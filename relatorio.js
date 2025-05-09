@@ -111,10 +111,12 @@ function generateUSMLEReportFull(questionario, respostas, pendentes, tempoPorQue
 
   updateDomainAnalysis(questionario, respostas, idioma);
   updateDifficultyAnalysis(questionario, respostas, idioma);
-  updateRecommendations(questionario, respostas, idioma);
-  addPendingQuestionsLink(pendentes, idioma);
+   updateRecommendations(questionario, respostas, idioma);
+  // Linha abaixo comentada porque o elemento 'pending-questions-section' não existe no HTML
+  // addPendingQuestionsLink(pendentes, idioma);
   updatePendingQuestions(questionario, pendentes, respostas, idioma);
   createFullReportLink(idioma);  
+ 
 }
 
 function updateDomainAnalysis(questions, answers, lang) {
