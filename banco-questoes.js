@@ -879,25 +879,36 @@ const bancoQuestoes = {
   ],
 
   // Funções auxiliares
-  "gerarQuestionario": function(modo) {
-    const qtdQuestoes = modo === 'simulado' ? 50 : 10;
-    const todasQuestoes = [];
-    
-    // Distribuição por dificuldade
-    const distribuição = {
-      'simulado': { facil: 20, moderada: 15, dificil: 10, muito_dificil: 5 },
-      'estudo': { facil: 4, moderada: 3, dificil: 2, muito_dificil: 1 }
-    };
-    
-    // Seleciona questões aleatórias mantendo a proporção
-    for (const [dificuldade, qtd] of Object.entries(distribuição[modo])) {
-      const quests = [...this[dificuldade]];
-      this.embaralharArray(quests);
-      todasQuestoes.push(...quests.slice(0, qtd));
-    }
-    
-    return this.embaralharArray(todasQuestoes);
-  },
+ "gerarQuestionario": function(modo) {
+  const qtdQuestoes = modo === 'simulado' ? 50 : 10;
+  const todasQuestoes = [];
+
+  // NOVAS proporções definidas por você
+  const proporcao = {
+    facil: 0.20,
+    moderada: 0.25,
+    dificil: 0.25,
+    muito_dificil: 0.30
+  };
+
+  for (const [nivel, proporcaoNivel] of Object.entries(proporcao)) {
+    const quantidade = Math.round(proporcaoNivel * qtdQuestoes);
+    const quests = [...this[nivel]];
+    this.embaralharArray(quests);
+    todasQuestoes.push(...quests.slice(0, quantidade));
+  }
+
+  // Correção caso o total não seja exato (devido ao arredondamento)
+  while (todasQuestoes.length > qtdQuestoes) todasQuestoes.pop();
+  while (todasQuestoes.length < qtdQuestoes) {
+    const extras = [...this.facil, ...this.moderada, ...this.dificil, ...this.muito_dificil];
+    this.embaralharArray(extras);
+    const extra = extras.find(q => !todasQuestoes.includes(q));
+    if (extra) todasQuestoes.push(extra);
+  }
+
+  return this.embaralharArray(todasQuestoes);
+},
   
   "embaralharArray": function(array) {
     for (let i = array.length - 1; i > 0; i--) {

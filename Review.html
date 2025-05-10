@@ -99,6 +99,32 @@
 
       reportContainer.appendChild(questionBlock);
     });
+  // Textos multilíngues do botão
+
+window.onload = function () {
+  const nextSetTexts = {
+    pt: "Próximo Bloco de Questões",
+    en: "Next Set of Questions",
+    es: "Siguiente Bloque de Preguntas"
+  };
+
+  const idioma = localStorage.getItem('selectedLanguage') || 'en';
+  const btn = document.getElementById('next-set-btn');
+
+  if (btn) {
+    btn.textContent = nextSetTexts[idioma] || "Next";
+    btn.addEventListener('click', () => {
+      localStorage.setItem('autoStartStudyMode', 'true');
+      window.location.href = "index.html";
+    });
+  }
+};
+
   </script>
+  <div style="text-align: center; margin-top: 40px;">
+  <button id="next-set-btn" style="padding: 12px 24px; font-size: 16px; background-color: #005b94; color: white; border: none; border-radius: 6px; cursor: pointer;">
+    <!-- Esse texto será sobrescrito pelo JS -->
+  </button>
+</div>
 </body>
 </html>
