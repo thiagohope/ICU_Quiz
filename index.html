@@ -365,6 +365,11 @@
       <label style="font-weight: bold;">Total Time (minutes): 
         <input type="number" id="exam-time" min="1" value="60" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
       </label>
+     <label style="font-weight: bold; margin-left: 30px;">
+  Number of Questions:
+  <input type="number" id="exam-questions" min="10" max="100" value="50" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; width: 80px;">
+</label>
+ 
     </div>
     
     <div style="text-align: center; margin-top: 30px;">
@@ -714,7 +719,8 @@
     // Funções do Quiz
     function startQuiz() {
       // Gerar questionário balanceado
-      questionarioAtual = gerarQuestionario(currentMode);
+const totalQuestoes = currentMode === 'exam' ? parseInt(document.getElementById('exam-questions').value) : 10;
+questionarioAtual = bancoQuestoes.gerarQuestionario(currentMode === 'exam' ? 'simulado' : 'estudo', totalQuestoes);
       currentQuestionIndex = 0;
       score = 0;
       pendingQuestions = [];

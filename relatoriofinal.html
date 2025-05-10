@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Relatório Final</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1, h2 {
+      color: #005b94;
+      text-align: center;
+    }
+    .question {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .option {
+      padding: 10px;
+      border-radius: 6px;
+      margin: 6px 0;
+      border: 1px solid #ccc;
+    }
+    .correct {
+      border-color: #27ae60;
+      background-color: #e6f9ec;
+      color: #27ae60;
+    }
+    .incorrect {
+      border-color: #e74c3c;
+      background-color: #fdecea;
+      color: #e74c3c;
+    }
+    .explanation {
+      margin-top: 15px;
+      border-left: 4px solid #ccc;
+      padding-left: 10px;
+    }
+    .explanation.correct {
+      border-color: #27ae60;
+      color: #27ae60;
+    }
+    .explanation.incorrect {
+      border-color: #e74c3c;
+      color: #e74c3c;
+    }
+    .summary {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .summary h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+    button {
+      padding: 10px 20px;
+      background: #005b94;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      display: block;
+      margin: 30px auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Relatório Final - 50 Questões</h1>
+  <div class="summary" id="summary"></div>
+  <h2>Últimas 10 Questões</h2>
+  <div id="review"></div>
+  <button onclick="resetCycle()">Reiniciar Ciclo</button>
+
+  <script>
+    const allQuestions = JSON.parse(localStorage.getItem('acumuladoQuestoes')) || [];
+    const allAnswers = JSON.parse(localStorage.getItem('acumuladoRespostas')) || {};
+    const idioma = localStorage.getItem('selectedLanguage') || 'pt';
+
+    const correctCount = allQuestions.filter(q => allAnswers[q.id] === q.correta).length;
+    const percentage = Math.round((correctCount / allQuestions.length) * 100);
+
+    document.getElementById('summary').innerHTML = `
+      <h3>Acertos: ${correctCount} / ${allQuestions.length}</h3>
+      <p>Percentual: <strong>${percentage}%</strong></p>
+    `;
+
+    const last10 = allQuestions.slice(-10);
+    const reviewContainer = document.getElementById('review');
+
+    last10.forEach((q, i) => {
+      const userAnswer = allAnswers[q.id];
+      const isCorrect = userAnswer === q.correta;
+      const hasAnswer = typeof userAnswer !== 'undefined';
+
+      const enunciado = q.enunciado?.[idioma] || q.enunciado;
+      const alternativas = q.alternativas?.[idioma] || q.alternativas;
+      const explicacao = q.explicacoes?.[idioma] || q.explicacoes;
+
+      const questionBlock = document.createElement('div');
+      questionBlock.className = 'question';
+
+      questionBlock.innerHTML = `
+        <h3>Questão ${allQuestions.length - 9 + i}</h3>
+        <p><strong>${enunciado}</strong></p>
+        <div>
+          ${alternativas.map((opt, idx) => {
+            let classe = '';
+            if (idx === q.correta) classe = 'correct';
+            if (hasAnswer && idx === userAnswer && userAnswer !== q.correta) classe = 'incorrect';
+            return `<div class="option ${classe}">${opt}</div>`;
+          }).join('')}
+        </div>
+        <div class="explanation ${isCorrect ? 'correct' : 'incorrect'}">
+          ${isCorrect ? '✓' : '✖'} ${explicacao}
+        </div>
+      `;
+
+      reviewContainer.appendChild(questionBlock);
+    });
+
+    function resetCycle() {
+      localStorage.removeItem('acumuladoQuestoes');
+      localStorage.removeItem('acumuladoRespostas');
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
