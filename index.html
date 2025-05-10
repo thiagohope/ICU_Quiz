@@ -1,20 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ICU Quiz - Intensive Care Medicine</title>
+  <title>BrainBox Med - Medical Simulator: Train Your Brain. Master Medicine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
   <style>
     /* Estilos Gerais */
-    body {
-      font-family: 'Arial', sans-serif;
-      line-height: 1.6;
-      color: #333;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #f5f5f5;
-    }
+:root {
+  --color-primary: #5E3E94;
+  --color-highlight: #F39C12;
+  --color-background: #f5f5f5;
+  --color-text: #333333;
+  --color-neutral: #6C757D;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, .button {
+  font-family: 'Poppins', sans-serif;
+  color: var(--color-primary);
+}
+
+.button {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.button:hover {
+  background-color: #482F74;
+}
+
+.mode-btn.active {
+  background: var(--color-primary);
+  color: white;
+}
+
     
     /* Telas */
     #home-screen, #question-container, #config-screen, #result-screen { 
@@ -348,9 +374,12 @@
   border-left: 3px solid #005b94;
   border-radius: 4px;
 }
-  </style>
+</style>
 </head>
 <body>
+  <div style="text-align: center; margin-bottom: 20px;">
+  <img src="logo-brainboxmed.png" alt="BrainboxMed Logo" style="max-width: 250px;">
+</div>
   <!-- Tela Inicial -->
   <div id="home-screen">
     <h1 style="text-align: center; color: #005b94;">ICU Quiz</h1>
@@ -468,7 +497,9 @@
   </div>
  </div>
 
-
+<h3 style="text-align: center; margin-top: 40px; color: #005b94;">Gráficos de Desempenho</h3>
+<canvas id="chart-dificuldade" width="800" height="400" style="margin: 30px auto; display: block;"></canvas>
+<canvas id="chart-tempo" width="800" height="300" style="margin: 30px auto; display: block;"></canvas>
     <!-- Seção 1: Performance Geral -->
     <div class="report-section" style="border-left-color: #005b94;">
       <h3 id="general-performance-title" style="color: #005b94;">▌ General Performance</h3>
@@ -765,7 +796,7 @@ questionarioAtual = bancoQuestoes.gerarQuestionario(currentMode === 'exam' ? 'si
     function showCurrentQuestion() {
       const question = questionarioAtual[currentQuestionIndex];
       const t = translations[selectedLanguage];
-      
+      questionarioAtual[currentQuestionIndex].tempoStart = Date.now();
       // Atualizar progresso
       updateProgress();
       
@@ -825,7 +856,8 @@ questionarioAtual = bancoQuestoes.gerarQuestionario(currentMode === 'exam' ? 'si
       // Marcar seleção atual
       options[index].classList.add('selected');
       userAnswers[question.id] = index;
-      
+      question.tempo = question.tempo || 0;
+question.tempo = (question.tempoStart) ? (Date.now() - question.tempoStart) / 1000 : 0;
       // No modo estudo, mostrar feedback após 10 questões
       if (currentMode === 'study') {
         questionsSinceLastFeedback++;

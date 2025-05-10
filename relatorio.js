@@ -116,7 +116,8 @@ function generateUSMLEReportFull(questionario, respostas, pendentes, tempoPorQue
   // addPendingQuestionsLink(pendentes, idioma);
   updatePendingQuestions(questionario, pendentes, respostas, idioma);
   createFullReportLink(idioma);  
- 
+  drawDifficultyChart(questionario, respostas);
+  drawTempoChart(questionario);
 }
 
 function updateDomainAnalysis(questions, answers, lang) {
@@ -435,4 +436,102 @@ function showFullReport() {
   document.getElementById('result-screen').style.display = 'none';
   document.getElementById('full-report-screen').style.display = 'block';
 generateDetailedReport(window.questionarioAtual, window.userAnswers, window.pendingQuestions, window.selectedLanguage);
+}
+function drawDifficultyChart(questions, answers) {
+  const lang = localStorage.getItem('selectedLanguage') || 'pt';
+  const stats = {
+    facil: { acertos: 0, erros: 0 },
+    moderada: { acertos: 0, erros: 0 },
+    dificil: { acertos: 0, erros: 0 },
+    muito_dificil: { acertos: 0, erros: 0 }
+  };
+
+  questions.forEach(q => {
+    const acertou = answers[q.id] === q.correta;
+    if (acertou) stats[q.dificuldade].acertos++;
+    else stats[q.dificuldade].erros++;
+  });
+
+  const ctx = document.getElementById('chart-dificuldade').getContext('2d');
+
+  const translatedLabels = [
+    translateDifficulty('facil', lang),
+    translateDifficulty('moderada', lang),
+    translateDifficulty('dificil', lang),
+    translateDifficulty('muito_dificil', lang)
+  ];
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: translatedLabels,
+
+      responsive: true,
+      plugins: {
+        legend: { position: 'top' },
+        title: {
+          display: true,
+          text: 'Desempenho por Nível de Dificuldade'
+        }
+      },
+      scales: {
+        x: { stacked: true },
+        y: { stacked: true, beginAtZero: true }
+      }
+    }
+  });
+}
+
+function drawTempoChart(questions) {
+  const lang = localStorage.getItem('selectedLanguage') || 'pt';
+
+  const titles = {
+    pt: 'Tempo Gasto por Questão no Simulado',
+    en: 'Time Spent per Question in Simulation',
+    es: 'Tiempo por Pregunta en el Simulador'
+  };
+
+  const labels = {
+    pt: 'Tempo por Questão (s)',
+    en: 'Time per Question (s)',
+    es: 'Tiempo por Pregunta (s)'
+  };
+
+  const ctx = document.getElementById('chart-tempo').getContext('2d');
+
+  const tempos = questions.map(q => q.tempo || 0); // campo "tempo" deve existir nas questões
+  const questLabels = questions.map((_, i) => `Q${i + 1}`);
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: questLabels,
+      datasets: [{
+        label: labels[lang] || labels.pt,
+        data: tempos,
+        fill: false,
+        borderColor: '#2980b9',
+        tension: 0.2
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'top' },
+        title: {
+          display: true,
+          text: titles[lang] || titles.pt
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: lang === 'pt' ? 'Segundos' : lang === 'es' ? 'Segundos' : 'Seconds'
+          }
+        }
+      }
+    }
+  });
 }
