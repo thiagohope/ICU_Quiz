@@ -5,384 +5,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BrainBox Med - Medical Simulator: Train Your Brain. Master Medicine</title>
+  <!-- Metadados essenciais -->
+<meta name="description" content="BrainboxMed is an interactive multilingual medical quiz platform to train, review, and master Intensive Care Medicine.">
+<meta name="keywords" content="medicina, medicine, simulado, mock tests, intensivismo, intensive care, intensive care medicine, critical care, critical care medicine, quiz médico, medical quiz, brainboxmed, usmle, medicina intensiva, ECMO, neuro, neurology, neurosurgery, cardio, cardiology, infecto, infectious diseases, ventilation, mechanical ventilation, nephrology, nephro, nefrologia, sedation, sedação, anestesia, anesthesia, pediatria, pediatrics, urgência, emergência, emergency medicine, urgência e emergência, nutritional therapy, terapia nutricional, terapia intensiva, intensive therapy, pancreatitis, pancreatite, dialysis, diálise, non-invasive ventilation">
+<meta name="author" content="BrainboxMed Team">
+<meta name="language" content="en">
+
+<!-- Metadados Open Graph para compartilhamento -->
+<meta property="og:title" content="BrainboxMed – Train your brain. Master medicine.">
+<meta property="og:description" content="Simulados interativos e multilíngues para dominar medicina intensiva. Dinâmico e focado na prática.">
+<meta property="og:image" content="https://seudominio.com/assets/img/preview.png"> <!-- ou omita por enquanto -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seudominio.com"> <!-- ajustar futuramente -->
+
+<!-- Compatibilidade e dispositivos -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
-  <style>
-    /* Estilos Gerais */
-:root {
-  --color-primary: #5E3E94;
-  --color-highlight: #F39C12;
-  --color-background: #f5f5f5;
-  --color-text: #333333;
-  --color-neutral: #6C757D;
-}
+  <link rel="stylesheet" href="assets/css/style.css">
 
-body {
-  background-color: var(--color-background);
-  color: var(--color-text);
-  font-family: 'Inter', sans-serif;
-}
-
-h1, h2, .button {
-  font-family: 'Poppins', sans-serif;
-  color: var(--color-primary);
-}
-
-.button {
-  background-color: var(--color-primary);
-  color: white;
-}
-
-.button:hover {
-  background-color: #482F74;
-}
-
-.mode-btn.active {
-  background: var(--color-primary);
-  color: white;
-}
-
-    
-    /* Telas */
-    #home-screen, #question-container, #config-screen, #result-screen { 
-      background: white;
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
-    }
-    
-    #question-container, #config-screen, #result-screen { 
-      display: none; 
-    }
-    
-    /* Botões */
-    .button {
-      display: inline-block;
-      margin: 10px 5px;
-      padding: 12px 24px;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: #005b94;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      transition: all 0.3s;
-    }
-    
-    .button:hover {
-      background-color: #004374;
-      transform: translateY(-2px);
-    }
-
-    .button:disabled {
-      background-color: #cccccc;
-      cursor: not-allowed;
-    }
-    
-    /* Timer */
-    #timer {
-      font-size: 1.8em;
-      font-weight: bold;
-      color: #d9534f;
-      text-align: center;
-      margin: 15px 0;
-    }
-    
-    /* Opções de Questão */
-    .options {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin: 25px 0;
-    }
-    
-    .option {
-      padding: 15px;
-      border: 2px solid #ddd;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-align: left;
-    }
-    
-    .option:hover {
-      border-color: #005b94;
-      background-color: #f0f7ff;
-    }
-    
-    .selected {
-      border-color: #005b94;
-      background-color: #e6f2ff;
-    }
-
-    .correct {
-      border-color: #27ae60;
-      background-color: #d4edda;
-    }
-
-    .incorrect {
-      border-color: #e74c3c;
-      background-color: #f8d7da;
-    }
-    
-    /* Controles */
-    .controls {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 30px;
-    }
-    
-    /* Modos */
-    .mode-selector {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin: 30px 0;
-    }
-    
-    .mode-btn {
-      padding: 15px 30px;
-      font-size: 18px;
-      border: 2px solid #005b94;
-      background: white;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: all 0.3s;
-    }
-    
-    .mode-btn.active {
-      background: #005b94;
-      color: white;
-    }
-          
-    .option.correct {
-      border-color: #27ae60;
-      background-color: #d4edda;
-    }
-
-    .option.incorrect {
-      border-color: #e74c3c;
-      background-color: #f8d7da;
-    }
-
-   .status-icon {
-     margin-right: 8px;
-     font-weight: bold;
-    } 
-
-    /* Relatório */
-    .report-section {
-      margin: 25px 0;
-      border-left: 4px solid;
-      padding-left: 15px;
-    }
-    
-    .strength { color: #27ae60; border-color: #27ae60; }
-    .weakness { color: #e74c3c; border-color: #e74c3c; }
-    .average { color: #f39c12; border-color: #f39c12; }
-    
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 15px 0;
-    }
-    
-    th, td {
-      padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-    
-    th {
-      background-color: #e6f2f8;
-    }
-    .correct-answer { 
-    color: #27ae60; 
-    font-weight: bold;
-  }
-  .user-incorrect { 
-    color: #e74c3c;
-    position: relative;
-    padding-left: 25px;
-  }
-  .status-icon {
-    position: absolute;
-    left: 5px;
-    font-size: 1.2em;
-  }
-  .explanation-box {
-    background: #f8f9fa;
-    padding: 15px;
-    border-left: 3px solid #005b94;
-    margin: 15px 0;
-    border-radius: 4px;
-  }
-  .question-status {
-    margin-top: 10px;
-    font-weight: bold;
-  }
-
-    /* Dificuldade */
-    .dificuldade {
-      font-size: 0.8em;
-      padding: 3px 8px;
-      border-radius: 12px;
-      margin-left: 10px;
-      display: inline-block;
-    }
-    .facil { background: #27ae60; color: white; }
-    .moderada { background: #f39c12; color: white; }
-    .dificil { background: #e74c3c; color: white; }
-    .muito_dificil { background: #8e44ad; color: white; }
-
-    /* Progresso */
-    .progress-container {
-      margin: 20px 0;
-    }
-    .progress-bar {
-      height: 6px;
-      background: #e0e0e0;
-      border-radius: 3px;
-    }
-    .progress {
-      height: 100%;
-      background: #005b94;
-      border-radius: 3px;
-      width: 0%;
-      transition: width 0.3s;
-    }
-    .progress-text {
-      text-align: center;
-      margin-top: 5px;
-      font-size: 0.9em;
-      color: #666;
-    }
-
-    /* Responsivo */
-    @media (max-width: 768px) {
-      .mode-selector {
-        flex-direction: column;
-      }
-      
-      .controls {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .button {
-        width: 100%;
-      }
-    }
-    .explanation-box.correct {
-     border-left: 3px solid #27ae60;
-    }
-    .explanation-box.incorrect {
-    border-left: 3px solid #e74c3c;
-    }
-
-    .explanation-text {
-    color: #333;
-    }
-    .correct-status {
-    color: #27ae60 !important;
-    }
-    .incorrect-status {
-    color: #e74c3c !important;
-    }
-  
- /* Relatório Completo */
-#full-report-screen {
-  display: none;
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  margin: 20px 0;
-}
-
-.report-header {
-  text-align: center;
-  margin-bottom: 30px;
-  border-bottom: 2px solid #005b94;
-  padding-bottom: 20px;
-}
-
-.quick-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-bottom: 30px;
-}
-
-.stat-box {
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  color: white;
-}
-
-.stat-box.correct { background: #27ae60; }
-.stat-box.incorrect { background: #e74c3c; }
-.stat-box.pending { background: #f39c12; }
-
-.stat-value {
-  font-size: 2.5em;
-  font-weight: bold;
-  display: block;
-}
-
-.stat-label {
-  font-size: 0.9em;
-  opacity: 0.9;
-}
-
-.question-list {
-  margin-top: 30px;
-}
-
-.question-item {
-  margin-bottom: 40px;
-  padding: 20px;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  position: relative;
-}
-
-.question-status {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  padding: 5px 10px;
-  border-radius: 15px;
-  font-size: 0.8em;
-}
-
-.status-correct {
-  background: #27ae60;
-  color: white;
-}
-
-.status-incorrect {
-  background: #e74c3c;
-  color: white;
-}
-
-.explanation-panel {
-  margin-top: 15px;
-  padding: 15px;
-  background: #f8f9fa;
-  border-left: 3px solid #005b94;
-  border-radius: 4px;
-}
-</style>
 </head>
-<body>
-  <div style="text-align: center; margin-bottom: 20px;">
-  <img src="logo-brainboxmed.png" alt="BrainboxMed Logo" style="max-width: 250px;">
+
+<body oncontextmenu="return false;">
+  <main>
+    <div style="text-align: center; margin-bottom: 20px;">
+
+<img src="logo-brainboxmed.png" alt="BrainboxMed Logo" loading="lazy" style="max-width: 250px;">
 </div>
+   <div style="text-align: center; margin-top: 10px;">
+       <p style="font-family: 'Inter', sans-serif; color: #666; font-size: 14px;">
+      Train your brain. Master medicine.
+    </p>
+  </div>
+
   <!-- Tela Inicial -->
-  <div id="home-screen">
-    <h1 style="text-align: center; color: #005b94;">ICU Quiz</h1>
+<section id="home-screen" role="region" aria-label="Home screen">
     <p style="text-align: center; margin-bottom: 30px;">Intensive Care Medicine Simulator</p>
     
     <div class="mode-selector">
@@ -402,13 +61,13 @@ h1, h2, .button {
     </div>
     
     <div style="text-align: center; margin-top: 30px;">
-      <button class="button" onclick="startQuiz()">Start Quiz</button>
-      <button class="button" onclick="showConfig()">Settings</button>
+      <button class="btn btn-primary" onclick="startQuiz()" style="background-color: var(--color-primary);">Start Quiz</button>
+      <button class="btn btn-secondary" onclick="showConfig()">Settings</button>
     </div>
-  </div>
+  </section>
 
   <!-- Tela de Configurações -->
-  <div id="config-screen">
+<section id="config-screen" role="region" aria-label="Configuration screen" style="display: none;">
     <h2 style="color: #005b94;">Settings</h2>
     <div style="margin: 20px 0;">
       <label for="language-selector" style="display: block; margin-bottom: 8px; font-weight: bold;">Language:</label>
@@ -420,16 +79,16 @@ h1, h2, .button {
     </div>
     
     <div style="margin-top: 30px;">
-      <button class="button" onclick="saveConfig()">Save Settings</button>
-      <button class="button" onclick="hideConfig()" style="background-color: #6c757d;">Cancel</button>
+      <button class="btn btn-secondary" onclick="saveConfig()">Save Settings</button>
+      <button class="btn btn-secondary" onclick="hideConfig()">Cancel</button>
     </div>
-  </div>
+  </section>
 
   <!-- Tela de Questões -->
-  <div id="question-container">
+<section id="question-container" role="region" aria-label="Quiz interface" style="display: none;">
     <div id="timer-container" style="text-align: center; display: none;">
       <div id="timer">60:00</div>
-    </div>
+      </div>
 
     <div class="progress-container">
       <div class="progress-bar">
@@ -438,24 +97,24 @@ h1, h2, .button {
       <div class="progress-text" id="progress-text">Question 1 of 50</div>
     </div>
     
-    <h2 id="question-text" style="color: #005b94;"></h2>
-    <div class="options" id="options-container"></div>
+    <h2 id="question-text" style="color: var(--color-primary);"></h2>
+    <div id="options-container" class="options"></div>
     
     <div class="controls">
-      <button id="prev-btn" class="button" onclick="prevQuestion()" style="background-color: #6c757d;">Previous</button>
-      <button id="mark-btn" class="button" onclick="togglePending()" style="background-color: #f39c12;">Mark for Review</button>
-      <button id="next-btn" class="button" onclick="nextQuestion()">Next</button>
+      <button id="prev-btn" class="btn btn-secondary" onclick="prevQuestion()">Previous</button>
+      <button id="mark-btn" class="btn btn-highlight" onclick="togglePending()">Mark for Review</button>
+      <button id="next-btn" class="btn btn-primary" onclick="nextQuestion()">Next</button>
     </div>
     
     <div id="explanation" style="margin-top: 30px; padding: 15px; background-color: #f8f9fa; border-radius: 6px; display: none;">
       <h3 style="margin-top: 0; color: #005b94;">Explanation:</h3>
       <p id="explanation-text"></p>
     </div>
-  </div>
+  </section>
 
   <!-- Tela de Resultado -->
-  <div id="result-screen">
-    <div style="background: #005b94; color: white; padding: 20px; text-align: center; border-radius: 6px 6px 0 0;">
+<section id="result-screen" role="region" aria-label="Results report" style="display: none;">
+      <div style="background: #005b94; color: white; padding: 20px; text-align: center; border-radius: 6px 6px 0 0;">
       <h2 style="margin: 0;" id="report-title">PERFORMANCE REPORT</h2>
       <p style="margin: 5px 0; font-size: 0.9em;">Generated on <span id="report-date"></span></p>
     </div>
@@ -474,14 +133,12 @@ h1, h2, .button {
   <div id="full-report-questions" class="question-list"></div>
 
   <div class="report-controls">
-    <button class="button" onclick="backToMainReport()">
+    <button class="btn btn-secondary" onclick="backToMainReport()">
       < Voltar ao Relatório
     </button>
-    <button class="button" onclick="window.print()">
-      Imprimir Relatório
-    </button>
+    <button class="btn btn-secondary" onclick="window.print()">Imprimir Relatório</button>
   </div>
- </div>
+</div>
 
   <!-- Tela de Relatório de Questões Pendentes -->
  <div id="pending-report-screen" style="display: none; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin: 20px 0;">
@@ -493,16 +150,16 @@ h1, h2, .button {
   <div id="pending-questions-container"></div>
 
   <div class="report-controls" style="text-align: center; margin-top: 30px;">
-    <button class="button" onclick="backToMainReport()">← Back to Report</button>
+    <button class="btn btn-secondary" onclick="backToMainReport()">← Back to Report</button>
   </div>
- </div>
+</div>
 
 <h3 style="text-align: center; margin-top: 40px; color: #005b94;">Gráficos de Desempenho</h3>
 <canvas id="chart-dificuldade" width="800" height="400" style="margin: 30px auto; display: block;"></canvas>
 <canvas id="chart-tempo" width="800" height="300" style="margin: 30px auto; display: block;"></canvas>
     <!-- Seção 1: Performance Geral -->
-    <div class="report-section" style="border-left-color: #005b94;">
-      <h3 id="general-performance-title" style="color: #005b94;">▌ General Performance</h3>
+    <div class="report-section" style="border-left-color: var(--color-primary);">
+      <h3 id="general-performance-title" style="color: var(--color-primary);">▌ General Performance</h3>
       <div style="display: flex; align-items: center; gap: 20px;">
         <div style="flex: 1;">
           <p><span id="score-text">Score: 0/0</span></p>
@@ -510,10 +167,10 @@ h1, h2, .button {
         </div>
         <div style="flex: 2;">
           <div style="height: 20px; background: #ecf0f1; border-radius: 10px; margin: 10px 0; position: relative;">
-            <div id="score-bar" style="height: 100%; width: 0%; background: linear-gradient(to right, #4a90e2, #005b94); border-radius: 10px;"></div>
+            <div id="score-bar" style="height: 100%; width: 0%; background: linear-gradient(to right, var(--color-highlight), var(--color-primary)); border-radius: 10px;"></div>
             <div style="position: absolute; top: -20px; left: 70%; border-left: 1px dashed #333; height: 25px; width: 1px;"></div>
           </div>
-          <p style="text-align: center; margin-top: -10px; font-size: 0.8em; color: #6c757d;">Expected average: 70%</p>
+          <p style="text-align: center; margin-top: -10px; font-size: 0.8em; color: var(--color-text);">Expected average: 70%</p>
         </div>
       </div>
     </div>
@@ -536,8 +193,8 @@ h1, h2, .button {
     </div>
     
     <!-- Seção 3: Análise por Dificuldade -->
-    <div class="report-section" style="border-left-color: #4a90e2;">
-      <h3 id="difficulty-title" style="color: #4a90e2;">▌ Performance by Difficulty</h3>
+    <div class="report-section" style="border-left-color: var(--color-primary);">
+<h3 id="difficulty-title" style="color: var(--color-primary);">▌ Performance by Difficulty</h3>
       <table>
         <thead>
           <tr>
@@ -562,7 +219,7 @@ h1, h2, .button {
     
    <!-- Seção 5: Questões Pendentes -->
 <div class="report-section weakness">
-  <h3 id="pending-title" style="cursor: pointer; color: #f39c12;" onclick="window.location.href='review.html'">
+  <h3 id="pending-title" style="cursor: pointer; color: var(--color-highlight);" onclick="window.location.href='review.html'">
   Questions for Review
 </h3>
   <ul id="pending-questions-list" style="padding-left: 0; list-style: none;">
@@ -574,441 +231,15 @@ h1, h2, .button {
 <!-- Botões de Controle -->
  <div id="pending-questions-section"></div>
 <div style="text-align: center; margin-top: 30px;">
-  <button id="restart-btn" class="button" onclick="restartQuiz()">Restart Test</button>
-  <button id="print-btn" class="button" style="background-color: #6c757d;" onclick="window.print()">Print Report</button>
+  <button id="restart-btn" class="btn btn-secondary" onclick="restartQuiz()">Restart Test</button>
+  <button id="print-btn" class="btn btn-secondary" style="background-color: var(--color-neutral);" onclick="window.print()">Print Report</button>
 </div>
-   
-   <!-- Scripts -->
-  <script src="banco-questoes.js"></script>
-  <script src="relatorio.js"></script>
-  <script>
-    // Variáveis globais
-    let currentQuestionIndex = 0;
-    let score = 0;
-    let selectedLanguage = 'en';
-    let currentMode = 'study';
-    let pendingQuestions = [];
-    let examDuration = 60;
-    let timeLeft = examDuration * 60;
-    let timerInterval;
-    let userAnswers = {};
-    let questionarioAtual = [];
-    let questionsSinceLastFeedback = 0;
-    let showFeedback = false;
-
-    // Textos multilíngues
-    const translations = {
-      "en": {
-        "question": "Question",
-        "of": "of",
-        "previous": "Previous",
-        "next": "Next",
-        "mark": "Mark for Review",
-        "unmark": "Unmark",
-        "explanation": "Explanation",
-        "correct": "Correct!",
-        "incorrect": "Incorrect!",
-        "timeLeft": "Time Left",
-        "easy": "Easy",
-        "medium": "Medium",
-        "hard": "Hard",
-        "very_hard": "Very Hard",
-        "startQuiz": "Start Quiz",
-        "settings": "Settings",
-        "studyMode": "Study Mode",
-        "examMode": "Exam Mode",
-        "score": "Score",
-        "viewFullReport": "View Full Report",
-        "questionsForReview": "Questions for Review"
-      },
-      "es": {
-        "question": "Pregunta",
-        "of": "de",
-        "previous": "Anterior",
-        "next": "Siguiente",
-        "mark": "Marcar para Revisión",
-        "unmark": "Desmarcar",
-        "explanation": "Explicación",
-        "correct": "¡Correcto!",
-        "incorrect": "¡Incorrecto!",
-        "timeLeft": "Tiempo Restante",
-        "easy": "Fácil",
-        "medium": "Moderada",
-        "hard": "Difícil",
-        "very_hard": "Muy Difícil",
-        "startQuiz": "Iniciar Quiz",
-        "settings": "Configuración",
-        "studyMode": "Modo Estudio",
-        "examMode": "Modo Simulado",
-        "score": "Puntuación",
-        "viewFullReport": "Ver Informe Completo",
-        "questionsForReview": "Preguntas para Revisión" 
-      },
-      "pt": {
-        "question": "Questão",
-        "of": "de",
-        "previous": "Anterior",
-        "next": "Próxima",
-        "mark": "Marcar Pendente",
-        "unmark": "Desmarcar",
-        "explanation": "Explicação",
-        "correct": "Correto!",
-        "incorrect": "Incorreto!",
-        "timeLeft": "Tempo Restante",
-        "easy": "Fácil",
-        "medium": "Moderada",
-        "hard": "Difícil",
-        "very_hard": "Muito Difícil",
-        "startQuiz": "Iniciar Quiz",
-        "settings": "Configurações",
-        "studyMode": "Modo Estudo",
-        "examMode": "Modo Simulado",
-        "score": "Pontuação",
-        "viewFullReport": "Ver Relatório Completo", 
-        "questionsForReview": "Questões para Revisão"
-      }
-    };
-
-    // Função para traduzir dificuldade
-    function translateDifficulty(difficulty, lang) {
-      const difficultyTranslations = {
-        "facil": {
-          "en": "Easy",
-          "es": "Fácil",
-          "pt": "Fácil"
-        },
-        "moderada": {
-          "en": "Medium",
-          "es": "Moderada",
-          "pt": "Moderada"
-        },
-        "dificil": {
-          "en": "Hard",
-          "es": "Difícil",
-          "pt": "Difícil"
-        },
-        "muito_dificil": {
-          "en": "Very Hard",
-          "es": "Muy Difícil",
-          "pt": "Muito Difícil"
-        }
-      };
-      
-      return difficultyTranslations[difficulty]?.[lang] || difficulty;
-    }
-
-    // Função para gerar questionário
-    function gerarQuestionario(modo) {
-      return bancoQuestoes.gerarQuestionario(modo === 'exam' ? 'simulado' : 'estudo');
-    }
-
-    // Inicialização
-    document.addEventListener('DOMContentLoaded', () => {
-  updateUI();
-
-  if (localStorage.getItem('autoStartStudyMode') === 'true') {
-    localStorage.removeItem('autoStartStudyMode');
-    currentMode = 'study';
-    startQuiz();
-  }
-});
-
-    // Funções de Modo
-    function setMode(mode) {
-      currentMode = mode;
-      document.querySelectorAll('.mode-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.textContent.includes(mode === 'study' ? 'Study' : 'Exam'));
-      });
-      document.getElementById('exam-settings').style.display = 
-        mode === 'exam' ? 'block' : 'none';
-      updateUI();
-    }
-
-    // Funções de Configuração
-    function showConfig() {
-      document.getElementById('home-screen').style.display = 'none';
-      document.getElementById('config-screen').style.display = 'block';
-      document.getElementById('language-selector').value = selectedLanguage;
-    }
-
-    function hideConfig() {
-      document.getElementById('config-screen').style.display = 'none';
-      document.getElementById('home-screen').style.display = 'block';
-    }
-
-    function saveConfig() {
-      selectedLanguage = document.getElementById('language-selector').value;
-      updateUI();
-      hideConfig();
-      
-      // Se estiver na tela de resultados, atualize o relatório
-      if (document.getElementById('result-screen').style.display === 'block') {
-        generateUSMLEReport();
-      }
-    }
-
-    // Funções do Quiz
-    function startQuiz() {
-      // Gerar questionário balanceado
-const totalQuestoes = currentMode === 'exam' ? parseInt(document.getElementById('exam-questions').value) : 10;
-questionarioAtual = bancoQuestoes.gerarQuestionario(currentMode === 'exam' ? 'simulado' : 'estudo', totalQuestoes);
-      currentQuestionIndex = 0;
-      score = 0;
-      pendingQuestions = [];
-      userAnswers = {};
-      questionsSinceLastFeedback = 0;
-      showFeedback = false;
-
-      if (currentMode === 'exam') {
-        examDuration = parseInt(document.getElementById('exam-time').value);
-        timeLeft = examDuration * 60;
-        startTimer();
-      }
-      
-      document.getElementById('home-screen').style.display = 'none';
-      document.getElementById('question-container').style.display = 'block';
-      document.getElementById('timer-container').style.display = 
-        currentMode === 'exam' ? 'block' : 'none';
-      
-      showCurrentQuestion();
-    }
-
-    function startTimer() {
-      updateTimerDisplay();
-      timerInterval = setInterval(() => {
-        timeLeft--;
-        updateTimerDisplay();
-        
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          finishQuiz();
-        }
-      }, 1000);
-    }
-
-    function updateTimerDisplay() {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      document.getElementById('timer').textContent = 
-        `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-    }
-
-    function showCurrentQuestion() {
-      const question = questionarioAtual[currentQuestionIndex];
-      const t = translations[selectedLanguage];
-      questionarioAtual[currentQuestionIndex].tempoStart = Date.now();
-      // Atualizar progresso
-      updateProgress();
-      
-      // Mostrar questão
-      document.getElementById('question-text').innerHTML = `
-        ${t.question} ${currentQuestionIndex + 1} ${t.of} ${questionarioAtual.length}:
-        ${question.enunciado[selectedLanguage]}
-        <span class="dificuldade ${question.dificuldade}">
-          ${translateDifficulty(question.dificuldade, selectedLanguage)}
-        </span>
-      `;
-      
-      // Mostrar opções
-      const optionsContainer = document.getElementById('options-container');
-      optionsContainer.innerHTML = '';
-      
-      question.alternativas[selectedLanguage].forEach((option, index) => {
-        const optionElement = document.createElement('div');
-        optionElement.className = 'option';
-        optionElement.textContent = option;
-        optionElement.onclick = () => selectOption(index);
-        
-        // Restaurar seleção se já respondida
-        if (userAnswers[question.id] !== undefined && userAnswers[question.id] === index) {
-          optionElement.classList.add('selected');
-        }
-        
-        optionsContainer.appendChild(optionElement);
-      });
-      
-      // Configurar botões
-      document.getElementById('prev-btn').disabled = currentQuestionIndex === 0;
-      document.getElementById('next-btn').disabled = userAnswers[question.id] === undefined && currentMode === 'exam';
-      document.getElementById('mark-btn').textContent = 
-        pendingQuestions.includes(question.id) ? t.unmark : t.mark;
-      
-      // Mostrar explicação se aplicável
-      document.getElementById('explanation').style.display = 'none';
-    }
-
-    function updateProgress() {
-      const progress = ((currentQuestionIndex + 1) / questionarioAtual.length) * 100;
-      document.getElementById('quiz-progress').style.width = `${progress}%`;
-      
-      const t = translations[selectedLanguage];
-      document.getElementById('progress-text').textContent = 
-        `${t.question} ${currentQuestionIndex + 1} ${t.of} ${questionarioAtual.length}`;
-    }
-
-    function selectOption(index) {
-      const question = questionarioAtual[currentQuestionIndex];
-      const options = document.querySelectorAll('.option');
-      
-      // Remover seleção anterior
-      options.forEach(opt => opt.classList.remove('selected', 'correct', 'incorrect'));
-      
-      // Marcar seleção atual
-      options[index].classList.add('selected');
-      userAnswers[question.id] = index;
-      question.tempo = question.tempo || 0;
-question.tempo = (question.tempoStart) ? (Date.now() - question.tempoStart) / 1000 : 0;
-      // No modo estudo, mostrar feedback após 10 questões
-      if (currentMode === 'study') {
-        questionsSinceLastFeedback++;
-        if (questionsSinceLastFeedback >= 10) {
-          showFeedbackImmediately();
-          questionsSinceLastFeedback = 0;
-        }
-      }
-      
-      // No modo simulado, habilitar próximo
-      if (currentMode === 'exam') {
-        document.getElementById('next-btn').disabled = false;
-      }
-    }
-
-    function showFeedbackImmediately() {
-      const question = questionarioAtual[currentQuestionIndex];
-      const options = document.querySelectorAll('.option');
-      const t = translations[selectedLanguage];
-      
-      options.forEach((option, index) => {
-        if (index === question.correta) {
-          option.classList.add('correct');
-        } else if (index === userAnswers[question.id] && index !== question.correta) {
-          option.classList.add('incorrect');
-        }
-      });
-      
-      document.getElementById('explanation-text').textContent = 
-        question.explicacoes[selectedLanguage];
-      document.getElementById('explanation').style.display = 'block';
-      
-      // Feedback visual
-      if (userAnswers[question.id] === question.correta) {
-        alert(t.correct);
-      } else {
-        alert(t.incorrect);
-      }
-    }
-
-    function togglePending() {
-      const question = questionarioAtual[currentQuestionIndex];
-      const index = pendingQuestions.indexOf(question.id);
-      const t = translations[selectedLanguage];
-      
-      if (index === -1) {
-        pendingQuestions.push(question.id);
-        document.getElementById('mark-btn').textContent = t.unmark;
-      } else {
-        pendingQuestions.splice(index, 1);
-        document.getElementById('mark-btn').textContent = t.mark;
-      }
-    }
-
-    function nextQuestion() {
-      // Verificar resposta no modo simulado
-      if (currentMode === 'exam') {
-        const question = questionarioAtual[currentQuestionIndex];
-        if (userAnswers[question.id] === question.correta) {
-          score++;
-        }
-      }
-      
-      // Avançar ou finalizar
-      if (currentQuestionIndex < questionarioAtual.length - 1) {
-        currentQuestionIndex++;
-        showCurrentQuestion();
-      } else {
-        finishQuiz();
-      }
-    }
-
-    function prevQuestion() {
-      if (currentQuestionIndex > 0) {
-        currentQuestionIndex--;
-        showCurrentQuestion();
-      }
-    }
-
-   function finishQuiz() {
-  clearInterval(timerInterval);
-  document.getElementById('question-container').style.display = 'none';
-  document.getElementById('result-screen').style.display = 'block';
-
-  // Salvar dados no localStorage para uso no review.html
-  localStorage.setItem('questionarioAtual', JSON.stringify(questionarioAtual));
-  localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
-  localStorage.setItem('selectedLanguage', selectedLanguage);
-
-  // Gerar relatório
-  generateUSMLEReport();
-}
-
- function generateUSMLEReport() {
-  // 1. Dados básicos
-  const totalQuestions = questionarioAtual.length;
-  const correctAnswers = questionarioAtual.filter(q => 
-    userAnswers[q.id] === q.correta
-  ).length;
-  const percentage = Math.round((correctAnswers / totalQuestions) * 100);
-  
-  // Gerar relatório completo
-  generateUSMLEReportFull(
-    questionarioAtual,
-    userAnswers,
-    pendingQuestions,
-    Array(totalQuestions).fill(30), // tempo médio fictício de 30s por questão
-    selectedLanguage
-  );
-  const t = translations[selectedLanguage]; // Obter traduções do idioma atual
-document.getElementById('full-report-link').textContent = t.viewFullReport;
-}
-
-    function updateUI() {
-      const t = translations[selectedLanguage];
-   
-      // Atualizar textos na tela inicial
-      document.querySelector('.mode-btn.active').textContent = 
-        currentMode === 'study' ? t.studyMode : t.examMode;
-      document.querySelector('.mode-btn:not(.active)').textContent = 
-        currentMode === 'study' ? t.examMode : t.studyMode;
-      
-      // Atualizar botões
-      document.querySelector('button[onclick="startQuiz()"]').textContent = t.startQuiz;
-      document.querySelector('button[onclick="showConfig()"]').textContent = t.settings;
-
-      if (document.getElementById('result-screen').style.display === 'block') {
-        updateReportLanguage(selectedLanguage);
-
-    document.getElementById('pending-title').textContent = `▌ ${t.questionsForReview}`;
-      }
-    }
-
-    function restartQuiz() {
-      document.getElementById('result-screen').style.display = 'none';
-      startQuiz();
-    }
-
-    function endExam() {
-      finishQuiz();
-    }
-    function showFullReport() {
-  document.getElementById('result-screen').style.display = 'none';
-  document.getElementById('full-report-screen').style.display = 'block';
-  generateDetailedReport(questionarioAtual, userAnswers, pendingQuestions, selectedLanguage);
-}
-
-    function backToMainReport() {
-      document.getElementById('full-report-screen').style.display = 'none';
-      document.getElementById('result-screen').style.display = 'block';
-    }
-  </script>
+</section>
+</main>
+<p id="legal-warning" style="text-align:center; font-size: 12px; color: #999; margin-top: 40px;"></p>
+     <!-- Scripts -->
+<script src="banco-questoes.js" defer></script>
+<script src="relatorio.js" defer></script>
+<script src="assets/js/script.js" defer></script>
 </body>
 </html>
