@@ -32,7 +32,9 @@
   <main>
     <div style="text-align: center; margin-bottom: 20px;">
 
-<img src="logo-brainboxmed.png" alt="BrainboxMed Logo" loading="lazy" style="max-width: 250px;">
+<a href="#" onclick="confirmReturnHome(); return false;">
+  <img src="logo-brainboxmed.png" alt="BrainboxMed Logo" loading="lazy" style="max-width: 250px; cursor: pointer;">
+</a>
 </div>
    <div style="text-align: center; margin-top: 10px;">
        <p style="font-family: 'Inter', sans-serif; color: #666; font-size: 14px;">
@@ -150,12 +152,16 @@
   <div id="pending-questions-container"></div>
 
   <div class="report-controls" style="text-align: center; margin-top: 30px;">
-    <button class="btn btn-secondary" onclick="backToMainReport()">← Back to Report</button>
-  </div>
+  <button class="btn btn-secondary" onclick="backToMainReport()">← Back to Report</button>
+  <button class="btn btn-secondary" onclick="confirmReturnHome()" style="background-color: var(--color-primary); margin-left: 10px;">
+    ← Return to Home Page
+  </button>
+</div>
+
 </div>
 
 <h3 style="text-align: center; margin-top: 40px; color: #005b94;">Gráficos de Desempenho</h3>
-<canvas id="chart-dificuldade" width="800" height="400" style="margin: 30px auto; display: block;"></canvas>
+<canvas id="chart-dificuldade" width="800" height="400" style="margin: 30px auto; display: none;"></canvas>
 <canvas id="chart-tempo" width="800" height="300" style="margin: 30px auto; display: block;"></canvas>
     <!-- Seção 1: Performance Geral -->
     <div class="report-section" style="border-left-color: var(--color-primary);">
@@ -233,6 +239,9 @@
 <div style="text-align: center; margin-top: 30px;">
   <button id="restart-btn" class="btn btn-secondary" onclick="restartQuiz()">Restart Test</button>
   <button id="print-btn" class="btn btn-secondary" style="background-color: var(--color-neutral);" onclick="window.print()">Print Report</button>
+  <button class="btn btn-secondary" onclick="confirmReturnHome()" style="background-color: var(--color-primary); margin-left: 10px;">
+    ← Voltar à Página Inicial
+  </button>
 </div>
 </section>
 </main>

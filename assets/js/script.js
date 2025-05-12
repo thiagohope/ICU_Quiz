@@ -184,9 +184,19 @@
     // Funções do Quiz
     function startQuiz() {
     console.log('🟡 Start Quiz acionado');
-      // Gerar questionário balanceado
-const totalQuestoes = currentMode === 'exam' ? parseInt(document.getElementById('exam-questions').value) : 10;
-questionarioAtual = bancoQuestoes.gerarQuestionario(currentMode === 'exam' ? 'simulado' : 'estudo', totalQuestoes);
+      if (currentMode === 'study' && localStorage.getItem('questionarioAtual') && localStorage.getItem('userAnswers')) {
+  // Restauração do progresso salvo
+  questionarioAtual = JSON.parse(localStorage.getItem('questionarioAtual'));
+  userAnswers = JSON.parse(localStorage.getItem('userAnswers'));
+  currentQuestionIndex = parseInt(localStorage.getItem('currentQuestionIndex')) || 0;
+  console.log("📦 Progresso restaurado do modo estudo.");
+} else {
+  // Novo questionário
+  const totalQuestoes = 10;
+  questionarioAtual = bancoQuestoes.gerarQuestionario('estudo', totalQuestoes);
+  userAnswers = {};
+  currentQuestionIndex = 0;
+}
 console.log('📘 Questões carregadas:', questionarioAtual);
       currentQuestionIndex = 0;
       score = 0;
@@ -298,16 +308,25 @@ console.log('📘 Questões carregadas:', questionarioAtual);
       // Marcar seleção atual
       options[index].classList.add('selected');
       userAnswers[question.id] = index;
+      if (currentMode === 'study') {
+  localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
+  localStorage.setItem('currentQuestionIndex', currentQuestionIndex);
+}
       question.tempo = question.tempo || 0;
 question.tempo = (question.tempoStart) ? (Date.now() - question.tempoStart) / 1000 : 0;
       // No modo estudo, mostrar feedback após 10 questões
       if (currentMode === 'study') {
-        questionsSinceLastFeedback++;
-        if (questionsSinceLastFeedback >= 10) {
-          showFeedbackImmediately();
-          questionsSinceLastFeedback = 0;
-        }
-      }
+  questionsSinceLastFeedback++;
+
+  // Só mostra feedback imediato se não for a última questão
+  const isLastQuestion = currentQuestionIndex === questionarioAtual.length - 1;
+
+  if (questionsSinceLastFeedback >= 10 && !isLastQuestion) {
+    showFeedbackImmediately();
+    questionsSinceLastFeedback = 0;
+  }
+}
+
       
       // No modo simulado, habilitar próximo
       if (currentMode === 'exam') {
@@ -332,12 +351,7 @@ question.tempo = (question.tempoStart) ? (Date.now() - question.tempoStart) / 10
         question.explicacoes[selectedLanguage];
       document.getElementById('explanation').style.display = 'block';
       
-      // Feedback visual
-      if (userAnswers[question.id] === question.correta) {
-        alert(t.correct);
-      } else {
-        alert(t.incorrect);
-      }
+      // Feedback visual já é exibido nos elementos da interface (sem alert).
     }
 
     function togglePending() {
@@ -383,7 +397,11 @@ question.tempo = (question.tempoStart) ? (Date.now() - question.tempoStart) / 10
   clearInterval(timerInterval);
   document.getElementById('question-container').style.display = 'none';
   document.getElementById('result-screen').style.display = 'block';
-
+  if (currentMode === 'study') {
+  localStorage.removeItem('questionarioAtual');
+  localStorage.removeItem('userAnswers');
+  localStorage.removeItem('currentQuestionIndex');
+}
   // Salvar dados no localStorage para uso no review.html
   localStorage.setItem('questionarioAtual', JSON.stringify(questionarioAtual));
   localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
@@ -410,7 +428,10 @@ question.tempo = (question.tempoStart) ? (Date.now() - question.tempoStart) / 10
     selectedLanguage
   );
   const t = translations[selectedLanguage]; // Obter traduções do idioma atual
-document.getElementById('full-report-link').textContent = t.viewFullReport;
+const linkEl = document.getElementById('full-report-link');
+if (linkEl) {
+  linkEl.textContent = t.viewFullReport;
+}
 }
 
     function updateUI() {
@@ -453,7 +474,28 @@ document.getElementById('full-report-link').textContent = t.viewFullReport;
     }
   
 
- 
+    function confirmReturnHome() {
+  const lang = selectedLanguage || 'en';
+
+  const confirmMessages = {
+    en: "If you return to the home page, your answers will be lost. Are you sure?",
+    pt: "Caso retorne à página inicial, suas respostas serão perdidas. Tem certeza?",
+    es: "Si regresa a la página principal, sus respuestas se perderán. ¿Está seguro?"
+  };
+
+  if (confirm(confirmMessages[lang])) {
+    // Limpa estados salvos
+    localStorage.removeItem('questionarioAtual');
+    localStorage.removeItem('userAnswers');
+
+    // Oculta todas as seções de resultado e volta à tela inicial
+    document.getElementById('question-container').style.display = 'none';
+    document.getElementById('result-screen').style.display = 'none';
+    document.getElementById('full-report-screen').style.display = 'none';
+    document.getElementById('home-screen').style.display = 'block';
+  }
+}
+
   console.log('bancoQuestoes está definido?', typeof bancoQuestoes !== 'undefined');
   document.addEventListener("DOMContentLoaded", () => {
     const lang = localStorage.getItem("selectedLanguage") || "en";

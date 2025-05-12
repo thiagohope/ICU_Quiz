@@ -59,6 +59,9 @@
   </style>
 </head>
 <body>
+  <a href="#" onclick="confirmReturnHome(); return false;">
+  <img src="logo-brainboxmed.png" alt="BrainboxMed Logo" loading="lazy" style="max-width: 250px; cursor: pointer; display: block; margin: 0 auto 30px;">
+</a>
   <h1>Questions for Review</h1>
   <p id="block-counter" style="text-align: center; font-size: 18px; color: #333; margin-bottom: 20px;"></p>
 
@@ -178,10 +181,26 @@ if (totalBlocos === 5) {
     localStorage.removeItem('acumuladoQuestoes');
     localStorage.removeItem('acumuladoRespostas');
     localStorage.setItem('autoStartStudyMode', 'true');
+    localStorage.removeItem('questionarioAtual');
+    localStorage.removeItem('userAnswers');
+    localStorage.removeItem('currentQuestionIndex');
     window.location.href = "index.html";
   };
 
   document.body.appendChild(reiniciarBtn);
+}
+   function confirmReturnHome() {
+  const lang = localStorage.getItem('selectedLanguage') || 'en';
+
+  const confirmMessages = {
+    en: "If you return to the home page, your answers will be lost. Are you sure?",
+    pt: "Caso retorne à página inicial, suas respostas serão perdidas. Tem certeza?",
+    es: "Si regresa a la página principal, sus respuestas se perderán. ¿Está seguro?"
+  };
+
+  if (confirm(confirmMessages[lang])) {
+    window.location.href = 'index.html';
+  }
 }
 
   </script>

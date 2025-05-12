@@ -76,6 +76,9 @@
   </style>
 </head>
 <body>
+  <a href="#" onclick="confirmReturnHome(); return false;">
+  <img src="logo-brainboxmed.png" alt="BrainboxMed Logo" loading="lazy" style="max-width: 250px; cursor: pointer; display: block; margin: 0 auto 30px;">
+</a>
   <h1>Relatório Final - 50 Questões</h1>
   <div class="summary" id="summary"></div>
   <h2>Últimas 10 Questões</h2>
@@ -134,6 +137,26 @@
       localStorage.removeItem('acumuladoRespostas');
       window.location.href = "index.html";
     }
+      function confirmReturnHome() {
+    const lang = localStorage.getItem('selectedLanguage') || 'pt';
+
+    const confirmMessages = {
+      en: "If you return to the home page, your answers will be lost. Are you sure?",
+      pt: "Caso retorne à página inicial, suas respostas serão perdidas. Tem certeza?",
+      es: "Si regresa a la página principal, sus respuestas se perderán. ¿Está seguro?"
+    };
+
+    if (confirm(confirmMessages[lang])) {
+      localStorage.removeItem('acumuladoQuestoes');
+      localStorage.removeItem('acumuladoRespostas');
+      window.location.href = "index.html";
+    }
+  }
   </script>
+  <div style="text-align: center; margin-top: 30px;">
+  <button class="btn btn-secondary" onclick="confirmReturnHome()" style="background-color: var(--color-primary);">
+    ← Return to Home Page
+  </button>
+</div>
 </body>
 </html>

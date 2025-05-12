@@ -16,7 +16,7 @@ const reportTexts = {
     "status": "Status",
     "recommendations": "Study Recommendations",
     "pending": "Questions for Review",
-    "nonePending": "No questions marked for review",
+    "nonePending": " ",
      "viewFullReport": "View Full Report",
     "restart": "Restart Test",
     "print": "Print Report",
@@ -47,7 +47,7 @@ const reportTexts = {
     "status": "Estado",
     "recommendations": "Recomendaciones de Estudio",
     "pending": "Preguntas para Revisión",
-    "nonePending": "No hay preguntas marcadas",
+    "nonePending": " ",
     "viewFullReport": "Ver Informe Completo",
     "restart": "Reiniciar Prueba",
     "print": "Imprimir Informe",
@@ -78,7 +78,7 @@ const reportTexts = {
     "status": "Status",
     "recommendations": "Recomendações de Estudo",
     "pending": "Questões para Revisão",
-    "nonePending": "Nenhuma questão marcada",
+    "nonePending": " ",
     "viewFullReport": "Ver Relatório Completo",
     "restart": "Refazer Teste",
     "print": "Imprimir Relatório",
@@ -370,10 +370,7 @@ window.showPendingQuestions = function() {
 
 function createFullReportLink(lang) {
   const t = reportTexts[lang];
-  const html = `
-    <p class="report-link" onclick="showFullReport()">${t.viewDetailedReport}</p>
-    `;
-  document.getElementById('full-report-section').innerHTML = html;
+  console.warn("⚠️ Elemento 'full-report-section' não encontrado. Ignorando criação de link.");
 }
 
 function generateDetailedReport(questions, answers, pending, lang) {
@@ -438,6 +435,7 @@ function showFullReport() {
 generateDetailedReport(window.questionarioAtual, window.userAnswers, window.pendingQuestions, window.selectedLanguage);
 }
 function drawDifficultyChart(questions, answers) {
+  console.log('🎯 Dados recebidos para gráfico de dificuldade:', questions, answers);
   const lang = localStorage.getItem('selectedLanguage') || 'pt';
   const stats = {
     facil: { acertos: 0, erros: 0 },
@@ -451,8 +449,15 @@ function drawDifficultyChart(questions, answers) {
     if (acertou) stats[q.dificuldade].acertos++;
     else stats[q.dificuldade].erros++;
   });
-
-  const ctx = document.getElementById('chart-dificuldade').getContext('2d');
+  
+const canvas = document.getElementById('chart-dificuldade');
+if (!canvas) {
+  console.warn("⚠️ Canvas 'chart-dificuldade' não encontrado.");
+  return;
+}
+canvas.style.display = 'block'; // exibe o canvas apenas se necessário
+canvas.height = 400; // garante altura
+const ctx = canvas.getContext('2d');
 
   const translatedLabels = [
     translateDifficulty('facil', lang),
@@ -483,6 +488,7 @@ function drawDifficultyChart(questions, answers) {
 }
 
 function drawTempoChart(questions) {
+  console.log('⏱️ Dados recebidos para gráfico de tempo:', questions);
   const lang = localStorage.getItem('selectedLanguage') || 'pt';
 
   const titles = {
