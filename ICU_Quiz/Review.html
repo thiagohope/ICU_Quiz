@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions for Review</title>
+  <style>
+  :root {
+    --color-primary: #005b94;
+    --color-highlight: #27ae60;
+    --color-wrong: #e74c3c;
+    --color-correct-bg: #e6f9ec;
+    --color-wrong-bg: #fdecea;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f5f5f5;
+    padding: 30px;
+    max-width: 900px;
+    margin: auto;
+  }
+
+  h1 {
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .question {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  }
+
+  .question h3 {
+    color: var(--color-primary);
+    margin-bottom: 10px;
+  }
+
+  .option {
+    padding: 12px;
+    border-radius: 6px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    transition: all 0.3s;
+  }
+
+  .correct {
+    border-left: 5px solid var(--color-highlight);
+    background-color: var(--color-correct-bg);
+    color: var(--color-highlight);
+  }
+
+  .incorrect {
+    border-left: 5px solid var(--color-wrong);
+    background-color: var(--color-wrong-bg);
+    color: var(--color-wrong);
+  }
+
+  .explanation {
+    margin-top: 18px;
+    padding: 12px;
+    border-left: 4px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+  }
+
+  .explanation.correct {
+    border-left-color: var(--color-highlight);
+    color: var(--color-highlight);
+  }
+
+  .explanation.incorrect {
+    border-left-color: var(--color-wrong);
+    color: var(--color-wrong);
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+    transition: background 0.3s;
+  }
+
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .btn-highlight {
+    background-color: var(--color-highlight);
+    color: white;
+  }
+
+  .btn-warn {
+    background-color: var(--color-wrong);
+    color: white;
+  }
+</style>
+
+</head>
+<body>
+<div style="text-align: center; margin-bottom: 30px;">
+  <a href="index.html">
+    <img src="logo-brainboxmed-transparent.png" alt="BrainboxMed Logo" style="max-width: 250px; cursor: pointer;">
+  </a>
+</div>
+
+  <h1>Questions for Review</h1>
+  <p id="block-counter" style="text-align: center; font-size: 18px; color: #333; margin-bottom: 20px;"></p>
+
+  <div id="report"></div>
+
+  <script>
+    const questionario = JSON.parse(localStorage.getItem('questionarioAtual')) || [];
+    const respostas = JSON.parse(localStorage.getItem('userAnswers')) || {};
+    const idioma = localStorage.getItem('selectedLanguage') || 'en';
+
+    const reportContainer = document.getElementById('report');
+
+    questionario.forEach((q, i) => {
+      const userAnswer = respostas[q.id];
+      const isCorrect = userAnswer === q.correta;
+      const hasAnswer = typeof userAnswer !== 'undefined';
+
+      const enunciado = q.pergunta?.[idioma] || q.pergunta?.pt || "";
+      const alternativas = q.alternativas || [];
+      const explicacao = alternativas[q.correta]?.explicacao?.[idioma] || "";
+
+
+      const questionBlock = document.createElement('div');
+      questionBlock.className = 'question';
+
+      questionBlock.innerHTML = `
+        <h3>Question ${i + 1}</h3>
+        <p><strong>${enunciado}</strong></p>
+        <div>
+          ${alternativas.map((opt, idx) => {
+          let classe = '';
+          if (idx === q.correta) classe = 'correct';
+          if (hasAnswer && idx === userAnswer && userAnswer !== q.correta) classe = 'incorrect';
+          const texto = opt.texto?.[idioma] || opt.texto?.pt || "";
+          return `<div class="option ${classe}">${texto}</div>`;
+          }).join('')}
+
+        </div>
+        <div class="explanation ${isCorrect ? 'correct' : 'incorrect'}">
+          ${isCorrect ? '✓' : '✖'} ${explicacao}
+        </div>
+      `;
+
+      reportContainer.appendChild(questionBlock);
+    });
+const acumulado = JSON.parse(localStorage.getItem('acumuladoQuestoes')) || [];
+const totalBlocos = Math.floor((acumulado.length + questionario.length) / 10);  // inclui bloco atual
+
+const textosBloco = {
+  pt: `Bloco ${totalBlocos} / 5`,
+  en: `Set ${totalBlocos} / 5`,
+  es: `Bloque ${totalBlocos} / 5`
+};
+
+document.getElementById('block-counter').textContent = textosBloco[idioma] || `Block ${totalBlocos} / 5`;
+  // Textos multilíngues do botão
+
+document.addEventListener('DOMContentLoaded', function () {
+  const nextSetTexts = {
+    pt: "Próximo Bloco de Questões",
+    en: "Next Set of Questions",
+    es: "Siguiente Bloque de Preguntas"
+  };
+
+  const idioma = localStorage.getItem('selectedLanguage') || 'en';
+  const btn = document.getElementById('next-set-btn');
+
+  if (btn) {
+      btn.addEventListener('click', () => {
+      const acumuladoQuestoes = JSON.parse(localStorage.getItem('acumuladoQuestoes')) || [];
+      const acumuladoRespostas = JSON.parse(localStorage.getItem('acumuladoRespostas')) || {};
+
+      questionario.forEach(q => {
+        if (!acumuladoQuestoes.some(q2 => q2.id === q.id)) {
+          acumuladoQuestoes.push(q);
+        }
+      });
+
+      Object.keys(respostas).forEach(id => {
+        acumuladoRespostas[id] = respostas[id];
+      });
+
+      localStorage.setItem('acumuladoQuestoes', JSON.stringify(acumuladoQuestoes));
+      localStorage.setItem('acumuladoRespostas', JSON.stringify(acumuladoRespostas));
+
+      if (acumuladoQuestoes.length >= 50) {
+        window.location.href = "relatorioFinal.html";
+      } else {
+        localStorage.setItem('autoStartStudyMode', 'true');
+        window.location.href = "index.html";
+      }
+    });
+  }
+});
+// Exibir botão de reinício apenas no final do 5º bloco
+if (totalBlocos === 5) {
+  const reiniciarBtn = document.createElement('button');
+  reiniciarBtn.textContent = {
+    pt: "Reiniciar Modo Estudo",
+    en: "Restart Study Mode",
+    es: "Reiniciar Modo de Estudio"
+  }[idioma] || "Restart";
+
+  reiniciarBtn.style = "margin-top: 30px; padding: 12px 24px; font-size: 16px; background-color: #f39c12; color: white; border: none; border-radius: 6px; cursor: pointer; display: block; margin-left: auto; margin-right: auto;";
+
+  reiniciarBtn.onclick = () => {
+    localStorage.removeItem('acumuladoQuestoes');
+    localStorage.removeItem('acumuladoRespostas');
+    localStorage.setItem('autoStartStudyMode', 'true');
+    localStorage.removeItem('questionarioAtual');
+    localStorage.removeItem('userAnswers');
+    localStorage.removeItem('currentQuestionIndex');
+    window.location.href = "index.html";
+  };
+
+  document.body.appendChild(reiniciarBtn);
+}
+   function confirmReturnHome() {
+  const lang = localStorage.getItem('selectedLanguage') || 'en';
+
+  const confirmMessages = {
+    en: "If you return to the home page, your answers will be lost. Are you sure?",
+    pt: "Caso retorne à página inicial, suas respostas serão perdidas. Tem certeza?",
+    es: "Si regresa a la página principal, sus respuestas se perderán. ¿Está seguro?"
+  };
+
+  if (confirm(confirmMessages[lang])) {
+    window.location.href = 'index.html';
+  }
+}
+  
+  </script>
+  <div id="next-block-controls" style="text-align: center; margin-top: 50px;">
+  <p id="block-label" style="font-size: 18px; color: #333; margin-bottom: 15px;"></p>
+  <button id="next-set-btn" class="btn btn-highlight" style="font-size: 18px;">
+    ➡️ Next Block
+  </button>
+  </div>
+<div style="text-align: center; margin-top: 50px;">
+  <button class="btn btn-primary" onclick="window.location.href='index.html'">
+    ← Return to Report
+  </button>
+  <button class="btn btn-warn" onclick="confirmReturnHome()" style="margin-left: 15px;">
+    🏠 Home
+  </button>
+</div>
+
+</body>
+</html>

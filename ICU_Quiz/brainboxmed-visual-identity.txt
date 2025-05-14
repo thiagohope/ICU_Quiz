@@ -1,0 +1,109 @@
+
+## BrainboxMed – Identidade Visual
+
+### 🧠 Nome Oficial
+**BrainboxMed**
+*Subtítulo opcional:* Train your brain. Master medicine.
+
+---
+
+### 🖼️ Logo (Descrição Visual)
+- Cubo roxo discreto com circuitos laranja conectando-se a um estetoscópio branco
+- Texto ao lado:
+  - "**BRAINBOX**" em roxo `#5E3E94`
+  - "**MED**" em laranja `#F39C12`
+
+> Arquivo do logo: `logo-brainboxmed.png`
+
+---
+
+### 🎨 Paleta de Cores
+
+| Elemento                 | Cor HEX   | Função                      |
+| ------------------------ | --------- | --------------------------- |
+| Primária – Roxo discreto | `#5E3E94` | Logo, títulos, botões       |
+| Secundária – Laranja     | `#F39C12` | Destaques, "MED", circuitos |
+| Estetoscópio (ícone)     | `#FFFFFF` | Contraste no logo           |
+| Fundo principal          | `#F5F5F5` | Background                  |
+| Texto principal          | `#333333` | Alta legibilidade           |
+| Botões secundários       | `#6C757D` | Cancelar, voltar, neutros   |
+
+---
+
+### 🖋️ Tipografia Oficial
+
+- **Primária (títulos & menus):** `Poppins`, sans-serif
+- **Secundária (texto corrido):** `Inter` ou `Roboto`, sans-serif
+
+#### Link para inclusão:
+
+```html
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
+```
+
+#### Exemplo CSS global:
+
+```css
+:root {
+  --color-primary: #5E3E94;
+  --color-highlight: #F39C12;
+  --color-background: #f5f5f5;
+  --color-text: #333333;
+  --color-neutral: #6C757D;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+h1, h2, h3, .button, .mode-btn {
+  font-family: 'Poppins', sans-serif;
+  color: var(--color-primary);
+}
+
+.button {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.button:hover {
+  background-color: #482F74;
+}
+```
+
+---
+
+### 📐 Identidade Modular
+
+- Nome fixo: **BrainboxMed**
+- Expansível por especialidade: `BrainboxMed – Neuro`, `BrainboxMed – Cardio`, etc.
+- Módulos visuais organizados por domínio e dificuldade
+- Relatórios e gráficos adaptados ao estilo visual oficial
+
+---
+
+### ✅ Aplicação no HTML
+
+#### Inserção do logo:
+
+```html
+<div style="text-align: center; margin-bottom: 20px;">
+<img src="logo-brainboxmed.png" alt="BrainboxMed Logo" loading="lazy" style="max-width: 250px;">
+</div>
+```
+
+#### Inserção do nome como texto:
+
+```html
+<div style="text-align: center; margin-top: 10px;">
+  <h1 style="font-family: 'Poppins', sans-serif; color: var(--color-primary); margin: 0;">
+    Brainbox<span style="color: var(--color-highlight);">Med</span>
+  </h1>
+</div>
+```
+
+---
+
+Este documento deve ser salvo como `brainboxmed-visual-identity.txt` e mantido na pasta raiz do projeto como referência para desenvolvedores e designers.
