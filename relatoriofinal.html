@@ -1,162 +1,345 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="">
 <head>
   <meta charset="UTF-8">
   <title>Relatório Final</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      padding: 30px;
-      max-width: 900px;
-      margin: auto;
-    }
-    h1, h2 {
-      color: #005b94;
-      text-align: center;
-    }
-    .question {
-      background: white;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 30px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .option {
-      padding: 10px;
-      border-radius: 6px;
-      margin: 6px 0;
-      border: 1px solid #ccc;
-    }
-    .correct {
-      border-color: #27ae60;
-      background-color: #e6f9ec;
-      color: #27ae60;
-    }
-    .incorrect {
-      border-color: #e74c3c;
-      background-color: #fdecea;
-      color: #e74c3c;
-    }
-    .explanation {
-      margin-top: 15px;
-      border-left: 4px solid #ccc;
-      padding-left: 10px;
-    }
-    .explanation.correct {
-      border-color: #27ae60;
-      color: #27ae60;
-    }
-    .explanation.incorrect {
-      border-color: #e74c3c;
-      color: #e74c3c;
-    }
-    .summary {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 30px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .summary h3 {
-      margin-bottom: 10px;
-      color: #333;
-    }
-    button {
-      padding: 10px 20px;
-      background: #005b94;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-      display: block;
-      margin: 30px auto;
-    }
-  </style>
+  :root {
+    --color-primary: #005b94;
+    --color-highlight: #27ae60;
+    --color-wrong: #e74c3c;
+    --color-correct-bg: #e6f9ec;
+    --color-wrong-bg: #fdecea;
+  }
+
+  body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f5f5f5;
+  padding: 30px;
+  margin: 0 auto;
+  max-width: 900px;
+  color: #333;
+  }
+
+  h1, h2 {
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: 30px;
+  }
+
+  .question {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  }
+
+  .option {
+  padding: 12px;
+  border-radius: 6px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  transition: all 0.3s;
+  }
+
+  .correct {
+    border-left: 5px solid var(--color-highlight);
+    background-color: var(--color-correct-bg);
+    color: var(--color-highlight);
+  }
+
+  .incorrect {
+    border-left: 5px solid var(--color-wrong);
+    background-color: var(--color-wrong-bg);
+    color: var(--color-wrong);
+  }
+
+  .explanation {
+    margin-top: 18px;
+    padding: 12px;
+    border-left: 4px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+    transition: background 0.3s;
+  }
+
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .btn-highlight {
+    background-color: var(--color-highlight);
+    color: white;
+  }
+
+  .btn-warn {
+    background-color: var(--color-wrong);
+    color: white;
+  }
+
+  .summary {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  }
+
+  .summary h3 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .area-block {
+  margin-bottom: 30px;
+  padding-left: 10px;
+  border-left: 4px solid var(--color-highlight);
+}
+
+.area-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-highlight);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+  .topic-list {
+  list-style: none;
+  padding-left: 15px;
+  position: relative;
+  margin: 0;
+  }
+
+  .topic-list::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #ccc;
+  }
+
+ .topic-list li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 6px;
+ }
+
+ .topic-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  }
+
+</style>
 </head>
 <body>
-  <a href="#" onclick="confirmReturnHome(); return false;">
-  <img src="logo-brainboxmed.png" alt="BrainboxMed Logo" loading="lazy" style="max-width: 250px; cursor: pointer; display: block; margin: 0 auto 30px;">
-</a>
-  <h1>Relatório Final - 50 Questões</h1>
+  <div style="text-align: center; margin-bottom: 30px;">
+  <a href="index.html">
+    <img src="logo-brainboxmed-transparent.png" alt="BrainboxMed Logo" style="max-width: 250px; cursor: pointer;">
+  </a>
+</div>
+
+  <h1 id="report-title">Relatório Final</h1>
   <div class="summary" id="summary"></div>
-  <h2>Últimas 10 Questões</h2>
+  <h2 id="last-questions-title">Últimas 10 Questões</h2>
   <div id="review"></div>
-  <button onclick="resetCycle()">Reiniciar Ciclo</button>
-
-  <script>
-    const allQuestions = JSON.parse(localStorage.getItem('acumuladoQuestoes')) || [];
-    const allAnswers = JSON.parse(localStorage.getItem('acumuladoRespostas')) || {};
-    const idioma = localStorage.getItem('selectedLanguage') || 'pt';
-
-    const correctCount = allQuestions.filter(q => allAnswers[q.id] === q.correta).length;
-    const percentage = Math.round((correctCount / allQuestions.length) * 100);
-
-    document.getElementById('summary').innerHTML = `
-      <h3>Acertos: ${correctCount} / ${allQuestions.length}</h3>
-      <p>Percentual: <strong>${percentage}%</strong></p>
-    `;
-
-    const last10 = allQuestions.slice(-10);
-    const reviewContainer = document.getElementById('review');
-
-    last10.forEach((q, i) => {
-      const userAnswer = allAnswers[q.id];
-      const isCorrect = userAnswer === q.correta;
-      const hasAnswer = typeof userAnswer !== 'undefined';
-
-      const enunciado = q.enunciado?.[idioma] || q.enunciado;
-      const alternativas = q.alternativas?.[idioma] || q.alternativas;
-      const explicacao = q.explicacoes?.[idioma] || q.explicacoes;
-
-      const questionBlock = document.createElement('div');
-      questionBlock.className = 'question';
-
-      questionBlock.innerHTML = `
-        <h3>Questão ${allQuestions.length - 9 + i}</h3>
-        <p><strong>${enunciado}</strong></p>
-        <div>
-          ${alternativas.map((opt, idx) => {
-            let classe = '';
-            if (idx === q.correta) classe = 'correct';
-            if (hasAnswer && idx === userAnswer && userAnswer !== q.correta) classe = 'incorrect';
-            return `<div class="option ${classe}">${opt}</div>`;
-          }).join('')}
-        </div>
-        <div class="explanation ${isCorrect ? 'correct' : 'incorrect'}">
-          ${isCorrect ? '✓' : '✖'} ${explicacao}
-        </div>
-      `;
-
-      reviewContainer.appendChild(questionBlock);
-    });
-
-    function resetCycle() {
-      localStorage.removeItem('acumuladoQuestoes');
-      localStorage.removeItem('acumuladoRespostas');
-      window.location.href = "index.html";
-    }
-      function confirmReturnHome() {
-    const lang = localStorage.getItem('selectedLanguage') || 'pt';
-
-    const confirmMessages = {
-      en: "If you return to the home page, your answers will be lost. Are you sure?",
-      pt: "Caso retorne à página inicial, suas respostas serão perdidas. Tem certeza?",
-      es: "Si regresa a la página principal, sus respuestas se perderán. ¿Está seguro?"
-    };
-
-    if (confirm(confirmMessages[lang])) {
-      localStorage.removeItem('acumuladoQuestoes');
-      localStorage.removeItem('acumuladoRespostas');
-      window.location.href = "index.html";
-    }
-  }
-  </script>
-  <div style="text-align: center; margin-top: 30px;">
-  <button class="btn btn-secondary" onclick="confirmReturnHome()" style="background-color: var(--color-primary);">
-    ← Return to Home Page
+  <div id="review-navigation" style="text-align: center; margin-top: 30px;">
+  <button id="prev-btn" class="btn btn-primary" style="display: none;">⬅️ Previous</button>
+  <span id="page-indicator" style="margin: 0 20px; font-weight: bold; font-size: 16px;"></span>
+  <button id="next-btn" class="btn btn-primary">Next ➡️</button>
+  </div>
+  <div id="review-cta" style="text-align: center; margin-top: 40px;">
+  <p id="full-review-invite" style="font-size: 18px; font-weight: bold; margin-bottom: 10px; color: var(--color-primary);">
+  Review full question set?
+</p>
+<button id="full-report-link" onclick="showFullReport()" class="btn btn-highlight">
+  📋 View Full Report
   </button>
 </div>
+
+<script>
+const allQuestions = JSON.parse(localStorage.getItem('acumuladoQuestoes')) || [];
+const allAnswers = JSON.parse(localStorage.getItem('acumuladoRespostas')) || {};
+const idioma = localStorage.getItem('selectedLanguage') || 'pt';
+drawPerformanceChart(allQuestions, allAnswers, idioma);
+
+const reviewContainer = document.getElementById('review');
+let currentPage = 0;
+const questionsPerPage = 10;
+const totalPages = Math.ceil(allQuestions.length / questionsPerPage);
+
+function renderPage(page) {
+  reviewContainer.innerHTML = '';
+
+  const start = page * questionsPerPage;
+  const end = start + questionsPerPage;
+  const pageQuestions = allQuestions.slice(start, end);
+
+  pageQuestions.forEach((q, i) => {
+    const userAnswer = allAnswers[q.id];
+    const isCorrect = userAnswer === q.correta;
+    const hasAnswer = typeof userAnswer !== 'undefined';
+
+    const enunciado = q.pergunta?.[idioma] || q.pergunta?.pt || '';
+    const alternativas = q.alternativas || [];
+    const explicacao = alternativas[q.correta]?.explicacao?.[idioma] || '';
+
+    const alternativasHTML = alternativas.map((alt, idx) => {
+      const texto = alt.texto?.[idioma] || alt.texto?.pt || '';
+      let classe = '';
+      let prefix = '';
+
+      if (idx === q.correta) {
+        classe = 'correct';
+        prefix = '✔️ ';
+      }
+      if (hasAnswer && idx === userAnswer && userAnswer !== q.correta) {
+        classe = 'incorrect';
+        prefix = '❌ ';
+      }
+
+      return `<div class="option ${classe}">${prefix}${texto}</div>`;
+    }).join('');
+
+    const block = document.createElement('div');
+    block.className = 'question';
+    block.innerHTML = `
+      <h3 style="color: var(--color-primary); font-size: 20px;">📘 Question ${start + i + 1}</h3>
+      <p style="font-weight: bold; font-size: 17px; margin-bottom: 15px;">${enunciado}</p>
+      <div style="margin-bottom: 20px;">${alternativasHTML}</div>
+      <div class="explanation ${isCorrect ? 'correct' : 'incorrect'}">
+        ${isCorrect ? '✅ Correct' : '❌ Incorrect'} — ${explicacao}
+      </div>
+    `;
+    reviewContainer.appendChild(block);
+  });
+
+  const indicatorTexts = {
+  pt: `Bloco ${page + 1} de ${totalPages}`,
+  en: `Set ${page + 1} of ${totalPages}`,
+  es: `Bloque ${page + 1} de ${totalPages}`
+  };
+
+
+  document.getElementById('page-indicator').textContent = indicatorTexts[idioma] || indicatorTexts.en;
+  document.getElementById('prev-btn').style.display = page > 0 ? 'inline-block' : 'none';
+  document.getElementById('next-btn').style.display = page < totalPages - 1 ? 'inline-block' : 'none';
+}
+
+document.getElementById('prev-btn').addEventListener('click', () => {
+  if (currentPage > 0) {
+    currentPage--;
+    renderPage(currentPage);
+  }
+});
+
+document.getElementById('next-btn').addEventListener('click', () => {
+  if (currentPage < totalPages - 1) {
+    currentPage++;
+    renderPage(currentPage);
+  }
+});
+
+renderPage(currentPage);
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const lang = localStorage.getItem('selectedLanguage') || 'pt';
+
+  const fullReviewTexts = {
+    pt: {
+      invite: "Deseja revisar todas as questões respondidas?",
+      button: "📋 Ver Relatório Completo"
+    },
+    en: {
+      invite: "Review full question set?",
+      button: "📋 View Full Report"
+    },
+    es: {
+      invite: "¿Revisar todas las preguntas respondidas?",
+      button: "📋 Ver Informe Completo"
+    }
+  };
+
+  const t = fullReviewTexts[lang];
+  document.getElementById("full-review-invite").textContent = t.invite;
+  document.getElementById("full-report-link").textContent = t.button;
+});
+</script>
+  <div style="text-align: center; margin-top: 50px;">
+  <button class="btn btn-primary" onclick="confirmReturnHome()" style="font-size: 16px;">
+    🏠 Return to Home Page
+  </button>
+  <button class="btn btn-highlight" onclick="resetCycle()" style="font-size: 16px; margin-left: 15px;">
+    🔄 Restart Cycle
+  </button>
+  </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const lang = localStorage.getItem('selectedLanguage') || 'en';
+  document.documentElement.lang = lang;
+
+  const translations = {
+    en: {
+      title: "Final Report",
+      subtitle: "Last 10 Questions",
+      invite: "Review full question set?",
+      button: "📋 View Full Report",
+      prev: "⬅️ Previous",
+      next: "Next ➡️"
+    },
+    pt: {
+      title: "Relatório Final",
+      subtitle: "Últimas 10 Questões",
+      invite: "Deseja revisar todas as questões respondidas?",
+      button: "📋 Ver Relatório Completo",
+      prev: "⬅️ Anterior",
+      next: "Próxima ➡️"
+    },
+    es: {
+      title: "Informe Final",
+      subtitle: "Últimas 10 Preguntas",
+      invite: "¿Revisar todas las preguntas respondidas?",
+      button: "📋 Ver Informe Completo",
+      prev: "⬅️ Anterior",
+      next: "Siguiente ➡️"
+    }
+  };
+
+  const t = translations[lang] || translations.en;
+
+  const setText = (id, text) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  };
+
+  setText("report-title", t.title);
+  setText("last-questions-title", t.subtitle);
+  setText("full-review-invite", t.invite);
+  setText("full-report-link", t.button);
+  setText("prev-btn", t.prev);
+  setText("next-btn", t.next);
+});
+</script>
+<script src="relatorio.js" defer></script>
 </body>
 </html>

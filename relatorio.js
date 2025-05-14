@@ -8,14 +8,16 @@ const reportTexts = {
     "percentage": "Percentage",
     "average": "Expected average",
     "strengths": "Strengths & Weaknesses",
-    "domain": "Domain",
+    "domain": "Topic Area",
     "difficulty": "Performance by Difficulty",
     "level": "Level",
     "questions": "Questions",
     "correctAnswers": "% Correct",
     "status": "Status",
-    "recommendations": "Study Recommendations",
-    "pending": "Questions for Review",
+    "recommendations": "Targeted Study Plan",
+    "pending": "Review Questions",
+    "pendingSubtitle": "Click the button below to review all the questions.",
+    "viewPending": "View Full Question Report",
     "nonePending": " ",
      "viewFullReport": "View Full Report",
     "restart": "Restart Test",
@@ -39,14 +41,16 @@ const reportTexts = {
     "percentage": "Porcentaje",
     "average": "Promedio esperado",
     "strengths": "Fortalezas y Debilidades",
-    "domain": "Dominio",
+    "domain": "Área Temática",
     "difficulty": "Rendimiento por Dificultad",
     "level": "Nivel",
     "questions": "Preguntas",
     "correctAnswers": "% Correctas",
     "status": "Estado",
-    "recommendations": "Recomendaciones de Estudio",
-    "pending": "Preguntas para Revisión",
+    "recommendations": "Plan de Estudio Personalizado",
+    "pending": "Revisar Preguntas",
+    "pendingSubtitle": "Haz clic en el botón de abajo para ver todas las preguntas.",
+    "viewPending": "Ver Informe de Preguntas",
     "nonePending": " ",
     "viewFullReport": "Ver Informe Completo",
     "restart": "Reiniciar Prueba",
@@ -70,14 +74,16 @@ const reportTexts = {
     "percentage": "Percentual",
     "average": "Média esperada",
     "strengths": "Pontos Fortes e Fracos",
-    "domain": "Domínio",
+    "domain": "Área Temática",
     "difficulty": "Desempenho por Dificuldade",
     "level": "Nível",
     "questions": "Questões",
     "correctAnswers": "% Corretas",
     "status": "Status",
-    "recommendations": "Recomendações de Estudo",
-    "pending": "Questões para Revisão",
+    "recommendations": "Plano de Estudo Personalizado",
+    "pending": "Revisar Questões",
+    "pendingSubtitle": "Clique no botão abaixo para ver todas as questões.",
+    "viewPending": "Ver Relatório de Questões",
     "nonePending": " ",
     "viewFullReport": "Ver Relatório Completo",
     "restart": "Refazer Teste",
@@ -107,44 +113,52 @@ function generateUSMLEReportFull(questionario, respostas, pendentes, tempoPorQue
   document.getElementById('report-date').textContent = `${t.generated} ${new Date().toLocaleDateString(idioma)}`;
   document.getElementById('score-text').textContent = `${t.score}: ${acertos}/${totalQuestoes} ${t.correct}`;
   document.getElementById('percentage').textContent = percentual;
-  document.getElementById('score-bar').style.width = `${percentual}%`;
+  
+const scoreBar = document.getElementById("score-bar");
+scoreBar.style.width = `${percentage}%`;
+scoreBar.style.background = percentage >= 70
+  ? "linear-gradient(to right, #2ecc71, #27ae60)" // verde
+  : "linear-gradient(to right, #e74c3c, #c0392b)"; // vermelho
 
   updateDomainAnalysis(questionario, respostas, idioma);
   updateDifficultyAnalysis(questionario, respostas, idioma);
-   updateRecommendations(questionario, respostas, idioma);
-  // Linha abaixo comentada porque o elemento 'pending-questions-section' não existe no HTML
+  updateRecommendations(questionario, respostas, idioma);
+  
+  // Comentado para evitar exibir "Questions for Review" + undefined
   // addPendingQuestionsLink(pendentes, idioma);
+
   updatePendingQuestions(questionario, pendentes, respostas, idioma);
-  createFullReportLink(idioma);  
+  // createFullReportLink(idioma); // Removido link para relatoriofinal.html
   drawDifficultyChart(questionario, respostas);
-  drawTempoChart(questionario);
 }
+
 
 function updateDomainAnalysis(questions, answers, lang) {
   const dominios = {};
   questions.forEach(q => {
-    const categoria = q.categoria[lang] || q.categoria;
+       const categoria = q.area || "undefined";
     if (!dominios[categoria]) {
       dominios[categoria] = { total: 0, acertos: 0 };
     }
     dominios[categoria].total++;
-    if (answers[q.id] === q.correta) dominios[categoria].acertos++;
+    console.log(`Questão ${q.id} — Correta: ${q.correta}, Respondida: ${answers?.[q.id]}`);
+    if (answers?.[q.id] === q.correta) dominios[categoria].acertos++;
   });
 
   let html = '';
   Object.entries(dominios).forEach(([dominio, dados]) => {
-    const percentual = Math.round((dados.acertos / dados.total) * 100);
-    const status = percentual >= 75 ? '🟢 ' + reportTexts[lang].strength :
-                  percentual >= 50 ? '🟡 ' + reportTexts[lang].averagePerf :
-                  '🔴 ' + reportTexts[lang].weakness;
-    html += `
-      <tr>
-        <td>${dominio}</td>
-        <td style="text-align: center;">${percentual}%</td>
-        <td style="text-align: center;">${status}</td>
-      </tr>
-    `;
-  });
+  const percentual = Math.round((dados.acertos / dados.total) * 100);
+  const status = percentual >= 70 ? '🟢' :
+                 percentual >= 50 ? '🟡' :
+                 '🔴';
+  html += `
+    <tr>
+      <td>${dominio}</td>
+      <td style="text-align: center;">${percentual}%</td>
+      <td style="text-align: center;">${status}</td>
+    </tr>
+  `;
+});
   document.getElementById('sw-body').innerHTML = html;
 }
 
@@ -157,8 +171,8 @@ function updateDifficultyAnalysis(questions, answers, lang) {
   };
 
   questions.forEach(q => {
-    difficultyStats[q.dificuldade].total++;
-    if (answers[q.id] === q.correta) difficultyStats[q.dificuldade].correct++;
+    difficultyStats[q.nivel].total++;
+if (answers[q.id] === q.correta) difficultyStats[q.nivel].correct++;
   });
 
   let html = '';
@@ -188,28 +202,174 @@ function translateDifficulty(difficulty, lang) {
 }
 
 function updateRecommendations(questions, answers, lang) {
-  const dominiosFracos = [];
-  const dominios = {};
+  const t = reportTexts[lang];
+  const conteudo = {};
   
   questions.forEach(q => {
-    const categoria = q.categoria[lang] || q.categoria;
-    if (!dominios[categoria]) dominios[categoria] = { total: 0, acertos: 0 };
-    dominios[categoria].total++;
-    if (answers[q.id] === q.correta) dominios[categoria].acertos++;
+    const acertou = answers[q.id] === q.correta;
+    if (acertou) return;
+
+    const area = q.area || "Undefined";
+    const topicos = Array.isArray(q.topic) ? q.topic : [q.topic || "Geral"];
+
+    if (!conteudo[area]) conteudo[area] = {};
+    topicos.forEach(topic => {
+      if (!conteudo[area][topic]) conteudo[area][topic] = 0;
+      conteudo[area][topic]++;
+    });
   });
 
-  for (const [dominio, dados] of Object.entries(dominios)) {
-    const percentual = Math.round((dados.acertos / dados.total) * 100);
-    if (percentual < 50) dominiosFracos.push(dominio);
-  }
+  const ordenado = Object.entries(conteudo)
+    .map(([area, topics]) => {
+      const totalErros = Object.values(topics).reduce((a, b) => a + b, 0);
+      return { area, topics, totalErros };
+    })
+    .sort((a, b) => b.totalErros - a.totalErros);
 
-  let html = '';
-  if (dominiosFracos.length > 0) {
-    html = dominiosFracos.map(dominio => `<li><strong>${dominio}:</strong> ${getRecommendation(dominio, lang)}</li>`).join('');
+  // ⬇️ MONTA LISTA VISUAL
+  let html = "";
+  if (ordenado.length === 0) {
+    html = `<li style="padding: 12px; color: #999;">${t.nonePending}</li>`;
   } else {
-    html = `<li>${reportTexts[lang].nonePending}</li>`;
+    html = ordenado.map(({ area, topics }) => {
+      const topicosHTML = Object.entries(topics)
+        .sort(([, a], [, b]) => b - a)
+        .map(([topic]) => `<li>${topic}</li>`)
+        .join("");
+      return `
+        <li class="area-block">
+          <div class="area-title">🧠 ${area}</div>
+          <ul class="topic-list">
+            ${topicosHTML}
+          </ul>
+        </li>
+      `;
+    }).join("");
   }
-  document.getElementById('materials-list').innerHTML = html;
+  document.getElementById("materials-list").innerHTML = html;
+
+  // ⬇️ MONTA INSIGHTS TEXTUAIS
+  const insightsEl = document.getElementById("study-insights");
+  const insightsList = document.getElementById("study-insights-list");
+  if (ordenado.length === 0) {
+    insightsEl.style.display = "none";
+    insightsList.innerHTML = "";
+    return;
+  }
+  insightsEl.style.display = "block";
+  const insights = ordenado.map(({ area, topics }) => {
+    const topicos = Object.entries(topics)
+      .sort(([, a], [, b]) => b - a)
+      .map(([t]) => t)
+      .slice(0, 3)
+      .join(", ");
+
+    if (lang === "pt") return `• Maior número de erros em ${area}, especialmente nos tópicos: ${topicos}.`;
+    if (lang === "es") return `• Mayor cantidad de errores en ${area}, especialmente en: ${topicos}.`;
+    return `• Most errors occurred in ${area}, especially in: ${topicos}.`;
+  });
+  insightsList.innerHTML = insights.map(i => `<li>${i}</li>`).join("");
+}
+
+function drawPerformanceChart(questoes, respostas, lang = "en") {
+  const canvas = document.getElementById("performance-chart");
+  if (!canvas || !questoes || questoes.length === 0) {
+    if (canvas) canvas.style.display = "none";
+    return;
+  }
+  const ctx = canvas.getContext("2d");
+
+  const estrutura = {}; // área → tópico → { total, correct }
+
+  questoes.forEach(q => {
+    const area = q.area || "General";
+    const topicos = Array.isArray(q.topic) ? q.topic : [q.topic || "General"];
+    const acertou = respostas[q.id] === q.correta;
+
+    if (!estrutura[area]) estrutura[area] = {};
+    topicos.forEach(topic => {
+      if (!estrutura[area][topic]) estrutura[area][topic] = { total: 0, correct: 0 };
+      estrutura[area][topic].total++;
+      if (acertou) estrutura[area][topic].correct++;
+    });
+  });
+
+  // Preparar dados
+  const labels = [];
+  const data = [];
+
+  Object.entries(estrutura).forEach(([area, topicos]) => {
+    const topicosOrdenados = Object.entries(topicos).sort(([, a], [, b]) => {
+      const pa = a.correct / a.total;
+      const pb = b.correct / b.total;
+      return pa - pb;
+    });
+
+    labels.push(`🧠 ${area}`);
+    data.push(null); // separador visual
+
+    topicosOrdenados.forEach(([topico, stat]) => {
+      const pct = Math.round((stat.correct / stat.total) * 100);
+      labels.push(`   ↳ ${topico}`);
+      data.push(pct);
+    });
+
+    labels.push(""); // espaçamento entre áreas
+    data.push(null);
+  });
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [{
+        data,
+        backgroundColor: data.map(val => val === null ? 'transparent' : 'rgba(39, 174, 96, 0.7)'),
+        borderSkipped: false,
+        borderRadius: 4
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          min: 0,
+          max: 100,
+          reverse: true,
+          title: {
+            display: true,
+            text: lang === "pt" ? "% de Acertos" : lang === "es" ? "% Correctas" : "% Correct"
+          },
+          ticks: {
+            stepSize: 10
+          },
+          grid: {
+            drawOnChartArea: true,
+            color: "#eee"
+          }
+        },
+        y: {
+          ticks: {
+            color: "#333",
+            callback: label => label,
+            mirror: true,
+            padding: -10
+          },
+          grid: { drawTicks: false, drawBorder: false }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ctx.raw !== null ? `${ctx.raw}% correct` : ""
+          }
+        }
+      }
+    }
+  });
 }
 
 function getRecommendation(dominio, lang) {
@@ -228,18 +388,35 @@ function getRecommendation(dominio, lang) {
   return recomendacoes[dominio]?.[lang] || reportTexts[lang].nonePending;
 }
 
-function addPendingQuestionsLink(pendentes, lang) {
+  function addPendingQuestionsLink(pendentes, lang) {
   const t = reportTexts[lang];
   const html = `
-    <div class="report-section">
-      <h3>${t.pending}</h3>
-      <button class="button" onclick="showPendingQuestions()" style="background-color: #f39c12;">
-        ${t.viewPending} (${pendentes.length})
+    <div class="report-section" style="margin-top: 40px; text-align: center;">
+      <h2 style="color: var(--color-primary); font-size: 22px; margin-bottom: 10px;">
+        ${t.pending}
+      </h2>
+      <p style="font-size: 16px; color: #555; margin-bottom: 20px;">
+        ${t.pendingSubtitle}
+      </p>
+      <button onclick="showPendingQuestions()" style="
+        padding: 14px 28px;
+        font-size: 17px;
+        background-color: var(--color-highlight);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: background 0.3s;
+      ">
+        📋 ${t.viewPending} (${pendentes.length})
       </button>
     </div>
   `;
+
   document.getElementById('pending-questions-section').innerHTML = html;
-}
+ }
+
 
 function generatePendingQuestionsReport(questionario, pendentes, idioma) {
   const t = reportTexts[idioma];
@@ -255,7 +432,7 @@ function generatePendingQuestionsReport(questionario, pendentes, idioma) {
 
     html += `
       <div class="pending-question" style="margin-bottom: 30px; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-        <h4 style="margin-bottom: 10px;">${t.question} ${index + 1}</h4>
+       <h4 style="margin-bottom: 10px;">${t.pendingTitle} - ${index + 1}</h4>
         <p style="font-weight: bold; color: #333;">${enunciado}</p>
         <div class="options">
           ${alternativas.map((opt, i) => `
@@ -368,10 +545,8 @@ window.showPendingQuestions = function() {
   generatePendingQuestionsReport(questionarioAtual, allQuestionIds, selectedLanguage);
 };
 
-function createFullReportLink(lang) {
-  const t = reportTexts[lang];
-  console.warn("⚠️ Elemento 'full-report-section' não encontrado. Ignorando criação de link.");
-}
+// função createFullReportLink removida conforme desativação do link para relatoriofinal.html
+
 
 function generateDetailedReport(questions, answers, pending, lang) {
   const t = reportTexts[lang];
@@ -446,8 +621,8 @@ function drawDifficultyChart(questions, answers) {
 
   questions.forEach(q => {
     const acertou = answers[q.id] === q.correta;
-    if (acertou) stats[q.dificuldade].acertos++;
-    else stats[q.dificuldade].erros++;
+    if (acertou) stats[q.nivel].acertos++;
+    else stats[q.nivel].erros++;
   });
   
 const canvas = document.getElementById('chart-dificuldade');
@@ -465,8 +640,10 @@ const ctx = canvas.getContext('2d');
     translateDifficulty('dificil', lang),
     translateDifficulty('muito_dificil', lang)
   ];
-
-  new Chart(ctx, {
+  if (window.graficoDificuldade) {
+  window.graficoDificuldade.destroy();
+  }
+  window.graficoDificuldade = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: translatedLabels,
@@ -482,61 +659,6 @@ const ctx = canvas.getContext('2d');
       scales: {
         x: { stacked: true },
         y: { stacked: true, beginAtZero: true }
-      }
-    }
-  });
-}
-
-function drawTempoChart(questions) {
-  console.log('⏱️ Dados recebidos para gráfico de tempo:', questions);
-  const lang = localStorage.getItem('selectedLanguage') || 'pt';
-
-  const titles = {
-    pt: 'Tempo Gasto por Questão no Simulado',
-    en: 'Time Spent per Question in Simulation',
-    es: 'Tiempo por Pregunta en el Simulador'
-  };
-
-  const labels = {
-    pt: 'Tempo por Questão (s)',
-    en: 'Time per Question (s)',
-    es: 'Tiempo por Pregunta (s)'
-  };
-
-  const ctx = document.getElementById('chart-tempo').getContext('2d');
-
-  const tempos = questions.map(q => q.tempo || 0); // campo "tempo" deve existir nas questões
-  const questLabels = questions.map((_, i) => `Q${i + 1}`);
-
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: questLabels,
-      datasets: [{
-        label: labels[lang] || labels.pt,
-        data: tempos,
-        fill: false,
-        borderColor: '#2980b9',
-        tension: 0.2
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { position: 'top' },
-        title: {
-          display: true,
-          text: titles[lang] || titles.pt
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          title: {
-            display: true,
-            text: lang === 'pt' ? 'Segundos' : lang === 'es' ? 'Segundos' : 'Seconds'
-          }
-        }
       }
     }
   });

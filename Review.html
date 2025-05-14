@@ -5,63 +5,114 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Questions for Review</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      padding: 30px;
-      max-width: 900px;
-      margin: auto;
-    }
-    h1 {
-      color: #005b94;
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .question {
-      background: white;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 30px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .question h3 {
-      color: #333;
-    }
-    .option {
-      padding: 10px;
-      border-radius: 6px;
-      margin: 6px 0;
-      border: 1px solid #ccc;
-    }
-    .correct {
-      border-color: #27ae60;
-      background-color: #e6f9ec;
-      color: #27ae60;
-    }
-    .incorrect {
-      border-color: #e74c3c;
-      background-color: #fdecea;
-      color: #e74c3c;
-    }
-    .explanation {
-      margin-top: 15px;
-      border-left: 4px solid #ccc;
-      padding-left: 10px;
-    }
-    .explanation.correct {
-      border-color: #27ae60;
-      color: #27ae60;
-    }
-    .explanation.incorrect {
-      border-color: #e74c3c;
-      color: #e74c3c;
-    }
-  </style>
+  :root {
+    --color-primary: #005b94;
+    --color-highlight: #27ae60;
+    --color-wrong: #e74c3c;
+    --color-correct-bg: #e6f9ec;
+    --color-wrong-bg: #fdecea;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f5f5f5;
+    padding: 30px;
+    max-width: 900px;
+    margin: auto;
+  }
+
+  h1 {
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .question {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  }
+
+  .question h3 {
+    color: var(--color-primary);
+    margin-bottom: 10px;
+  }
+
+  .option {
+    padding: 12px;
+    border-radius: 6px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    transition: all 0.3s;
+  }
+
+  .correct {
+    border-left: 5px solid var(--color-highlight);
+    background-color: var(--color-correct-bg);
+    color: var(--color-highlight);
+  }
+
+  .incorrect {
+    border-left: 5px solid var(--color-wrong);
+    background-color: var(--color-wrong-bg);
+    color: var(--color-wrong);
+  }
+
+  .explanation {
+    margin-top: 18px;
+    padding: 12px;
+    border-left: 4px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+  }
+
+  .explanation.correct {
+    border-left-color: var(--color-highlight);
+    color: var(--color-highlight);
+  }
+
+  .explanation.incorrect {
+    border-left-color: var(--color-wrong);
+    color: var(--color-wrong);
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+    transition: background 0.3s;
+  }
+
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .btn-highlight {
+    background-color: var(--color-highlight);
+    color: white;
+  }
+
+  .btn-warn {
+    background-color: var(--color-wrong);
+    color: white;
+  }
+</style>
+
 </head>
 <body>
-  <a href="#" onclick="confirmReturnHome(); return false;">
-  <img src="logo-brainboxmed.png" alt="BrainboxMed Logo" loading="lazy" style="max-width: 250px; cursor: pointer; display: block; margin: 0 auto 30px;">
-</a>
+<div style="text-align: center; margin-bottom: 30px;">
+  <a href="index.html">
+    <img src="logo-brainboxmed-transparent.png" alt="BrainboxMed Logo" style="max-width: 250px; cursor: pointer;">
+  </a>
+</div>
+
   <h1>Questions for Review</h1>
   <p id="block-counter" style="text-align: center; font-size: 18px; color: #333; margin-bottom: 20px;"></p>
 
@@ -79,9 +130,10 @@
       const isCorrect = userAnswer === q.correta;
       const hasAnswer = typeof userAnswer !== 'undefined';
 
-      const enunciado = q.enunciado?.[idioma] || q.enunciado;
-      const alternativas = q.alternativas?.[idioma] || q.alternativas;
-      const explicacao = q.explicacoes?.[idioma] || q.explicacoes;
+      const enunciado = q.pergunta?.[idioma] || q.pergunta?.pt || "";
+      const alternativas = q.alternativas || [];
+      const explicacao = alternativas[q.correta]?.explicacao?.[idioma] || "";
+
 
       const questionBlock = document.createElement('div');
       questionBlock.className = 'question';
@@ -91,11 +143,13 @@
         <p><strong>${enunciado}</strong></p>
         <div>
           ${alternativas.map((opt, idx) => {
-            let classe = '';
-            if (idx === q.correta) classe = 'correct';
-            if (hasAnswer && idx === userAnswer && userAnswer !== q.correta) classe = 'incorrect';
-            return `<div class="option ${classe}">${opt}</div>`;
+          let classe = '';
+          if (idx === q.correta) classe = 'correct';
+          if (hasAnswer && idx === userAnswer && userAnswer !== q.correta) classe = 'incorrect';
+          const texto = opt.texto?.[idioma] || opt.texto?.pt || "";
+          return `<div class="option ${classe}">${texto}</div>`;
           }).join('')}
+
         </div>
         <div class="explanation ${isCorrect ? 'correct' : 'incorrect'}">
           ${isCorrect ? '✓' : '✖'} ${explicacao}
@@ -104,15 +158,6 @@
 
       reportContainer.appendChild(questionBlock);
     });
-    // Calcular o número do bloco APÓS gerar o relatório
-const acumuladoQuestoes = JSON.parse(localStorage.getItem('acumuladoQuestoes')) || [];
-const blocoAtual = Math.floor((acumuladoQuestoes.length + 10) / 10);
-const blocoTexts = {
-  pt: `Bloco ${blocoAtual} / 5`,
-  en: `Set ${blocoAtual} / 5`,
-  es: `Bloque ${blocoAtual} / 5`
-};
-document.getElementById('block-counter').textContent = blocoTexts[idioma] || `Block ${blocoAtual} / 5`;
 const acumulado = JSON.parse(localStorage.getItem('acumuladoQuestoes')) || [];
 const totalBlocos = Math.floor((acumulado.length + questionario.length) / 10);  // inclui bloco atual
 
@@ -136,11 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const btn = document.getElementById('next-set-btn');
 
   if (btn) {
-    btn.textContent = nextSetTexts[idioma] || "Next";
-
-
-
-    btn.addEventListener('click', () => {
+      btn.addEventListener('click', () => {
       const acumuladoQuestoes = JSON.parse(localStorage.getItem('acumuladoQuestoes')) || [];
       const acumuladoRespostas = JSON.parse(localStorage.getItem('acumuladoRespostas')) || {};
 
@@ -202,11 +243,20 @@ if (totalBlocos === 5) {
     window.location.href = 'index.html';
   }
 }
-
+  
   </script>
-  <div style="text-align: center; margin-top: 40px;">
-  <button id="next-set-btn" style="padding: 12px 24px; font-size: 16px; background-color: #005b94; color: white; border: none; border-radius: 6px; cursor: pointer;">
-    <!-- Esse texto será sobrescrito pelo JS -->
+  <div id="next-block-controls" style="text-align: center; margin-top: 50px;">
+  <p id="block-label" style="font-size: 18px; color: #333; margin-bottom: 15px;"></p>
+  <button id="next-set-btn" class="btn btn-highlight" style="font-size: 18px;">
+    ➡️ Next Block
+  </button>
+  </div>
+<div style="text-align: center; margin-top: 50px;">
+  <button class="btn btn-primary" onclick="window.location.href='index.html'">
+    ← Return to Report
+  </button>
+  <button class="btn btn-warn" onclick="confirmReturnHome()" style="margin-left: 15px;">
+    🏠 Home
   </button>
 </div>
 

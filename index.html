@@ -79,6 +79,14 @@
         <option value="pt">Português</option>
       </select>
     </div>
+
+  <div style="margin-top: 20px;">
+   <label style="font-weight: bold; display: block; margin-bottom: 8px;">Select Difficulty:</label>
+   <label><input type="checkbox" class="difficulty-filter" value="facil" checked> Easy</label><br>
+   <label><input type="checkbox" class="difficulty-filter" value="moderada" checked> Medium</label><br>
+   <label><input type="checkbox" class="difficulty-filter" value="dificil" checked> Hard</label><br>
+   <label><input type="checkbox" class="difficulty-filter" value="muito_dificil" checked> Very Hard</label>
+  </div>
     
     <div style="margin-top: 30px;">
       <button class="btn btn-secondary" onclick="saveConfig()">Save Settings</button>
@@ -96,7 +104,7 @@
       <div class="progress-bar">
         <div class="progress" id="quiz-progress"></div>
       </div>
-      <div class="progress-text" id="progress-text">Question 1 of 50</div>
+      <div class="progress-text" id="progress-text" style="display: none;"></div>
     </div>
     
     <h2 id="question-text" style="color: var(--color-primary);"></h2>
@@ -116,31 +124,14 @@
 
   <!-- Tela de Resultado -->
 <section id="result-screen" role="region" aria-label="Results report" style="display: none;">
-      <div style="background: #005b94; color: white; padding: 20px; text-align: center; border-radius: 6px 6px 0 0;">
-      <h2 style="margin: 0;" id="report-title">PERFORMANCE REPORT</h2>
-      <p style="margin: 5px 0; font-size: 0.9em;">Generated on <span id="report-date"></span></p>
-    </div>
-
-   <!-- Tela de Relatório Completo -->
- <div id="full-report-screen">
-  <div class="report-header">
-    <h2 id="full-report-title">Relatório Completo</h2>
-    <p id="full-report-date"></p>
+  <div style="background-color: #ffffff; border: 2px solid var(--color-primary); padding: 24px; text-align: center; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+  <h2 id="report-title" style="margin: 0; font-size: 24px; color: var(--color-primary); font-weight: 600;">
+    📊 PERFORMANCE REPORT
+  </h2>
+  <p style="margin-top: 10px; font-size: 14px; color: #555;">
+    <span id="report-date"></span>
+  </p>
   </div>
-  
-  <div id="full-report-stats" class="quick-stats">
-    <!-- ... (conteúdo novo) ... -->
-  </div>
-
-  <div id="full-report-questions" class="question-list"></div>
-
-  <div class="report-controls">
-    <button class="btn btn-secondary" onclick="backToMainReport()">
-      < Voltar ao Relatório
-    </button>
-    <button class="btn btn-secondary" onclick="window.print()">Imprimir Relatório</button>
-  </div>
-</div>
 
   <!-- Tela de Relatório de Questões Pendentes -->
  <div id="pending-report-screen" style="display: none; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin: 20px 0;">
@@ -160,9 +151,6 @@
 
 </div>
 
-<h3 style="text-align: center; margin-top: 40px; color: #005b94;">Gráficos de Desempenho</h3>
-<canvas id="chart-dificuldade" width="800" height="400" style="margin: 30px auto; display: none;"></canvas>
-<canvas id="chart-tempo" width="800" height="300" style="margin: 30px auto; display: block;"></canvas>
     <!-- Seção 1: Performance Geral -->
     <div class="report-section" style="border-left-color: var(--color-primary);">
       <h3 id="general-performance-title" style="color: var(--color-primary);">▌ General Performance</h3>
@@ -187,7 +175,7 @@
       <table>
         <thead>
           <tr>
-            <th id="domain-header">Domain</th>
+            <th id="domain-header">Topic Area</th>
             <th style="text-align: center;" id="performance-header">% Correct</th>
             <th style="text-align: center;" id="status-header">Status</th>
           </tr>
@@ -200,7 +188,7 @@
     
     <!-- Seção 3: Análise por Dificuldade -->
     <div class="report-section" style="border-left-color: var(--color-primary);">
-<h3 id="difficulty-title" style="color: var(--color-primary);">▌ Performance by Difficulty</h3>
+  <h3 id="difficulty-title" style="color: var(--color-primary);">▌ Performance by Difficulty</h3>
       <table>
         <thead>
           <tr>
@@ -213,42 +201,340 @@
           <!-- Preenchido dinamicamente -->
         </tbody>
       </table>
-    </div>
+      <canvas id="chart-dificuldade" width="800" height="400" style="margin: 30px auto; display: none;"></canvas>
+  </div>
     
-    <!-- Seção 4: Recomendações -->
-    <div class="report-section" style="border-left-color: #27ae60; background-color: #f0f9f0;">
-      <h3 id="recommendations-title" style="color: #27ae60;">▌ Study Recommendations</h3>
-      <ul id="materials-list" style="padding-left: 20px;">
-        <!-- Preenchido dinamicamente -->
-      </ul>
-    </div>
-    
-   <!-- Seção 5: Questões Pendentes -->
-<div class="report-section weakness">
-  <h3 id="pending-title" style="cursor: pointer; color: var(--color-highlight);" onclick="window.location.href='review.html'">
-  Questions for Review
-</h3>
-  <ul id="pending-questions-list" style="padding-left: 0; list-style: none;">
-      <!-- Preenchido dinamicamente -->
-  </ul>
+    <!-- Gráfico de Forças e Fraquezas por Dificuldade -->
+<div class="report-section" style="margin-top: 60px;">
+  <h3 id="voronoi-title" style="text-align: center; color: var(--color-primary); margin-bottom: 30px;">
+    📊 Strengths and Weaknesses by Difficulty
+  </h3>
+
+  <div id="voronoi-chart" style="width: 100%; max-width: 900px; height: 500px; margin: 0 auto;"></div>
+
+  <div id="voronoi-legend" style="text-align: center; margin-top: 20px; font-size: 14px; color: #555;">
+    <p><strong>🟦 Strengths (Top)</strong> – Size ∝ % of correct answers per difficulty</p>
+    <p><strong>🟥 Weaknesses (Bottom)</strong> – Size ∝ % of incorrect answers per difficulty</p>
+  </div>
+
+  <div id="voronoi-topics" style="margin-top: 40px;">
+  <h4 id="voronoi-topics-title" style="text-align: center; color: var(--color-primary); margin-bottom: 20px;">
+    🧩 Detailed Accuracy by Topic
+  </h4>
+  <div id="voronoi-topics-content" style="max-width: 800px; margin: 0 auto; font-size: 14px; line-height: 1.8;">
+    <!-- preenchido dinamicamente -->
+  </div>
 </div>
 
+</div>
+
+    <!-- Seção 4: Plano de Estudo Padronizado -->
+  <div class="report-section" style="border: 2px dashed var(--color-highlight); background-color: #ffffff; border-radius: 12px; padding: 24px; margin-top: 40px;">
+  
+  <h3 id="performance-graph-title" style="color: var(--color-primary); text-align: center; margin-top: 60px; margin-bottom: 30px;">
+  📊 Detailed Performance by Area and Topic
+  </h3>
+  <canvas id="performance-chart" width="800" height="500" style="max-width: 100%; margin: 0 auto 50px auto;"></canvas>
+  
+  <h3 id="recommendations-title" style="color: var(--color-highlight); font-size: 22px; margin-bottom: 20px;">
+    📚 Targeted Study Plan
+  </h3>
+  <ul id="materials-list" style="list-style-type: none; padding: 0;">
+    <!-- Itens adicionados dinamicamente -->
+  </ul>
+  </div>
+
+  <div id="study-insights" style="margin-top: 30px; padding: 20px; background-color: #f9f9f9; border-left: 4px solid var(--color-primary); border-radius: 8px; display: none;">
+  <h4 id="study-insights-title" style="color: var(--color-primary); margin-bottom: 10px;">🔍 Additional Insights</h4>
+  <ul id="study-insights-list" style="padding-left: 20px; list-style-type: disc;">
+    <!-- conteúdo dinâmico -->
+  </ul>
+  </div>
+
+    
+   <!-- Seção 5: Questões Pendentes -->
+  <div id="review-box" class="report-section" style="text-align: center; padding: 30px; background-color: #ffffff; border: 2px dashed var(--color-highlight); border-radius: 12px; margin-top: 40px;">
+    <h3 id="review-redirect-title" style="font-size: 26px; font-weight: 600; color: var(--color-highlight); margin-bottom: 20px;">
+    📘 Review Your Answers
+    </h3>
+  <p id="review-redirect-subtitle" style="font-size: 16px; color: #555; margin-bottom: 25px;">
+    See all your responses with explanations and learn from each one.
+  </p>
+  <button onclick="window.location.href='review.html'" style="
+    font-size: 18px;
+    padding: 14px 32px;
+    background-color: var(--color-highlight);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: background 0.3s;
+  ">
+    📋 <span id="review-redirect-button">Open Detailed Review</span>
+  </button>
+</div>
 
 <!-- Botões de Controle -->
  <div id="pending-questions-section"></div>
 <div style="text-align: center; margin-top: 30px;">
   <button id="restart-btn" class="btn btn-secondary" onclick="restartQuiz()">Restart Test</button>
-  <button id="print-btn" class="btn btn-secondary" style="background-color: var(--color-neutral);" onclick="window.print()">Print Report</button>
-  <button class="btn btn-secondary" onclick="confirmReturnHome()" style="background-color: var(--color-primary); margin-left: 10px;">
-    ← Voltar à Página Inicial
+  <button id="print-btn" class="btn btn-secondary" style="background-color: var(--color-neutral);" onclick="window.print()"> Print Report</button>
+  <button id="back-home-btn" class="btn btn-secondary" onclick="confirmReturnHome()" style="background-color: var(--color-primary); margin-left: 10px;">
+  ← Voltar à Página Inicial
+</button>
+<div style="text-align: center; margin-top: 20px;">
+  <button id="final-report-btn" class="btn btn-highlight" onclick="window.location.href='relatoriofinal.html'" style="font-size: 16px;">
+    📊 View Final Report
   </button>
+</div>
 </div>
 </section>
 </main>
 <p id="legal-warning" style="text-align:center; font-size: 12px; color: #999; margin-top: 40px;"></p>
      <!-- Scripts -->
-<script src="banco-questoes.js" defer></script>
+<script src="Question-Bank/banco-questoes.js" defer></script>
+<script src="Question-Bank/Neuro01.js" defer></script>
+<script src="Question-Bank/Neuro02.js" defer></script>
+<script src="Question-Bank/Neuro03.js" defer></script>
+<script src="Question-Bank/Neuro04.js" defer></script>
 <script src="relatorio.js" defer></script>
 <script src="assets/js/script.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const lang = localStorage.getItem("selectedLanguage") || "en";
+
+  const reviewTexts = {
+    en: {
+      title: "📘 Review Your Answers",
+      subtitle: "See all your responses with explanations and learn from each one.",
+      button: "Open Detailed Review"
+    },
+    pt: {
+      title: "📘 Revisar suas Respostas",
+      subtitle: "Veja todas as suas respostas com explicações e aprenda com cada uma.",
+      button: "Abrir Revisão Detalhada"
+    },
+    es: {
+      title: "📘 Revisar tus Respuestas",
+      subtitle: "Consulta todas tus respuestas con explicaciones y aprende de cada una.",
+      button: "Abrir Revisión Detallada"
+    }
+  };
+
+  const t = reviewTexts[lang] || reviewTexts["en"];
+  document.getElementById("review-redirect-title").textContent = t.title;
+  document.getElementById("review-redirect-subtitle").textContent = t.subtitle;
+  document.getElementById("review-redirect-button").textContent = t.button;
+  
+  const homeTexts = {
+  pt: "← Voltar à Página Inicial",
+  en: "← Return to Home Page",
+  es: "← Volver a la Página Principal"
+  };
+  document.getElementById("back-home-btn").textContent = homeTexts[lang] || homeTexts.en;
+
+  const restartTexts = {
+  pt: "🔁 Refazer Teste",
+  en: "🔁 Restart Test",
+  es: "🔁 Reiniciar Prueba"
+  };
+  document.getElementById("restart-btn").textContent = restartTexts[lang] || restartTexts.en;
+  
+  const printTexts = {
+    pt: "🖨️ Imprimir Relatório",
+    en: "🖨️ Print Report",
+    es: "🖨️ Imprimir Informe"
+  };
+  document.getElementById("print-btn").textContent = printTexts[lang] || printTexts.en;
+  
+  const graphTitles = {
+  pt: "📊 Desempenho Detalhado por Área e Tópico",
+  en: "📊 Detailed Performance by Area and Topic",
+  es: "📊 Rendimiento Detallado por Área y Tema"
+  };
+  document.getElementById("performance-graph-title").textContent = graphTitles[lang] || graphTitles.en;
+  
+  const voronoiTitles = {
+  pt: "📊 Desempenho por Dificuldade – Forças e Fraquezas",
+  en: "📊 Strengths and Weaknesses by Difficulty",
+  es: "📊 Rendimiento por Dificultad – Fortalezas y Debilidades"
+  };
+  document.getElementById("voronoi-title").textContent = voronoiTitles[lang] || voronoiTitles.en;
+
+  const voronoiLegend = {
+  pt: `
+    <p><strong>🟦 Forças (Acima)</strong> – Tamanho proporcional à % de acertos por nível de dificuldade</p>
+    <p><strong>🟥 Fraquezas (Abaixo)</strong> – Tamanho proporcional à % de erros por nível de dificuldade</p>
+  `,
+  en: `
+    <p><strong>🟦 Strengths (Top)</strong> – Size ∝ % of correct answers per difficulty</p>
+    <p><strong>🟥 Weaknesses (Bottom)</strong> – Size ∝ % of incorrect answers per difficulty</p>
+  `,
+  es: `
+    <p><strong>🟦 Fortalezas (Arriba)</strong> – Tamaño ∝ % de respuestas correctas por nivel de dificultad</p>
+    <p><strong>🟥 Debilidades (Abajo)</strong> – Tamaño ∝ % de errores por nivel de dificultad</p>
+  `
+  };
+  document.getElementById("voronoi-legend").innerHTML = voronoiLegend[lang] || voronoiLegend.en;
+
+  const insightsTitles = {
+  pt: "🔍 Informações Adicionais",
+  en: "🔍 Additional Insights",
+  es: "🔍 Información Adicional"
+  };
+  document.getElementById("study-insights-title").textContent = insightsTitles[lang] || insightsTitles.en;
+
+  const legalWarnings = {
+  pt: "Este relatório é apenas para fins educacionais. Não substitui orientação médica ou institucional.",
+  en: "This report is for educational purposes only. It does not replace medical or institutional guidance.",
+  es: "Este informe es solo con fines educativos. No reemplaza la orientación médica o institucional."
+  };
+  document.getElementById("legal-warning").textContent = legalWarnings[lang] || legalWarnings.en;
+
+});
+</script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+function drawVoronoiDifficultyChart(questions, answers, lang = "en") {
+  const diffLabels = {
+    facil: { pt: "Fácil", en: "Easy", es: "Fácil" },
+    moderada: { pt: "Moderada", en: "Moderate", es: "Moderada" },
+    dificil: { pt: "Difícil", en: "Hard", es: "Difícil" },
+    muito_dificil: { pt: "Muito Difícil", en: "Very Hard", es: "Muy Difícil" }
+  };
+
+  const difficulties = ["facil", "moderada", "dificil", "muito_dificil"];
+  const stats = {
+    facil: { total: 0, correct: 0 },
+    moderada: { total: 0, correct: 0 },
+    dificil: { total: 0, correct: 0 },
+    muito_dificil: { total: 0, correct: 0 }
+  };
+
+  questions.forEach(q => {
+    const nivel = q.nivel;
+    if (!nivel || !stats[nivel]) return;
+
+    stats[nivel].total++;
+    if (answers[q.id] === q.correta) stats[nivel].correct++;
+  });
+
+  const strengths = [];
+  const weaknesses = [];
+
+  difficulties.forEach(nivel => {
+    const total = stats[nivel].total;
+    const correct = stats[nivel].correct;
+    const incorrect = total - correct;
+
+    if (correct > 0) {
+      strengths.push({
+        label: diffLabels[nivel][lang],
+        size: correct,
+        color: "rgba(52, 152, 219, 0.8)" // azul
+      });
+    }
+
+    if (incorrect > 0) {
+      weaknesses.push({
+        label: diffLabels[nivel][lang],
+        size: incorrect,
+        color: "rgba(231, 76, 60, 0.8)" // vermelho
+      });
+    }
+  });
+
+  const top = strengths.map((d, i) => ({
+    type: "scatter",
+    mode: "text",
+    x: [i],
+    y: [1],
+    text: [`${d.label}<br><sub>${d.size} q</sub>`],
+    textposition: "middle center",
+    marker: { size: d.size * 15, color: d.color },
+    hoverinfo: "text",
+    showlegend: false
+  }));
+
+  const bottom = weaknesses.map((d, i) => ({
+    type: "scatter",
+    mode: "text",
+    x: [i],
+    y: [0],
+    text: [`${d.label}<br><sub>${d.size} q</sub>`],
+    textposition: "middle center",
+    marker: { size: d.size * 15, color: d.color },
+    hoverinfo: "text",
+    showlegend: false
+  }));
+
+  const layout = {
+    height: 500,
+    margin: { l: 0, r: 0, t: 10, b: 10 },
+    xaxis: { showgrid: false, zeroline: false, showticklabels: false },
+    yaxis: { showgrid: false, zeroline: false, showticklabels: false },
+    showlegend: false
+  };
+
+  Plotly.newPlot("voronoi-chart", [...top, ...bottom], layout, {
+  responsive: true,
+  displayModeBar: false,
+  transition: {
+    duration: 500,
+    easing: 'cubic-in-out'
+  }
+  });
+  }
+</script>
+<script>
+function generateVoronoiTopicDetails(questions, answers, lang = "en") {
+  const areaData = {};
+
+  questions.forEach(q => {
+    const area = q.area || "General";
+    const topics = Array.isArray(q.topic) ? q.topic : [q.topic || "General"];
+    const acertou = answers[q.id] === q.correta;
+
+    if (!areaData[area]) areaData[area] = {};
+
+    topics.forEach(topic => {
+      if (!areaData[area][topic]) areaData[area][topic] = { total: 0, correct: 0 };
+      areaData[area][topic].total++;
+      if (acertou) areaData[area][topic].correct++;
+    });
+  });
+
+  const emoji = pct => {
+    if (pct >= 80) return "🟢";
+    if (pct >= 50) return "🟡";
+    return "🔴";
+  };
+
+  const titleTexts = {
+    pt: "🧩 Precisão por Área e Tópico",
+    en: "🧩 Detailed Accuracy by Topic",
+    es: "🧩 Precisión por Área y Tema"
+  };
+
+  const container = document.getElementById("voronoi-topics-content");
+  const title = document.getElementById("voronoi-topics-title");
+  title.textContent = titleTexts[lang] || titleTexts.en;
+
+  let html = "";
+
+  Object.entries(areaData).forEach(([area, topics]) => {
+    html += `<div style="margin-bottom: 12px;"><strong>🧠 ${area}</strong><ul style="margin: 6px 0 12px 18px;">`;
+    Object.entries(topics).forEach(([topic, stat]) => {
+      const pct = Math.round((stat.correct / stat.total) * 100);
+      html += `<li>${topic} — ${pct}% ${emoji(pct)}</li>`;
+    });
+    html += `</ul></div>`;
+  });
+
+  container.innerHTML = html;
+}
+</script>
+
 </body>
 </html>
