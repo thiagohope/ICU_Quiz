@@ -374,6 +374,195 @@ const bancoNeuroDificilima = [
     }
   ]
 },
+{
+  id: 406,
+  codigo: "neuro04-q406",
+  area: "neurointensivismo",
+  topic: ["brain death", "transcranial doppler", "ancillary testing", "neurosonology", "ethics"],
+  nivel: "muito_dificil",
+  correta: 3,
+  pergunta: {
+    pt: "Homem de 46 anos, vítima de traumatismo cranioencefálico grave, evolui para coma profundo com Glasgow 3, ausência de reflexos troncoencefálicos e apneia persistente. Após testes clínicos seriados e exclusão de causas reversíveis, decide-se por um exame complementar para confirmar morte encefálica. O Doppler transcraniano (DTC) é realizado. Sobre o uso do DTC nessa situação, assinale a alternativa incorreta:",
+    en: "A 46-year-old man, victim of severe traumatic brain injury, evolves into a deep coma with a Glasgow Coma Scale of 3, absent brainstem reflexes, and persistent apnea. After serial clinical tests and exclusion of reversible causes, an ancillary test is chosen to confirm brain death. Transcranial Doppler (TCD) is performed. Regarding the use of TCD in this context, select the incorrect statement:",
+    es: "Hombre de 46 años, víctima de traumatismo craneoencefálico grave, evoluciona a coma profundo con puntuación de Glasgow 3, ausencia de reflejos del tronco encefálico y apnea persistente. Tras pruebas clínicas seriadas y exclusión de causas reversibles, se decide realizar un examen complementario para confirmar muerte encefálica. Se realiza Doppler transcraneal (DTC). En relación con su uso en este contexto, señale la afirmación incorrecta:"
+  },
+  alternativas: [
+    {
+      texto: {
+        pt: "A presença de fluxo reverberante ou sinais de parada circulatória em ambas as artérias cerebrais médias pode ser compatível com morte encefálica.",
+        en: "The presence of reverberating flow or signs of circulatory arrest in both middle cerebral arteries may be compatible with brain death.",
+        es: "La presencia de flujo reverberante o signos de paro circulatorio en ambas arterias cerebrales medias puede ser compatible con muerte encefálica."
+      },
+      explicacao: {
+        pt: "Esse padrão, especialmente quando bilateral e sustentado, é um dos critérios aceitos internacionalmente como compatível com ausência de perfusão cerebral.",
+        en: "This bilateral and sustained pattern is internationally accepted as compatible with cerebral circulatory arrest.",
+        es: "Este patrón bilateral sostenido es un criterio aceptado internacionalmente como compatible con paro circulatorio cerebral."
+      }
+    },
+    {
+      texto: {
+        pt: "A ausência de janelas acústicas adequadas inviabiliza o uso do DTC como teste confirmatório isolado para morte encefálica.",
+        en: "The absence of adequate acoustic windows invalidates the use of TCD as a stand-alone confirmatory test for brain death.",
+        es: "La ausencia de ventanas acústicas adecuadas invalida el uso del DTC como prueba confirmatoria única para muerte encefálica."
+      },
+      explicacao: {
+        pt: "Sem janelas temporais ou occipitais, não é possível documentar fluxo em vasos intracranianos, exigindo outro método diagnóstico.",
+        en: "Without temporal or occipital windows, intracranial flow cannot be documented, requiring another diagnostic method.",
+        es: "Sin ventanas temporales u occipitales, no se puede documentar el flujo intracraneal y se requiere otro método diagnóstico."
+      }
+    },
+    {
+      texto: {
+        pt: "Em alguns países, é necessário repetir o exame com intervalo mínimo de 30 minutos para validação legal do diagnóstico.",
+        en: "In some countries, repeating the test after a minimum 30-minute interval is required for legal validation of the diagnosis.",
+        es: "En algunos países, se requiere repetir el examen con un intervalo mínimo de 30 minutos para validar legalmente el diagnóstico."
+      },
+      explicacao: {
+        pt: "Normas variam por país. No Brasil, por exemplo, exige-se repetição em intervalos definidos em adultos. Já nos EUA, a exigência depende da legislação estadual.",
+        en: "Regulations vary. In Brazil, repetition at defined intervals is required for adults. In the US, it depends on state law.",
+        es: "Las normativas varían. En Brasil se exige repetición en adultos. En EE.UU. depende de la legislación del estado."
+      }
+    },
+    {
+      texto: {
+        pt: "A visualização de fluxo anterógrado contínuo nas artérias cerebrais anteriores confirma o diagnóstico de morte encefálica.",
+        en: "The visualization of continuous antegrade flow in the anterior cerebral arteries confirms the diagnosis of brain death.",
+        es: "La visualización de flujo anterógrado continuo en las arterias cerebrales anteriores confirma el diagnóstico de muerte encefálica."
+      },
+      explicacao: {
+        pt: "**INCORRETA.** Fluxo anterógrado contínuo indica presença de perfusão cerebral, o que é incompatível com o diagnóstico de morte encefálica.",
+        en: "**INCORRECT.** Continuous antegrade flow indicates cerebral perfusion, which is incompatible with brain death diagnosis.",
+        es: "**INCORRECTA.** El flujo anterógrado continuo indica perfusión cerebral, lo cual es incompatible con el diagnóstico de muerte encefálica."
+      }
+    }
+  ]
+},
+{
+  id: 407,
+  codigo: "neuro04-q407",
+  area: "neurointensivismo",
+  topic: ["intracerebral hemorrhage", "venous hypertension", "cerebral venous thrombosis", "posterior fossa", "anticoagulation"],
+  nivel: "muito_dificil",
+  correta: 1,
+  pergunta: {
+    pt: "Homem de 59 anos, previamente hígido, apresenta cefaleia súbita intensa e desequilíbrio ao caminhar. É admitido com rebaixamento progressivo do nível de consciência (GCS 10), vômitos e rigidez de nuca. TC de crânio revela hemorragia cerebelar direita e sinais de compressão do quarto ventrículo. AngioTC evidencia sinais indiretos de trombose do seio transverso direito com congestão venosa local. Após estabilização clínica, a equipe discute conduta. Todas as afirmativas abaixo estão corretas, **exceto**:",
+    en: "A 59-year-old previously healthy man presents with sudden severe headache and gait imbalance. He is admitted with progressive decreased consciousness (GCS 10), vomiting, and neck stiffness. Head CT shows right cerebellar hemorrhage with fourth ventricle compression. CTA reveals indirect signs of right transverse sinus thrombosis and local venous congestion. After clinical stabilization, the team discusses management. All of the following statements are correct, **except**:",
+    es: "Hombre de 59 años previamente sano presenta cefalea súbita intensa e inestabilidad al caminar. Ingresa con disminución progresiva del nivel de conciencia (GCS 10), vómitos y rigidez de nuca. La TC craneal muestra hemorragia cerebelosa derecha con compresión del cuarto ventrículo. La angioTC revela signos indirectos de trombosis del seno transverso derecho con congestión venosa local. Tras estabilización clínica, el equipo discute la conducta. Todas las afirmaciones son correctas, **excepto**:"
+  },
+  alternativas: [
+    {
+      texto: {
+        pt: "A anticoagulação plena pode ser indicada mesmo na presença de hemorragia, desde que não haja herniação iminente.",
+        en: "Full anticoagulation may be indicated even in the presence of hemorrhage, provided there is no imminent herniation.",
+        es: "La anticoagulación plena puede estar indicada incluso con hemorragia si no hay herniación inminente."
+      },
+      explicacao: {
+        pt: "Segundo a AHA/ASA (2011) e a ESO (2017), a anticoagulação com heparina é recomendada em trombose venosa cerebral, mesmo com AVCh, desde que o risco de expansão não supere o benefício de recanalização.",
+        en: "According to AHA/ASA (2011) and ESO (2017), anticoagulation with heparin is recommended in cerebral venous thrombosis, even with ICH, if the risk of expansion does not outweigh the benefit.",
+        es: "Según AHA/ASA (2011) y ESO (2017), la anticoagulación con heparina está indicada en trombosis venosa cerebral incluso con hemorragia, si el beneficio supera el riesgo de expansión."
+      }
+    },
+    {
+      texto: {
+        pt: "A hemorragia cerebelar pode ser secundária à hipertensão venosa local por trombose do seio transverso.",
+        en: "Cerebellar hemorrhage may be secondary to local venous hypertension due to transverse sinus thrombosis.",
+        es: "La hemorragia cerebelosa puede deberse a hipertensión venosa local por trombosis del seno transverso."
+      },
+      explicacao: {
+        pt: "A fisiopatologia inclui congestão retrógrada dos vasos perfurantes, ruptura capilar e extravasamento hemorrágico, comum em tromboses de drenagem posterior.",
+        en: "Pathophysiology involves retrograde congestion, capillary rupture, and hemorrhagic extravasation, frequent in posterior drainage thrombosis.",
+        es: "La fisiopatología incluye congestión retrógrada, ruptura capilar y extravasación hemorrágica, común en trombosis de drenaje posterior."
+      }
+    },
+    {
+      texto: {
+        pt: "A cirurgia descompressiva pode ser necessária se houver compressão do tronco encefálico ou hidrocefalia obstrutiva.",
+        en: "Decompressive surgery may be required in cases of brainstem compression or obstructive hydrocephalus.",
+        es: "La cirugía descompresiva puede ser necesaria si hay compresión del tronco encefálico o hidrocefalia obstructiva."
+      },
+      explicacao: {
+        pt: "Em casos com sinais de compressão do IV ventrículo, desvio da linha média ou deterioração clínica, a craniectomia descompressiva ou derivação ventricular está indicada.",
+        en: "In cases with fourth ventricle compression, midline shift, or clinical deterioration, decompressive craniectomy or ventricular shunting is indicated.",
+        es: "Ante compresión del IV ventrículo, desviación de línea media o deterioro clínico, se indica craniectomía descompresiva o derivación."
+      }
+    },
+    {
+      texto: {
+        pt: "A anticoagulação está absolutamente contraindicada em qualquer tipo de hemorragia cerebelar aguda.",
+        en: "Anticoagulation is absolutely contraindicated in any type of acute cerebellar hemorrhage.",
+        es: "La anticoagulación está absolutamente contraindicada en cualquier tipo de hemorragia cerebelosa aguda."
+      },
+      explicacao: {
+        pt: "**INCORRETA.** Essa é a afirmativa incorreta. A presença de hemorragia cerebelar por trombose venosa não contraindica anticoagulação, desde que o paciente esteja estável e sem herniação ativa.",
+        en: "**INCORRECT.** This is the incorrect statement. Cerebellar hemorrhage due to venous thrombosis does not absolutely contraindicate anticoagulation if the patient is stable and without ongoing herniation.",
+        es: "**INCORRECTA.** Esta es la afirmación incorrecta. La hemorragia cerebelosa por trombosis venosa no contraindica anticoagulación si el paciente está clínicamente estable y sin herniación."
+      }
+    }
+  ]
+},
+{
+  id: 408,
+  codigo: "neuro04-q408",
+  area: "neurointensivismo",
+  topic: ["intracranial hypertension", "cerebral hyperperfusion", "autoregulation", "carotid revascularization", "osmotherapy"],
+  nivel: "muito_dificil",
+  correta: 2,
+  pergunta: {
+    pt: "Mulher de 67 anos, hipertensa e dislipidêmica, é submetida a endarterectomia de carótida direita por estenose crítica sintomática. Evolui no pós-operatório imediato com agitação, cefaleia intensa, hipertensão arterial (PA 200x110 mmHg) e sonolência progressiva. TC de crânio sem sinais de AVC. PIC monitorada mostra pressão intracraniana de 26 mmHg, com pressão de perfusão cerebral (PPC) em 90 mmHg. O EEG mostra lentificação difusa sem descargas epileptiformes. A equipe considera tratar a hipertensão intracraniana. Todas as afirmações abaixo estão corretas, **exceto**:",
+    en: "A 67-year-old woman with hypertension and dyslipidemia undergoes right carotid endarterectomy for symptomatic critical stenosis. In the immediate postoperative period, she develops agitation, severe headache, high blood pressure (200/110 mmHg), and progressive somnolence. Brain CT shows no infarct. ICP monitoring reveals intracranial pressure of 26 mmHg and cerebral perfusion pressure (CPP) of 90 mmHg. EEG shows diffuse slowing without epileptiform discharges. The team considers treatment for intracranial hypertension. All of the following statements are correct, **except**:",
+    es: "Mujer de 67 años, hipertensa y dislipidémica, se somete a endarterectomía carotídea derecha por estenosis crítica sintomática. En el postoperatorio inmediato presenta agitación, cefalea intensa, hipertensión arterial (PA 200x110 mmHg) y somnolencia progresiva. La TC craneal no muestra infarto. La PIC es de 26 mmHg y la PPC de 90 mmHg. El EEG muestra enlentecimiento difuso sin descargas epilépticas. El equipo considera tratar la hipertensión intracraneal. Todas las afirmaciones son correctas, **excepto**:"
+  },
+  alternativas: [
+    {
+      texto: {
+        pt: "O quadro é compatível com síndrome de hiperperfusão cerebral, que pode ocorrer após revascularização carotídea.",
+        en: "The clinical picture is compatible with cerebral hyperperfusion syndrome, which may occur after carotid revascularization.",
+        es: "El cuadro clínico es compatible con síndrome de hiperperfusión cerebral, que puede presentarse tras revascularización carotídea."
+      },
+      explicacao: {
+        pt: "A síndrome de hiperperfusão cerebral ocorre em até 3% dos pacientes após endarterectomia ou stent carotídeo, especialmente com perda da autorregulação em territórios cronicamente hipoperfundidos.",
+        en: "Cerebral hyperperfusion syndrome occurs in up to 3% of patients after carotid surgery, especially when autoregulation is impaired.",
+        es: "El síndrome de hiperperfusión cerebral ocurre hasta en el 3% de los pacientes tras cirugía carotídea, especialmente con disautoregulación."
+      }
+    },
+    {
+      texto: {
+        pt: "O uso de manitol e hiperventilação deve ser prioritário para reduzir rapidamente a pressão intracraniana.",
+        en: "Mannitol and hyperventilation should be prioritized to rapidly reduce intracranial pressure.",
+        es: "Se debe priorizar el uso de manitol e hiperventilación para reducir rápidamente la presión intracraneal."
+      },
+      explicacao: {
+        pt: "**INCORRETA.** Essa é a afirmativa incorreta. Em contextos de hiperperfusão, medidas que reduzem a resistência vascular cerebral (como manitol ou hipocapnia) podem agravar o fluxo cerebral e aumentar o risco de hemorragia. O tratamento deve focar em controle rigoroso da PA.",
+        en: "**INCORRECT.** This is the incorrect statement. In hyperperfusion contexts, mannitol or hypocapnia may lower vascular resistance and worsen perfusion, increasing hemorrhagic risk. Management should focus on strict BP control.",
+        es: "**INCORRECTA.** Esta es la afirmación incorrecta. En casos de hiperperfusión, el manitol o la hipocapnia pueden aumentar el flujo cerebral y el riesgo de hemorragia. El manejo debe centrarse en el control estricto de la PA."
+      }
+    },
+    {
+      texto: {
+        pt: "O EEG pode ser útil no diagnóstico diferencial com estado de mal não convulsivo em pacientes com alteração do nível de consciência.",
+        en: "EEG may help differentiate from nonconvulsive status epilepticus in patients with altered consciousness.",
+        es: "El EEG puede ayudar en el diagnóstico diferencial con estatus no convulsivo en pacientes con alteración de la conciencia."
+      },
+      explicacao: {
+        pt: "Lentificação difusa sem descargas sugere encefalopatia metabólica ou vascular, mas o EEG é essencial para afastar causas eletrográficas ocultas como status não convulsivo.",
+        en: "Diffuse slowing without discharges suggests metabolic or vascular encephalopathy, but EEG helps exclude hidden electrographic status.",
+        es: "El enlentecimiento difuso sugiere encefalopatía metabólica o vascular, pero el EEG es útil para excluir estatus oculto."
+      }
+    },
+    {
+      texto: {
+        pt: "A redução da pressão arterial deve ser feita com agentes que não causem vasodilatação cerebral adicional.",
+        en: "Blood pressure should be lowered using agents that do not cause further cerebral vasodilation.",
+        es: "La reducción de la presión arterial debe realizarse con fármacos que no causen vasodilatación cerebral adicional."
+      },
+      explicacao: {
+        pt: "Beta-bloqueadores ou nicardipina são frequentemente preferidos. Evita-se nitroprussiato e vasodilatadores potentes por risco de agravamento da hiperperfusão.",
+        en: "Beta-blockers or nicardipine are often preferred. Nitroprusside and potent vasodilators are avoided due to hyperperfusion risk.",
+        es: "Los betabloqueantes o la nicardipina son preferidos. Se evita nitroprusiato y vasodilatadores potentes por riesgo de hiperperfusión."
+      }
+    }
+  ]
+},
 
 ];
 
