@@ -99,7 +99,6 @@ const reportTexts = {
     "unanswered": "Não Respondida"
   }
 };
-
 function generateUSMLEReportFull(questionario, respostas, pendentes, tempoPorQuestao, idioma = 'pt') {
   const t = reportTexts[idioma];
   
@@ -114,9 +113,9 @@ function generateUSMLEReportFull(questionario, respostas, pendentes, tempoPorQue
   document.getElementById('score-text').textContent = `${t.score}: ${acertos}/${totalQuestoes} ${t.correct}`;
   document.getElementById('percentage').textContent = percentual;
   
-const scoreBar = document.getElementById("score-bar");
-scoreBar.style.width = `${percentage}%`;
-scoreBar.style.background = percentage >= 70
+  const scoreBar = document.getElementById("score-bar");
+  scoreBar.style.width = `${percentual}%`;
+  scoreBar.style.background = percentual >= 70
   ? "linear-gradient(to right, #2ecc71, #27ae60)" // verde
   : "linear-gradient(to right, #e74c3c, #c0392b)"; // vermelho
 
@@ -130,9 +129,13 @@ scoreBar.style.background = percentage >= 70
   updatePendingQuestions(questionario, pendentes, respostas, idioma);
   // createFullReportLink(idioma); // Removido link para relatoriofinal.html
   drawDifficultyChart(questionario, respostas);
+  const lang = localStorage.getItem("selectedLanguage") || "en";
+  drawVoronoiDifficultyChart(questionario, respostas, lang);
+  drawSankeyAccuracyChart(questionario, respostas, idioma);
+  drawPerformanceChart(questionario, respostas, idioma);
+  generateCompactRecommendations(questionario, respostas, idioma);
+  generateDifficultyInsights(questionario, respostas, idioma);
 }
-
-
 function updateDomainAnalysis(questions, answers, lang) {
   const dominios = {};
   questions.forEach(q => {
@@ -146,6 +149,14 @@ function updateDomainAnalysis(questions, answers, lang) {
   });
 
   let html = '';
+  const dominioLabels = {
+  neuro: { pt: "🧠 Neuro", en: "🧠 Neuro", es: "🧠 Neuro" },
+  cardio: { pt: "❤️ Cardio", en: "❤️ Cardio", es: "❤️ Cardio" },
+  infecto: { pt: "🦠 Infecto", en: "🦠 Infectious", es: "🦠 Infecciosas" },
+  respiratorio: { pt: "🫁 Respiratório", en: "🫁 Respiratory", es: "🫁 Respiratorio" },
+  renal: { pt: "🩸 Renal", en: "🩸 Renal", es: "🩸 Renal" },
+  general: { pt: "📚 Geral", en: "📚 General", es: "📚 General" }
+  };
   Object.entries(dominios).forEach(([dominio, dados]) => {
   const percentual = Math.round((dados.acertos / dados.total) * 100);
   const status = percentual >= 70 ? '🟢' :
@@ -153,7 +164,7 @@ function updateDomainAnalysis(questions, answers, lang) {
                  '🔴';
   html += `
     <tr>
-      <td>${dominio}</td>
+      <td>${dominioLabels[dominio]?.[idioma] || dominio}</td>
       <td style="text-align: center;">${percentual}%</td>
       <td style="text-align: center;">${status}</td>
     </tr>
@@ -161,7 +172,6 @@ function updateDomainAnalysis(questions, answers, lang) {
 });
   document.getElementById('sw-body').innerHTML = html;
 }
-
 function updateDifficultyAnalysis(questions, answers, lang) {
   const difficultyStats = {
     facil: { total: 0, correct: 0 },
@@ -190,7 +200,6 @@ if (answers[q.id] === q.correta) difficultyStats[q.nivel].correct++;
   }
   document.getElementById('difficulty-body').innerHTML = html;
 }
-
 function translateDifficulty(difficulty, lang) {
   const translations = {
     facil: { en: 'Easy', es: 'Fácil', pt: 'Fácil' },
@@ -200,7 +209,6 @@ function translateDifficulty(difficulty, lang) {
   };
   return translations[difficulty][lang];
 }
-
 function updateRecommendations(questions, answers, lang) {
   const t = reportTexts[lang];
   const conteudo = {};
@@ -246,11 +254,13 @@ function updateRecommendations(questions, answers, lang) {
       `;
     }).join("");
   }
-  document.getElementById("materials-list").innerHTML = html;
-
+  const list = document.getElementById("materials-list");
+  if (list) list.innerHTML = html;
   // ⬇️ MONTA INSIGHTS TEXTUAIS
   const insightsEl = document.getElementById("study-insights");
   const insightsList = document.getElementById("study-insights-list");
+  if (!insightsEl || !insightsList) return;
+
   if (ordenado.length === 0) {
     insightsEl.style.display = "none";
     insightsList.innerHTML = "";
@@ -270,108 +280,205 @@ function updateRecommendations(questions, answers, lang) {
   });
   insightsList.innerHTML = insights.map(i => `<li>${i}</li>`).join("");
 }
+function drawPerformanceChart(questions, answers, lang = "en") {
+  const container = document.getElementById("performance-chart");
+  if (!container || !questions?.length) return;
 
-function drawPerformanceChart(questoes, respostas, lang = "en") {
-  const canvas = document.getElementById("performance-chart");
-  if (!canvas || !questoes || questoes.length === 0) {
-    if (canvas) canvas.style.display = "none";
-    return;
-  }
-  const ctx = canvas.getContext("2d");
-
-  const estrutura = {}; // área → tópico → { total, correct }
-
-  questoes.forEach(q => {
-    const area = q.area || "General";
-    const topicos = Array.isArray(q.topic) ? q.topic : [q.topic || "General"];
-    const acertou = respostas[q.id] === q.correta;
-
-    if (!estrutura[area]) estrutura[area] = {};
-    topicos.forEach(topic => {
-      if (!estrutura[area][topic]) estrutura[area][topic] = { total: 0, correct: 0 };
-      estrutura[area][topic].total++;
-      if (acertou) estrutura[area][topic].correct++;
-    });
-  });
-
-  // Preparar dados
-  const labels = [];
-  const data = [];
-
-  Object.entries(estrutura).forEach(([area, topicos]) => {
-    const topicosOrdenados = Object.entries(topicos).sort(([, a], [, b]) => {
-      const pa = a.correct / a.total;
-      const pb = b.correct / b.total;
-      return pa - pb;
-    });
-
-    labels.push(`🧠 ${area}`);
-    data.push(null); // separador visual
-
-    topicosOrdenados.forEach(([topico, stat]) => {
-      const pct = Math.round((stat.correct / stat.total) * 100);
-      labels.push(`   ↳ ${topico}`);
-      data.push(pct);
-    });
-
-    labels.push(""); // espaçamento entre áreas
-    data.push(null);
-  });
-
-  new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels,
-      datasets: [{
-        data,
-        backgroundColor: data.map(val => val === null ? 'transparent' : 'rgba(39, 174, 96, 0.7)'),
-        borderSkipped: false,
-        borderRadius: 4
-      }]
+  const translations = {
+    en: {
+      correct: "Correct",
+      incorrect: "Incorrect",
+      title: "Top 15 most frequent topics"
     },
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        x: {
-          min: 0,
-          max: 100,
-          reverse: true,
-          title: {
-            display: true,
-            text: lang === "pt" ? "% de Acertos" : lang === "es" ? "% Correctas" : "% Correct"
-          },
-          ticks: {
-            stepSize: 10
-          },
-          grid: {
-            drawOnChartArea: true,
-            color: "#eee"
-          }
-        },
-        y: {
-          ticks: {
-            color: "#333",
-            callback: label => label,
-            mirror: true,
-            padding: -10
-          },
-          grid: { drawTicks: false, drawBorder: false }
-        }
-      },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: ctx => ctx.raw !== null ? `${ctx.raw}% correct` : ""
-          }
-        }
-      }
+    pt: {
+      correct: "Corretas",
+      incorrect: "Incorretas",
+      title: "15 tópicos mais frequentes"
+    },
+    es: {
+      correct: "Correctas",
+      incorrect: "Incorrectas",
+      title: "15 temas más frecuentes"
     }
-  });
-}
+  };
+  const t = translations[lang] || translations["en"];
 
+  const topicStats = {};
+  questions.forEach(q => {
+    const topics = Array.isArray(q.topic) ? q.topic : [q.topic || "General"];
+    const acertou = answers[q.id] === q.correta;
+    topics.forEach(topic => {
+      if (!topicStats[topic]) topicStats[topic] = { total: 0, correct: 0 };
+      topicStats[topic].total++;
+      if (acertou) topicStats[topic].correct++;
+    });
+  });
+
+  const topTopics = Object.entries(topicStats)
+    .sort((a, b) => b[1].total - a[1].total)
+    .slice(0, 15);
+
+  let html = `
+    <p style="font-weight: bold; color: #555; margin-bottom: 10px; font-size: 14px;">
+      📌 ${t.title}
+    </p>
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+      <div style="background-color: #3498db; color: white; padding: 4px 10px; border-radius: 4px; font-size: 12px;">
+        ${t.correct}
+      </div>
+      <div style="background-color: #bdc3c7; color: #333; padding: 4px 10px; border-radius: 4px; font-size: 12px;">
+        ${t.incorrect}
+      </div>
+    </div>
+  `;
+
+  topTopics.forEach(([topic, stat]) => {
+    const correct = stat.correct;
+    const incorrect = stat.total - correct;
+    const pctCorrect = Math.round((correct / stat.total) * 100);
+    const pctIncorrect = 100 - pctCorrect;
+
+    html += `
+      <div style="display: flex; align-items: center; margin-bottom: 12px; font-size: 14px;">
+        <div style="flex: 1; font-weight: bold; padding-right: 10px; color: #333;">${topic}</div>
+        <div style="flex: 4; position: relative; height: 22px; background: #ecf0f1; overflow: hidden;">
+          <div style="width: ${pctCorrect}%; background-color: #3498db; height: 100%; float: left; text-align: center; color: white; font-size: 13px; line-height: 22px;">
+            ${pctCorrect > 5 ? `${pctCorrect}%` : ""}
+          </div>
+          <div style="width: ${pctIncorrect}%; background-color: #bdc3c7; height: 100%; float: left; text-align: center; color: #333; font-size: 13px; line-height: 22px;">
+            ${pctIncorrect > 5 ? `${pctIncorrect}%` : ""}
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+function generateCompactRecommendations(questions, answers, lang = "en") {
+  const container = document.getElementById("study-recommendations");
+  if (!container || !questions?.length) return;
+
+  const translations = {
+    en: {
+      intro: "You should review the following topics:",
+      low: "Low performance in",
+      and: "and",
+      percent: "% correct"
+    },
+    pt: {
+      intro: "Você deve revisar os seguintes tópicos:",
+      low: "Desempenho baixo em",
+      and: "e",
+      percent: "% de acerto"
+    },
+    es: {
+      intro: "Deberías revisar los siguientes temas:",
+      low: "Bajo rendimiento en",
+      and: "y",
+      percent: "% correctas"
+    }
+  };
+
+  const t = translations[lang] || translations["en"];
+  const topicStats = {};
+
+  questions.forEach(q => {
+    const topics = Array.isArray(q.topic) ? q.topic : [q.topic || "General"];
+    const acertou = answers[q.id] === q.correta;
+    topics.forEach(topic => {
+      if (!topicStats[topic]) topicStats[topic] = { total: 0, correct: 0 };
+      topicStats[topic].total++;
+      if (acertou) topicStats[topic].correct++;
+    });
+  });
+
+  const topTopics = Object.entries(topicStats)
+    .sort((a, b) => b[1].total - a[1].total)
+    .slice(0, 15);
+
+  const weakTopics = topTopics
+    .map(([topic, stat]) => {
+      const pct = Math.round((stat.correct / stat.total) * 100);
+      return { topic, percent: pct };
+    })
+    .filter(t => t.percent < 70)
+    .sort((a, b) => a.percent - b.percent)
+    .slice(0, 5);
+
+  let html = `<p><strong>${t.intro}</strong></p><ul style="padding-left: 18px;">`;
+  weakTopics.forEach(tk => {
+    html += `<li>${t.low} <strong>${tk.topic}</strong> (${tk.percent}${t.percent})</li>`;
+  });
+  html += "</ul>";
+
+  container.innerHTML = html;
+}
+function generateDifficultyInsights(questions, answers, lang = "en") {
+  const container = document.getElementById("difficulty-body");
+  if (!container || !questions?.length) return;
+
+  const labels = {
+    en: {
+      facil: "Easy",
+      moderada: "Moderate",
+      dificil: "Hard",
+      muito_dificil: "Very Hard"
+    },
+    pt: {
+      facil: "Fácil",
+      moderada: "Moderada",
+      dificil: "Difícil",
+      muito_dificil: "Muito Difícil"
+    },
+    es: {
+      facil: "Fácil",
+      moderada: "Moderada",
+      dificil: "Difícil",
+      muito_dificil: "Muy Difícil"
+    }
+  };
+
+  const t = labels[lang] || labels.en;
+
+  const stats = {
+    facil: { total: 0, correct: 0 },
+    moderada: { total: 0, correct: 0 },
+    dificil: { total: 0, correct: 0 },
+    muito_dificil: { total: 0, correct: 0 }
+  };
+
+  questions.forEach(q => {
+    const nivel = q.nivel;
+    if (!nivel || !stats[nivel]) return;
+    stats[nivel].total++;
+    if (answers[q.id] === q.correta) stats[nivel].correct++;
+  });
+
+  const percentList = Object.entries(stats)
+    .filter(([_, s]) => s.total > 0)
+    .map(([nivel, s]) => ({
+      nivel,
+      percent: Math.round((s.correct / s.total) * 100)
+    }));
+
+  if (!percentList.length) return;
+
+  percentList.sort((a, b) => b.percent - a.percent);
+  const best = percentList[0];
+  const worst = percentList[percentList.length - 1];
+
+  const insightsEl = document.createElement("div");
+  insightsEl.style.marginTop = "20px";
+  insightsEl.style.color = "#555";
+  insightsEl.style.fontSize = "14px";
+  insightsEl.innerHTML = `
+    <p><strong>✅ Best performance:</strong> ${t[best.nivel]} (${best.percent}%)</p>
+    <p><strong>❌ Weakest performance:</strong> ${t[worst.nivel]} (${worst.percent}%)</p>
+  `;
+
+  container.parentNode.appendChild(insightsEl);
+}
 function getRecommendation(dominio, lang) {
   const recomendacoes = {
     "Sepsis": {
@@ -387,8 +494,7 @@ function getRecommendation(dominio, lang) {
   };
   return recomendacoes[dominio]?.[lang] || reportTexts[lang].nonePending;
 }
-
-  function addPendingQuestionsLink(pendentes, lang) {
+function addPendingQuestionsLink(pendentes, lang) {
   const t = reportTexts[lang];
   const html = `
     <div class="report-section" style="margin-top: 40px; text-align: center;">
@@ -415,9 +521,7 @@ function getRecommendation(dominio, lang) {
   `;
 
   document.getElementById('pending-questions-section').innerHTML = html;
- }
-
-
+}
 function generatePendingQuestionsReport(questionario, pendentes, idioma) {
   const t = reportTexts[idioma];
   let html = '';
@@ -454,7 +558,6 @@ function generatePendingQuestionsReport(questionario, pendentes, idioma) {
   document.getElementById('pending-report-title').textContent = t.pendingTitle;
   document.getElementById('pending-report-date').textContent = `${t.generated} ${new Date().toLocaleDateString(idioma)}`;
 }
-
 function updateReportLanguage(lang) {
   const t = reportTexts[lang];
   const elements = {
@@ -470,7 +573,7 @@ function updateReportLanguage(lang) {
     document.getElementById(id).textContent = text;
   }
 }
- function updatePendingQuestions(questions, pending, answers, lang) {
+function updatePendingQuestions(questions, pending, answers, lang) {
   const t = reportTexts[lang];
   const list = document.getElementById('pending-questions-list');
   list.innerHTML = '';
@@ -537,17 +640,13 @@ function updateReportLanguage(lang) {
     list.innerHTML = `<li>${t.nonePending}</li>`;
   }
 }
-
 window.showPendingQuestions = function() {
   document.getElementById('result-screen').style.display = 'none';
   document.getElementById('pending-report-screen').style.display = 'block';
   const allQuestionIds = questionarioAtual.map(q => q.id);
   generatePendingQuestionsReport(questionarioAtual, allQuestionIds, selectedLanguage);
 };
-
 // função createFullReportLink removida conforme desativação do link para relatoriofinal.html
-
-
 function generateDetailedReport(questions, answers, pending, lang) {
   const t = reportTexts[lang];
   const container = document.getElementById('full-report-questions');
@@ -603,7 +702,6 @@ function generateDetailedReport(questions, answers, pending, lang) {
   
   container.innerHTML = html;
 }
-
 function showFullReport() {
   document.getElementById('result-screen').style.display = 'none';
   document.getElementById('full-report-screen').style.display = 'block';

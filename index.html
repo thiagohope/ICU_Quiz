@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BrainBox Med - Medical Simulator: Train Your Brain. Master Medicine</title>
@@ -20,6 +21,15 @@
 
 <!-- Compatibilidade e dispositivos -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Variáveis de cor para a barra de desempenho -->
+  <style>
+  :root {
+  --color-primary: #3498db; /* azul padrão */
+  --color-highlight: #1abc9c; /* verde-água */
+  --color-neutral: #7f8c8d; /* cinza neutro */
+  --color-text: #333;
+}  </style>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -139,9 +149,8 @@
     <h2 id="pending-report-title">Questions for Review</h2>
     <p id="pending-report-date"></p>
   </div>
-
   <div id="pending-questions-container"></div>
-
+  <ul id="pending-questions-list"></ul>
   <div class="report-controls" style="text-align: center; margin-top: 30px;">
   <button class="btn btn-secondary" onclick="backToMainReport()">← Back to Report</button>
   <button class="btn btn-secondary" onclick="confirmReturnHome()" style="background-color: var(--color-primary); margin-left: 10px;">
@@ -201,7 +210,8 @@
           <!-- Preenchido dinamicamente -->
         </tbody>
       </table>
-      <canvas id="chart-dificuldade" width="800" height="400" style="margin: 30px auto; display: none;"></canvas>
+    <div style="height: 30px;"></div>
+    <hr style="border: none; border-top: 1px solid #ddd; margin: 30px auto; max-width: 80%;">
   </div>
     
     <!-- Gráfico de Forças e Fraquezas por Dificuldade -->
@@ -221,37 +231,23 @@
   <h4 id="voronoi-topics-title" style="text-align: center; color: var(--color-primary); margin-bottom: 20px;">
     🧩 Detailed Accuracy by Topic
   </h4>
-  <div id="voronoi-topics-content" style="max-width: 800px; margin: 0 auto; font-size: 14px; line-height: 1.8;">
-    <!-- preenchido dinamicamente -->
-  </div>
+ <div id="voronoi-topics-content" style="width: 100%; height: 600px; margin: 0 auto;"></div>
 </div>
 
 </div>
-
     <!-- Seção 4: Plano de Estudo Padronizado -->
   <div class="report-section" style="border: 2px dashed var(--color-highlight); background-color: #ffffff; border-radius: 12px; padding: 24px; margin-top: 40px;">
   
   <h3 id="performance-graph-title" style="color: var(--color-primary); text-align: center; margin-top: 60px; margin-bottom: 30px;">
   📊 Detailed Performance by Area and Topic
   </h3>
-  <canvas id="performance-chart" width="800" height="500" style="max-width: 100%; margin: 0 auto 50px auto;"></canvas>
+  <div id="performance-chart" style="max-width: 100%; margin: 0 auto 50px auto;"></div>
   
   <h3 id="recommendations-title" style="color: var(--color-highlight); font-size: 22px; margin-bottom: 20px;">
-    📚 Targeted Study Plan
+  📚 Study Recommendations Based on Your Most Missed Topics
   </h3>
-  <ul id="materials-list" style="list-style-type: none; padding: 0;">
-    <!-- Itens adicionados dinamicamente -->
-  </ul>
-  </div>
-
-  <div id="study-insights" style="margin-top: 30px; padding: 20px; background-color: #f9f9f9; border-left: 4px solid var(--color-primary); border-radius: 8px; display: none;">
-  <h4 id="study-insights-title" style="color: var(--color-primary); margin-bottom: 10px;">🔍 Additional Insights</h4>
-  <ul id="study-insights-list" style="padding-left: 20px; list-style-type: disc;">
-    <!-- conteúdo dinâmico -->
-  </ul>
-  </div>
-
-    
+  <div id="study-recommendations" style="font-size: 15px; color: #333; line-height: 1.6;"></div>
+     
    <!-- Seção 5: Questões Pendentes -->
   <div id="review-box" class="report-section" style="text-align: center; padding: 30px; background-color: #ffffff; border: 2px dashed var(--color-highlight); border-radius: 12px; margin-top: 40px;">
     <h3 id="review-redirect-title" style="font-size: 26px; font-weight: 600; color: var(--color-highlight); margin-bottom: 20px;">
@@ -383,7 +379,8 @@ document.addEventListener("DOMContentLoaded", function () {
   en: "🔍 Additional Insights",
   es: "🔍 Información Adicional"
   };
-  document.getElementById("study-insights-title").textContent = insightsTitles[lang] || insightsTitles.en;
+  const insightsTitleEl = document.getElementById("study-insights-title");
+  if (insightsTitleEl) insightsTitleEl.textContent = insightsTitles[lang] || insightsTitles.en;
 
   const legalWarnings = {
   pt: "Este relatório é apenas para fins educacionais. Não substitui orientação médica ou institucional.",
@@ -394,7 +391,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script>
 function drawVoronoiDifficultyChart(questions, answers, lang = "en") {
   const diffLabels = {
@@ -404,7 +400,6 @@ function drawVoronoiDifficultyChart(questions, answers, lang = "en") {
     muito_dificil: { pt: "Muito Difícil", en: "Very Hard", es: "Muy Difícil" }
   };
 
-  const difficulties = ["facil", "moderada", "dificil", "muito_dificil"];
   const stats = {
     facil: { total: 0, correct: 0 },
     moderada: { total: 0, correct: 0 },
@@ -415,124 +410,196 @@ function drawVoronoiDifficultyChart(questions, answers, lang = "en") {
   questions.forEach(q => {
     const nivel = q.nivel;
     if (!nivel || !stats[nivel]) return;
-
     stats[nivel].total++;
     if (answers[q.id] === q.correta) stats[nivel].correct++;
   });
 
-  const strengths = [];
-  const weaknesses = [];
+  const labels = [];
+  const parents = [];
+  const values = [];
+  const colors = [];
 
-  difficulties.forEach(nivel => {
-    const total = stats[nivel].total;
-    const correct = stats[nivel].correct;
+  const colorStrength = "rgba(52, 152, 219, 0.8)";
+  const colorWeakness = "rgba(231, 76, 60, 0.8)";
+
+  Object.entries(stats).forEach(([nivel, { total, correct }]) => {
     const incorrect = total - correct;
+    const label = diffLabels[nivel][lang];
 
     if (correct > 0) {
-      strengths.push({
-        label: diffLabels[nivel][lang],
-        size: correct,
-        color: "rgba(52, 152, 219, 0.8)" // azul
-      });
+      labels.push(`${label} ✅`);
+      parents.push("Strengths");
+      values.push(correct);
+      colors.push(colorStrength);
     }
 
     if (incorrect > 0) {
-      weaknesses.push({
-        label: diffLabels[nivel][lang],
-        size: incorrect,
-        color: "rgba(231, 76, 60, 0.8)" // vermelho
-      });
+      labels.push(`${label} ❌`);
+      parents.push("Weaknesses");
+      values.push(incorrect);
+      colors.push(colorWeakness);
     }
   });
 
-  const top = strengths.map((d, i) => ({
-    type: "scatter",
-    mode: "text",
-    x: [i],
-    y: [1],
-    text: [`${d.label}<br><sub>${d.size} q</sub>`],
-    textposition: "middle center",
-    marker: { size: d.size * 15, color: d.color },
-    hoverinfo: "text",
-    showlegend: false
-  }));
+  // Adiciona os grupos principais
+  const totalStrengths = values
+  .filter((_, i) => parents[i] === "Strengths")
+  .reduce((a, b) => a + b, 0);
 
-  const bottom = weaknesses.map((d, i) => ({
-    type: "scatter",
-    mode: "text",
-    x: [i],
-    y: [0],
-    text: [`${d.label}<br><sub>${d.size} q</sub>`],
-    textposition: "middle center",
-    marker: { size: d.size * 15, color: d.color },
-    hoverinfo: "text",
-    showlegend: false
-  }));
+  const totalWeaknesses = values
+  .filter((_, i) => parents[i] === "Weaknesses")
+  .reduce((a, b) => a + b, 0);
+
+  labels.unshift("Strengths", "Weaknesses");
+  parents.unshift("", "");
+  values.unshift(totalStrengths, totalWeaknesses);
+  colors.unshift("lightblue", "lightcoral");
+
+  const data = [{
+    type: "treemap",
+    labels,
+    parents,
+    values,
+    marker: {
+      colors,
+      line: { width: 1 }
+    },
+    textinfo: "label+value",
+    branchvalues: "total"
+  }];
 
   const layout = {
     height: 500,
-    margin: { l: 0, r: 0, t: 10, b: 10 },
-    xaxis: { showgrid: false, zeroline: false, showticklabels: false },
-    yaxis: { showgrid: false, zeroline: false, showticklabels: false },
-    showlegend: false
+    margin: { t: 30, l: 0, r: 0, b: 0 }
   };
 
-  Plotly.newPlot("voronoi-chart", [...top, ...bottom], layout, {
-  responsive: true,
-  displayModeBar: false,
-  transition: {
-    duration: 500,
-    easing: 'cubic-in-out'
-  }
-  });
-  }
-</script>
-<script>
-function generateVoronoiTopicDetails(questions, answers, lang = "en") {
-  const areaData = {};
+  Plotly.newPlot("voronoi-chart", data, layout, { responsive: true });
+}
+ </script>
+ <script>
+  function drawSankeyAccuracyChart(questions, answers, lang = "en") {
+    const statusLabels = {
+    en: { correct: "✅ Correct", incorrect: "❌ Incorrect" },
+    pt: { correct: "✅ Corretas", incorrect: "❌ Incorretas" },
+    es: { correct: "✅ Correctas", incorrect: "❌ Incorrectas" }
+    };
+    const areaLabels = {
+     neuro: { pt: "🧠 Neuro", en: "🧠 Neuro", es: "🧠 Neuro" },
+     cardio: { pt: "❤️ Cardio", en: "❤️ Cardio", es: "❤️ Cardio" },
+     infecto: { pt: "🦠 Infecto", en: "🦠 Infectious", es: "🦠 Infecciosas" },
+     respiratorio: { pt: "🫁 Respiratório", en: "🫁 Respiratory", es: "🫁 Respiratorio" },
+     renal: { pt: "🩸 Renal", en: "🩸 Renal", es: "🩸 Renal" },
+     general: { pt: "📚 Geral", en: "📚 General", es: "📚 General" }
+    };
+    const labelsByLang = statusLabels[lang] || statusLabels["en"];
+    const areaTopicStats = {};
+    const labelIndexMap = {};
+    const nodes = [];
+    const links = [];
 
+  // Etapa 1: Agrupar dados por área e tópico separando acertos e erros
   questions.forEach(q => {
     const area = q.area || "General";
     const topics = Array.isArray(q.topic) ? q.topic : [q.topic || "General"];
-    const acertou = answers[q.id] === q.correta;
-
-    if (!areaData[area]) areaData[area] = {};
+    const correct = answers[q.id] === q.correta;
+    const status = correct ? "Correct" : "Incorrect";
 
     topics.forEach(topic => {
-      if (!areaData[area][topic]) areaData[area][topic] = { total: 0, correct: 0 };
-      areaData[area][topic].total++;
-      if (acertou) areaData[area][topic].correct++;
+      const key = `${status}|${area}|${topic}`;
+      if (!areaTopicStats[key]) areaTopicStats[key] = { status, area, topic, count: 0 };
+      areaTopicStats[key].count++;
     });
   });
 
-  const emoji = pct => {
-    if (pct >= 80) return "🟢";
-    if (pct >= 50) return "🟡";
-    return "🔴";
-  };
+  // Etapa 2: Pegar os 10 tópicos mais acertados e mais errados
+  const statsArray = Object.values(areaTopicStats);
+  const topCorrect = statsArray.filter(d => d.status === "Correct")
+    .sort((a, b) => b.count - a.count).slice(0, 10);
 
-  const titleTexts = {
-    pt: "🧩 Precisão por Área e Tópico",
-    en: "🧩 Detailed Accuracy by Topic",
-    es: "🧩 Precisión por Área y Tema"
-  };
+  const topIncorrect = statsArray.filter(d => d.status === "Incorrect")
+    .sort((a, b) => b.count - a.count).slice(0, 10);
 
-  const container = document.getElementById("voronoi-topics-content");
-  const title = document.getElementById("voronoi-topics-title");
-  title.textContent = titleTexts[lang] || titleTexts.en;
+  const topStats = [...topCorrect, ...topIncorrect];
 
-  let html = "";
+  // Função auxiliar para adicionar nós
+  function getLabelIndex(label) {
+    if (!(label in labelIndexMap)) {
+      labelIndexMap[label] = nodes.length;
+      nodes.push({ name: label });
+    }
+    return labelIndexMap[label];
+  }
 
-  Object.entries(areaData).forEach(([area, topics]) => {
-    html += `<div style="margin-bottom: 12px;"><strong>🧠 ${area}</strong><ul style="margin: 6px 0 12px 18px;">`;
-    Object.entries(topics).forEach(([topic, stat]) => {
-      const pct = Math.round((stat.correct / stat.total) * 100);
-      html += `<li>${topic} — ${pct}% ${emoji(pct)}</li>`;
-    });
-    html += `</ul></div>`;
+  // Etapa 3: Montar os links e nós com cores adaptadas
+  topStats.forEach(({ status, area, topic, count }) => {
+    const isCorrect = status === "Correct";
+    const statusLabel = isCorrect ? labelsByLang.correct : labelsByLang.incorrect;
+    const topicLabel = `${topic} ${isCorrect ? "✅" : "❌"}`;
+
+    const source1 = getLabelIndex(statusLabel);
+    const areaLabel = areaLabels[area.toLowerCase()]?.[lang] || area;
+    const source2 = getLabelIndex(areaLabel);
+    const target = getLabelIndex(topicLabel);
+
+    // status → área
+    links.push({ source: source1, target: source2, value: count });
+
+    // área → tópico
+    links.push({ source: source2, target: target, value: count });
   });
 
-  container.innerHTML = html;
+  const colorCorrect = "rgba(52, 152, 219, 0.8)";
+  const colorIncorrect = "rgba(231, 76, 60, 0.8)";
+  const colorLightCorrect = "rgba(52, 152, 219, 0.25)";
+  const colorLightIncorrect = "rgba(231, 76, 60, 0.25)";
+  const colorArea = "#cccccc";
+
+  const data = [{
+    type: "sankey",
+    orientation: "h",
+    node: {
+      pad: 15,
+      thickness: 20,
+      line: { color: "black", width: 0.5 },
+      label: nodes.map(n => n.name),
+      color: nodes.map(n => {
+        if (n.name === "✅ Correct") return colorCorrect;
+        if (n.name === "❌ Incorrect") return colorIncorrect;
+        if (n.name.endsWith("✅")) return colorLightCorrect;
+        if (n.name.endsWith("❌")) return colorLightIncorrect;
+        return colorArea;
+      })
+    },
+    link: {
+     source: links.map(l => l.source),
+     target: links.map(l => l.target),
+     value: links.map(l => l.value),
+     color: links.map(l => {
+      const srcLabel = nodes[l.source].name;
+      if (srcLabel.startsWith("✅")) return colorCorrect;
+      if (srcLabel.startsWith("❌")) return colorIncorrect;
+      return "rgba(160,160,160,0.3)";
+     }),
+     label: links.map(l => {
+      const src = nodes[l.source].name;
+      const tgt = nodes[l.target].name;
+      return `${src} → ${tgt}: ${l.value}`;
+     })
+    }
+
+  }];
+
+  const estimatedHeight = Math.max(400, nodes.length * 28);
+
+  const layout = {
+  title: "Topic Accuracy Flow",
+  font: { size: 12 },
+  height: estimatedHeight,
+  margin: { t: 40, l: 10, r: 10, b: 10 }
+  };
+
+
+  Plotly.newPlot("voronoi-topics-content", data, layout, { responsive: true });
 }
 </script>
 

@@ -17,6 +17,8 @@
 
     // Variáveis globais
     let currentQuestionIndex = 0;
+    let questionsMarkedForReview = [];
+    let questionQueue = [];
     let score = 0;
     let selectedLanguage = 'en';
     let currentMode = 'study';
@@ -43,6 +45,7 @@
 
  // Textos multilíngues
     const translations = {
+      
       "en": {
         "question": "Question",
         "of": "of",
@@ -113,6 +116,10 @@
         "questionsForReview": "Questões para Revisão"
       }
     };
+    function getTranslation(key) {
+     const lang = selectedLanguage || "en";
+     return translations[lang]?.[key] || key;
+    }
 
     // Função para traduzir dificuldade
     function translateDifficulty(difficulty, lang) {
@@ -194,57 +201,52 @@
     }
 
     // Funções do Quiz
-    function startQuiz() {
+  function startQuiz() {
     console.log('🟡 Start Quiz acionado');
       if (currentMode === 'study' && localStorage.getItem('questionarioAtual') && localStorage.getItem('userAnswers')) {
-  // Restauração do progresso salvo
-  questionarioAtual = JSON.parse(localStorage.getItem('questionarioAtual'));
-  userAnswers = JSON.parse(localStorage.getItem('userAnswers'));
-  currentQuestionIndex = parseInt(localStorage.getItem('currentQuestionIndex')) || 0;
-  console.log("📦 Progresso restaurado do modo estudo.");
-} else {
-  // Novo questionário
-  const totalQuestoes = 10;
-
-// 1. Captura os níveis selecionados
-const dificuldadesSelecionadas = Array.from(document.querySelectorAll('.difficulty-filter:checked'))
-  .map(el => el.value);
-
-// 2. Filtra o banco de questões conforme as dificuldades
-const todasQuestoes = bancoQuestoes.bancosExternos;
-const questoesFiltradas = todasQuestoes.filter(q => dificuldadesSelecionadas.includes(q.nivel));
-
-// 3. Embaralha e seleciona 10
-const questoesSelecionadas = questoesFiltradas.sort(() => Math.random() - 0.5).slice(0, totalQuestoes);
-
-// 4. Atribui ao questionário atual
-questionarioAtual = questoesSelecionadas;
-  userAnswers = {};
-  currentQuestionIndex = 0;
-}
-console.log('📘 Questões carregadas:', questionarioAtual);
-      currentQuestionIndex = 0;
-      score = 0;
-      pendingQuestions = [];
-      userAnswers = {};
-      questionsSinceLastFeedback = 0;
-      showFeedback = false;
-
+     // Restauração do progresso salvo
+     questionarioAtual = JSON.parse(localStorage.getItem('questionarioAtual'));
+     userAnswers = JSON.parse(localStorage.getItem('userAnswers'));
+     currentQuestionIndex = parseInt(localStorage.getItem('currentQuestionIndex')) || 0;
+    console.log("📦 Progresso restaurado do modo estudo.");
+      } else {
+     // Novo questionário
+    const totalQuestoes = 10;
+    // 1. Captura os níveis selecionados
+    const dificuldadesSelecionadas = Array.from(document.querySelectorAll('.difficulty-filter:checked'))
+     .map(el => el.value);
+    // 2. Filtra o banco de questões conforme as dificuldades
+    const todasQuestoes = bancoQuestoes.bancosExternos;
+    const questoesFiltradas = todasQuestoes.filter(q => dificuldadesSelecionadas.includes(q.nivel));
+    // 3. Embaralha e seleciona 10
+    const questoesSelecionadas = questoesFiltradas.sort(() => Math.random() - 0.5).slice(0, totalQuestoes);
+    // 4. Atribui ao questionário atual
+     questionarioAtual = questoesSelecionadas;
+     userAnswers = {};
+     currentQuestionIndex = 0;
+      }
+     console.log('📘 Questões carregadas:', questionarioAtual);
+     currentQuestionIndex = 0;
+     score = 0;
+     pendingQuestions = [];
+     userAnswers = {};
+     questionsSinceLastFeedback = 0;
+     showFeedback = false;
       if (currentMode === 'exam') {
         examDuration = parseInt(document.getElementById('exam-time').value);
         timeLeft = examDuration * 60;
         startTimer();
       }
-      
-      document.getElementById('home-screen').style.display = 'none';
-      document.getElementById('question-container').style.display = 'block';
-      document.getElementById('timer-container').style.display = 
-        currentMode === 'exam' ? 'block' : 'none';
-      
-      showCurrentQuestion();
-      document.getElementById("question-container").style.setProperty("display", "block", "important");
-
-    }
+     document.getElementById('home-screen').style.display = 'none';
+     document.getElementById('question-container').style.display = 'block';
+     document.getElementById('timer-container').style.display = 
+     currentMode === 'exam' ? 'block' : 'none';
+       showCurrentQuestion();
+     document.getElementById("question-container").style.setProperty("display", "block", "important");
+     questionQueue = questionarioAtual.map((_, index) => index);
+     // Preenche a fila com [0, 1, 2, ...]
+     currentQuestionIndex = 0;
+  }
 
     function startTimer() {
       updateTimerDisplay();
@@ -308,20 +310,12 @@ console.log('📘 Questões carregadas:', questionarioAtual);
       // Configurar botões
       document.getElementById('prev-btn').disabled = currentQuestionIndex === 0;
       document.getElementById('next-btn').disabled = userAnswers[question.id] === undefined && currentMode === 'exam';
-      document.getElementById('mark-btn').textContent = 
-      questoesMarcadasParaRevisao.includes(question.id) ? t.unmark : t.mark;
-      
+      updateMarkButtonStyle();
       // Mostrar explicação se aplicável
       document.getElementById('explanation').style.display = 'none';
-
       // Atualiza o texto do botão Mark for Review conforme o estado atual
-      const idAtual = questionarioAtual[currentQuestionIndex].id;
-     if (questoesMarcadasParaRevisao.includes(idAtual)) {
-     document.getElementById("mark-btn").innerText = "✅ Marked";
-     } else {
-     document.getElementById("mark-btn").innerText = "Mark for Review";
-     }
-}
+      updateMarkButtonStyle();
+    }
 
     function updateProgress() {
       const progress = ((currentQuestionIndex + 1) / questionarioAtual.length) * 100;
@@ -334,39 +328,36 @@ console.log('📘 Questões carregadas:', questionarioAtual);
     }
 
     function selectOption(index) {
+      // Desmarca automaticamente se estava marcada para revisão
+      const questionIndex = questionQueue[currentQuestionIndex];
+       if (questionsMarkedForReview.includes(questionIndex)) {
+           questionsMarkedForReview = questionsMarkedForReview.filter(i => i !== questionIndex);
+        document.getElementById("mark-btn").innerText = getTranslation("Mark for Review");
+        updateMarkButtonStyle();
+      }
       const question = questionarioAtual[currentQuestionIndex];
       const options = document.querySelectorAll('.option');
-      
       // Remover seleção anterior
-      options.forEach(opt => opt.classList.remove('selected', 'correct', 'incorrect'));
-      
+            options.forEach(opt => opt.classList.remove('selected', 'correct', 'incorrect'));
       // Marcar seleção atual
-      options[index].classList.add('selected');
-      userAnswers[question.id] = index;
+            options[index].classList.add('selected');
+            userAnswers[question.id] = index;
       if (currentMode === 'study') {
-  localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
-  localStorage.setItem('currentQuestionIndex', currentQuestionIndex);
-}
+      localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
+      localStorage.setItem('currentQuestionIndex', currentQuestionIndex);}
       question.tempo = question.tempo || 0;
       question.tempo = (question.tempoStart) ? (Date.now() - question.tempoStart) / 1000 : 0;
       // No modo estudo, mostrar feedback após 10 questões
       if (currentMode === 'study') {
-  questionsSinceLastFeedback++;
-
-  // Só mostra feedback imediato se não for a última questão
-  const isLastQuestion = currentQuestionIndex === questionarioAtual.length - 1;
-
-  if (questionsSinceLastFeedback >= 10 && !isLastQuestion) {
-    showFeedbackImmediately();
-    questionsSinceLastFeedback = 0;
-  }
-  }
-
-      
+      questionsSinceLastFeedback++;
+      // Só mostra feedback imediato se não for a última questão
+      const isLastQuestion = currentQuestionIndex === questionarioAtual.length - 1;
+      if (questionsSinceLastFeedback >= 10 && !isLastQuestion) {
+      showFeedbackImmediately();
+      questionsSinceLastFeedback = 0;}}
       // No modo simulado, habilitar próximo
       if (currentMode === 'exam') {
-        document.getElementById('next-btn').disabled = false;
-      }
+          document.getElementById('next-btn').disabled = false;}
     }
 
     function showFeedbackImmediately() {
@@ -390,204 +381,195 @@ console.log('📘 Questões carregadas:', questionarioAtual);
     }
 
   function togglePending() {
-  const id = questionarioAtual[currentQuestionIndex].id;
-  const index = questoesMarcadasParaRevisao.indexOf(id);
-  if (index === -1) {
-    questoesMarcadasParaRevisao.push(id);
-    document.getElementById("mark-btn").innerText = "✅ Marked";
+  const questionIndex = questionQueue[currentQuestionIndex];
+  const currentQuestion = questionarioAtual[questionIndex];
+  if (!currentQuestion) return;
+  const alreadyPending = questionsMarkedForReview.includes(questionIndex);
+  if (alreadyPending) {
+    questionsMarkedForReview = questionsMarkedForReview.filter(i => i !== questionIndex);
+    document.getElementById("mark-btn").innerText = getTranslation("Mark for Review");
   } else {
-    questoesMarcadasParaRevisao.splice(index, 1);
-    document.getElementById("mark-btn").innerText = "Mark for Review";
+    questionsMarkedForReview.push(questionIndex);
+    questionQueue.push(questionIndex);  // Envia para o fim do ciclo
+    document.getElementById("mark-btn").innerText = getTranslation("Unmark Review");
   }
+  updateMarkButtonStyle();
   }
+  
+  function updateMarkButtonStyle() {
+  const questionIndex = questionQueue[currentQuestionIndex];
+  const markBtn = document.getElementById("mark-btn");
+  if (!markBtn) return;
 
+  if (questionsMarkedForReview.includes(questionIndex)) {
+    markBtn.classList.add("marked");
+    markBtn.innerText = getTranslation("unmark");
+  } else {
+    markBtn.classList.remove("marked");
+    markBtn.innerText = getTranslation("mark");
+  }
+  }
 
   function nextQuestion() {
-  // Verificar resposta no modo simulado
-  if (currentMode === 'exam') {
-  const question = questionarioAtual[currentQuestionIndex];
-  if (userAnswers[question.id] === question.correta) {
-    score++;
+   // Verificar resposta no modo simulado
+   if (currentMode === 'exam') {
+    const question = questionarioAtual[currentQuestionIndex];
+   if (userAnswers[question.id] === question.correta) {
+    score++;}
+   }
+    // Avançar ou finalizar
+   if (currentQuestionIndex < questionarioAtual.length - 1) {
+     currentQuestionIndex++;
+     showCurrentQuestion();
+    } else {
+    if (questoesMarcadasParaRevisao.length > 0) {
+     const idsAtuais = questionarioAtual.map(q => q.id);
+     const revisoes = questionarioAtual.filter(q => questoesMarcadasParaRevisao.includes(q.id));
+     const revisoesFiltradas = revisoes.filter(q => !idsAtuais.includes(q.id));
+      questionarioAtual = questionarioAtual.concat(revisoesFiltradas);
+      questoesMarcadasParaRevisao = [];
+      currentQuestionIndex++;
+      showCurrentQuestion();
+       } 
+    else {finishQuiz();}
+    }
   }
-  }
-      
-      // Avançar ou finalizar
-      if (currentQuestionIndex < questionarioAtual.length - 1) {
-        currentQuestionIndex++;
-        showCurrentQuestion();
-      } else {
-  if (questoesMarcadasParaRevisao.length > 0) {
-    const idsAtuais = questionarioAtual.map(q => q.id);
-    const revisoes = questionarioAtual.filter(q => questoesMarcadasParaRevisao.includes(q.id));
-    const revisoesFiltradas = revisoes.filter(q => !idsAtuais.includes(q.id));
-    questionarioAtual = questionarioAtual.concat(revisoesFiltradas);
-    questoesMarcadasParaRevisao = [];
-    currentQuestionIndex++;
-    showCurrentQuestion();
-  } else {
-    finishQuiz();
-  }
-}
-}
 
-    function prevQuestion() {
-      if (currentQuestionIndex > 0) {
+  function prevQuestion() {
+    if (currentQuestionIndex > 0) {
         currentQuestionIndex--;
         showCurrentQuestion();
-      }
     }
-
-   function finishQuiz() {
-  clearInterval(timerInterval);
-  document.getElementById('question-container').style.display = 'none';
-  document.getElementById('result-screen').style.display = 'block';
-  if (currentMode === 'study') {
-  localStorage.removeItem('questionarioAtual');
-  localStorage.removeItem('userAnswers');
-  localStorage.removeItem('currentQuestionIndex');
-}
-  // Salvar dados no localStorage para uso no review.html
-  localStorage.setItem('questionarioAtual', JSON.stringify(questionarioAtual));
-  localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
-  localStorage.setItem('selectedLanguage', selectedLanguage);
-  // Adicionar para funcionamento do relatoriofinal.html
-  localStorage.setItem('acumuladoQuestoes', JSON.stringify(questionarioAtual));
-  localStorage.setItem('acumuladoRespostas', JSON.stringify(userAnswers));
-  // Gerar relatório
-  generateUSMLEReport();
   }
 
- function generateUSMLEReport() {
-  // 1. Dados básicos
-  const totalQuestions = questionarioAtual.length;
-  const correctAnswers = questionarioAtual.filter(q => 
-    userAnswers[q.id] === q.correta
-  ).length;
-  const percentage = Math.round((correctAnswers / totalQuestions) * 100);
-  
-  // Gerar relatório completo
-  generateUSMLEReportFull(
-    questionarioAtual,
-    userAnswers,
-    pendingQuestions,
-    Array(totalQuestions).fill(30), // tempo médio fictício de 30s por questão
-    selectedLanguage
-  );
+  function finishQuiz() {
+   clearInterval(timerInterval);
+    document.getElementById('question-container').style.display = 'none';
+    document.getElementById('result-screen').style.display = 'block';
+   if (currentMode === 'study') {
+    localStorage.removeItem('questionarioAtual');
+    localStorage.removeItem('userAnswers');
+    localStorage.removeItem('currentQuestionIndex');
+   }
+   // Salvar dados no localStorage para uso no review.html
+    localStorage.setItem('questionarioAtual', JSON.stringify(questionarioAtual));
+    localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
+    localStorage.setItem('selectedLanguage', selectedLanguage);
+   // Adicionar para funcionamento do relatoriofinal.html
+    localStorage.setItem('acumuladoQuestoes', JSON.stringify(questionarioAtual));
+    localStorage.setItem('acumuladoRespostas', JSON.stringify(userAnswers));
+   // Gerar relatório
+   generateUSMLEReport();
+  }
 
-  drawPerformanceChart(questionarioAtual, userAnswers, selectedLanguage);
-  drawDifficultyChart(questionarioAtual, userAnswers);
-  drawVoronoiDifficultyChart(questionarioAtual, userAnswers, selectedLanguage);
-  generateVoronoiTopicDetails(questionarioAtual, userAnswers, selectedLanguage);
+  function generateUSMLEReport() {
+    // 1. Dados básicos
+    const totalQuestions = questionarioAtual.length;
+    const correctAnswers = questionarioAtual.filter(q => 
+     userAnswers[q.id] === q.correta
+     ).length;
+    const percentage = Math.round((correctAnswers / totalQuestions) * 100);
+    // Gerar relatório completo
+      generateUSMLEReportFull(
+       questionarioAtual,
+       userAnswers,
+       pendingQuestions,
+       Array(totalQuestions).fill(30), // tempo médio fictício de 30s por questão
+       selectedLanguage);
+      drawPerformanceChart(questionarioAtual, userAnswers, selectedLanguage);
+      drawDifficultyChart(questionarioAtual, userAnswers);
+      drawVoronoiDifficultyChart(questionarioAtual, userAnswers, selectedLanguage);
+      drawSankeyAccuracyChart(questionarioAtual, userAnswers, selectedLanguage);
+    const t = translations[selectedLanguage]; // Obter traduções do idioma atual
+    const linkEl = document.getElementById('full-report-link');
+     if (linkEl) {
+     linkEl.textContent = t.viewFullReport;}
+  }
 
-
-
-  const t = translations[selectedLanguage]; // Obter traduções do idioma atual
-  const linkEl = document.getElementById('full-report-link');
-  if (linkEl) {
-  linkEl.textContent = t.viewFullReport;
-}
-}
-
-    function updateUI() {
-      const t = translations[selectedLanguage];
-   
-      // Atualizar textos na tela inicial
+  function updateUI() {
+    const t = translations[selectedLanguage];
+    // Atualizar textos na tela inicial
       document.querySelector('.mode-btn.active').textContent = 
-        currentMode === 'study' ? t.studyMode : t.examMode;
+      currentMode === 'study' ? t.studyMode : t.examMode;
       document.querySelector('.mode-btn:not(.active)').textContent = 
-        currentMode === 'study' ? t.examMode : t.studyMode;
-      
-      // Atualizar botões
+      currentMode === 'study' ? t.examMode : t.studyMode;
+    // Atualizar botões
       document.querySelector('button[onclick="startQuiz()"]').textContent = t.startQuiz;
 
-     const difficultyLabels = {
+    const difficultyLabels = {
      "facil": t.easy,
      "moderada": t.medium,
      "dificil": t.hard,
-     "muito_dificil": t.very_hard
-     };
-
-     document.querySelectorAll('.difficulty-filter').forEach(el => {
-     const label = el.parentElement;
+     "muito_dificil": t.very_hard};
+      document.querySelectorAll('.difficulty-filter').forEach(el => {
+    const label = el.parentElement;
      label.childNodes[1].textContent = " " + (difficultyLabels[el.value] || el.value);
      });
-
-     document.querySelector('button[onclick="showConfig()"]').textContent = t.settings;
-
+      document.querySelector('button[onclick="showConfig()"]').textContent = t.settings;
       if (document.getElementById('result-screen').style.display === 'block') {
-        updateReportLanguage(selectedLanguage);
-
-     document.getElementById('pending-title').textContent = `▌ ${t.questionsForReview}`;
-     const btnFinalReport = document.getElementById('final-report-btn');
+      updateReportLanguage(selectedLanguage);
+      document.getElementById('pending-title').textContent = `▌ ${t.questionsForReview}`;
+    const btnFinalReport = document.getElementById('final-report-btn');
      if (btnFinalReport) {
      btnFinalReport.textContent =
      selectedLanguage === 'pt' ? '📊 Ver Relatório Final' :
      selectedLanguage === 'es' ? '📊 Ver Informe Final' :
-     '📊 View Final Report';
-     }
+     '📊 View Final Report';}
     }
-      }
-    function restartQuiz() {
-      document.getElementById('result-screen').style.display = 'none';
-      startQuiz();
-    }
-
-    function endExam() {
-      finishQuiz();
-    }
-    function showFullReport() {
-  document.getElementById('result-screen').style.display = 'none';
-  document.getElementById('full-report-screen').style.display = 'block';
-  generateDetailedReport(questionarioAtual, userAnswers, pendingQuestions, selectedLanguage);
-}
-
-    function backToMainReport() {
-      document.getElementById('full-report-screen').style.display = 'none';
-      document.getElementById('result-screen').style.display = 'block';
-    }
+  }
   
+  function restartQuiz() {
+    document.getElementById('result-screen').style.display = 'none';
+    startQuiz();
+  }
+  
+  function endExam() {
+      finishQuiz();
+  }
+  
+  function showFullReport() {
+    document.getElementById('result-screen').style.display = 'none';
+    document.getElementById('full-report-screen').style.display = 'block';
+     generateDetailedReport(questionarioAtual, userAnswers, pendingQuestions, selectedLanguage);
+  }
 
-    function confirmReturnHome() {
-  const lang = selectedLanguage || 'en';
-
-  const confirmMessages = {
+  function backToMainReport() {
+    document.getElementById('full-report-screen').style.display = 'none';
+    document.getElementById('result-screen').style.display = 'block';
+  }
+  
+  function confirmReturnHome() {
+   const lang = selectedLanguage || 'en';
+   const confirmMessages = {
     en: "If you return to the home page, your answers will be lost. Are you sure?",
     pt: "Caso retorne à página inicial, suas respostas serão perdidas. Tem certeza?",
-    es: "Si regresa a la página principal, sus respuestas se perderán. ¿Está seguro?"
-  };
-
-  if (confirm(confirmMessages[lang])) {
-    // Limpa estados salvos
+    es: "Si regresa a la página principal, sus respuestas se perderán. ¿Está seguro?"};
+    if (confirm(confirmMessages[lang])) {
+   // Limpa estados salvos
     localStorage.removeItem('questionarioAtual');
     localStorage.removeItem('userAnswers');
-
-    // Oculta todas as seções de resultado e volta à tela inicial
+   // Oculta todas as seções de resultado e volta à tela inicial
     document.getElementById('question-container').style.display = 'none';
     document.getElementById('result-screen').style.display = 'none';
     document.getElementById('full-report-screen').style.display = 'none';
-    document.getElementById('home-screen').style.display = 'block';
+    document.getElementById('home-screen').style.display = 'block';}
   }
-}
 
   console.log('bancoQuestoes está definido?', typeof bancoQuestoes !== 'undefined');
   document.addEventListener("DOMContentLoaded", () => {
     const lang = localStorage.getItem("selectedLanguage") || "en";
-
     const descriptions = {
       en: "BrainboxMed is an interactive multilingual medical quiz platform to train, review, and master Intensive Care Medicine.",
       pt: "O BrainboxMed é uma plataforma interativa multilíngue de simulado médico para treinar, revisar e dominar a Medicina Intensiva.",
       es: "BrainboxMed es una plataforma interactiva multilingüe de simulación médica para entrenar, repasar y dominar la medicina intensiva."
     };
-
     const ogDescriptions = {
       en: "Interactive and multilingual quizzes to master critical care. Dynamic, and evidence-based.",
       pt: "Simulados interativos e multilíngues para dominar a medicina intensiva. Dinâmico e baseado em evidências.",
       es: "Simulaciones interactivas y multilingües para dominar la medicina intensiva. Dinámico y basado en evidencia."
     };
-
     const metaDesc = document.getElementById("meta-desc");
     const metaOgDesc = document.getElementById("meta-og-desc");
-
-    if (metaDesc) metaDesc.setAttribute("content", descriptions[lang] || descriptions["en"]);
-    if (metaOgDesc) metaOgDesc.setAttribute("content", ogDescriptions[lang] || ogDescriptions["en"]);
+     if (metaDesc) metaDesc.setAttribute("content", descriptions[lang] || descriptions["en"]);
+     if (metaOgDesc) metaOgDesc.setAttribute("content", ogDescriptions[lang] || ogDescriptions["en"]);
   });
