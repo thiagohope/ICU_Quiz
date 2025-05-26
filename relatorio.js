@@ -99,53 +99,78 @@ const reportTexts = {
     "unanswered": "Não Respondida"
   }
 };
-function generateUSMLEReportFull(questionario, respostas, pendentes, tempoPorQuestao, idioma = 'pt') {
-  const t = reportTexts[idioma];
-  
-  updateReportLanguage(idioma);
-  
-  const totalQuestoes = questionario.length;
-  const acertos = questionario.filter(q => respostas[q.id] === q.correta).length;
-  const percentual = Math.round((acertos / totalQuestoes) * 100);
+const topicDictionary = {
+  // Domínios
+  "neurointensivismo": { pt: "Neurointensivismo", en: "Neurointensive Care", es: "Cuidados Neurointensivos" },
+  "cardiointensivismo": { pt: "Cardiointensivismo", en: "Cardiointensive Care", es: "Cuidados Cardiointensivos" },
+  "infectologia": { pt: "Infectologia", en: "Infectious Diseases", es: "Infecciosas" },
+  "ventilação": { pt: "Ventilação", en: "Ventilation", es: "Ventilación" },
+  "renal": { pt: "Renal", en: "Renal", es: "Renal" },
+  "general": { pt: "Geral", en: "General", es: "General" },
 
-  document.getElementById('report-title').textContent = t.title;
-  document.getElementById('report-date').textContent = `${t.generated} ${new Date().toLocaleDateString(idioma)}`;
-  document.getElementById('score-text').textContent = `${t.score}: ${acertos}/${totalQuestoes} ${t.correct}`;
-  document.getElementById('percentage').textContent = percentual;
+  // Tópicos comuns
+  "coma": { pt: "Coma", en: "Coma", es: "Coma" },
+  "shock": { pt: "Choque", en: "Shock", es: "Choque" },
+  "stroke": { pt: "AVC", en: "Stroke", es: "ACV" },
+  "sepsis": { pt: "Sepse", en: "Sepsis", es: "Sepsis" },
+  "ecmo": { pt: "ECMO", en: "ECMO", es: "ECMO" },
+  "sedation": { pt: "Sedação", en: "Sedation", es: "Sedación" },
+  "mechanical ventilation": { pt: "Ventilação Mecânica", en: "Mechanical Ventilation", es: "Ventilación Mecánica" },
+  "anticoagulation": { pt: "Anticoagulação", en: "Anticoagulation", es: "Anticoagulación" },
+  "cardiac arrest": { pt: "Parada Cardíaca", en: "Cardiac Arrest", es: "Paro Cardíaco" },
+  "arrhythmia": { pt: "Arritmia", en: "Arrhythmia", es: "Arritmia" },
+  "myocardial infarction": { pt: "Infarto Agudo", en: "Myocardial Infarction", es: "Infarto Agudo" }
+  // Adicione mais conforme surgirem novos tópicos
+};
+
+function generateUSMLEReportFull(questionnaire, answers, pending, timePerQuestion, language = 'en') {
+  const t = reportTexts[language];
   
+  updateReportLanguage(language);
+  
+  const totalQuestions = questionnaire.length;
+  const correctAnswers = questionnaire.filter(q => answers[q.id] === q.correct).length;
+  const percentage = Math.round((correctAnswers / totalQuestions) * 100);
+
+  const titleEl = document.getElementById('report-title');
+  if (!titleEl) return;
+  titleEl.textContent = t.title;
+
+  document.getElementById('report-date').textContent = `${t.generated} ${new Date().toLocaleDateString(language)}`;
+  document.getElementById('score-text').textContent = `${t.score}: ${correctAnswers}/${totalQuestions} ${t.correct}`;
+  document.getElementById('percentage').textContent = percentage;
+
   const scoreBar = document.getElementById("score-bar");
-  scoreBar.style.width = `${percentual}%`;
-  scoreBar.style.background = percentual >= 70
-  ? "linear-gradient(to right, #2ecc71, #27ae60)" // verde
-  : "linear-gradient(to right, #e74c3c, #c0392b)"; // vermelho
-
-  updateDomainAnalysis(questionario, respostas, idioma);
-  updateDifficultyAnalysis(questionario, respostas, idioma);
-  updateRecommendations(questionario, respostas, idioma);
-  
-  // Comentado para evitar exibir "Questions for Review" + undefined
-  // addPendingQuestionsLink(pendentes, idioma);
-
-  updatePendingQuestions(questionario, pendentes, respostas, idioma);
-  // createFullReportLink(idioma); // Removido link para relatoriofinal.html
-  drawDifficultyChart(questionario, respostas);
+  scoreBar.style.width = `${percentage}%`;
+  scoreBar.style.background = percentage >= 70
+    ? "linear-gradient(to right, #2ecc71, #27ae60)" // green
+    : "linear-gradient(to right, #e74c3c, #c0392b)"; // red
+  updateDomainAnalysis(questionnaire, answers, language);
+  updateDifficultyAnalysis(questionnaire, answers, language);
+  updateRecommendations(questionnaire, answers, language);
+  // Commented out to avoid showing "Questions for Review" + undefined
+  // addPendingQuestionsLink(pending, language);
+  updatePendingQuestions(questionnaire, pending, answers, language);
+  // createFullReportLink(language); // Removed link to relatoriofinal.html
+  drawDifficultyChart(questionnaire, answers);
   const lang = localStorage.getItem("selectedLanguage") || "en";
-  drawVoronoiDifficultyChart(questionario, respostas, lang);
-  drawSankeyAccuracyChart(questionario, respostas, idioma);
-  drawPerformanceChart(questionario, respostas, idioma);
-  generateCompactRecommendations(questionario, respostas, idioma);
-  generateDifficultyInsights(questionario, respostas, idioma);
+  drawVoronoiDifficultyChart(questionnaire, answers, lang);
+  drawSankeyAccuracyChart(questionnaire, answers, language);
+  drawPerformanceChart(questionnaire, answers, language);
+  generateCompactRecommendations(questionnaire, answers, language);
+  generateDifficultyInsights(questionnaire, answers, language);
 }
+
 function updateDomainAnalysis(questions, answers, lang) {
-  const dominios = {};
+  const domains = {};
   questions.forEach(q => {
-       const categoria = q.area || "undefined";
-    if (!dominios[categoria]) {
-      dominios[categoria] = { total: 0, acertos: 0 };
+    const category = q.area || "undefined";
+    if (!domains[category]) {
+      domains[category] = { total: 0, correct: 0 };
     }
-    dominios[categoria].total++;
-    console.log(`Questão ${q.id} — Correta: ${q.correta}, Respondida: ${answers?.[q.id]}`);
-    if (answers?.[q.id] === q.correta) dominios[categoria].acertos++;
+    domains[category].total++;
+    console.log(`Question ${q.id} — Correct: ${q.correct}, Answered: ${answers?.[q.id]}`);
+    if (answers?.[q.id] === q.correct) domains[category].correct++;
   });
 
   let html = '';
@@ -157,32 +182,32 @@ function updateDomainAnalysis(questions, answers, lang) {
   renal: { pt: "🩸 Renal", en: "🩸 Renal", es: "🩸 Renal" },
   general: { pt: "📚 Geral", en: "📚 General", es: "📚 General" }
   };
-  Object.entries(dominios).forEach(([dominio, dados]) => {
-  const percentual = Math.round((dados.acertos / dados.total) * 100);
-  const status = percentual >= 70 ? '🟢' :
-                 percentual >= 50 ? '🟡' :
+  Object.entries(domains).forEach(([domain, data]) => {
+  const percentage = Math.round((data.correct / data.total) * 100);
+  const status = percentage >= 70 ? '🟢' :
+                 percentage >= 50 ? '🟡' :
                  '🔴';
   html += `
     <tr>
-      <td>${dominioLabels[dominio]?.[idioma] || dominio}</td>
-      <td style="text-align: center;">${percentual}%</td>
+      <td>${domainLabels[domain]?.[language] || domain}</td>
+      <td style="text-align: center;">${percentage}%</td>
       <td style="text-align: center;">${status}</td>
     </tr>
   `;
 });
-  document.getElementById('sw-body').innerHTML = html;
+document.getElementById('sw-body').innerHTML = html;
 }
 function updateDifficultyAnalysis(questions, answers, lang) {
   const difficultyStats = {
-    facil: { total: 0, correct: 0 },
-    moderada: { total: 0, correct: 0 },
-    dificil: { total: 0, correct: 0 },
-    muito_dificil: { total: 0, correct: 0 }
+    easy: { total: 0, correct: 0 },
+    moderate: { total: 0, correct: 0 },
+    hard: { total: 0, correct: 0 },
+    very_hard: { total: 0, correct: 0 }
   };
 
   questions.forEach(q => {
-    difficultyStats[q.nivel].total++;
-if (answers[q.id] === q.correta) difficultyStats[q.nivel].correct++;
+    difficultyStats[q.level].total++;
+if (answers[q.id] === q.correct) difficultyStats[q.level].correct++;
   });
 
   let html = '';
@@ -191,7 +216,7 @@ if (answers[q.id] === q.correta) difficultyStats[q.nivel].correct++;
       const percentual = Math.round((data.correct / data.total) * 100);
       html += `
         <tr>
-          <td><span class="dificuldade ${difficulty}">${translateDifficulty(difficulty, lang)}</span></td>
+          <td><span class="level ${difficulty}">${translateDifficulty(difficulty, lang)}</span></td>
           <td style="text-align: center;">${data.total}</td>
           <td style="text-align: center;">${percentual}%</td>
         </tr>
@@ -202,83 +227,87 @@ if (answers[q.id] === q.correta) difficultyStats[q.nivel].correct++;
 }
 function translateDifficulty(difficulty, lang) {
   const translations = {
-    facil: { en: 'Easy', es: 'Fácil', pt: 'Fácil' },
-    moderada: { en: 'Medium', es: 'Moderada', pt: 'Moderada' },
-    dificil: { en: 'Hard', es: 'Difícil', pt: 'Difícil' },
-    muito_dificil: { en: 'Very Hard', es: 'Muy Difícil', pt: 'Muito Difícil' }
+    easy: { en: 'Easy', es: 'Fácil', pt: 'Fácil' },
+    moderate: { en: 'Medium', es: 'Moderada', pt: 'Moderada' },
+    hard: { en: 'Hard', es: 'Difícil', pt: 'Difícil' },
+    very_hard: { en: 'Very Hard', es: 'Muy Difícil', pt: 'Muito Difícil' }
   };
   return translations[difficulty][lang];
 }
 function updateRecommendations(questions, answers, lang) {
   const t = reportTexts[lang];
-  const conteudo = {};
-  
+  const content = {};
+
   questions.forEach(q => {
-    const acertou = answers[q.id] === q.correta;
-    if (acertou) return;
+    const isCorrect = answers[q.id] === q.correct;
+    if (isCorrect) return;
 
-    const area = q.area || "Undefined";
-    const topicos = Array.isArray(q.topic) ? q.topic : [q.topic || "Geral"];
+    const domain = q.area || "Undefined";
+    const topics = Array.isArray(q.topic) ? q.topic : [q.topic || "General"];
 
-    if (!conteudo[area]) conteudo[area] = {};
-    topicos.forEach(topic => {
-      if (!conteudo[area][topic]) conteudo[area][topic] = 0;
-      conteudo[area][topic]++;
+    if (!content[domain]) content[domain] = {};
+    topics.forEach(topic => {
+      if (!content[domain][topic]) content[domain][topic] = 0;
+      content[domain][topic]++;
     });
   });
 
-  const ordenado = Object.entries(conteudo)
-    .map(([area, topics]) => {
-      const totalErros = Object.values(topics).reduce((a, b) => a + b, 0);
-      return { area, topics, totalErros };
+  const sorted = Object.entries(content)
+    .map(([domain, topics]) => {
+      const totalErrors = Object.values(topics).reduce((a, b) => a + b, 0);
+      return { domain, topics, totalErrors };
     })
-    .sort((a, b) => b.totalErros - a.totalErros);
+    .sort((a, b) => b.totalErrors - a.totalErrors);
 
   // ⬇️ MONTA LISTA VISUAL
   let html = "";
-  if (ordenado.length === 0) {
-    html = `<li style="padding: 12px; color: #999;">${t.nonePending}</li>`;
-  } else {
-    html = ordenado.map(({ area, topics }) => {
-      const topicosHTML = Object.entries(topics)
-        .sort(([, a], [, b]) => b - a)
-        .map(([topic]) => `<li>${topic}</li>`)
-        .join("");
-      return `
-        <li class="area-block">
-          <div class="area-title">🧠 ${area}</div>
-          <ul class="topic-list">
-            ${topicosHTML}
-          </ul>
-        </li>
-      `;
-    }).join("");
-  }
-  const list = document.getElementById("materials-list");
-  if (list) list.innerHTML = html;
-  // ⬇️ MONTA INSIGHTS TEXTUAIS
-  const insightsEl = document.getElementById("study-insights");
-  const insightsList = document.getElementById("study-insights-list");
-  if (!insightsEl || !insightsList) return;
-
-  if (ordenado.length === 0) {
-    insightsEl.style.display = "none";
-    insightsList.innerHTML = "";
-    return;
-  }
-  insightsEl.style.display = "block";
-  const insights = ordenado.map(({ area, topics }) => {
-    const topicos = Object.entries(topics)
+if (ordered.length === 0) {
+  html = `<li style="padding: 12px; color: #999;">${t.nonePending}</li>`;
+} else {
+  html = ordered.map(({ area, topics }) => {
+    const topicsHTML = Object.entries(topics)
       .sort(([, a], [, b]) => b - a)
-      .map(([t]) => t)
-      .slice(0, 3)
-      .join(", ");
+      .map(([topic]) => `<li>${topic}</li>`)
+      .join("");
+    return `
+      <li class="area-block">
+        <div class="area-title">🧠 ${area}</div>
+        <ul class="topic-list">
+          ${topicsHTML}
+        </ul>
+      </li>
+    `;
+  }).join("");
+}
 
-    if (lang === "pt") return `• Maior número de erros em ${area}, especialmente nos tópicos: ${topicos}.`;
-    if (lang === "es") return `• Mayor cantidad de errores en ${area}, especialmente en: ${topicos}.`;
-    return `• Most errors occurred in ${area}, especially in: ${topicos}.`;
-  });
-  insightsList.innerHTML = insights.map(i => `<li>${i}</li>`).join("");
+const list = document.getElementById("materials-list");
+if (list) list.innerHTML = html;
+
+// ⬇️ BUILDS TEXTUAL INSIGHTS
+const insightsEl = document.getElementById("study-insights");
+const insightsList = document.getElementById("study-insights-list");
+if (!insightsEl || !insightsList) return;
+
+if (ordered.length === 0) {
+  insightsEl.style.display = "none";
+  insightsList.innerHTML = "";
+  return;
+}
+
+insightsEl.style.display = "block";
+const insights = ordered.map(({ area, topics }) => {
+  const topTopics = Object.entries(topics)
+    .sort(([, a], [, b]) => b - a)
+    .map(([t]) => t)
+    .slice(0, 3)
+    .join(", ");
+
+   if (lang === "pt") return `• Maior número de erros em ${area}, especialmente nos tópicos: ${topTopics}.`;
+if (lang === "es") return `• Mayor cantidad de errores en ${area}, especialmente en: ${topTopics}.`;
+return `• Most errors occurred in ${area}, especially in: ${topTopics}.`;
+});
+insightsList.innerHTML = insights.map(i => `<li>${i}</li>`).join("");
+
 }
 function drawPerformanceChart(questions, answers, lang = "en") {
   const container = document.getElementById("performance-chart");
@@ -304,15 +333,15 @@ function drawPerformanceChart(questions, answers, lang = "en") {
   const t = translations[lang] || translations["en"];
 
   const topicStats = {};
-  questions.forEach(q => {
-    const topics = Array.isArray(q.topic) ? q.topic : [q.topic || "General"];
-    const acertou = answers[q.id] === q.correta;
-    topics.forEach(topic => {
-      if (!topicStats[topic]) topicStats[topic] = { total: 0, correct: 0 };
-      topicStats[topic].total++;
-      if (acertou) topicStats[topic].correct++;
-    });
+questions.forEach(question => {
+  const topics = Array.isArray(question.topic) ? question.topic : [question.topic || "General"];
+  const isCorrect = answers[question.id] === question.correct;
+  topics.forEach(topic => {
+    if (!topicStats[topic]) topicStats[topic] = { total: 0, correct: 0 };
+    topicStats[topic].total++;
+    if (isCorrect) topicStats[topic].correct++;
   });
+});
 
   const topTopics = Object.entries(topicStats)
     .sort((a, b) => b[1].total - a[1].total)
@@ -340,15 +369,17 @@ function drawPerformanceChart(questions, answers, lang = "en") {
 
     html += `
       <div style="display: flex; align-items: center; margin-bottom: 12px; font-size: 14px;">
-        <div style="flex: 1; font-weight: bold; padding-right: 10px; color: #333;">${topic}</div>
-        <div style="flex: 4; position: relative; height: 22px; background: #ecf0f1; overflow: hidden;">
-          <div style="width: ${pctCorrect}%; background-color: #3498db; height: 100%; float: left; text-align: center; color: white; font-size: 13px; line-height: 22px;">
-            ${pctCorrect > 5 ? `${pctCorrect}%` : ""}
-          </div>
-          <div style="width: ${pctIncorrect}%; background-color: #bdc3c7; height: 100%; float: left; text-align: center; color: #333; font-size: 13px; line-height: 22px;">
-            ${pctIncorrect > 5 ? `${pctIncorrect}%` : ""}
-          </div>
-        </div>
+      <div style="flex: 1; font-weight: bold; padding-right: 10px; color: #333;">
+        ${topicDictionary[topic]?.[lang] || topic}
+      </div>
+      <div style="flex: 4; position: relative; height: 22px; background: #ecf0f1; overflow: hidden;">
+      <div style="width: ${pctCorrect}%; background-color: #3498db; height: 100%; float: left; text-align: center; color: white; font-size: 13px; line-height: 22px;">
+        ${pctCorrect > 5 ? `${pctCorrect}%` : ""}
+      </div>
+      <div style="width: ${pctIncorrect}%; background-color: #bdc3c7; height: 100%; float: left; text-align: center; color: #333; font-size: 13px; line-height: 22px;">
+        ${pctIncorrect > 5 ? `${pctIncorrect}%` : ""}
+      </div>
+      </div>
       </div>
     `;
   });
@@ -383,15 +414,15 @@ function generateCompactRecommendations(questions, answers, lang = "en") {
   const t = translations[lang] || translations["en"];
   const topicStats = {};
 
-  questions.forEach(q => {
-    const topics = Array.isArray(q.topic) ? q.topic : [q.topic || "General"];
-    const acertou = answers[q.id] === q.correta;
-    topics.forEach(topic => {
-      if (!topicStats[topic]) topicStats[topic] = { total: 0, correct: 0 };
-      topicStats[topic].total++;
-      if (acertou) topicStats[topic].correct++;
-    });
+  questions.forEach(question => {
+  const topics = Array.isArray(question.topic) ? question.topic : [question.topic || "General"];
+  const isCorrect = answers[question.id] === question.correct;
+  topics.forEach(topic => {
+    if (!topicStats[topic]) topicStats[topic] = { total: 0, correct: 0 };
+    topicStats[topic].total++;
+    if (isCorrect) topicStats[topic].correct++;
   });
+});
 
   const topTopics = Object.entries(topicStats)
     .sort((a, b) => b[1].total - a[1].total)
@@ -420,47 +451,48 @@ function generateDifficultyInsights(questions, answers, lang = "en") {
 
   const labels = {
     en: {
-      facil: "Easy",
-      moderada: "Moderate",
-      dificil: "Hard",
-      muito_dificil: "Very Hard"
+      easy: "Easy",
+      moderate: "Moderate",
+      hard: "Hard",
+      very_hard: "Very Hard"
     },
     pt: {
-      facil: "Fácil",
-      moderada: "Moderada",
-      dificil: "Difícil",
-      muito_dificil: "Muito Difícil"
+      easy: "Fácil",
+      moderate: "Moderada",
+      hard: "Difícil",
+      very_hard: "Muito Difícil"
     },
     es: {
-      facil: "Fácil",
-      moderada: "Moderada",
-      dificil: "Difícil",
-      muito_dificil: "Muy Difícil"
+      easy: "Fácil",
+      moderate: "Moderada",
+      hard: "Difícil",
+      very_hard: "Muy Difícil"
     }
   };
 
   const t = labels[lang] || labels.en;
 
   const stats = {
-    facil: { total: 0, correct: 0 },
-    moderada: { total: 0, correct: 0 },
-    dificil: { total: 0, correct: 0 },
-    muito_dificil: { total: 0, correct: 0 }
+    easy: { total: 0, correct: 0 },
+    moderate: { total: 0, correct: 0 },
+    hard: { total: 0, correct: 0 },
+    very_hard: { total: 0, correct: 0 }
   };
 
-  questions.forEach(q => {
-    const nivel = q.nivel;
-    if (!nivel || !stats[nivel]) return;
-    stats[nivel].total++;
-    if (answers[q.id] === q.correta) stats[nivel].correct++;
-  });
+  questions.forEach(question => {
+  const level = question.level;
+  if (!level || !stats[level]) return;
+  stats[level].total++;
+  if (answers[question.id] === question.correct) stats[level].correct++;
+});
 
-  const percentList = Object.entries(stats)
-    .filter(([_, s]) => s.total > 0)
-    .map(([nivel, s]) => ({
-      nivel,
-      percent: Math.round((s.correct / s.total) * 100)
-    }));
+const percentList = Object.entries(stats)
+  .filter(([_, stat]) => stat.total > 0)
+  .map(([level, stat]) => ({
+    level,
+    percent: Math.round((stat.correct / stat.total) * 100)
+  }));
+
 
   if (!percentList.length) return;
 
@@ -473,14 +505,15 @@ function generateDifficultyInsights(questions, answers, lang = "en") {
   insightsEl.style.color = "#555";
   insightsEl.style.fontSize = "14px";
   insightsEl.innerHTML = `
-    <p><strong>✅ Best performance:</strong> ${t[best.nivel]} (${best.percent}%)</p>
-    <p><strong>❌ Weakest performance:</strong> ${t[worst.nivel]} (${worst.percent}%)</p>
-  `;
+   <p><strong>✅ Best performance:</strong> ${t[best.level]} (${best.percent}%)</p>
+<p><strong>❌ Weakest performance:</strong> ${t[worst.level]} (${worst.percent}%)</p>
+`;
 
-  container.parentNode.appendChild(insightsEl);
+container.parentNode.appendChild(insightsEl);
 }
-function getRecommendation(dominio, lang) {
-  const recomendacoes = {
+
+function getRecommendation(domain, lang) {
+  const recommendations = {
     "Sepsis": {
       en: "Review Surviving Sepsis Campaign guidelines",
       es: "Revisar guías de la Campaña Sobreviviendo a la Sepsis",
@@ -492,9 +525,10 @@ function getRecommendation(dominio, lang) {
       pt: "Praticar protocolos de manejo de ventilação mecânica"
     }
   };
-  return recomendacoes[dominio]?.[lang] || reportTexts[lang].nonePending;
+  return recommendations[domain]?.[lang] || reportTexts[lang].nonePending;
 }
-function addPendingQuestionsLink(pendentes, lang) {
+
+function addPendingQuestionsLink(pendingQuestions, lang) {
   const t = reportTexts[lang];
   const html = `
     <div class="report-section" style="margin-top: 40px; text-align: center;">
@@ -515,39 +549,39 @@ function addPendingQuestionsLink(pendentes, lang) {
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         transition: background 0.3s;
       ">
-        📋 ${t.viewPending} (${pendentes.length})
+        📋 ${t.viewPending} (${pendingQuestions.length})
       </button>
     </div>
   `;
-
   document.getElementById('pending-questions-section').innerHTML = html;
 }
-function generatePendingQuestionsReport(questionario, pendentes, idioma) {
-  const t = reportTexts[idioma];
+
+function generatePendingQuestionsReport(quiz, pendingList, language) {
+  const t = reportTexts[language];
   let html = '';
 
-  pendentes.forEach((id, index) => {
-    const q = questionario.find(question => question.id === id);
-    if (!q) return;
+  pendingList.forEach((id, index) => {
+    const questionItem = quiz.find(question => question.id === id);
+    if (!questionItem) return;
 
-    const enunciado = q.enunciado?.[idioma] || q.enunciado;
-    const alternativas = q.alternativas?.[idioma] || q.alternativas;
-    const explicacao = q.explicacoes?.[idioma] || q.explicacoes;
+    const questionText = questionItem.question?.[language] || questionItem.question;
+    const options = questionItem.options?.[language] || questionItem.options;
+    const explanation = questionItem.explanations?.[language] || questionItem.explanations;
 
     html += `
       <div class="pending-question" style="margin-bottom: 30px; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
        <h4 style="margin-bottom: 10px;">${t.pendingTitle} - ${index + 1}</h4>
-        <p style="font-weight: bold; color: #333;">${enunciado}</p>
+        <p style="font-weight: bold; color: #333;">${question}</p>
         <div class="options">
-          ${alternativas.map((opt, i) => `
-            <div class="option ${i === q.correta ? 'correct' : ''}" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin: 6px 0;">
+          ${options.map((opt, i) => `
+            <div class="option ${i === q.correct ? 'correct' : ''}" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin: 6px 0;">
               ${opt}
             </div>
           `).join('')}
         </div>
-        <div class="explanation-box ${userAnswers[q.id] === q.correta ? 'correct' : 'incorrect'}">
-          <p class="explanation-text" style="color: ${userAnswers[q.id] === q.correta ? '#27ae60' : '#e74c3c'};">
-            ${userAnswers[q.id] === q.correta ? '✓' : '✖'} ${explicacao}
+        <div class="explanation-box ${userAnswers[q.id] === q.correct ? 'correct' : 'incorrect'}">
+          <p class="explanation-text" style="color: ${userAnswers[q.id] === q.correct ? '#27ae60' : '#e74c3c'};">
+            ${userAnswers[q.id] === q.correct ? '✓' : '✖'} ${explanation}
           </p>
         </div>
       </div>
@@ -583,24 +617,24 @@ function updatePendingQuestions(questions, pending, answers, lang) {
     if (!q) return;
 
     const userAnswer = answers[q.id];
-    const isCorrect = userAnswer === q.correta;
+    const isCorrect = userAnswer === q.correct;
     const hasAnswer = typeof userAnswer !== 'undefined';
 
     const questionHTML = `
       <li style="margin-bottom: 30px; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-          <h4 style="color: #333; margin: 0;">${q.enunciado[lang]}</h4>
-          <span class="dificuldade ${q.dificuldade}">
-            ${translateDifficulty(q.dificuldade, lang)}
+          <h4 style="color: #333; margin: 0;">${q.question[lang]}</h4>
+          <span class="level ${q.level}">
+            ${translateDifficulty(q.level, lang)}
           </span>
         </div>
 
         <div class="options">
-          ${q.alternativas[lang].map((option, index) => {
+          ${q.options[lang].map((option, index) => {
             let icon = '';
             let style = '';
             
-            if (index === q.correta) {
+            if (index === q.correct) {
               icon = '<span class="status-icon correct-status">✓</span>';
               style = 'border-color: #27ae60; background-color: #e6f2ff;';
             }
@@ -625,7 +659,7 @@ function updatePendingQuestions(questions, pending, answers, lang) {
 
         <div class="explanation-box ${isCorrect ? 'correct' : 'incorrect'}">
           <strong>${t.explanation}:</strong>
-          <p class="explanation-text">${q.explicacoes[lang]}</p>
+          <p class="explanation-text">${q.explanations[lang]}</p>
           <div class="question-status ${isCorrect ? 'correct-status' : 'incorrect-status'}">
             ${isCorrect ? '✓ ' : '✖ '}${isCorrect ? t.correct : t.incorrect}
           </div>
@@ -643,9 +677,10 @@ function updatePendingQuestions(questions, pending, answers, lang) {
 window.showPendingQuestions = function() {
   document.getElementById('result-screen').style.display = 'none';
   document.getElementById('pending-report-screen').style.display = 'block';
-  const allQuestionIds = questionarioAtual.map(q => q.id);
-  generatePendingQuestionsReport(questionarioAtual, allQuestionIds, selectedLanguage);
+  const allQuestionIds = currentQuiz.map(q => q.id);
+  generatePendingQuestionsReport(currentQuiz, allQuestionIds, selectedLanguage);
 };
+
 // função createFullReportLink removida conforme desativação do link para relatoriofinal.html
 function generateDetailedReport(questions, answers, pending, lang) {
   const t = reportTexts[lang];
@@ -653,8 +688,8 @@ function generateDetailedReport(questions, answers, pending, lang) {
   let html = '';
   
   // Atualizar stats rápidos
-  const correct = questions.filter(q => answers[q.id] === q.correta).length;
-  const incorrect = questions.filter(q => answers[q.id] !== undefined && answers[q.id] !== q.correta).length;
+  const correct = questions.filter(q => answers[q.id] === q.correct).length;
+  const incorrect = questions.filter(q => answers[q.id] !== undefined && answers[q.id] !== q.correct).length;
   const unanswered = questions.length - (correct + incorrect);
   
   document.getElementById('total-correct').textContent = correct;
@@ -664,27 +699,27 @@ function generateDetailedReport(questions, answers, pending, lang) {
   // Gerar lista de questões
   questions.forEach((q, index) => {
     const userAnswer = answers[q.id];
-    const isCorrect = userAnswer === q.correta;
+    const isCorrect = userAnswer === q.correct;
     const hasAnswer = typeof userAnswer !== 'undefined';
     
     html += `
       <div class="question-item">
         <div class="question-header">
-          <span class="dificuldade ${q.dificuldade}">
-            ${translateDifficulty(q.dificuldade, lang)}
+          <span class="level ${q.level}">
+            ${translateDifficulty(q.level, lang)}
           </span>
           <span class="question-status ${hasAnswer ? (isCorrect ? 'status-correct' : 'status-incorrect') : ''}">
             ${hasAnswer ? (isCorrect ? t.correct : t.incorrect) : t.unanswered}
           </span>
         </div>
         
-        <h3 class="question-text">${q.enunciado[lang]}</h3>
+        <h3 class="question-text">${q.question[lang]}</h3>
         
         <div class="options">
-          ${q.alternativas[lang].map((opt, i) => `
-            <div class="option ${i === q.correta ? 'correct' : ''} ${hasAnswer && i === userAnswer ? 'user-answer' : ''}">
+          ${q.options[lang].map((opt, i) => `
+            <div class="option ${i === q.correct ? 'correct' : ''} ${hasAnswer && i === userAnswer ? 'user-answer' : ''}">
               ${opt}
-              ${i === q.correta ? '<span class="correct-icon">✓</span>' : ''}
+              ${i === q.correct ? '<span class="correct-icon">✓</span>' : ''}
               ${hasAnswer && i === userAnswer && !isCorrect ? '<span class="incorrect-icon">✖</span>' : ''}
             </div>
           `).join('')}
@@ -693,7 +728,7 @@ function generateDetailedReport(questions, answers, pending, lang) {
         ${hasAnswer ? `
           <div class="explanation-panel">
             <h4>${t.explanation}:</h4>
-            <p>${q.explicacoes[lang]}</p>
+            <p>${q.explanations[lang]}</p>
           </div>
         ` : ''}
       </div>
@@ -708,55 +743,143 @@ function showFullReport() {
 generateDetailedReport(window.questionarioAtual, window.userAnswers, window.pendingQuestions, window.selectedLanguage);
 }
 function drawDifficultyChart(questions, answers) {
-  console.log('🎯 Dados recebidos para gráfico de dificuldade:', questions, answers);
+  console.log('🎯 Dados recebidos para gráfico de level:', questions, answers);
   const lang = localStorage.getItem('selectedLanguage') || 'pt';
-  const stats = {
-    facil: { acertos: 0, erros: 0 },
-    moderada: { acertos: 0, erros: 0 },
-    dificil: { acertos: 0, erros: 0 },
-    muito_dificil: { acertos: 0, erros: 0 }
-  };
+ const stats = {
+  easy: { correct: 0, wrong: 0 },
+  moderate: { correct: 0, wrong: 0 },
+  hard: { correct: 0, wrong: 0 },
+  very_hard: { correct: 0, wrong: 0 }
+};
 
-  questions.forEach(q => {
-    const acertou = answers[q.id] === q.correta;
-    if (acertou) stats[q.nivel].acertos++;
-    else stats[q.nivel].erros++;
-  });
-  
-const canvas = document.getElementById('chart-dificuldade');
-if (!canvas) {
-  console.warn("⚠️ Canvas 'chart-dificuldade' não encontrado.");
-  return;
-}
-canvas.style.display = 'block'; // exibe o canvas apenas se necessário
-canvas.height = 400; // garante altura
+questions.forEach(question => {
+  const isCorrect = answers[question.id] === question.correct;
+  if (isCorrect) stats[question.level].correct++;
+  else stats[question.level].wrong++;
+});
+
+ const canvas = document.getElementById('chart-difficulty');
+    if (!canvas) {
+      console.warn("⚠️ Canvas 'chart-difficulty' not found.");
+      return;
+    }
+    if (!questions || !questions.length) {
+      console.warn("⚠️ No data available to render difficulty chart.");
+      return;
+    }
+    canvas.style.display = 'block';
+    canvas.width = 600;
+    canvas.height = 400;
 const ctx = canvas.getContext('2d');
-
-  const translatedLabels = [
-    translateDifficulty('facil', lang),
-    translateDifficulty('moderada', lang),
-    translateDifficulty('dificil', lang),
-    translateDifficulty('muito_dificil', lang)
+    if (!ctx) {
+      console.error("❌ Failed to acquire 2D context from canvas.");
+      return;
+    }
+const translatedLabels = [
+  translateDifficulty('easy', lang),
+  translateDifficulty('moderate', lang),
+  translateDifficulty('hard', lang),
+  translateDifficulty('muito_hard', lang)
   ];
-  if (window.graficoDificuldade) {
-  window.graficoDificuldade.destroy();
-  }
-  window.graficoDificuldade = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: translatedLabels,
+   if (window.difficultyChart) {
+  window.difficultyChart.destroy();
+}
 
-      responsive: true,
-      plugins: {
-        legend: { position: 'top' },
-        title: {
-          display: true,
-          text: 'Desempenho por Nível de Dificuldade'
+window.difficultyChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: translatedLabels,
+    datasets: [
+      {
+        label: lang === "pt" ? "% de acertos" : lang === "es" ? "% correctas" : "% Correct",
+        data: [
+          stats.easy.total > 0 ? Math.round((stats.easy.correct / stats.easy.total) * 100) : 0,
+          stats.moderate.total > 0 ? Math.round((stats.moderate.correct / stats.moderate.total) * 100) : 0,
+          stats.hard.total > 0 ? Math.round((stats.hard.correct / stats.hard.total) * 100) : 0,
+          stats.very_hard.total > 0 ? Math.round((stats.very_hard.correct / stats.very_hard.total) * 100) : 0
+        ],
+        backgroundColor: "rgba(52, 152, 219, 0.7)",
+        borderRadius: 8,
+        barThickness: 40
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text:
+          lang === "pt"
+            ? "Desempenho por Nível de Dificuldade"
+            : lang === "es"
+            ? "Rendimiento por Nivel de Dificultad"
+            : "Performance by Difficulty Level"
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 100,
+        ticks: {
+          callback: value => value + "%"
         }
-      },
+      }
+    }
+  }
+});
+
+}
+function drawPerformanceChart(questions, answers, lang = "en") {
+  const areas = {};
+   questions.forEach(q => {
+    const area = q.area || "General";
+    if (!areas[area]) {
+      areas[area] = { total: 0, correct: 0 };
+    }
+    areas[area].total++;
+    if (answers[q.id] === q.correct) {
+      areas[area].correct++;
+    }
+  });
+  const labels = [];
+  const data = [];
+   Object.entries(areas).forEach(([area, stats]) => {
+    labels.push(area);
+    const percent = Math.round((stats.correct / stats.total) * 100);
+    data.push(percent);
+  });
+  const container = document.getElementById("performance-chart");
+    if (!container) return;
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      console.error("❌ Could not get 2D context for performance chart.");
+      return;
+    }
+    new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: lang === "pt" ? "% de acertos" : lang === "es" ? "% correctas" : "% Correct",
+        data: data,
+        backgroundColor: "rgba(52, 152, 219, 0.7)",
+        borderRadius: 8,
+        barThickness: 40
+  }]
+  },
+    options: {
+      responsive: true,
       scales: {
-        x: { stacked: true },
-        y: { stacked: true, beginAtZero: true }
+        y: {
+          beginAtZero: true,
+          max: 100,
+          ticks: {
+            callback: value => value + "%"
+          }
+        }
       }
     }
   });

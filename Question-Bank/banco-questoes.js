@@ -1,109 +1,98 @@
 // Question-Bank/banco-questoes.js
 
-const bancoQuestoes = {
-  bancosExternos: [],
-  facil: [],
-  moderada: [],
-  dificil: [],
-  muito_dificil: [],
+const questionBank = {
+  externalBanks: [],
+  easy: [],
+  moderate: [],
+  hard: [],
+  very_hard: [],
 
-  // Adiciona questões e classifica por nível
-  adicionarBanco: function (questoes) {
-    this.bancosExternos.push(...questoes);
-    for (const q of questoes) {
-      if (this[q.nivel]) {
-        this[q.nivel].push(q);
+  // Add external questions and categorize by difficulty
+  addBank: function (questions) {
+    this.externalBanks.push(...questions);
+    for (const q of questions) {
+      if (this[q.level]) {
+        this[q.level].push(q);
       }
     }
   },
 
- // Função auxiliar para embaralhar
-embaralharArray: function (array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+  // Shuffle helper
+  shuffleArray: function (array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  },
+
+  // Shuffle options and update correct index
+  shuffleOptionsAndUpdateCorrect: function (question) {
+    const correctText = question.options[question.correct].texto;
+    for (let i = question.options.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [question.options[i], question.options[j]] = [question.options[j], question.options[i]];
+    }
+    const newIndex = question.options.findIndex(opt =>
+      JSON.stringify(opt.texto) === JSON.stringify(correctText)
+    );
+    question.correct = newIndex;
+  },
+
+  // Smart quiz generator
+  generateQuiz: function (mode, numberOfQuestions) {
+  if (!numberOfQuestions) numberOfQuestions = mode === 'exam' ? 50 : 10;
+    const allQuestions = [];
+  let excluded = [];
+  let pending = [];
+  try {
+    const accumulated = JSON.parse(localStorage.getItem('accumulatedQuestions')) || [];
+    excluded = accumulated.slice(-150).map(q => q.id);
+    const answers = JSON.parse(localStorage.getItem('accumulatedAnswers')) || {};
+    const wrong = accumulated.filter(q => answers[q.id] !== q.correct).map(q => q.id);
+    pending = Array.from(new Set(wrong));
+  } catch (e) {
+    excluded = [];
+    pending = [];
   }
-  return array;
-},
 
-// Embaralha alternativas de uma questão e atualiza o índice da correta
-embaralharAlternativasEAtualizarCorreta: function (questao) {
-  const alternativaCorretaTexto = questao.alternativas[questao.correta].texto;
-
-  // Embaralhar
-  for (let i = questao.alternativas.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [questao.alternativas[i], questao.alternativas[j]] = [questao.alternativas[j], questao.alternativas[i]];
-  }
-
-  // Encontrar o novo índice da correta
-  const novoIndice = questao.alternativas.findIndex(alt =>
-    JSON.stringify(alt.texto) === JSON.stringify(alternativaCorretaTexto)
-  );
-  questao.correta = novoIndice;
-},
-
-  // Função inteligente para gerar questionário
-  gerarQuestionario: function (modo, qtdQuestoes) {
-    if (!qtdQuestoes) qtdQuestoes = modo === 'simulado' ? 50 : 10;
-    const todasQuestoes = [];
-
-    // Recuperar listas anteriores
-    let excluidas = [];
-    let pendentes = [];
-    try {
-      const acumuladas = JSON.parse(localStorage.getItem('acumuladoQuestoes')) || [];
-      excluidas = acumuladas.slice(-150).map(q => q.id);
-
-      const respostas = JSON.parse(localStorage.getItem('acumuladoRespostas')) || {};
-      const erradas = acumuladas.filter(q => respostas[q.id] !== q.correta).map(q => q.id);
-      pendentes = Array.from(new Set(erradas));
-    } catch (e) {
-      excluidas = [];
-      pendentes = [];
+    const pendingQuestions = [];
+    for (const level of ['easy', 'moderate', 'hard', 'very_hard']) {
+      const pool = this[level].filter(q => pending.includes(q.id));
+      pendingQuestions.push(...pool);
     }
 
-    // Puxar questões pendentes primeiro
-    const pendentesQuestoes = [];
-    for (const nivel of ['facil', 'moderada', 'dificil', 'muito_dificil']) {
-      const pool = this[nivel].filter(q => pendentes.includes(q.id));
-      pendentesQuestoes.push(...pool);
-    }
+    this.shuffleArray(pendingQuestions);
+    allQuestions.push(...pendingQuestions.slice(0, numberOfQuestions));
 
-    this.embaralharArray(pendentesQuestoes);
-    todasQuestoes.push(...pendentesQuestoes.slice(0, qtdQuestoes));
-
-    // Se não preencher tudo com pendentes, completa com novas (excluindo últimas 150 e as pendentes)
-    if (todasQuestoes.length < qtdQuestoes) {
-      const proporcao = {
-        facil: 0.20,
-        moderada: 0.25,
-        dificil: 0.25,
-        muito_dificil: 0.30
+    if (allQuestions.length < numberOfQuestions) {
+      const proportions = {
+        easy: 0.20,
+        moderate: 0.25,
+        hard: 0.25,
+        very_hard: 0.30
       };
 
-      for (const [nivel, proporcaoNivel] of Object.entries(proporcao)) {
-        const quantidade = Math.round(proporcaoNivel * qtdQuestoes);
-        const restantes = this[nivel].filter(q =>
-          !excluidas.includes(q.id) &&
-          !pendentes.includes(q.id) &&
-          !todasQuestoes.some(existing => existing.id === q.id)
+      for (const [level, share] of Object.entries(proportions)) {
+        const amount = Math.round(share * numberOfQuestions);
+        const remaining = this[level].filter(q =>
+          !excluded.includes(q.id) &&
+          !pending.includes(q.id) &&
+          !allQuestions.some(existing => existing.id === q.id)
         );
-        this.embaralharArray(restantes);
-        todasQuestoes.push(...restantes.slice(0, quantidade));
+        this.shuffleArray(remaining);
+        allQuestions.push(...remaining.slice(0, amount));
       }
 
-      while (todasQuestoes.length > qtdQuestoes) todasQuestoes.pop();
+      while (allQuestions.length > numberOfQuestions) allQuestions.pop();
     }
 
-// Embaralhar alternativas de cada questão individualmente
-for (const q of todasQuestoes) {
-  this.embaralharAlternativasEAtualizarCorreta(q);
-}
+    for (const q of allQuestions) {
+      this.shuffleOptionsAndUpdateCorrect(q);
+    }
 
-return this.embaralharArray(todasQuestoes); // embaralha ordem das questões
+    return this.shuffleArray(allQuestions);
   }
 };
 
-// Disponibiliza no escopo global
-window.bancoQuestoes = bancoQuestoes;
+window.questionBank = questionBank;

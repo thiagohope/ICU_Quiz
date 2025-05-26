@@ -39,26 +39,35 @@
 </head>
 
 <body oncontextmenu="return false;">
-  <main>
-    <div style="text-align: center; margin-bottom: 20px;">
-
-<a href="#" onclick="confirmReturnHome(); return false;">
-  <img src="logo-brainboxmed.png" alt="BrainboxMed Logo" loading="lazy" style="max-width: 250px; cursor: pointer;">
-</a>
+  <!-- Idioma e Logo BrainboxMed (cópia do landing.html) -->
+<div style="position: absolute; top: 1rem; right: 1rem; z-index: 999;">
+  <button onclick="changeLanguage('en')" style="background: none; border: none; cursor: pointer; margin-right: 8px;">
+    <img src="flag-en.png" alt="English" style="height: 48px; width: auto;" />
+  </button>
+    <button onclick="changeLanguage('es')" style="background: none; border: none; cursor: pointer;">
+    <img src="flag-es.png" alt="Español" style="height: 48px; width: auto;" />
+  </button>
+  <button onclick="changeLanguage('pt')" style="background: none; border: none; cursor: pointer; margin-right: 8px;">
+    <img src="flag-pt.png" alt="Português" style="height: 48px; width: auto;" />
+  </button>
 </div>
-   <div style="text-align: center; margin-top: 10px;">
-       <p style="font-family: 'Inter', sans-serif; color: #666; font-size: 14px;">
-      Train your brain. Master medicine.
-    </p>
-  </div>
 
+<div style="width: 100%; background-color: #f3f0eb; display: flex; justify-content: center; align-items: center; padding: 48px 0; margin-top: 32px;">
+  <img src="logo-brainboxmed-cube.png" alt="BrainboxMed Icon" style="height: 120px; width: auto; margin-right: 32px;" />
+  <img src="logo-brainboxmed-name.png" alt="BrainboxMed Text Logo" style="height: 120px; width: auto;" />
+</div>
+
+<p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: #333; text-align: center; margin: 1.5rem auto 2rem auto;">
+  Train your brain. Master medicine.
+</p>
+  <main>
   <!-- Tela Inicial -->
 <section id="home-screen" role="region" aria-label="Home screen">
     <p style="text-align: center; margin-bottom: 30px;">Intensive Care Medicine Simulator</p>
     
     <div class="mode-selector">
-      <button class="mode-btn active" onclick="setMode('study')">Study Mode</button>
-      <button class="mode-btn" onclick="setMode('exam')">Exam Mode</button>
+      <button id="btn-study" class="mode-btn active" onclick="setMode('study')">Study Mode</button>
+      <button id="btn-exam" class="mode-btn" onclick="setMode('exam')">Exam Mode</button>
     </div>
     
     <div id="exam-settings" style="display: none; text-align: center;">
@@ -73,34 +82,41 @@
     </div>
     
     <div style="text-align: center; margin-top: 30px;">
-      <button class="btn btn-primary" onclick="startQuiz()" style="background-color: var(--color-primary);">Start Quiz</button>
-      <button class="btn btn-secondary" onclick="showConfig()">Settings</button>
+      <button id="btn-start" class="btn btn-primary" onclick="startQuiz()" style="background-color: var(--color-primary);">Start Quiz </button>
+      <button id="btn-settings" class="btn btn-secondary" onclick="showConfig()">Settings</button>
     </div>
   </section>
 
   <!-- Tela de Configurações -->
 <section id="config-screen" role="region" aria-label="Configuration screen" style="display: none;">
-    <h2 style="color: #005b94;">Settings</h2>
+    <h2 id="settings-title" style="color: #005b94;">Settings</h2>
     <div style="margin: 20px 0;">
-      <label for="language-selector" style="display: block; margin-bottom: 8px; font-weight: bold;">Language:</label>
-      <select id="language-selector" style="padding: 8px; width: 100%; max-width: 200px; border: 1px solid #ddd; border-radius: 4px;">
-        <option value="en" selected>English</option>
-        <option value="es">Español</option>
-        <option value="pt">Português</option>
+    </div>
+    <!-- Checkboxes de Dificuldade -->
+  <div style="margin-top: 20px;">
+    <label id="label-select-difficulty" style="font-weight: bold; display: block; margin-bottom: 8px;">Select Difficulty:</label>
+    <label id="label-easy"><input type="checkbox" class="difficulty-filter" value="easy" checked> Easy</label><br>
+    <label id="label-medium"><input type="checkbox" class="difficulty-filter" value="moderate" checked> Medium</label><br>
+    <label id="label-hard"><input type="checkbox" class="difficulty-filter" value="hard" checked> Hard</label><br>
+    <label id="label-very-hard"><input type="checkbox" class="difficulty-filter" value="very_hard" checked> Very Hard</label>
+  </div>
+  <!-- Checkboxes de Especialidade -->
+    <div style="margin-top: 30px;">
+      <label id="label-select-specialty" style="font-weight: bold; display: block; margin-bottom: 8px;">Select Specialty:</label>
+      <div id="specialty-checkboxes"></div>
+    </div>
+
+    <div style="margin-top: 30px;">
+      <label id="label-specialty-mode" for="specialty-mode" style="font-weight: bold;">Filter Mode for Specialty:</label>
+      <select id="specialty-mode" style="margin-left: 10px; padding: 6px 10px; border-radius: 4px;">
+      <option value="inclusive">Match any selected specialty</option>
+      <option value="strict">Only match questions with all selected specialties</option>
       </select>
     </div>
 
-  <div style="margin-top: 20px;">
-   <label style="font-weight: bold; display: block; margin-bottom: 8px;">Select Difficulty:</label>
-   <label><input type="checkbox" class="difficulty-filter" value="facil" checked> Easy</label><br>
-   <label><input type="checkbox" class="difficulty-filter" value="moderada" checked> Medium</label><br>
-   <label><input type="checkbox" class="difficulty-filter" value="dificil" checked> Hard</label><br>
-   <label><input type="checkbox" class="difficulty-filter" value="muito_dificil" checked> Very Hard</label>
-  </div>
-    
     <div style="margin-top: 30px;">
-      <button class="btn btn-secondary" onclick="saveConfig()">Save Settings</button>
-      <button class="btn btn-secondary" onclick="hideConfig()">Cancel</button>
+      <button id="btn-save-config" class="btn btn-secondary" onclick="saveConfig()">Save Settings</button>
+      <button id="btn-cancel-config" class="btn btn-secondary" onclick="hideConfig()">Cancel</button>
     </div>
   </section>
 
@@ -108,24 +124,27 @@
 <section id="question-container" role="region" aria-label="Quiz interface" style="display: none;">
     <div id="timer-container" style="text-align: center; display: none;">
       <div id="timer">60:00</div>
-      </div>
-
+    </div>
     <div class="progress-container">
       <div class="progress-bar">
         <div class="progress" id="quiz-progress"></div>
       </div>
       <div class="progress-text" id="progress-text" style="display: none;"></div>
     </div>
-    
     <h2 id="question-text" style="color: var(--color-primary);"></h2>
     <div id="options-container" class="options"></div>
-    
-    <div class="controls">
-      <button id="prev-btn" class="btn btn-secondary" onclick="prevQuestion()">Previous</button>
-      <button id="mark-btn" class="btn btn-highlight" onclick="togglePending()">Mark for Review</button>
-      <button id="next-btn" class="btn btn-primary" onclick="nextQuestion()">Next</button>
+    <div id="controls-container" class="controls" style="
+            display: none;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            flex-direction: row;">
+        <button id="prev-btn" class="btn btn-secondary" style="min-width: 100px;" onclick="prevQuestion()">Previous</button>
+        <button id="mark-btn" class="btn btn-highlight" style="min-width: 140px;" onclick="togglePending()">Mark for Review</button>
+        <button id="next-btn" class="btn btn-primary" style="min-width: 100px;" onclick="nextQuestion()">Next</button>
     </div>
-    
+
     <div id="explanation" style="margin-top: 30px; padding: 15px; background-color: #f8f9fa; border-radius: 6px; display: none;">
       <h3 style="margin-top: 0; color: #005b94;">Explanation:</h3>
       <p id="explanation-text"></p>
@@ -210,11 +229,9 @@
           <!-- Preenchido dinamicamente -->
         </tbody>
       </table>
-    <div style="height: 30px;"></div>
-    <hr style="border: none; border-top: 1px solid #ddd; margin: 30px auto; max-width: 80%;">
+  <canvas id="chart-difficulty" width="600" height="400" style="display: none; margin: 20px auto;"></canvas>
   </div>
-    
-    <!-- Gráfico de Forças e Fraquezas por Dificuldade -->
+        <!-- Gráfico de Forças e Fraquezas por Dificuldade -->
 <div class="report-section" style="margin-top: 60px;">
   <h3 id="voronoi-title" style="text-align: center; color: var(--color-primary); margin-bottom: 30px;">
     📊 Strengths and Weaknesses by Difficulty
@@ -277,7 +294,7 @@
   <button id="restart-btn" class="btn btn-secondary" onclick="restartQuiz()">Restart Test</button>
   <button id="print-btn" class="btn btn-secondary" style="background-color: var(--color-neutral);" onclick="window.print()"> Print Report</button>
   <button id="back-home-btn" class="btn btn-secondary" onclick="confirmReturnHome()" style="background-color: var(--color-primary); margin-left: 10px;">
-  ← Voltar à Página Inicial
+  <span id="back-home-btn"></span>
 </button>
 <div style="text-align: center; margin-top: 20px;">
   <button id="final-report-btn" class="btn btn-highlight" onclick="window.location.href='relatoriofinal.html'" style="font-size: 16px;">
@@ -294,12 +311,31 @@
 <script src="Question-Bank/Neuro02.js" defer></script>
 <script src="Question-Bank/Neuro03.js" defer></script>
 <script src="Question-Bank/Neuro04.js" defer></script>
+<script src="Question-Bank/Cardio01.js" defer></script>
+<script src="Question-Bank/Cardio02.js" defer></script>
+<script src="Question-Bank/Cardio03.js" defer></script>
+<script src="Question-Bank/Cardio04.js" defer></script>
 <script src="relatorio.js" defer></script>
 <script src="assets/js/script.js" defer></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+  const reviewReturn = localStorage.getItem('reviewReturn');
+    if (reviewReturn === 'true') {
+    document.getElementById('home-screen').style.display = 'none';
+    document.getElementById('result-screen').style.display = 'block';
+    // Restaurar dados
+    questionarioAtual = JSON.parse(localStorage.getItem('accumulatedQuestions')) || [];
+    userAnswers = JSON.parse(localStorage.getItem('accumulatedAnswers')) || {};
+    let selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+    // Aguarda DOM e depois gera relatório
+    setTimeout(() => {
+  const hasData = (Array.isArray(questionarioAtual) && questionarioAtual.length > 0);
+    if (hasData) {
+      generateUSMLEReport();
+      updateUI();}
+    }, 100);
+   localStorage.removeItem('reviewReturn');}
   const lang = localStorage.getItem("selectedLanguage") || "en";
-
   const reviewTexts = {
     en: {
       title: "📘 Review Your Answers",
@@ -324,7 +360,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("review-redirect-button").textContent = t.button;
   
   const homeTexts = {
-  pt: "← Voltar à Página Inicial",
+  pt: "<span id=\"back-home-btn\"></span>",
   en: "← Return to Home Page",
   es: "← Volver a la Página Principal"
   };
@@ -394,24 +430,24 @@ document.addEventListener("DOMContentLoaded", function () {
 <script>
 function drawVoronoiDifficultyChart(questions, answers, lang = "en") {
   const diffLabels = {
-    facil: { pt: "Fácil", en: "Easy", es: "Fácil" },
-    moderada: { pt: "Moderada", en: "Moderate", es: "Moderada" },
-    dificil: { pt: "Difícil", en: "Hard", es: "Difícil" },
-    muito_dificil: { pt: "Muito Difícil", en: "Very Hard", es: "Muy Difícil" }
-  };
-
+  easy: { pt: "Fácil", en: "Easy", es: "Fácil" },
+  moderate: { pt: "Moderada", en: "Moderate", es: "Moderada" },
+  hard: { pt: "Difícil", en: "Hard", es: "Difícil" },
+  very_hard: { pt: "Muito Difícil", en: "Very Hard", es: "Muy Difícil" }
+};
   const stats = {
-    facil: { total: 0, correct: 0 },
-    moderada: { total: 0, correct: 0 },
-    dificil: { total: 0, correct: 0 },
-    muito_dificil: { total: 0, correct: 0 }
+  easy: { correct: 0, wrong: 0, total: 0 },
+  moderate: { correct: 0, wrong: 0, total: 0 },
+  hard: { correct: 0, wrong: 0, total: 0 },
+  very_hard: { correct: 0, wrong: 0, total: 0 }
   };
 
   questions.forEach(q => {
-    const nivel = q.nivel;
-    if (!nivel || !stats[nivel]) return;
-    stats[nivel].total++;
-    if (answers[q.id] === q.correta) stats[nivel].correct++;
+  if (!stats[q.level]) return;
+  stats[q.level].total++;
+  const isCorrect = answers[q.id] === q.correct;
+  if (isCorrect) stats[q.level].correct++;
+  else stats[q.level].wrong++;
   });
 
   const labels = [];
@@ -535,11 +571,18 @@ function drawVoronoiDifficultyChart(questions, answers, lang = "en") {
     const isCorrect = status === "Correct";
     const statusLabel = isCorrect ? labelsByLang.correct : labelsByLang.incorrect;
     const topicLabel = `${topic} ${isCorrect ? "✅" : "❌"}`;
+    let areaKey = "general";
+     if (typeof area === "string") {
+      areaKey = area.toLowerCase();
+     } else if (Array.isArray(area) && typeof area[0] === "string") {
+      areaKey = area[0].toLowerCase();
+}
 
-    const source1 = getLabelIndex(statusLabel);
-    const areaLabel = areaLabels[area.toLowerCase()]?.[lang] || area;
-    const source2 = getLabelIndex(areaLabel);
-    const target = getLabelIndex(topicLabel);
+const areaLabel = areaLabels[areaKey]?.[lang] || areaKey;
+const source1 = getLabelIndex(statusLabel);
+const source2 = getLabelIndex(areaLabel);
+const target = getLabelIndex(topicLabel);
+
 
     // status → área
     links.push({ source: source1, target: source2, value: count });
@@ -553,7 +596,6 @@ function drawVoronoiDifficultyChart(questions, answers, lang = "en") {
   const colorLightCorrect = "rgba(52, 152, 219, 0.25)";
   const colorLightIncorrect = "rgba(231, 76, 60, 0.25)";
   const colorArea = "#cccccc";
-
   const data = [{
     type: "sankey",
     orientation: "h",
@@ -588,9 +630,7 @@ function drawVoronoiDifficultyChart(questions, answers, lang = "en") {
     }
 
   }];
-
   const estimatedHeight = Math.max(400, nodes.length * 28);
-
   const layout = {
   title: "Topic Accuracy Flow",
   font: { size: 12 },
@@ -599,9 +639,77 @@ function drawVoronoiDifficultyChart(questions, answers, lang = "en") {
   };
 
 
-  Plotly.newPlot("voronoi-topics-content", data, layout, { responsive: true });
-}
+  Plotly.newPlot("voronoi-topics-content", data, layout, { responsive: true });}
 </script>
-
+<script>
+const translationsIndex = {
+  en: {
+    'btn-study': 'Study Mode',
+    'btn-exam': 'Exam Mode',
+    'btn-start': 'Start Quiz',
+    'btn-settings': 'Settings',
+    'settings-title': 'Settings',
+    'label-select-difficulty': 'Select Difficulty:',
+    'btn-save-config': 'Save Settings',
+    'btn-cancel-config': 'Cancel',
+    'label-easy': 'Easy',
+    'label-medium': 'Medium',
+    'label-hard': 'Hard',
+    'label-very-hard': 'Very Hard',
+    'label-select-specialty': 'Select Specialty:',
+  },
+  pt: {
+    'btn-study': 'Modo Estudo',
+    'btn-exam': 'Modo Simulado',
+    'btn-start': 'Iniciar Simulado',
+    'btn-settings': 'Configurações',
+    'settings-title': 'Configurações',
+    'label-select-difficulty': 'Selecionar Dificuldade:',
+    'btn-save-config': 'Salvar',
+    'btn-cancel-config': 'Cancelar',
+    'label-easy': 'Fácil',
+    'label-medium': 'Médio',
+    'label-hard': 'Difícil',
+    'label-very-hard': 'Muito Difícil',
+    'label-select-specialty': 'Selecionar Especialidade:',
+  },
+  es: {
+    'btn-study': 'Modo Estudio',
+    'btn-exam': 'Modo Simulado',
+    'btn-start': 'Comenzar Simulacro',
+    'btn-settings': 'Configuraciones',
+    'settings-title': 'Configuraciones',
+    'label-select-difficulty': 'Seleccionar Dificultad:',
+    'btn-save-config': 'Guardar',
+    'btn-cancel-config': 'Cancelar',
+    'label-easy': 'Fácil',
+    'label-medium': 'Moderado',
+    'label-hard': 'Difícil',
+    'label-very-hard': 'Muy Difícil',
+    'label-select-specialty': 'Seleccionar Especialidad:',
+  }
+};
+function changeLanguage(lang) {
+  localStorage.setItem('selectedLanguage', lang);
+  window.location.reload();
+}
+window.addEventListener("DOMContentLoaded", () => {
+  const lang = localStorage.getItem("selectedLanguage") || "en";
+  const t = translationsIndex[lang] || translationsIndex.en;
+  for (const id in t) {
+  const el = document.getElementById(id);
+  if (el) {
+    if (el.tagName === "LABEL" && el.querySelector("input")) {
+      // Se for um <label> com input, atualiza só o texto após o input
+      const input = el.querySelector("input");
+      el.innerHTML = "";
+      el.appendChild(input);
+      el.appendChild(document.createTextNode(" " + t[id]));
+    } else {
+      el.textContent = t[id];}
+ }
+}
+});
+</script>
 </body>
 </html>

@@ -118,57 +118,63 @@
 
   <div id="report"></div>
 
-  <script>
-    const questionario = JSON.parse(localStorage.getItem('questionarioAtual')) || [];
-    const respostas = JSON.parse(localStorage.getItem('userAnswers')) || {};
-    const idioma = localStorage.getItem('selectedLanguage') || 'en';
+ <script>
+const questionnaire = JSON.parse(localStorage.getItem('currentQuestionnaire')) || [];
+const answers = JSON.parse(localStorage.getItem('userAnswers')) || {};
+const language = localStorage.getItem('selectedLanguage') || 'en';
 
-    const reportContainer = document.getElementById('report');
+const reportContainer = document.getElementById('report');
 
-    questionario.forEach((q, i) => {
-      const userAnswer = respostas[q.id];
-      const isCorrect = userAnswer === q.correta;
-      const hasAnswer = typeof userAnswer !== 'undefined';
+questionnaire.forEach((q, i) => {
+  const userAnswer = answers[q.id];
+  const isCorrect = userAnswer === q.correct;
+  const hasAnswer = typeof userAnswer !== 'undefined';
+  const questionText = q.question?.[language] || q.question?.en || "";
+  const options = q.options || [];
+  const explanation = q.explanations?.en || ""; // Always show in English
 
-      const enunciado = q.pergunta?.[idioma] || q.pergunta?.pt || "";
-      const alternativas = q.alternativas || [];
-      const explicacao = alternativas[q.correta]?.explicacao?.[idioma] || "";
+  const levelLabels = {
+    easy: { pt: "Fácil", en: "Easy", es: "Fácil" },
+    moderate: { pt: "Moderada", en: "Moderate", es: "Moderada" },
+    hard: { pt: "Difícil", en: "Hard", es: "Difícil" },
+    very_hard: { pt: "Muito Difícil", en: "Very Hard", es: "Muy Difícil" }
+  };
+  const difficulty = q.level;
+  const labelLevel = levelLabels[difficulty]?.[language] || difficulty;
 
+  const questionBlock = document.createElement('div');
+  questionBlock.className = 'question';
+  questionBlock.innerHTML = `
+    <h3>Question ${i + 1} <span style="font-size: 0.8em; color: #888;">• ${labelLevel}</span></h3>
+    <p><strong>${questionText}</strong></p>
 
-      const questionBlock = document.createElement('div');
-      questionBlock.className = 'question';
+    <div>
+      ${options.map((opt, idx) => {
+        let cssClass = '';
+        if (idx === q.correct) cssClass = 'correct';
+        if (hasAnswer && idx === userAnswer && userAnswer !== q.correct) cssClass = 'incorrect';
+        const text = opt.text?.[language] || opt.text?.en || "";
+        return `<div class="option ${cssClass}">${text}</div>`;
+      }).join('')}
+    </div>
 
-      questionBlock.innerHTML = `
-        <h3>Question ${i + 1}</h3>
-        <p><strong>${enunciado}</strong></p>
-        <div>
-          ${alternativas.map((opt, idx) => {
-          let classe = '';
-          if (idx === q.correta) classe = 'correct';
-          if (hasAnswer && idx === userAnswer && userAnswer !== q.correta) classe = 'incorrect';
-          const texto = opt.texto?.[idioma] || opt.texto?.pt || "";
-          return `<div class="option ${classe}">${texto}</div>`;
-          }).join('')}
+    <div class="explanation ${isCorrect ? 'correct' : 'incorrect'}">
+      ${isCorrect ? '✓' : '✖'} ${explanation}
+    </div>
+  `;
+  reportContainer.appendChild(questionBlock);
+});
 
-        </div>
-        <div class="explanation ${isCorrect ? 'correct' : 'incorrect'}">
-          ${isCorrect ? '✓' : '✖'} ${explicacao}
-        </div>
-      `;
+const accumulated = JSON.parse(localStorage.getItem('accumulatedQuestions')) || [];
+const totalBlocks = Math.floor((accumulated.length + questionnaire.length) / 10);
 
-      reportContainer.appendChild(questionBlock);
-    });
-const acumulado = JSON.parse(localStorage.getItem('acumuladoQuestoes')) || [];
-const totalBlocos = Math.floor((acumulado.length + questionario.length) / 10);  // inclui bloco atual
-
-const textosBloco = {
-  pt: `Bloco ${totalBlocos} / 5`,
-  en: `Set ${totalBlocos} / 5`,
-  es: `Bloque ${totalBlocos} / 5`
+const blockTexts = {
+  pt: `Bloco ${totalBlocks} / 5`,
+  en: `Set ${totalBlocks} / 5`,
+  es: `Bloque ${totalBlocks} / 5`
 };
 
-document.getElementById('block-counter').textContent = textosBloco[idioma] || `Block ${totalBlocos} / 5`;
-  // Textos multilíngues do botão
+document.getElementById('block-counter').textContent = blockTexts[language] || `Block ${totalBlocks} / 5`;
 
 document.addEventListener('DOMContentLoaded', function () {
   const nextSetTexts = {
@@ -177,28 +183,26 @@ document.addEventListener('DOMContentLoaded', function () {
     es: "Siguiente Bloque de Preguntas"
   };
 
-  const idioma = localStorage.getItem('selectedLanguage') || 'en';
   const btn = document.getElementById('next-set-btn');
-
   if (btn) {
-      btn.addEventListener('click', () => {
-      const acumuladoQuestoes = JSON.parse(localStorage.getItem('acumuladoQuestoes')) || [];
-      const acumuladoRespostas = JSON.parse(localStorage.getItem('acumuladoRespostas')) || {};
+    btn.addEventListener('click', () => {
+      const accumulatedQuestions = JSON.parse(localStorage.getItem('accumulatedQuestions')) || [];
+      const accumulatedAnswers = JSON.parse(localStorage.getItem('accumulatedAnswers')) || {};
 
-      questionario.forEach(q => {
-        if (!acumuladoQuestoes.some(q2 => q2.id === q.id)) {
-          acumuladoQuestoes.push(q);
+      questionnaire.forEach(q => {
+        if (!accumulatedQuestions.some(q2 => q2.id === q.id)) {
+          accumulatedQuestions.push(q);
         }
       });
 
-      Object.keys(respostas).forEach(id => {
-        acumuladoRespostas[id] = respostas[id];
+      Object.keys(answers).forEach(id => {
+        accumulatedAnswers[id] = answers[id];
       });
 
-      localStorage.setItem('acumuladoQuestoes', JSON.stringify(acumuladoQuestoes));
-      localStorage.setItem('acumuladoRespostas', JSON.stringify(acumuladoRespostas));
+      localStorage.setItem('accumulatedQuestions', JSON.stringify(accumulatedQuestions));
+      localStorage.setItem('accumulatedAnswers', JSON.stringify(accumulatedAnswers));
 
-      if (acumuladoQuestoes.length >= 50) {
+      if (accumulatedQuestions.length >= 50) {
         window.location.href = "relatorioFinal.html";
       } else {
         localStorage.setItem('autoStartStudyMode', 'true');
@@ -207,44 +211,64 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
-// Exibir botão de reinício apenas no final do 5º bloco
-if (totalBlocos === 5) {
-  const reiniciarBtn = document.createElement('button');
-  reiniciarBtn.textContent = {
+
+// Show restart button only at the end of block 5
+if (totalBlocks === 5) {
+  const restartBtn = document.createElement('button');
+  restartBtn.textContent = {
     pt: "Reiniciar Modo Estudo",
     en: "Restart Study Mode",
     es: "Reiniciar Modo de Estudio"
-  }[idioma] || "Restart";
+  }[language] || "Restart";
 
-  reiniciarBtn.style = "margin-top: 30px; padding: 12px 24px; font-size: 16px; background-color: #f39c12; color: white; border: none; border-radius: 6px; cursor: pointer; display: block; margin-left: auto; margin-right: auto;";
+  restartBtn.style = "margin-top: 30px; padding: 12px 24px; font-size: 16px; background-color: #f39c12; color: white; border: none; border-radius: 6px; cursor: pointer; display: block; margin-left: auto; margin-right: auto;";
 
-  reiniciarBtn.onclick = () => {
-    localStorage.removeItem('acumuladoQuestoes');
-    localStorage.removeItem('acumuladoRespostas');
+  restartBtn.onclick = () => {
+    localStorage.removeItem('accumulatedQuestions');
+    localStorage.removeItem('accumulatedAnswers');
     localStorage.setItem('autoStartStudyMode', 'true');
-    localStorage.removeItem('questionarioAtual');
+    localStorage.removeItem('currentQuestionnaire');
     localStorage.removeItem('userAnswers');
     localStorage.removeItem('currentQuestionIndex');
     window.location.href = "index.html";
   };
 
-  document.body.appendChild(reiniciarBtn);
+  document.body.appendChild(restartBtn);
 }
-   function confirmReturnHome() {
-  const lang = localStorage.getItem('selectedLanguage') || 'en';
 
+function confirmReturnHome() {
+  const lang = localStorage.getItem('selectedLanguage') || 'en';
   const confirmMessages = {
     en: "If you return to the home page, your answers will be lost. Are you sure?",
     pt: "Caso retorne à página inicial, suas respostas serão perdidas. Tem certeza?",
     es: "Si regresa a la página principal, sus respuestas se perderán. ¿Está seguro?"
   };
-
   if (confirm(confirmMessages[lang])) {
     window.location.href = 'index.html';
   }
 }
-  
-  </script>
+
+function returnToReport() {
+  const accumulatedQuestions = JSON.parse(localStorage.getItem('accumulatedQuestions')) || [];
+  const accumulatedAnswers = JSON.parse(localStorage.getItem('accumulatedAnswers')) || {};
+
+  questionnaire.forEach(q => {
+    if (!accumulatedQuestions.some(q2 => q2.id === q.id)) {
+      accumulatedQuestions.push(q);
+    }
+  });
+
+  Object.keys(answers).forEach(id => {
+    accumulatedAnswers[id] = answers[id];
+  });
+
+  localStorage.setItem('accumulatedQuestions', JSON.stringify(accumulatedQuestions));
+  localStorage.setItem('accumulatedAnswers', JSON.stringify(accumulatedAnswers));
+  localStorage.setItem('reviewReturn', 'true');
+  window.location.href = "index.html";
+}
+</script>
+
   <div id="next-block-controls" style="text-align: center; margin-top: 50px;">
   <p id="block-label" style="font-size: 18px; color: #333; margin-bottom: 15px;"></p>
   <button id="next-set-btn" class="btn btn-highlight" style="font-size: 18px;">
@@ -252,13 +276,14 @@ if (totalBlocos === 5) {
   </button>
   </div>
 <div style="text-align: center; margin-top: 50px;">
-  <button class="btn btn-primary" onclick="window.location.href='index.html'">
-    ← Return to Report
+  <button class="btn btn-primary" onclick="returnToReport()">
+  ← Return to Report
   </button>
   <button class="btn btn-warn" onclick="confirmReturnHome()" style="margin-left: 15px;">
     🏠 Home
   </button>
 </div>
+
 
 </body>
 </html>

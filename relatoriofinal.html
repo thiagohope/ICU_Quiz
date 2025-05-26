@@ -170,16 +170,23 @@
   <p id="full-review-invite" style="font-size: 18px; font-weight: bold; margin-bottom: 10px; color: var(--color-primary);">
   Review full question set?
 </p>
-<button id="full-report-link" onclick="showFullReport()" class="btn btn-highlight">
+<button id="full-report-link" onclick="showFullReportFinal()" class="btn btn-highlight">
   📋 View Full Report
   </button>
 </div>
 
 <script>
-const allQuestions = JSON.parse(localStorage.getItem('acumuladoQuestoes')) || [];
-const allAnswers = JSON.parse(localStorage.getItem('acumuladoRespostas')) || {};
-const idioma = localStorage.getItem('selectedLanguage') || 'pt';
-drawPerformanceChart(allQuestions, allAnswers, idioma);
+let allQuestions = JSON.parse(localStorage.getItem('accumulatedQuestions')) || [];
+let allAnswers = JSON.parse(localStorage.getItem('accumulatedAnswers')) || {};
+let idioma = localStorage.getItem('selectedLanguage') || 'pt';
+
+document.addEventListener('DOMContentLoaded', function () {
+  allQuestions = JSON.parse(localStorage.getItem('accumulatedQuestions')) || [];
+  allAnswers = JSON.parse(localStorage.getItem('accumulatedAnswers')) || {};
+  idioma = localStorage.getItem('selectedLanguage') || 'pt';
+
+  drawPerformanceChart(allQuestions, allAnswers, idioma);
+});
 
 const reviewContainer = document.getElementById('review');
 let currentPage = 0;
@@ -195,23 +202,23 @@ function renderPage(page) {
 
   pageQuestions.forEach((q, i) => {
     const userAnswer = allAnswers[q.id];
-    const isCorrect = userAnswer === q.correta;
+    const isCorrect = userAnswer === q.correct;
     const hasAnswer = typeof userAnswer !== 'undefined';
 
-    const enunciado = q.pergunta?.[idioma] || q.pergunta?.pt || '';
-    const alternativas = q.alternativas || [];
-    const explicacao = alternativas[q.correta]?.explicacao?.[idioma] || '';
+    const enunciado = q.question?.[idioma] || q.question?.pt || '';
+    const options = q.options || [];
+    const explanation = options[q.correct]?.explanation?.[idioma] || '';
 
-    const alternativasHTML = alternativas.map((alt, idx) => {
-      const texto = alt.texto?.[idioma] || alt.texto?.pt || '';
+    const optionsHTML = options.map((alt, idx) => {
+      const texto = opt.text?.[idioma] || opt.text?.pt || '';
       let classe = '';
       let prefix = '';
 
-      if (idx === q.correta) {
+      if (idx === q.correct) {
         classe = 'correct';
         prefix = '✔️ ';
       }
-      if (hasAnswer && idx === userAnswer && userAnswer !== q.correta) {
+      if (hasAnswer && idx === userAnswer && userAnswer !== q.correct) {
         classe = 'incorrect';
         prefix = '❌ ';
       }
@@ -224,9 +231,9 @@ function renderPage(page) {
     block.innerHTML = `
       <h3 style="color: var(--color-primary); font-size: 20px;">📘 Question ${start + i + 1}</h3>
       <p style="font-weight: bold; font-size: 17px; margin-bottom: 15px;">${enunciado}</p>
-      <div style="margin-bottom: 20px;">${alternativasHTML}</div>
+      <div style="margin-bottom: 20px;">${optionsHTML}</div>
       <div class="explanation ${isCorrect ? 'correct' : 'incorrect'}">
-        ${isCorrect ? '✅ Correct' : '❌ Incorrect'} — ${explicacao}
+        ${isCorrect ? '✅ Correct' : '❌ Incorrect'} — ${explanation}
       </div>
     `;
     reviewContainer.appendChild(block);
@@ -341,5 +348,66 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 <script src="relatorio.js" defer></script>
+<script>
+// Protege caso Chart.js não esteja carregado
+function drawPerformanceChart(questions, answers, lang = "en") {
+  const canvas = document.createElement("canvas");
+  canvas.id = "dummy-chart";
+  canvas.style.display = "none";
+  document.body.appendChild(canvas);
+  try {
+    new Chart(canvas.getContext("2d"), {
+      type: "bar",
+      data: {
+        labels: ["Placeholder"],
+        datasets: [{
+          label: "Chart Placeholder",
+          data: [100],
+          backgroundColor: "rgba(52, 152, 219, 0.5)"
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  } catch (e) {
+    console.warn("Chart.js não disponível ou erro ao gerar gráfico.");
+  }
+}
+
+// Ação para mostrar o relatório completo
+function showFullReportFinal() {
+  const lang = localStorage.getItem('selectedLanguage') || 'en';
+
+  const messages = {
+    pt: "⚠️ O relatório completo ainda não está implementado.",
+    en: "⚠️ Full report is not yet implemented.",
+    es: "⚠️ El informe completo aún no está implementado."
+  };
+
+  alert(messages[lang] || messages.en);
+}
+
+// Retornar à página inicial com confirmação
+function confirmReturnHome() {
+  if (confirm("Returning home will clear your answers. Continue?")) {
+    localStorage.clear();
+    window.location.href = "index.html";
+  }
+}
+
+// Reiniciar o ciclo de simulado
+function resetCycle() {
+  if (confirm("Restart the full cycle and clear all progress?")) {
+    localStorage.removeItem('accumulatedQuestions');
+    localStorage.removeItem('accumulatedAnswers');
+    localStorage.removeItem('selectedLanguage');
+    window.location.href = "index.html";
+  }
+}
+</script>
 </body>
 </html>

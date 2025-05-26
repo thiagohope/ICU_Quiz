@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BrainboxMed - Landing Page</title>
+
+  <!-- ✅ Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
+  <!-- Fontes opcionais que você está usando -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet" />
+</head>
+<body style="margin: 0; padding: 0;">
+<section class="pricing-section py-16" style="background-color: var(--color-background); font-family: 'Inter', sans-serif;">
+  <div class="max-w-screen-xl mx-auto px-4">
+  <div class="text-center mb-10" style="margin: 0; padding: 0;">
+  <!-- Seletor de idioma no topo -->
+  <div style="position: absolute; top: 1rem; right: 1rem; z-index: 999;">
+   <button onclick="changeLanguage('en')" style="background: none; border: none; cursor: pointer; margin-right: 8px;">
+    <img src="flag-en.png" alt="English" style="height: 48px; width: auto;" />
+   </button>
+      <button onclick="changeLanguage('es')" style="background: none; border: none; cursor: pointer;">
+    <img src="flag-es.png" alt="Español" style="height: 48px; width: auto;" />
+   </button>
+   <button onclick="changeLanguage('pt')" style="background: none; border: none; cursor: pointer; margin-right: 8px;">
+    <img src="flag-pt.png" alt="Português" style="height: 48px; width: auto;" />
+   </button>
+  </div>
+
+  <!-- Logo completo com fundo ocupando toda a largura e altura aumentada -->
+  <div style="width: 100%; background-color: #f3f0eb; display: flex; justify-content: center; align-items: center; padding: 48px 0;">
+    <img src="logo-brainboxmed-cube.png" alt="BrainboxMed Icon" style="height: 120px; width: auto; margin-right: 32px;" />
+    <img src="logo-brainboxmed-name.png" alt="BrainboxMed Text Logo" style="height: 120px; width: auto;" />
+  </div>
+
+  <!-- Slogan abaixo -->
+  <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: #333; text-align: center; margin: 1.5rem auto 2rem auto;">
+    Train your brain. Master medicine.
+  </p>
+  <div class="mb-12">
+   <img src="Students studying.png" alt="Students studying medicine" style="width: 100%; max-height: 420px; object-fit: cover; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.1);">
+  </div>
+  
+<!-- Ad Banner Section -->
+<div class="w-full my-8 flex justify-center">
+  <div class="w-full sm:w-3/4 lg:w-2/3 px-4">
+    <div class="bg-yellow-50 border border-yellow-300 rounded-xl shadow p-4 text-center">
+      <!-- Aqui você pode substituir pelo script de ads do Google ou similar -->
+      <p class="text-sm text-yellow-800 font-semibold">Publicidade</p>
+      <div class="mt-2">
+        <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+          data-ad-slot="YYYYYYYYYY"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+      </div>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
+</div>
+
+  <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+  <div class="bg-white rounded-xl p-4 shadow-md border">
+    <img src="example-simulation.png" alt="Simulation Example" class="w-full rounded-lg mb-4">
+    <p class="text-sm text-gray-600">💻 Full-length exam simulations with real-time timer and feedback</p>
+  </div>
+  <div class="bg-white rounded-xl p-4 shadow-md border">
+    <img src="example-analytics.png" alt="Analytics Example" class="w-full rounded-lg mb-4">
+    <p class="text-sm text-gray-600">📊 Personalized performance analytics by topic and difficulty</p>
+  </div>
+  <div class="bg-white rounded-xl p-4 shadow-md border">
+    <img src="example-recommendations.png" alt="Recommendation Example" class="w-full rounded-lg mb-4">
+    <p class="text-sm text-gray-600">🎯 AI-powered study plans based on your strengths and weaknesses</p>
+  </div>
+  </div>
+
+    <h2 class="text-3xl font-bold text-center mb-4" id="pricing-title" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h2>
+    <p class="text-center text-base mb-10" id="pricing-desc" style="color: var(--color-text);"></p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 text-center items-start w-full">
+      <!-- Planos Individuais -->
+      <a href="#" style="text-decoration: none;">
+        <div class="rounded-xl p-6 flex flex-col justify-between transition duration-300 relative"
+         style="background-color: #f7f4fb; border: 1px solid #d5cde2; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);">
+        <h3 id="plan-starter-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
+        <p id="plan-starter-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+        <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$5.99<span class="text-base font-normal">/mo</span></p>
+        <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+          <li>✅ Simulated test formats (USMLE, etc)</li>
+          <li>✅ All specialties included</li>
+          <li>✅ Updated weekly by doctors</li>
+          <li>⚠️ With ads</li>
+        </ul>
+        <div style="
+          position: absolute;
+          bottom: -12px;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: #7C3AED;
+          color: white;
+          font-size: 0.75rem;
+          font-weight: bold;
+          padding: 6px 16px;
+          border-radius: 999px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          cursor: pointer;
+          ">
+          🎁 Try Free
+        </div>
+        </div>
+        </a>
+        
+        <a href="#" style="text-decoration: none;">
+        <div class="rounded-xl p-6 flex flex-col justify-between transition duration-300"
+         style="background-color: #f7f4fb; border: 1px solid #d5cde2; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);">
+        <h3 id="plan-adfree-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
+        <p id="plan-adfree-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+        <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$9.99<span class="text-base font-normal">/mo</span></p>
+        <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+          <li>✅ Everything in Starter</li>
+          <li>🚫 No ads</li>
+          <li>⚡ Faster access</li>
+        </ul>
+        </div>
+        </a>
+
+        <a href="#" style="text-decoration: none;">
+        <div class="rounded-xl p-6 flex flex-col justify-between transition duration-300"
+         style="background-color: #f7f4fb; border: 1px solid #d5cde2; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); position: relative;">
+        <div id="plan-focused-badge" style="position: absolute; top: -16px; left: 50%; transform: translateX(-50%); background-color: #5E3E94; color: white; font-size: 0.75rem; font-weight: bold; padding: 4px 12px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); letter-spacing: 0.5px; text-transform: uppercase;"></div>
+        <h3 id="plan-focused-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
+        <p id="plan-focused-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+        <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$15.99<span class="text-base font-normal">/mo</span></p>
+        <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+          <li>✅ Everything in Ad-Free</li>
+          <li>🎯 Choose specialty & topic</li>
+          <li>🧠 Adaptive recommendations</li>
+        </ul>
+        </div>
+        </a>
+
+        <a href="#" style="text-decoration: none;">
+        <div class="rounded-xl p-6 flex flex-col justify-between transition duration-300"
+         style="background-color: #f7f4fb; border: 1px solid #d5cde2; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); position: relative;">
+        <div id="plan-sim-badge" style="position: absolute; top: -16px; left: 50%; transform: translateX(-50%); background-color: #5E3E94; color: white; font-size: 0.75rem; font-weight: bold; padding: 4px 12px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); letter-spacing: 0.5px; text-transform: uppercase;"></div>
+        <h3 id="plan-sim-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-highlight); font-family: 'Poppins', sans-serif;"></h3>
+        <p id="plan-sim-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+        <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-highlight);">$17.99<span class="text-base font-normal">/mo</span></p>
+        <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+          <li>🧪 Full-length timed simulations</li>
+          <li>📈 Performance analytics</li>
+          <li>🧬 Real exam experience</li>
+        </ul>
+        </div>
+        </a>
+    </div>
+
+  <div class="mt-20 bg-white rounded-xl shadow-lg p-8 border border-gray-200 max-w-4xl mx-auto text-center">
+  <h3 class="text-2xl font-bold mb-2" id="institutional-title" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
+  <p class="text-sm text-gray-600 mb-6" id="institutional-desc">
+    For universities, hospitals & residency programs
+  </p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+    <div class="bg-gray-50 p-4 rounded-lg border border-gray-300">
+      <p class="text-sm font-semibold text-gray-700">👥 Up to 10 users</p>
+      <p class="text-lg text-gray-900 font-bold mt-2">$79.99/mo</p>
+      <p class="text-sm text-gray-600">or $799.99/yr</p>
+    </div>
+    <div class="bg-gray-50 p-4 rounded-lg border border-gray-300">
+      <p class="text-sm font-semibold text-gray-700">👥 Up to 50 users</p>
+      <p class="text-lg text-gray-900 font-bold mt-2">$299.99/mo</p>
+      <p class="text-sm text-gray-600">or $2,999.99/yr</p>
+    </div>
+    <div class="bg-gray-50 p-4 rounded-lg border border-gray-300">
+      <p class="text-sm font-semibold text-gray-700">👥 Up to 100 users</p>
+      <p class="text-lg text-gray-900 font-bold mt-2">$499.99/mo</p>
+      <p class="text-sm text-gray-600">or $4,999.99/yr</p>
+    </div>
+    <div class="bg-purple-100 p-4 rounded-lg border-2 border-purple-500">
+      <p class="text-sm font-semibold text-purple-700">🏥 More than 100 users</p>
+      <p class="text-md mt-2 text-purple-900 font-bold italic">Contact us</p>
+    </div>
+  </div>
+
+  <a href="mailto:contact@brainboxmed.com"
+     class="inline-block bg-purple-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-purple-700 transition"
+     style="font-family: 'Poppins', sans-serif;">
+    📩 Request Institutional Access
+  </a>
+</div>
+
+
+</div>
+  </div>
+</section>
+
+<!-- Bloco de tradução já funcional -->
+<script>
+const translations = {
+  en: {
+    'pricing-title': 'Choose Your Plan',
+    'pricing-desc': 'Join thousands of future specialists already using BrainboxMed to simulate real medical exams. Updated weekly by experienced doctors. Prepare smarter.',
+    'institutional-title': '🏥 Institutional Plans',
+    'institutional-desc': 'For universities, hospitals & residency programs',
+    'plan-starter-title': 'Starter (With Ads)',
+    'plan-starter-desc': 'Ideal for trying out',
+    'plan-starter-btn': 'Try Free',
+    'plan-adfree-title': 'Ad-Free',
+    'plan-adfree-desc': 'Smooth experience',
+    'plan-adfree-btn': 'Subscribe',
+    'plan-focused-title': 'Focused Study',
+    'plan-focused-desc': 'Choose what to study',
+    'plan-focused-btn': 'Customize',
+    'plan-sim-title': 'Simulated Exam',
+    'plan-sim-desc': 'Closest to the real thing',
+    'plan-sim-btn': 'Simulate Now',
+    'site-slogan': 'Train your brain. Master medicine.',
+    'plan-sim-badge': '⭐ Best Way to Study',
+    'plan-focused-badge': '🔥 Most Popular',
+  },
+  pt: {
+    'pricing-title': 'Escolha Seu Plano',
+    'pricing-desc': 'Junte-se a milhares de futuros especialistas já utilizando o BrainboxMed para simular exames médicos reais. Atualizado semanalmente por médicos experientes. Prepare-se melhor.',
+    'institutional-title': '🏥 Planos Institucionais',
+    'institutional-desc': 'Para universidades, hospitais e programas de residência',
+    'plan-starter-title': 'Inicial (com anúncios)',
+    'plan-starter-desc': 'Ideal para experimentar',
+    'plan-starter-btn': 'Teste Grátis',
+    'plan-adfree-title': 'Sem Anúncios',
+    'plan-adfree-desc': 'Experiência mais fluida',
+    'plan-adfree-btn': 'Assinar',
+    'plan-focused-title': 'Estudo Focado',
+    'plan-focused-desc': 'Escolha o que estudar',
+    'plan-focused-btn': 'Personalizar',
+    'plan-sim-title': 'Simulado Completo',
+    'plan-sim-desc': 'Mais próximo da prova real',
+    'plan-sim-btn': 'Simular Agora',
+    'plan-sim-badge': '⭐ Melhor forma de estudar',
+    'plan-focused-badge': '🔥 Mais popular',
+  },
+  es: {
+    'pricing-title': 'Elige Tu Plan',
+    'pricing-desc': 'Únete a miles de futuros especialistas que ya usan BrainboxMed para simular exámenes médicos reales. Actualizado semanalmente por médicos expertos. Prepárate mejor.',
+    'institutional-title': '🏥 Planes Institucionales',
+    'institutional-desc': 'Para universidades, hospitales y programas de residencia',
+    'plan-starter-title': 'Inicial (con anuncios)',
+    'plan-starter-desc': 'Ideal para probar',
+    'plan-starter-btn': 'Probar Gratis',
+    'plan-adfree-title': 'Sin Anuncios',
+    'plan-adfree-desc': 'Experiencia fluida',
+    'plan-adfree-btn': 'Suscribirse',
+    'plan-focused-title': 'Estudio Personalizado',
+    'plan-focused-desc': 'Elige qué estudiar',
+    'plan-focused-btn': 'Personalizar',
+    'plan-sim-title': 'Simulacro de Examen',
+    'plan-sim-desc': 'Más cercano al examen real',
+    'plan-sim-btn': 'Simular Ahora',
+    'plan-sim-badge': '⭐ Mejor forma de estudiar',
+    'plan-focused-badge': '🔥 Más popular',
+  }
+};
+
+function applyTranslations() {
+  const lang = localStorage.getItem('selectedLanguage') || 'en';
+  const map = translations[lang];
+  Object.keys(map).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = map[id];
+  });
+}
+
+function changeLanguage(lang) {
+  localStorage.setItem('selectedLanguage', lang);
+  location.reload();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  applyTranslations();
+
+  const lang = localStorage.getItem('selectedLanguage') || 'en';
+  const selector = document.getElementById('language-switch');
+  if (selector) selector.value = lang;
+});
+</script>
+</body>
+</html>
+
