@@ -779,7 +779,7 @@ const translatedLabels = [
   translateDifficulty('easy', lang),
   translateDifficulty('moderate', lang),
   translateDifficulty('hard', lang),
-  translateDifficulty('muito_hard', lang)
+  translateDifficulty('very_hard', lang)
   ];
    if (window.difficultyChart) {
   window.difficultyChart.destroy();

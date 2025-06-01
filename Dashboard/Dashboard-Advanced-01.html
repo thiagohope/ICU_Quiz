@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="dashboard-title">Advanced Dashboard | BrainboxMed</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-SEU_CLIENT_ID_REAL"
+     crossorigin="anonymous"></script> <!--Adicione seu ID de cliente AdSense real-->
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f9fafb; }
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+  </style>
+</head>
+<body class="text-gray-800">
+
+  <div id="top-dashboard-bar" class="w-full py-3 px-4 sm:px-6 bg-white shadow-md">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <a href="../landing.html">
+        <img src="../assets/img/logo-brainboxmed-cube.png" alt="BrainboxMed Logo" class="h-10">
+      </a>
+      <button id="dashboard-logout-button"
+              class="bg-red-500 text-white hover:bg-red-600 text-xs font-semibold py-1.5 px-4 rounded-md shadow-sm transition-colors whitespace-nowrap">
+        <span id="dashboard_logout_text">Logout</span> 🚪
+      </button>
+    </div>
+  </div>
+
+  <main class="max-w-3xl mx-auto p-4 sm:p-6 md:p-8">
+    <header class="mb-8 pt-4 text-center">
+      <h1 class="text-2xl sm:text-3xl font-bold text-purple-700" id="user-welcome-message">
+        Welcome, <span id="user-name-placeholder">[User Name]</span>!
+      </h1>
+      <p class="text-gray-600 mt-2" id="user-plan-info">
+        Your Plan: <strong id="user-plan-name-placeholder" class="text-purple-600">[Plan Name]</strong> | 
+        Member Since: <span id="user-subscription-date-placeholder" class="italic">[Subscription Date]</span>
+      </p>
+    </header>
+
+    <!--Seção de Escolha de Modo (Botões) -->
+    <section id="mode-selection-section" class="mb-6 bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+      <h2 class="text-xl sm:text-2xl font-semibold text-purple-600 mb-6 text-center" data-i18n="dashboard_advanced_mode_title">
+        Choose Your Session Type
+      </h2>
+      <div class="flex flex-col sm:flex-row sm:space-x-4 justify-center">
+        <button id="start-study-mode-button" 
+                class="w-full sm:w-auto mb-4 sm:mb-0 flex-1 bg-purple-600 text-white hover:bg-purple-700 font-bold py-3 px-6 rounded-lg shadow-md transition-colors text-lg flex items-center justify-center space-x-2">
+          <span data-i18n="start_study_mode_button_text">Focused Study</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM2 10a8 8 0 1116 0 8 8 0 01-16 0z" clip-rule="evenodd" />
+          </svg>
+        </button>
+
+        <button id="start-simulation-mode-button" 
+                class="w-full sm:w-auto flex-1 bg-blue-600 text-white hover:bg-blue-700 font-bold py-3 px-6 rounded-lg shadow-md transition-colors text-lg flex items-center justify-center space-x-2">
+          <span data-i18n="start_simulation_mode_button_text">Simulation</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.415L11 9.586V6z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <div id="ad-slot-dashboard-advanced" class="my-6 flex justify-center">
+        <div class="w-full sm:w-10/12 md:w-8/12 lg:w-7/12">
+            <div class="bg-gray-100 border border-dashed border-gray-300 rounded-xl shadow p-2 text-center min-h-[50px] sm:min-h-[60px] flex items-center justify-center">
+            <ins class="adsbygoogle"
+                style="display:block; width:100%;"
+                data-ad-client="ca-pub-SEU_CLIENT_ID_REAL"  {/* SEU ID DE CLIENTE ADSENSE */}
+                data-ad-slot="SEU_SLOT_ID_ADVANCED_DASH" {/* NOVO ID DE SLOT PARA ESTE LOCAL */}
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            <span class="text-xs text-gray-400" data-i18n="advertisement_placeholder_text_dashboard">Advertisement</span>
+            </div>
+        </div>
+    </div>
+
+  </main>
+
+  <footer class="text-center text-sm text-gray-500 py-8 border-t border-gray-200 mt-12">
+    <p id="dashboard-footer-text-1">[Footer Text 1 Placeholder]</p>
+    <p id="dashboard-footer-text-2">[Footer Text 2 Placeholder]</p>
+  </footer>
+
+  <script>
+    // Script inline para logout e algumas traduções estáticas, se necessário para esta página.
+    // A lógica principal de popular dados do usuário e navegação dos botões de modo
+    // viria de um arquivo como "dashboard-advanced.js".
+    (function() {
+      const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+      const staticTranslations = {
+        en: {
+          "dashboard_logout_text": "Logout",
+          "logout_confirm_message": "Your progress will be saved. Are you sure you want to logout and go to the login page?",
+          "dashboard-footer-text-1": "© " + new Date().getFullYear() + " BrainboxMed. All rights reserved.",
+          "dashboard-footer-text-2": "Educational content. Not a substitute for professional medical advice."
+        },
+        pt: { /* ... suas traduções ... */ },
+        es: { /* ... suas traduções ... */ }
+      };
+      const s_t = staticTranslations[currentLang] || staticTranslations['en'];
+
+      document.getElementById("dashboard_logout_text").textContent = s_t["dashboard_logout_text"];
+      document.getElementById("dashboard-footer-text-1").textContent = s_t["dashboard-footer-text-1"];
+      document.getElementById("dashboard-footer-text-2").textContent = s_t["dashboard-footer-text-2"];
+      // Adicione aqui as traduções para os data-i18n se for usar o método de substituição por ID no script inline
+
+      function handleDashboardLogout() {
+        const confirmMessage = s_t.logout_confirm_message;
+        if (confirm(confirmMessage)) {
+          localStorage.removeItem('userDetails'); 
+          localStorage.removeItem('authToken'); 
+          localStorage.removeItem('focusedProState');
+          window.location.href = '../login.html'; // Ajuste o caminho para sua página de login
+        }
+      }
+      const logoutButtonTextEl = document.getElementById("dashboard_logout_text");
+      if (logoutButtonTextEl) { // Verifica se o elemento existe
+          logoutButtonTextEl.textContent = s_t["dashboard_logout_text"];
+      }
+    })
+  </script>
+    <!-- Footer legal -->
+    <footer class="text-center text-xs text-gray-500 mt-12 py-6 border-t border-gray-200">
+    <p>&copy; 2025 BrainboxMed. All rights reserved.</p>
+    <p>BrainboxMed™ is a registered educational platform. Unauthorized use is prohibited.</p>
+    <p>
+        <a href="privacy.html" class="text-purple-600 hover:underline">Privacy Policy</a> |
+        <a href="terms.html" class="text-purple-600 hover:underline">Terms of Use</a>
+    </p>
+    </footer>
+</body>
+</html>

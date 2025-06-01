@@ -95,10 +95,10 @@
     <!-- Checkboxes de Dificuldade -->
   <div style="margin-top: 20px;">
     <label id="label-select-difficulty" style="font-weight: bold; display: block; margin-bottom: 8px;">Select Difficulty:</label>
-    <label id="label-easy"><input type="checkbox" class="difficulty-filter" value="easy" checked> Easy</label><br>
-    <label id="label-medium"><input type="checkbox" class="difficulty-filter" value="moderate" checked> Medium</label><br>
-    <label id="label-hard"><input type="checkbox" class="difficulty-filter" value="hard" checked> Hard</label><br>
-    <label id="label-very-hard"><input type="checkbox" class="difficulty-filter" value="very_hard" checked> Very Hard</label>
+    <label id="label-easy"><input type="checkbox" class="difficulty-filter" value="facil" checked> Easy</label><br>
+    <label id="label-medium"><input type="checkbox" class="difficulty-filter" value="moderada" checked> Medium</label><br>
+    <label id="label-hard"><input type="checkbox" class="difficulty-filter" value="dificil" checked> Hard</label><br>
+    <label id="label-very-hard"><input type="checkbox" class="difficulty-filter" value="muito_dificil" checked> Very Hard</label>
   </div>
   <!-- Checkboxes de Especialidade -->
     <div style="margin-top: 30px;">
@@ -229,7 +229,7 @@
           <!-- Preenchido dinamicamente -->
         </tbody>
       </table>
-  <canvas id="chart-difficulty" width="600" height="400" style="display: none; margin: 20px auto;"></canvas>
+  <canvas id="chart-dificuldade" style="margin: 0 auto; display: none;"></canvas>
   </div>
         <!-- Gráfico de Forças e Fraquezas por Dificuldade -->
 <div class="report-section" style="margin-top: 60px;">
@@ -294,7 +294,7 @@
   <button id="restart-btn" class="btn btn-secondary" onclick="restartQuiz()">Restart Test</button>
   <button id="print-btn" class="btn btn-secondary" style="background-color: var(--color-neutral);" onclick="window.print()"> Print Report</button>
   <button id="back-home-btn" class="btn btn-secondary" onclick="confirmReturnHome()" style="background-color: var(--color-primary); margin-left: 10px;">
-  <span id="back-home-btn"></span>
+  ← Voltar à Página Inicial
 </button>
 <div style="text-align: center; margin-top: 20px;">
   <button id="final-report-btn" class="btn btn-highlight" onclick="window.location.href='relatoriofinal.html'" style="font-size: 16px;">
@@ -320,20 +320,18 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const reviewReturn = localStorage.getItem('reviewReturn');
-    if (reviewReturn === 'true') {
-    document.getElementById('home-screen').style.display = 'none';
-    document.getElementById('result-screen').style.display = 'block';
-    // Restaurar dados
-    questionarioAtual = JSON.parse(localStorage.getItem('accumulatedQuestions')) || [];
-    userAnswers = JSON.parse(localStorage.getItem('accumulatedAnswers')) || {};
-    let selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
-    // Aguarda DOM e depois gera relatório
-    setTimeout(() => {
-  const hasData = (Array.isArray(questionarioAtual) && questionarioAtual.length > 0);
-    if (hasData) {
-      generateUSMLEReport();
-      updateUI();}
-    }, 100);
+   if (reviewReturn === 'true') {
+   document.getElementById('home-screen').style.display = 'none';
+   document.getElementById('result-screen').style.display = 'block';
+   // Restaurar dados
+   questionarioAtual = JSON.parse(localStorage.getItem('acumuladoQuestoes')) || [];
+   userAnswers = JSON.parse(localStorage.getItem('acumuladoRespostas')) || {};
+   let selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+   // Aguarda DOM e depois gera relatório
+   setTimeout(() => {
+     generateUSMLEReport();
+     updateUI();
+   }, 100);
    localStorage.removeItem('reviewReturn');}
   const lang = localStorage.getItem("selectedLanguage") || "en";
   const reviewTexts = {
@@ -360,7 +358,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("review-redirect-button").textContent = t.button;
   
   const homeTexts = {
-  pt: "<span id=\"back-home-btn\"></span>",
+  pt: "← Voltar à Página Inicial",
   en: "← Return to Home Page",
   es: "← Volver a la Página Principal"
   };
@@ -430,24 +428,24 @@ document.addEventListener("DOMContentLoaded", function () {
 <script>
 function drawVoronoiDifficultyChart(questions, answers, lang = "en") {
   const diffLabels = {
-  easy: { pt: "Fácil", en: "Easy", es: "Fácil" },
-  moderate: { pt: "Moderada", en: "Moderate", es: "Moderada" },
-  hard: { pt: "Difícil", en: "Hard", es: "Difícil" },
-  very_hard: { pt: "Muito Difícil", en: "Very Hard", es: "Muy Difícil" }
-};
+    facil: { pt: "Fácil", en: "Easy", es: "Fácil" },
+    moderada: { pt: "Moderada", en: "Moderate", es: "Moderada" },
+    dificil: { pt: "Difícil", en: "Hard", es: "Difícil" },
+    muito_dificil: { pt: "Muito Difícil", en: "Very Hard", es: "Muy Difícil" }
+  };
+
   const stats = {
-  easy: { correct: 0, wrong: 0, total: 0 },
-  moderate: { correct: 0, wrong: 0, total: 0 },
-  hard: { correct: 0, wrong: 0, total: 0 },
-  very_hard: { correct: 0, wrong: 0, total: 0 }
+    facil: { total: 0, correct: 0 },
+    moderada: { total: 0, correct: 0 },
+    dificil: { total: 0, correct: 0 },
+    muito_dificil: { total: 0, correct: 0 }
   };
 
   questions.forEach(q => {
-  if (!stats[q.level]) return;
-  stats[q.level].total++;
-  const isCorrect = answers[q.id] === q.correct;
-  if (isCorrect) stats[q.level].correct++;
-  else stats[q.level].wrong++;
+    const nivel = q.nivel;
+    if (!nivel || !stats[nivel]) return;
+    stats[nivel].total++;
+    if (answers[q.id] === q.correta) stats[nivel].correct++;
   });
 
   const labels = [];

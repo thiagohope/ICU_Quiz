@@ -2,7 +2,7 @@ const bancoCardioFacil = [
  {
     id: 501,
     code: "cardio01-q01",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["hemodynamics"],
     level: "easy",
     correct: 0,
@@ -65,7 +65,7 @@ const bancoCardioFacil = [
   {
     id: 502,
     code: "cardio01-q02",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["circulatory shock"],
     level: "easy",
     correct: 1,
@@ -128,7 +128,7 @@ const bancoCardioFacil = [
   {
     id: 503,
     code: "cardio01-q03",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["ACLS"],
     level: "easy",
     correct: 2,
@@ -191,7 +191,7 @@ const bancoCardioFacil = [
   {
     id: 504,
     code: "cardio01-q04",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["vascular access"],
     level: "easy",
     correct: 0,
@@ -254,7 +254,7 @@ const bancoCardioFacil = [
   {
     id: 505,
     code: "cardio01-q05",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["echocardiography"],
     level: "easy",
     correct: 3,
@@ -317,7 +317,7 @@ const bancoCardioFacil = [
   {
     id: 506,
     code: "cardio01-q06",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["pacemaker"],
     level: "easy",
     correct: 1,
@@ -380,7 +380,7 @@ const bancoCardioFacil = [
   {
     id: 507,
     code: "cardio01-q07",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["IABP"],
     level: "easy",
     correct: 0,
@@ -443,7 +443,7 @@ const bancoCardioFacil = [
   {
     id: 508,
     code: "cardio01-q08",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["ECMO-VA"],
     level: "easy",
     correct: 2,
@@ -506,7 +506,7 @@ const bancoCardioFacil = [
   {
     id: 509,
     code: "cardio01-q09",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["LVAD"],
     level: "easy",
     correct: 1,
@@ -569,7 +569,7 @@ const bancoCardioFacil = [
   {
     id: 510,
     code: "cardio01-q10",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["arrhythmias"],
     level: "easy",
     correct: 0,
@@ -632,7 +632,7 @@ const bancoCardioFacil = [
   {
     id: 511,
     code: "cardio01-q11",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["myocardial infarction"],
     level: "easy",
     correct: 3,
@@ -695,7 +695,7 @@ const bancoCardioFacil = [
   {
     id: 512,
     code: "cardio01-q12",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["pulmonary embolism"],
     level: "easy",
     correct: 2,
@@ -758,7 +758,7 @@ const bancoCardioFacil = [
   {
     id: 513,
     code: "cardio01-q13",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["hemodynamics"],
     level: "easy",
     correct: 1,
@@ -821,7 +821,7 @@ const bancoCardioFacil = [
   {
     id: 514,
     code: "cardio01-q14",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["hemodynamics"],
     level: "easy",
     correct: 1,
@@ -884,7 +884,7 @@ const bancoCardioFacil = [
   {
     id: 515,
     code: "cardio01-q15",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["myocardial infarction"],
     level: "easy",
     correct: 2,
@@ -947,7 +947,7 @@ const bancoCardioFacil = [
    {
     id: 516,
     code: "cardio01-q16",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["arrhythmias"],
     level: "easy",
     correct: 1,
@@ -1010,7 +1010,7 @@ const bancoCardioFacil = [
    {
     id: 517,
     code: "cardio01-q17",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["hypertensive emergencies"],
     level: "easy",
     correct: 3,
@@ -1073,7 +1073,7 @@ const bancoCardioFacil = [
   {
     id: 518,
     code: "cardio01-q18",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["anticoagulation"],
     level: "easy",
     correct: 0,
@@ -1136,7 +1136,7 @@ const bancoCardioFacil = [
   {
     id: 519,
     code: "cardio01-q19",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["echocardiography"],
     level: "easy",
     correct: 2,
@@ -1199,7 +1199,7 @@ const bancoCardioFacil = [
   {
     id: 520,
     code: "cardio01-q20",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["hemodynamics", "shock"],
     level: "easy",
     correct: 3,

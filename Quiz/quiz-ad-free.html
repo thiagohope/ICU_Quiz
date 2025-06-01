@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ad Free - BrainboxMed™ </title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+    </head>
+<body>
+    <div id="top-controls-bar" class="w-full py-2 px-4 sm:px-6 bg-gray-100 shadow-sm">
+        <div class="max-w-6xl mx-auto flex justify-end items-center"> 
+            <div class="ml-2">
+                <button id="dashboard-logout-button"
+                        class="bg-red-500 text-white hover:bg-red-600 text-xs font-semibold py-1.5 px-4 rounded-md shadow-sm transition-colors whitespace-nowrap">
+                  <span id="dashboard_logout_text">Logout</span> 🚪
+                </button>
+            </div>
+        </div>
+  </div>
+  <header class="text-center">
+    <div style="width: 100%; background-color: #f3f0eb; display: flex; justify-content: center; align-items: center; padding: 48px 0;">
+      <img src="../assets/img/logo-brainboxmed-cube.png" alt="BrainboxMed Icon" style="height: 120px; width: auto; margin-right: 32px;" />
+      <img src="../assets/img/logo-brainboxmed-name.png" alt="BrainboxMed Text Logo" style="height: 120px; width: auto;" />
+    </div>
+    <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: #333; text-align: center; margin: 1.5rem auto 2rem auto;">
+      Train your brain. Master medicine.
+    </p>
+  </header>
+
+  <!-- 📚 Quiz Container -->
+  <main id="quiz-container" class="max-w-4xl mx-auto p-4">
+    <!-- Dynamic content injected here -->
+  </main>
+
+  <!-- 📊 Statistics and Recommendations -->
+  <section id="final-stats" style="display:none;" class="max-w-4xl mx-auto p-4"></section>
+
+  <!-- ⚖️ Footer -->
+  <footer class="text-center text-sm text-gray-500 py-6 border-t border-gray-200 mt-8 px-4">
+    <p id="legal-notice-text"></p>
+  </footer>
+
+<script>
+  const lang = localStorage.getItem('selectedLanguage') || 'en';
+  const translations = {
+    en: {
+      "logout_button_text_content": "Logout", // Para o ID do span
+      "logout_confirm_message": "Your progress will be saved. Are you sure you want to logout and return to the homepage?",
+      "legal-notice-text": "© 2025 BrainboxMed. All rights reserved. This content is for educational purposes only and does not replace professional medical advice."
+    },
+    pt: {
+      "logout_button_text_content": "Sair",
+      "logout_confirm_message": "Seu progresso será salvo. Tem certeza que deseja sair e retornar à página inicial?",
+      "legal-notice-text": "© 2025 BrainboxMed. Todos os direitos reservados. Este conteúdo é apenas para fins educacionais e não substitui o aconselhamento médico profissional."
+    },
+    es: {
+      "logout_button_text_content": "Cerrar Sesión",
+      "logout_confirm_message": "Tu progreso será guardado. ¿Estás seguro de que quieres cerrar sesión y volver a la página principal?",
+      "legal-notice-text": "© 2025 BrainboxMed. Todos los derechos reservados. Este contenido es solo para fines educativos y no reemplaza el asesoramiento médico profesional."
+    }
+  };
+  const t = translations[lang] || translations['en'];
+  const trackTitleEl = document.getElementById("track-title");
+  if (trackTitleEl) trackTitleEl.textContent = t["track-title"]; 
+  const logoutButtonTextEl = document.getElementById("logout_button_text_content");
+  if (logoutButtonTextEl) logoutButtonTextEl.textContent = t["logout_button_text_content"];
+  const legalNoticeEl = document.getElementById("legal-notice-text");
+  if (legalNoticeEl) legalNoticeEl.textContent = t["legal-notice-text"];
+  function handleInteractiveLogout() {
+  const confirmMessage = t.logout_confirm_message; // Usar a tradução carregada
+    console.log("User progress would be saved here."); // Placeholder para salvar progresso
+    if (confirm(confirmMessage)) {
+      window.location.href = 'landing.html'; 
+    }
+  }
+  const logoutBtn = document.getElementById('logout-button-interactive');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', handleInteractiveLogout);
+  }
+</script>
+<script src="../Question-bank/banco-questoes.js"></script>
+<script src="../Question-Bank/Neuro01.js"></script>
+<script src="../Question-Bank/Neuro02.js"></script>
+<script src="../Question-Bank/Neuro03.js"></script>
+<script src="../Question-Bank/Neuro04.js"></script>
+<script src="../Question-Bank/Cardio01.js"></script>
+<script src="../Question-Bank/Cardio02.js"></script>
+<script src="../Question-Bank/Cardio03.js"></script>
+<script src="../Question-Bank/Cardio04.js"></script>
+<script src="../Question-Bank/Pneumo01.js"></script>
+<script src="../Question-Bank/Pneumo02.js"></script>
+<script src="../Question-Bank/Ventilation.js"></script>
+<script src="quiz-ad-free.js"></script>
+</body>
+</html>

@@ -1,8 +1,8 @@
-const bancoNeuroModerado = [
+const bancoNeuromoderate = [
 {
   id: 201,
   code: "neuro02-q201",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["intracranial hypertension", "neuromonitoring", "head trauma", "ct scan", "emergency"],
   level: "moderate",
   correct: 1,
@@ -65,7 +65,7 @@ const bancoNeuroModerado = [
 {
   id: 202,
   code: "neuro02-q202",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["intracranial hypertension", "tiered therapy", "neurocritical care", "sedation", "osmotherapy"],
   level: "moderate",
   correct: 3,
@@ -128,7 +128,7 @@ const bancoNeuroModerado = [
 {
   id: 203,
   code: "neuro02-q203",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["jugular bulb", "brain oxygenation", "neuromonitoring", "svjO2", "neurocritical care"],
   level: "moderate",
   correct: 0,
@@ -191,7 +191,7 @@ const bancoNeuroModerado = [
 {
   id: 204,
   code: "neuro02-q204",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["malignant stroke", "middle cerebral artery", "mass effect", "neuroimaging", "surgical management"],
   level: "moderate",
   correct: 2,
@@ -254,7 +254,7 @@ const bancoNeuroModerado = [
 {
   id: 205,
   code: "neuro02-q205",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["ischemic stroke", "thrombolysis", "alteplase", "contraindications", "time window"],
   level: "moderate",
   correct: 0,
@@ -317,7 +317,7 @@ const bancoNeuroModerado = [
 {
   id: 206,
   code: "neuro02-q206",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["prolonged seizure", "status epilepticus", "anticonvulsants", "emergency", "neurology"],
   level: "moderate",
   correct: 1,
@@ -380,7 +380,7 @@ const bancoNeuroModerado = [
 {
   id: 207,
   code: "neuro02-q207",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["multimodal monitoring", "pbto2", "intracranial pressure", "neurocritical care", "cerebral hypoxia"],
   level: "moderate",
   correct: 2,
@@ -443,7 +443,7 @@ const bancoNeuroModerado = [
 {
   id: 208,
   code: "neuro02-q208",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["intracerebral hemorrhage", "blood pressure", "surgery indication", "emergency", "neuroimaging"],
   level: "moderate",
   correct: 1,
@@ -506,7 +506,7 @@ const bancoNeuroModerado = [
 {
   id: 209,
   code: "neuro02-q209",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["mannitol", "intracranial hypertension", "osmotherapy", "renal function", "contraindications"],
   level: "moderate",
   correct: 3,
@@ -569,7 +569,7 @@ const bancoNeuroModerado = [
 {
   id: 210,
   code: "neuro02-q210",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["transcranial doppler", "vasospasm", "saeh", "mca velocity", "monitoring limitations"],
   level: "moderate",
   correct: 2,
@@ -632,7 +632,7 @@ const bancoNeuroModerado = [
 {
   id: 211,
   code: "neuro02-q211",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["meningitis", "critical care", "antibiotics", "lumbar puncture", "neuroinfection"],
   level: "moderate",
   correct: 0,
@@ -695,7 +695,7 @@ const bancoNeuroModerado = [
 {
   id: 211,
   code: "neuro02-q211",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["meningitis", "nosocomial infection", "empirical therapy", "antibiotics", "treatment duration"],
   level: "moderate",
   correct: 1,
@@ -758,7 +758,7 @@ const bancoNeuroModerado = [
 {
   id: 212,
   code: "neuro02-q212",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["ventriculitis", "external ventricular drain", "csf infection", "intraventricular antibiotics", "device management"],
   level: "moderate",
   correct: 3,
@@ -821,7 +821,7 @@ const bancoNeuroModerado = [
 {
   id: 213,
   code: "neuro02-q213",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["evd", "vp shunt", "hydrocephalus", "csf drainage", "shunt complications"],
   level: "moderate",
   correct: 2,
@@ -884,7 +884,7 @@ const bancoNeuroModerado = [
 {
   id: 214,
   code: "neuro02-q214",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["microdialysis", "lactate pyruvate ratio", "cerebral metabolism", "ischemia", "brain monitoring"],
   level: "moderate",
   correct: 1,
@@ -947,7 +947,7 @@ const bancoNeuroModerado = [
 {
   id: 215,
   code: "neuro02-q215",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["neuroplasticity", "brain injury", "rehabilitation", "functional recovery", "intensive care"],
   level: "moderate",
   correct: 0,
@@ -1010,7 +1010,7 @@ const bancoNeuroModerado = [
 {
   id: 216,
   code: "neuro02-q216",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["status epilepticus", "refractory seizures", "sedation", "neurocritical care", "icu management"],
   level: "moderate",
   correct: 2,
@@ -1073,7 +1073,7 @@ const bancoNeuroModerado = [
 {
   id: 217,
   code: "neuro02-q217",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["traumatic brain injury", "subdural hematoma", "surgical criteria", "neurosurgery", "neuroimaging"],
   level: "moderate",
   correct: 0,
@@ -1136,7 +1136,7 @@ const bancoNeuroModerado = [
 {
   id: 218,
   code: "neuro02-q218",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["postoperative care", "craniotomy", "neuromonitoring", "sedation", "infection prevention"],
   level: "moderate",
   correct: 1,
@@ -1199,7 +1199,7 @@ const bancoNeuroModerado = [
 {
   id: 219,
   code: "neuro02-q219",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["delirium", "prevention", "icu care", "nonpharmacological strategies", "neurology"],
   level: "moderate",
   correct: 0,
@@ -1262,7 +1262,7 @@ const bancoNeuroModerado = [
 {
   id: 220,
   code: "neuro02-q220",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["therapeutic hypothermia", "cardiac arrest", "brain protection", "postresuscitation care", "hypothermia complications"],
   level: "moderate",
   correct: 3,
@@ -1325,4 +1325,4 @@ const bancoNeuroModerado = [
 
 ];
 
-questionBank.addBank(bancoNeuroModerado);
+questionBank.addBank(bancoNeuromoderate);

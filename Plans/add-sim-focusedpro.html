@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Simulations - Focused Pro</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    h1, h2 {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen py-10 px-4">
+  <div class="max-w-md mx-auto bg-white p-6 rounded-xl shadow-md">
+    <!-- Logo -->
+    <div class="text-center mb-6">
+      <img src="../assets/img/logo-brainboxmed-cube.png" alt="BrainboxMed Icon" class="mx-auto h-16 mb-2">
+      <img src="../assets/img/logo-brainboxmed-name.png" alt="BrainboxMed Text" class="mx-auto h-10">
+      <p class="text-sm text-gray-500 mt-1">Train your brain. Master medicine.</p>
+    </div>
+
+    <!-- Upgrade Info -->
+    <h1 id="title-text" class="text-xl font-bold text-purple-700 text-center mb-2">Upgrade Your Plan</h1>
+    <p id="info-text" class="text-center text-sm text-gray-600 mb-4">
+      Add timed professional simulations to your Focused Study Pro plan for <strong>+ $5/month</strong>.
+    </p>
+
+    <form class="space-y-4">
+      <input type="text" placeholder="Full Name" class="w-full border rounded-lg px-4 py-2" required />
+      <input type="email" placeholder="Email Address" class="w-full border rounded-lg px-4 py-2" required />
+      <button type="submit" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold">
+        Confirm Upgrade
+      </button>
+    </form>
+
+    <!-- Back -->
+    <div class="mt-4 text-center">
+      <a id="back-link" href="../Signup/signup-focusedpro.html" class="text-sm text-purple-600 hover:underline">⬅️ Back to Focused Pro</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center text-xs text-gray-500 mt-12 py-6 border-t border-gray-200">
+    <p id="footer1">© 2024 BrainboxMed. All rights reserved.</p>
+    <p id="footer2">BrainboxMed™ is a registered educational platform. Unauthorized use is prohibited.</p>
+    <p>
+      <a href="../privacy.html" id="footer3" class="text-purple-600 hover:underline">Privacy Policy</a> |
+      <a href="../terms.html" id="footer4" class="text-purple-600 hover:underline">Terms of Use</a>
+    </p>
+  </footer>
+
+  <!-- Multilingual Script -->
+  <script>
+    const lang = localStorage.getItem('selectedLanguage') || 'en';
+
+    const translations = {
+      en: {
+        title: "Upgrade Your Plan",
+        info: "Add timed professional simulations to your Focused Study Pro plan for <strong>+ $5/month</strong>.",
+        back: "⬅️ Back to Focused Pro",
+        footer1: "© 2024 BrainboxMed. All rights reserved.",
+        footer2: "BrainboxMed™ is a registered educational platform. Unauthorized use is prohibited.",
+        footer3: "Privacy Policy",
+        footer4: "Terms of Use"
+      },
+      pt: {
+        title: "Atualize seu Plano",
+        info: "Adicione simulações profissionais cronometradas ao seu plano Focused Study Pro por <strong>+ R$5/mês</strong>.",
+        back: "⬅️ Voltar ao Focused Pro",
+        footer1: "© 2024 BrainboxMed. Todos os direitos reservados.",
+        footer2: "BrainboxMed™ é uma plataforma educacional registrada. Uso não autorizado é proibido.",
+        footer3: "Política de Privacidade",
+        footer4: "Termos de Uso"
+      },
+      es: {
+        title: "Mejorar tu Plan",
+        info: "Agrega simulaciones cronometradas profesionales a tu plan Focused Study Pro por <strong>+ $5/mes</strong>.",
+        back: "⬅️ Volver a Focused Pro",
+        footer1: "© 2024 BrainboxMed. Todos los derechos reservados.",
+        footer2: "BrainboxMed™ es una plataforma educativa registrada. Uso no autorizado está prohibido.",
+        footer3: "Política de Privacidad",
+        footer4: "Términos de Uso"
+      }
+    };
+
+    const t = translations[lang];
+    document.getElementById("title-text").textContent = t.title;
+    document.getElementById("info-text").innerHTML = t.info;
+    document.getElementById("back-link").textContent = t.back;
+    document.getElementById("footer1").textContent = t.footer1;
+    document.getElementById("footer2").textContent = t.footer2;
+    document.getElementById("footer3").textContent = t.footer3;
+    document.getElementById("footer4").textContent = t.footer4;
+  </script>
+</body>
+</html>

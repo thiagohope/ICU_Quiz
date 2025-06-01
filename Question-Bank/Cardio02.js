@@ -1,10 +1,10 @@
-const bancoCardioModerado = [
+const bancoCardiomoderate = [
 {
     id: 201,
     code: "cardio02-q201",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["heart failure", "hemodynamics"],
-    level: "moderado",
+    level: "moderate",
     correct: 3,
     question: {
       pt: "Homem de 67 anos, com história de insuficiência cardíaca com fração de ejeção reduzida (ICFER), é admitido na UTI por desconforto respiratório progressivo e confusão mental. Apresenta PA 85x50 mmHg, FC 110 bpm, extremidades frias e lactato 3,2 mmol/L. Qual a melhor abordagem inicial?",
@@ -65,9 +65,9 @@ const bancoCardioModerado = [
 {
     id: 202,
     code: "cardio02-q202",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["myocardial infarction", "shock"],
-    level: "moderado",
+    level: "moderate",
     correct: 0,
     question: {
       pt: "Mulher de 72 anos com antecedentes de hipertensão e dislipidemia é admitida com dor torácica intensa há 2h. ECG mostra supra de ST em parede anterior. Após angioplastia primária bem-sucedida, permanece hipotensa com extremidades frias e estertores bibasais. Qual hipótese deve ser considerada prioritariamente?",
@@ -128,9 +128,9 @@ const bancoCardioModerado = [
   {
     id: 203,
     code: "cardio02-q203",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["echocardiography", "shock"],
-    level: "moderado",
+    level: "moderate",
     correct: 2,
     question: {
       pt: "Homem de 59 anos com DPOC é admitido na UTI por dispneia intensa e rebaixamento do nível de consciência. Está hipotenso, taquicárdico e com SpO₂ 86%. O ecocardiograma à beira-leito revela dilatação de VD, septo interventricular abaulado para a esquerda e VE hiperdinâmico. Qual o diagnóstico mais provável?",
@@ -191,9 +191,9 @@ const bancoCardioModerado = [
   {
     id: 204,
     code: "cardio02-q204",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["arrhythmias", "atrial fibrillation"],
-    level: "moderado",
+    level: "moderate",
     correct: 1,
     question: {
       pt: "Homem de 81 anos com fibrilação atrial permanente é internado na UTI por sepse urinária com disfunção renal. Apresenta PA 100x60 mmHg, FC 135 bpm, e sinais de hipoperfusão periférica. Qual a conduta inicial mais adequada em relação à frequência cardíaca?",
@@ -254,9 +254,9 @@ const bancoCardioModerado = [
   {
     id: 205,
     code: "cardio02-q205",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["pacemaker", "bradyarrhythmias"],
-    level: "moderado",
+    level: "moderate",
     correct: 0,
     question: {
       pt: "Paciente de 74 anos apresenta episódios de síncope e bradicardia com FC de 38 bpm. ECG mostra bloqueio atrioventricular total (BAVT) com dissociação AV. Qual é a conduta mais apropriada na fase aguda?",
@@ -317,9 +317,9 @@ const bancoCardioModerado = [
   {
     id: 206,
     code: "cardio02-q206",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["IABP", "mechanical support"],
-    level: "moderado",
+    level: "moderate",
     correct: 0,
     question: {
       pt: "Paciente de 70 anos com IAM extenso anterior é submetido à angioplastia, mas evolui com choque cardiogênico refratário apesar de dobutamina e noradrenalina. Qual dos seguintes benefícios é atribuído ao uso de balão intra-aórtico (IABP)?",
@@ -380,9 +380,9 @@ const bancoCardioModerado = [
   {
     id: 207,
     code: "cardio02-q207",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["ECMO-VA", "mechanical support"],
-    level: "moderado",
+    level: "moderate",
     correct: 2,
     question: {
       pt: "Paciente de 58 anos com choque cardiogênico refratário após IAM extenso é indicado para ECMO venoarterial (ECMO-VA). Qual das seguintes características é verdadeira sobre a ECMO-VA neste context?",
@@ -443,9 +443,9 @@ const bancoCardioModerado = [
   {
     id: 208,
     code: "cardio02-q208",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["shock", "hemodynamics"],
-    level: "moderado",
+    level: "moderate",
     correct: 1,
     question: {
       pt: "Em relação aos tipos de choque circulatório, qual das seguintes afirmações está correct?",
@@ -506,9 +506,9 @@ const bancoCardioModerado = [
   {
     id: 209,
     code: "cardio02-q209",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["electrolyte disorders", "arrhythmias"],
-    level: "moderado",
+    level: "moderate",
     correct: 2,
     question: {
       pt: "Paciente de 60 anos internado na UTI por sepse abdominal apresenta extrassístoles ventriculares frequentes. O ECG mostra intervalo QT prolongado. O potássio sérico é 3,0 mEq/L e o magnésio é 1,2 mg/dL. Qual a conduta inicial mais adequada?",
@@ -569,9 +569,9 @@ const bancoCardioModerado = [
   {
     id: 210,
     code: "cardio02-q210",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["anticoagulation", "myocardial infarction"],
-    level: "moderado",
+    level: "moderate",
     correct: 3,
     question: {
       pt: "Homem de 75 anos com fibrilação atrial paroxística e uso crônico de apixabana é admitido na UTI após IAM com supra de ST tratado com angioplastia e stent farmacológico. Qual conduta é mais adequada em relação à anticoagulação e antiagregação?",
@@ -632,9 +632,9 @@ const bancoCardioModerado = [
   {
     id: 211,
     code: "cardio02-q211",
-    area: ["cardio", "icu"],
+    area: ["cardio+icu", "cardio"],
     topic: ["pericardiocentesis", "tamponade"],
-    level: "moderado",
+    level: "moderate",
     correct: 0,
     question: {
       pt: "Homem de 65 anos com neoplasia pulmonar metastática apresenta-se com dispneia progressiva, hipotensão e turgência jugular. ECG mostra baixa voltagem e alternância elétrica. Ecocardiograma revela derrame pericárdico volumoso com colapso diastólico de átrio direito. Qual a conduta imediata?",
@@ -695,9 +695,9 @@ const bancoCardioModerado = [
   {
   id: 212,
   code: "cardio02-q212",
-  area: ["cardio", "icu"],
+  area: ["cardio+icu", "cardio"],
   topic: ["aortic dissection", "hypertensive emergencies", "chest pain"],
-  level: "moderado",
+  level: "moderate",
   correct: 0,
   question: {
     pt: "Um paciente de 58 anos, previamente hipertenso, chega ao serviço de emergência com dor torácica súbita e intensa irradiando para as costas. Apresenta PA de 210/110 mmHg e diferença de pulsos entre os membros superiores. A angio-TC revela dissecção aguda de aorta tipo B (DeBakey III). Qual a conduta inicial mais adequada?",
@@ -758,9 +758,9 @@ const bancoCardioModerado = [
 {
   id: 213,
   code: "cardio02-q213",
-  area: ["cardio", "icu"],
+  area: ["cardio+icu", "cardio"],
   topic: ["ACLS", "cardiac arrest", "defibrillation"],
-  level: "moderado",
+  level: "moderate",
   correct: 0,
   question: {
     pt: "Paciente de 60 anos sofre parada cardiorrespiratória no hospital. Monitor mostra fibrilação ventricular. Após início imediato de RCP de alta qualidade, qual a próxima intervenção recomendada?",
@@ -821,9 +821,9 @@ const bancoCardioModerado = [
 {
   id: 214,
   code: "cardio02-q214",
-  area: ["cardio", "icu"],
+  area: ["cardio+icu", "cardio"],
   topic: ["ACLS", "cardiac arrest", "PEA", "asystole"],
-  level: "moderado",
+  level: "moderate",
   correct: 1,
   question: {
     pt: "Homem de 67 anos, internado em UTI por sepse, evolui com parada cardiorrespiratória. Monitor mostra ritmo sem complexos QRS organizados e sem pulso palpável. Qual a conduta correct de acordo com o algoritmo de ACLS?",
@@ -884,9 +884,9 @@ const bancoCardioModerado = [
 {
   id: 213,
   code: "cardio02-q213",
-  area: ["cardio", "icu"],
+  area: ["cardio+icu", "cardio"],
   topic: ["ACLS", "cardiac arrest", "defibrillation"],
-  level: "moderado",
+  level: "moderate",
   correct: 0,
   question: {
     pt: "Paciente de 60 anos sofre parada cardiorrespiratória no hospital. Monitor mostra fibrilação ventricular. Após início imediato de RCP de alta qualidade, qual a próxima intervenção recomendada?",
@@ -947,9 +947,9 @@ const bancoCardioModerado = [
 {
   id: 214,
   code: "cardio02-q214",
-  area: ["cardio", "icu"],
+  area: ["cardio+icu", "cardio"],
   topic: ["ACLS", "cardiac arrest", "PEA", "asystole"],
-  level: "moderado",
+  level: "moderate",
   correct: 1,
   question: {
     pt: "Homem de 67 anos, internado em UTI por sepse, evolui com parada cardiorrespiratória. Monitor mostra ritmo sem complexos QRS organizados e sem pulso palpável. Qual a conduta correct de acordo com o algoritmo de ACLS?",
@@ -1010,9 +1010,9 @@ const bancoCardioModerado = [
 {
   id: 215,
   code: "cardio02-q215",
-  area: ["cardio", "icu"],
+  area: ["cardio+icu", "cardio"],
   topic: ["ACLS", "cardiac arrest", "PEA", "asystole"],
-  level: "moderado",
+  level: "moderate",
   correct: 1,
   question: {
     pt: "Homem de 67 anos, internado em UTI por sepse, evolui com parada cardiorrespiratória. Monitor mostra ritmo sem complexos QRS organizados e sem pulso palpável. Qual a conduta correct de acordo com o algoritmo de ACLS?",
@@ -1073,9 +1073,9 @@ const bancoCardioModerado = [
 {
   id: 216,
   code: "cardio02-q216",
-  area: ["cardio", "icu"],
+  area: ["cardio+icu", "cardio"],
   topic: ["pulmonary embolism", "ACLS", "cardiac arrest", "5Ts"],
-  level: "moderado",
+  level: "moderate",
   correct: 2,
   question: {
     pt: "Paciente de 48 anos é internado na UTI após cirurgia ortopédica de fêmur. Subitamente, desenvolve parada cardiorrespiratória. O ritmo é AESP. Após início de RCP de alta qualidade e administração de adrenalina, qual causa reversível deve ser fortemente considerada neste caso?",
@@ -1136,9 +1136,9 @@ const bancoCardioModerado = [
 {
   id: 217,
   code: "cardio02-q217",
-  area: ["cardio", "icu"],
+  area: ["cardio+icu", "cardio"],
   topic: ["shock", "hemodynamics", "critical care"],
-  level: "moderado",
+  level: "moderate",
   correct: 3,
   question: {
     pt: "Paciente de 70 anos, com história de IAM recente, apresenta hipotensão (PA 85/60 mmHg), extremidades frias, estertores em bases pulmonares e tempo de enchimento capilar aumentado. Gasometria com acidose metabólica e lactato elevado. Qual o tipo de choque mais compatível com esse quadro?",
@@ -1199,9 +1199,9 @@ const bancoCardioModerado = [
 {
   id: 218,
   code: "cardio02-q218",
-  area: ["cardio", "icu"],
+  area: ["cardio+icu", "cardio"],
   topic: ["cardiac trauma", "blunt chest trauma", "ECG", "echocardiography"],
-  level: "moderado",
+  level: "moderate",
   correct: 1,
   question: {
     pt: "Homem de 35 anos sofre acidente automobilístico e dá entrada na emergência consciente, com dor torácica e taquicardia. Exame físico mostra crepitações em arcos costais. ECG revela extrassístoles ventriculares frequentes e troponina I discretamente elevada. Qual exame é mais indicado para avaliar lesão cardíaca no context de trauma torácico contuso?",
@@ -1262,9 +1262,9 @@ const bancoCardioModerado = [
 {
   id: 219,
   code: "cardio02-q219",
-  area: ["cardio", "icu"],
+  area: ["cardio+icu", "cardio"],
   topic: ["LVAD", "mechanical support", "heart failure", "critical care"],
-  level: "moderado",
+  level: "moderate",
   correct: 2,
   question: {
     pt: "Homem de 55 anos com miocardiopatia dilatada e fração de ejeção de 15% é internado após implante recente de dispositivo de assistência ventricular esquerda (LVAD). Está consciente, mas sem pulso palpável e pressão arterial inaudível pelo método auscultatório. Qual conduta é mais adequada para avaliação clínica inicial?",
@@ -1325,9 +1325,9 @@ const bancoCardioModerado = [
 {
   id: 220,
   code: "cardio02-q220",
-  area: ["cardio", "icu"],
+  area: ["cardio+icu", "cardio"],
   topic: ["pacemaker", "CABG", "postoperative care", "bradyarrhythmia"],
-  level: "moderado",
+  level: "moderate",
   correct: 3,
   question: {
     pt: "Paciente de 68 anos, no segundo dia de pós-operatório de cirurgia de revascularização miocárdica (CABG), apresenta bradicardia (FC 38 bpm), hipotensão, extremidades frias e tonturas. ECG mostra ritmo de escape ventricular. Todos os itens abaixo são condutas corrects, EXCETO:",
@@ -1387,4 +1387,4 @@ const bancoCardioModerado = [
 },
 ];
 
-questionBank.addBank(bancoCardioModerado);
+questionBank.addBank(bancoCardiomoderate);

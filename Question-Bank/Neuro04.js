@@ -2,9 +2,9 @@ const bancoNeuroDificilima = [
 {
   id: 401,
   code: "neuro04-q401",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["ischemic stroke", "atrial fibrillation", "anticoagulation", "thrombolysis", "decision-making"],
-  level: "muito_hard",
+  level: "very_hard",
   correct: 3,
   question: {
     pt: "Homem de 78 anos, hipertenso, diabético e com fibrilação atrial permanente, faz uso regular de apixabana 5 mg duas vezes ao dia. Foi encontrado por familiares às 08h com afasia global e hemiplegia à direita, tendo sido visto assintomático pela última vez às 05h. Chega ao hospital às 08h45 com NIHSS 16. A última dose da apixabana foi às 22h da noite anterior. TC de crânio sem sangramento; angioTC mostra oclusão da ACM esquerda (M1). Todas as afirmações estão corrects, **exceto**:",
@@ -77,9 +77,9 @@ const bancoNeuroDificilima = [
 {
   id: 402,
   code: "neuro04-q402",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["subarachnoid hemorrhage", "vasospasm", "endovascular therapy", "ethics", "informed refusal"],
-  level: "muito_hard",
+  level: "very_hard",
   correct: 1,
   question: {
     pt: "Mulher de 52 anos, previamente saudável, foi admitida na UTI neuro após hemorragia subaracnóidea por ruptura de aneurisma da artéria comunicante anterior, tratado por clipagem cirúrgica no 2º dia. No 6º dia, ainda sob sedação leve, desenvolve hemiparesia esquerda e agitação. Doppler transcraniano mostra velocidade > 200 cm/s na ACM direita, e a angioTC com perfusão confirma mismatch compatível com vasoespasmo grave. A equipe indica terapia endovascular urgente, mas os familiares recusam o procedimento por considerá-lo invasivo demais. Todas as afirmações abaixo estão corrects, **exceto**:",
@@ -152,9 +152,9 @@ const bancoNeuroDificilima = [
 {
   id: 403,
   code: "neuro04-q403",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["post-cardiac arrest", "brain death", "ethics", "prognosis", "EEG"],
-  level: "muito_hard",
+  level: "very_hard",
   correct: 2,
   question: {
     pt: "Homem de 61 anos, previamente hígido, é atendido após parada cardiorrespiratória extra-hospitalar presenciada, com reanimação em 10 minutos. Evolui em coma profundo, GCS 3, com EEG plano, pupilas midriáticas arreativas, reflexo óculo-cefálico ausente, e eletroneuromiografia com ausência de potenciais motores. A dosagem de NSE (neuron-specific enolase) está > 100 mcg/L. Após 72h do evento, mantido em ventilação mecânica e hemodinamicamente estável, a equipe propõe limitação de suporte, mas a família exige continuidade total. Todas as afirmativas abaixo estão corrects, **exceto**:",
@@ -227,9 +227,9 @@ const bancoNeuroDificilima = [
 {
   id: 404,
   code: "neuro04-q404",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["vasospasm", "subarachnoid hemorrhage", "endovascular therapy", "angioplasty", "nimodipine"],
-  level: "muito_hard",
+  level: "very_hard",
   correct: 1,
   question: {
     pt: "Mulher de 49 anos com HSA grau IV (WFNS) por aneurisma de cerebral anterior tratado com clipagem evolui no 7º dia com rebaixamento do nível de consciência e déficit motor direito. Doppler transcraniano mostra velocidades > 220 cm/s na ACM esquerda. A angioTC evidencia vasoespasmo segmentar proximal da ACM e da artéria carótida intracraniana esquerda, sem sinais de infarto estabelecido na perfusão cerebral. A equipe endovascular considera intervenção imediata. Todas as afirmativas abaixo estão corrects, **exceto**:",
@@ -302,9 +302,9 @@ const bancoNeuroDificilima = [
 {
   id: 405,
   code: "neuro04-q405",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["intracranial hypertension", "uremia", "renal replacement therapy", "dialysis", "osmolarity"],
-  level: "muito_hard",
+  level: "very_hard",
   correct: 2,
   question: {
     pt: "Homem de 54 anos, previamente hipertenso e diabético, é admitido na UTI com rebaixamento do nível de consciência, crises convulsivas e sinais clínicos de hipertensão intracraniana (midríase assimétrica, vômitos, GCS 7). TC de crânio evidencia edema cerebral difuso sem lesões focais. Ureia: 258 mg/dL; creatinina: 6,3 mg/dL; Na⁺: 132 mEq/L; K⁺: 6,0 mEq/L; pH: 7,18. ECG com ondas T apiculadas e alargamento de QRS. A equipe considera início de terapia renal substitutiva (TRS). Todas as afirmativas abaixo estão corrects, **exceto**:",
@@ -377,9 +377,9 @@ const bancoNeuroDificilima = [
 {
   id: 406,
   code: "neuro04-q406",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["brain death", "transcranial doppler", "ancillary testing", "neurosonology", "ethics"],
-  level: "muito_hard",
+  level: "very_hard",
   correct: 3,
   question: {
     pt: "Homem de 46 anos, vítima de traumatismo cranioencefálico grave, evolui para coma profundo com Glasgow 3, ausência de reflexos troncoencefálicos e apneia persistente. Após testes clínicos seriados e exclusão de causas reversíveis, decide-se por um exame complementar para confirmar morte encefálica. O Doppler transcraniano (DTC) é realizado. Sobre o uso do DTC nessa situação, assinale a alternativa incorrect:",
@@ -440,9 +440,9 @@ const bancoNeuroDificilima = [
 {
   id: 407,
   code: "neuro04-q407",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["intracerebral hemorrhage", "venous hypertension", "cerebral venous thrombosis", "posterior fossa", "anticoagulation"],
-  level: "muito_hard",
+  level: "very_hard",
   correct: 1,
   question: {
     pt: "Homem de 59 anos, previamente hígido, apresenta cefaleia súbita intensa e desequilíbrio ao caminhar. É admitido com rebaixamento progressivo do nível de consciência (GCS 10), vômitos e rigidez de nuca. TC de crânio revela hemorragia cerebelar direita e sinais de compressão do quarto ventrículo. AngioTC evidencia sinais indiretos de trombose do seio transverso direito com congestão venosa local. Após estabilização clínica, a equipe discute conduta. Todas as afirmativas abaixo estão corrects, **exceto**:",
@@ -503,9 +503,9 @@ const bancoNeuroDificilima = [
 {
   id: 408,
   code: "neuro04-q408",
-  area: ["neuro", "icu"],
+  area: ["neuro+icu", "neuro"],
   topic: ["intracranial hypertension", "neuroprotection", "cerebral hyperperfusion", "autoregulation", "carotid revascularization", "osmotherapy"],
-  level: "muito_hard",
+  level: "very_hard",
   correct: 2,
   question: {
     pt: "Mulher de 67 anos, hipertensa e dislipidêmica, é submetida a endarterectomia de carótida direita por estenose crítica sintomática. Evolui no pós-operatório imediato com agitação, cefaleia intensa, hipertensão arterial (PA 200x110 mmHg) e sonolência progressiva. TC de crânio sem sinais de AVC. PIC monitorada mostra pressão intracraniana de 26 mmHg, com pressão de perfusão cerebral (PPC) em 90 mmHg. O EEG mostra lentificação difusa sem descargas epileptiformes. A equipe considera tratar a hipertensão intracraniana. Todas as afirmações abaixo estão corrects, **exceto**:",
@@ -566,9 +566,9 @@ const bancoNeuroDificilima = [
 {
     id: 409,
     code: "neuro04-q409",
-    area: ["neuro", "icu"],
+    area: ["neuro+icu", "neuro"],
     topic: ["ischemic stroke", "COVID-19", "hypercoagulability", "thrombosis", "anticoagulation"],
-    level: "muito_hard",
+    level: "very_hard",
     correct: 2,
     question: {
       pt: "Homem de 39 anos, previamente hígido, é admitido na UTI com AVC isquêmico extenso em território da ACM esquerda, após 10 dias de internação por pneumonia grave por COVID-19 com necessidade de ventilação mecânica. Apresentava dímero-D > 4000 ng/mL, trombocitose e ferritina elevada. Estava em heparina de baixo peso molecular profilática. AngioTC mostra trombose em carótida interna esquerda. Não há evidência de fibrilação atrial. Todas as options abaixo estão corrects, **exceto**:",
@@ -641,9 +641,9 @@ const bancoNeuroDificilima = [
   {
     id: 410,
     code: "neuro04-q410",
-    area: ["neuro", "icu"],
+    area: ["neuro+icu", "neuro"],
     topic: ["ARDS", "ventilation", "intracranial pressure", "permissive hypercapnia", "neuroprotection", "lung-brain interaction"],
-    level: "muito_hard",
+    level: "very_hard",
     correct: 3,
     question: {
       pt: "Homem de 51 anos com hemorragia subaracnóidea grau IV (WFNS) evolui com edema cerebral difuso e hipertensão intracraniana, sendo submetido à monitorização da PIC. No 3º dia, desenvolve síndrome do desconforto respiratório agudo (SDRA) com PaO₂/FiO₂ < 100 e infiltrado bilateral. Está em ventilação protetora com PEEP de 12 cmH₂O e PaCO₂ de 62 mmHg. Todas as options estão corrects, **exceto**:",
@@ -704,9 +704,9 @@ const bancoNeuroDificilima = [
 {
     id: 411,
     code: "neuro04-q411",
-    area: ["neuro", "icu"],
+    area: ["neuro+icu", "neuro"],
     topic: ["intracranial hypertension", "tiered therapy", "decompressive craniectomy", "prognosis", "ethics"],
-    level: "muito_hard",
+    level: "very_hard",
     correct: 1,
     question: {
       pt: "Mulher de 74 anos, com histórico de hipertensão e diabetes, é internada após TCE grave por queda. TC mostra contusão frontal extensa e desvio da linha média de 9 mm. PIC monitorada com valores sustentados > 28 mmHg por 6 horas, refratária a sedação, osmoterapia e hiperventilação leve. A equipe considera craniectomia descompressiva. Todas as afirmações abaixo estão corrects, **exceto**:",
@@ -767,9 +767,9 @@ const bancoNeuroDificilima = [
   {
     id: 412,
     code: "neuro04-q412",
-    area: ["neuro", "icu"],
+    area: ["neuro+icu", "neuro"],
     topic: ["ventriculitis", "empirical antibiotics", "external ventricular drain", "intracranial hypertension", "CNS infections"],
-    level: "muito_hard",
+    level: "very_hard",
     correct: 3,
     question: {
       pt: "Homem de 58 anos com hemorragia intraventricular por HIC está com DVE desde o 1º dia de internação. No 8º dia, desenvolve febre, rebaixamento do nível de consciência e secreção purulenta na câmara externa. LCR turvo, com 850 leucócitos/mm³ (90% neutrófilos), proteína 190 mg/dL e glicose 24 mg/dL. A equipe inicia antibioticoterapia empírica. Todas as afirmativas abaixo estão corrects, **exceto**:",
@@ -830,9 +830,9 @@ const bancoNeuroDificilima = [
   {
     id: 413,
     code: "neuro04-q413",
-    area: ["neuro", "icu"],
+    area: ["neuro+icu", "neuro"],
     topic: ["biofilm", "external ventricular drain", "antimicrobial pharmacodynamics", "multidrug resistance", "CNS infections"],
-    level: "muito_hard",
+    level: "very_hard",
     correct: 1,
     question: {
       pt: "Paciente de 63 anos com DVE mantida há 15 dias por hidrocefalia pós-HSA evolui com febre e alteração do nível de consciência. Cultura de LCR com crescimento de Acinetobacter baumannii multirresistente. Considerando os mecanismos de resistência e presença de biofilme, todas as afirmações abaixo estão corrects, **exceto**:",
@@ -893,9 +893,9 @@ const bancoNeuroDificilima = [
   {
     id: 414,
     code: "neuro04-q414",
-    area: ["neuro", "icu"],
+    area: ["neuro+icu", "neuro"],
     topic: ["TBI", "multimodal monitoring", "ICP", "PbtO2", "tiered therapy"],
-    level: "muito_hard",
+    level: "very_hard",
     correct: 1,
     question: {
       pt: "Homem de 34 anos, vítima de colisão veicular, é admitido com TCE grave (GCS 5). TC inicial mostra contusão frontotemporal e edema difuso. Monitorização mostra PIC 24 mmHg, PbtO₂ 14 mmHg e PPC 68 mmHg. Após sedação, osmoterapia e alinhamento postural, a equipe discute próximos passos. Todas as afirmativas abaixo estão corrects, **exceto**:",
@@ -956,9 +956,9 @@ const bancoNeuroDificilima = [
   {
     id: 415,
     code: "neuro04-q415",
-    area: ["neuro", "icu"],
+    area: ["neuro+icu", "neuro"],
     topic: ["TBI", "prognosis", "decompressive craniectomy", "ethical decision", "withdrawal of care"],
-    level: "muito_hard",
+    level: "very_hard",
     correct: 2,
     question: {
       pt: "Mulher de 69 anos, previamente independente, é admitida após TCE grave por atropelamento. GCS inicial 4, TC com lesão hemisférica extensa e desvio da linha média de 11 mm. Após 48h de manejo intensivo, mantém PIC > 30 mmHg e sinais de herniação. A família question sobre continuidade terapêutica. Todas as afirmativas estão corrects, **exceto**:",
@@ -1019,9 +1019,9 @@ const bancoNeuroDificilima = [
   {
     id: 416,
     code: "neuro04-q416",
-    area: ["neuro", "icu"],
+    area: ["neuro+icu", "neuro"],
     topic: ["tracheostomy", "neurosurgery", "ICP", "procedural risk", "ventilator weaning"],
-    level: "muito_hard",
+    level: "very_hard",
     correct: 0,
     question: {
       pt: "Homem de 49 anos, submetido a craniotomia frontal por tumor cerebral, permanece em ventilação mecânica com GCS 6 e sem previsão de extubação. A equipe propõe traqueostomia percutânea no leito da UTI. Todas as afirmações abaixo estão corrects, **exceto**:",
@@ -1082,9 +1082,9 @@ const bancoNeuroDificilima = [
   {
     id: 417,
     code: "neuro04-q417",
-    area: ["neuro", "icu"],
+    area: ["neuro+icu", "neuro"],
     topic: ["postoperative care", "brain tumor", "seizure prevention", "corticosteroids", "complications"],
-    level: "muito_hard",
+    level: "very_hard",
     correct: 1,
     question: {
       pt: "Mulher de 61 anos, submetida a ressecção de meningioma parasagital esquerdo, é admitida na UTI para monitorização. Evolui com paresia leve à direita e cefaleia moderate. Todas as afirmações abaixo estão corrects, **exceto**:",
@@ -1145,9 +1145,9 @@ const bancoNeuroDificilima = [
   {
     id: 418,
     code: "neuro04-q418",
-    area: ["neuro", "icu"],
+    area: ["neuro+icu", "neuro"],
     topic: ["cervical trauma", "spinal cord injury", "immobilization", "neurogenic shock", "airway management"],
-    level: "muito_hard",
+    level: "very_hard",
     correct: 3,
     question: {
       pt: "Homem de 27 anos, vítima de acidente automobilístico, chega intubado à emergência. Apresenta tetraplegia flácida e hipotensão persistente com bradicardia. TC de coluna mostra fratura instável de C5. Todas as afirmativas abaixo estão corrects, **exceto**:",
@@ -1208,9 +1208,9 @@ const bancoNeuroDificilima = [
   {
     id: 419,
     code: "neuro04-q419",
-    area: ["neuro", "icu"],
+    area: ["neuro+icu", "neuro"],
     topic: ["multimodal monitoring", "ICP", "PbtO2", "EEG", "microdialysis"],
-    level: "muito_hard",
+    level: "very_hard",
     correct: 1,
     question: {
       pt: "Paciente de 42 anos com TCE grave está sob monitorização com PIC, PbtO₂, EEG contínuo e microdiálise cerebral. Nas últimas 6h, PIC permaneceu < 20 mmHg, mas PbtO₂ caiu para 13 mmHg, e microdiálise mostra elevação da razão lactato/piruvato para 38. EEG mostra lentificação difusa. Todas as afirmativas abaixo estão corrects, **exceto**:",
@@ -1271,9 +1271,9 @@ const bancoNeuroDificilima = [
   {
     id: 420,
     code: "neuro04-q420",
-    area: ["neuro", "icu"],
+    area: ["neuro+icu", "neuro"],
     topic: ["hyponatremia", "diabetes insipidus", "SIADH", "CSW", "subarachnoid hemorrhage"],
-    level: "muito_hard",
+    level: "very_hard",
     correct: 2,
     question: {
       pt: "Mulher de 56 anos, com HSA por aneurisma de comunicante anterior tratado com clipagem, evolui com hiponatremia (Na⁺ 124 mEq/L), diurese aumentada e hipotensão no 6º dia. Todas as afirmativas abaixo estão corrects, **exceto**:",

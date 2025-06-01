@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Questão - BrainboxMed</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script defer src="firebase-init.js"></script>
+  <script defer src="questao.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col items-center justify-center px-4 py-10">
+  <div class="bg-white p-6 rounded-xl shadow-md w-full max-w-2xl">
+    <h1 class="text-xl font-bold text-purple-700 mb-4">🧠 Questão do Simulado</h1>
+    <p id="enunciado" class="text-gray-700 mb-6">Carregando questão...</p>
+
+    <!-- Área de alternativas -->
+    <div id="alternativas" class="space-y-3 mb-6"></div>
+
+    <div class="flex justify-between">
+      <button id="next-btn" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
+        ▶️ Próxima
+      </button>
+      <button id="logout-btn" class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition">
+        🚪 Sair
+      </button>
+    </div>
+  </div>
+
+  <!-- Bloco de Ads para plano básico -->
+  <div id="ads-container" class="mt-6 w-full max-w-2xl text-center hidden">
+    <p class="text-xs text-gray-500 mb-2">Publicidade</p>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="YYYYYYYYYY"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</body>
+</html>

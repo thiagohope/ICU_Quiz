@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BrainboxMed - Landing Page</title>
+  <title> BrainboxMed - Landing Page </title>
 
   <!-- ✅ Tailwind CSS CDN -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
@@ -12,34 +12,48 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet" />
 </head>
 <body style="margin: 0; padding: 0;">
-<section class="pricing-section py-16" style="background-color: var(--color-background); font-family: 'Inter', sans-serif;">
+<header class="w-full py-3 px-4 sm:px-6 bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-screen-xl mx-auto flex justify-between items-center h-12 sm:h-14">
+    <div id="header-actions-landing" style="position: absolute; top: 1rem; right: 1rem; z-index: 1000; display: flex; align-items: center; gap: 0.5rem;">
+      <button id="login-button-landing"
+        class="bg-purple-600 text-white hover:bg-purple-700 text-xs font-semibold py-1 px-3 rounded-md shadow-sm transition-colors whitespace-nowrap">
+        <span data-i18n="login_button_text">Login</span> 🔑
+      </button>
+      <a href="upgrade.html" id="signup-button-landing"
+        class="border border-purple-600 text-purple-700 hover:bg-purple-600 hover:text-white text-xs font-semibold py-1 px-3 rounded-md shadow-sm transition-colors whitespace-nowrap"
+        style="text-decoration: none;">
+        <span data-i18n="signup_button_text">Sign Up</span> ✨
+      </a>
+    </div>
+  </div>
+  <!-- Seletor de idioma no topo -->
+  <div id="language-selector-landing" style="position: absolute; top: 1rem; left: 1rem; z-index: 1000; display: flex; align-items: center; gap: 0.5rem;">
+    <button onclick="changeLanguage('en')" title="English" style="background: none; border: none; cursor: pointer; padding:0; line-height: 0;">
+      <img src="assets/img/flag-en.png" alt="English" style="height: 32px; width: auto; display: block;"> 
+    </button>
+    <button onclick="changeLanguage('es')" title="Español" style="background: none; border: none; cursor: pointer; padding:0; line-height: 0;">
+      <img src="assets/img/flag-es.png" alt="Español" style="height: 32px; width: auto; display: block;"> 
+    </button>
+    <button onclick="changeLanguage('pt')" title="Português" style="background: none; border: none; cursor: pointer; padding:0; line-height: 0;">
+      <img src="assets/img/flag-pt.png" alt="Português" style="height: 32px; width: auto; display: block;"> 
+    </button>
+  </div>
+ 
+</header>
+  <!-- Logo -->
+  <section class="pricing-section py-16" style="padding-top: 5rem; background-color: var(--color-background); font-family: 'Inter', sans-serif;">
   <div class="max-w-screen-xl mx-auto px-4">
   <div class="text-center mb-10" style="margin: 0; padding: 0;">
-  <!-- Seletor de idioma no topo -->
-  <div style="position: absolute; top: 1rem; right: 1rem; z-index: 999;">
-   <button onclick="changeLanguage('en')" style="background: none; border: none; cursor: pointer; margin-right: 8px;">
-    <img src="flag-en.png" alt="English" style="height: 48px; width: auto;" />
-   </button>
-      <button onclick="changeLanguage('es')" style="background: none; border: none; cursor: pointer;">
-    <img src="flag-es.png" alt="Español" style="height: 48px; width: auto;" />
-   </button>
-   <button onclick="changeLanguage('pt')" style="background: none; border: none; cursor: pointer; margin-right: 8px;">
-    <img src="flag-pt.png" alt="Português" style="height: 48px; width: auto;" />
-   </button>
+   <div style="width: 100%; background-color: #f3f0eb; display: flex; justify-content: center; align-items: center; padding: 48px 0;">
+      <img src="assets/img/logo-brainboxmed-cube.png" alt="BrainboxMed Icon" style="height: 120px; width: auto; margin-right: 32px;" />
+      <img src="assets/img/logo-brainboxmed-name.png" alt="BrainboxMed Text Logo" style="height: 120px; width: auto;" />
   </div>
-
-  <!-- Logo completo com fundo ocupando toda a largura e altura aumentada -->
-  <div style="width: 100%; background-color: #f3f0eb; display: flex; justify-content: center; align-items: center; padding: 48px 0;">
-    <img src="logo-brainboxmed-cube.png" alt="BrainboxMed Icon" style="height: 120px; width: auto; margin-right: 32px;" />
-    <img src="logo-brainboxmed-name.png" alt="BrainboxMed Text Logo" style="height: 120px; width: auto;" />
-  </div>
-
   <!-- Slogan abaixo -->
   <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: #333; text-align: center; margin: 1.5rem auto 2rem auto;">
     Train your brain. Master medicine.
   </p>
   <div class="mb-12">
-   <img src="Students studying.png" alt="Students studying medicine" style="width: 100%; max-height: 420px; object-fit: cover; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.1);">
+   <img src="assets/img/Students studying.png" alt="Students studying medicine" style="width: 100%; max-height: 420px; object-fit: cover; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.1);">
   </div>
   
 <!-- Ad Banner Section -->
@@ -63,7 +77,7 @@
   </div>
 </div>
 
-  <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
   <div class="bg-white rounded-xl p-4 shadow-md border">
     <img src="example-simulation.png" alt="Simulation Example" class="w-full rounded-lg mb-4">
     <p class="text-sm text-gray-600">💻 Full-length exam simulations with real-time timer and feedback</p>
@@ -78,87 +92,103 @@
   </div>
   </div>
 
-    <h2 class="text-3xl font-bold text-center mb-4" id="pricing-title" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h2>
-    <p class="text-center text-base mb-10" id="pricing-desc" style="color: var(--color-text);"></p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 text-center items-start w-full">
+  <h2 class="text-3xl font-bold text-center mb-4" id="pricing-title" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h2>
+  <p class="text-center text-base mb-10" id="pricing-desc" style="color: var(--color-text);"></p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10 text-center items-start w-full">
       <!-- Planos Individuais -->
-      <a href="#" style="text-decoration: none;">
-        <div class="rounded-xl p-6 flex flex-col justify-between transition duration-300 relative"
-         style="background-color: #f7f4fb; border: 1px solid #d5cde2; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);">
-        <h3 id="plan-starter-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
-        <p id="plan-starter-desc" class="text-center text-sm text-gray-500 mb-4"></p>
-        <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$5.99<span class="text-base font-normal">/mo</span></p>
-        <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
-          <li>✅ Simulated test formats (USMLE, etc)</li>
-          <li>✅ All specialties included</li>
-          <li>✅ Updated weekly by doctors</li>
-          <li>⚠️ With ads</li>
-        </ul>
-        <div style="
-          position: absolute;
-          bottom: -12px;
-          left: 50%;
-          transform: translateX(-50%);
-          background-color: #7C3AED;
-          color: white;
-          font-size: 0.75rem;
-          font-weight: bold;
-          padding: 6px 16px;
-          border-radius: 999px;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-          cursor: pointer;
-          ">
-          🎁 Try Free
-        </div>
-        </div>
-        </a>
+      <a href="Plans/plan-basic.html" style="text-decoration: none;">
+      <div class="rounded-xl p-6 flex flex-col justify-between h-full transition duration-300" style="background-color: #f7f4fb; border: 1px solid #d5cde2; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);">
+      <h3 id="plan-starter-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
+      <p id="plan-starter-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+      <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$5.99<span class="text-base font-normal">/mo</span></p>
+      <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+        <li id="starter-li1">✅ Simulated test formats (USMLE, etc)</li>
+        <li id="starter-li2">✅ All specialties included</li>
+        <li id="starter-li3">✅ Updated weekly by doctors</li>
+        <li id="starter-li4">⚠️ With ads</li>
+      </ul>
+      </div>
+      </a>
         
-        <a href="#" style="text-decoration: none;">
-        <div class="rounded-xl p-6 flex flex-col justify-between transition duration-300"
-         style="background-color: #f7f4fb; border: 1px solid #d5cde2; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);">
-        <h3 id="plan-adfree-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
-        <p id="plan-adfree-desc" class="text-center text-sm text-gray-500 mb-4"></p>
-        <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$9.99<span class="text-base font-normal">/mo</span></p>
-        <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
-          <li>✅ Everything in Starter</li>
-          <li>🚫 No ads</li>
-          <li>⚡ Faster access</li>
-        </ul>
+      <a href="Plans/plan-adfree.html" style="text-decoration: none;">
+        <div class="rounded-xl p-6 flex flex-col justify-between transition duration-300" style="background-color: #f7f4fb; border: 1px solid #d5cde2; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);">
+          <h3 id="plan-adfree-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
+          <p id="plan-adfree-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+          <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$9.99<span class="text-base font-normal">/mo</span></p>
+          <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+            <li id="adfree-li1">✅ Everything in Starter</li>
+            <li id="adfree-li2">🚫 No ads</li>
+            <li id="adfree-li3">⚡ Faster access</li>
+          </ul>
         </div>
-        </a>
+      </a>
 
-        <a href="#" style="text-decoration: none;">
-        <div class="rounded-xl p-6 flex flex-col justify-between transition duration-300"
-         style="background-color: #f7f4fb; border: 1px solid #d5cde2; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); position: relative;">
-        <div id="plan-focused-badge" style="position: absolute; top: -16px; left: 50%; transform: translateX(-50%); background-color: #5E3E94; color: white; font-size: 0.75rem; font-weight: bold; padding: 4px 12px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); letter-spacing: 0.5px; text-transform: uppercase;"></div>
-        <h3 id="plan-focused-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
-        <p id="plan-focused-desc" class="text-center text-sm text-gray-500 mb-4"></p>
-        <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$15.99<span class="text-base font-normal">/mo</span></p>
-        <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
-          <li>✅ Everything in Ad-Free</li>
-          <li>🎯 Choose specialty & topic</li>
-          <li>🧠 Adaptive recommendations</li>
-        </ul>
+      <a href="Plans/plan-focused.html" style="text-decoration: none;">
+        <div class="rounded-xl p-6 flex flex-col justify-between transition duration-300" style="background-color: #f7f4fb; border: 1px solid #d5cde2; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); position: relative;">
+          <div id="plan-focused-badge" style="margin-top: -32px; margin-bottom: 12px; background-color: #5E3E94; color: white; font-size: 0.75rem; font-weight: bold; padding: 4px 12px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); letter-spacing: 0.5px; text-align: center; text-transform: uppercase; max-width: 180px; line-height: 1.2; margin-left: auto; margin-right: auto;">
+            🔥 Most Popular
+          </div>
+          <h3 id="plan-focused-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
+            <p id="plan-focused-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$15.99<span class="text-base font-normal">/mo</span></p>
+          <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+            <li id="focused-li1">✅ Everything in Ad-Free</li>
+            <li id="focused-li2">🎯 Choose specialty & topic</li>
+            <li id="focused-li3">🧠 Adaptive recommendations</li>
+          </ul>
         </div>
-        </a>
+      </a>
 
-        <a href="#" style="text-decoration: none;">
+      <a href="Plans/plan-focusedpro.html" style="text-decoration: none;">
         <div class="rounded-xl p-6 flex flex-col justify-between transition duration-300"
-         style="background-color: #f7f4fb; border: 1px solid #d5cde2; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); position: relative;">
-        <div id="plan-sim-badge" style="position: absolute; top: -16px; left: 50%; transform: translateX(-50%); background-color: #5E3E94; color: white; font-size: 0.75rem; font-weight: bold; padding: 4px 12px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); letter-spacing: 0.5px; text-transform: uppercase;"></div>
-        <h3 id="plan-sim-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-highlight); font-family: 'Poppins', sans-serif;"></h3>
-        <p id="plan-sim-desc" class="text-center text-sm text-gray-500 mb-4"></p>
-        <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-highlight);">$17.99<span class="text-base font-normal">/mo</span></p>
-        <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
-          <li>🧪 Full-length timed simulations</li>
-          <li>📈 Performance analytics</li>
-          <li>🧬 Real exam experience</li>
-        </ul>
+            style="background-color: #fef9f5; border: 1px solid #fcd34d; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); position: relative;">
+          <div style="margin-top: -32px; margin-bottom: 12px; background-color: #f59e0b; color: #1f2937; font-size: 0.75rem; font-weight: bold; padding: 4px 12px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); letter-spacing: 0.5px; text-align: center; text-transform: uppercase; max-width: 180px; line-height: 1.2; margin-left: auto; margin-right: auto;">
+            🎧 Includes Study Music
+          </div>
+          <h3 id="plan-focusedpro-title" class="text-xl font-bold text-center mb-2" style="color: #b45309; font-family: 'Poppins', sans-serif;">Focused Study Pro</h3>
+            <p id="plan-focusedpro-desc" class="text-center text-sm text-gray-500 mb-4">Focus deeper with music and analytics</p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: #b45309;">$18.99<span class="text-base font-normal">/mo</span></p>
+          <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+            <li id="focusedpro-li1">🎯 Choose specialty & topic</li>
+            <li id="focusedpro-li2">📊 Performance analytics</li>
+            <li id="focusedpro-li3">🎵 Curated study music</li>
+            <li id="focusedpro-li5">🎧 Will not be available during simulation sessions</li>
+            <li id="focusedpro-li4">🚫 No ads</li>
+          </ul>
         </div>
-        </a>
-    </div>
+      </a>
+
+      <a href="Plans/plan-pro.html" style="text-decoration: none;">
+        <div class="rounded-xl p-6 flex flex-col justify-between transition duration-300" style="background-color: #f7f4fb; border: 1px solid #d5cde2; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); position: relative;">
+           <h3 id="plan-sim-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-highlight); font-family: 'Poppins', sans-serif;"></h3>
+            <p id="plan-sim-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-highlight);">$17.99<span class="text-base font-normal">/mo</span></p>
+          <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+            <li id="sim-li1">🧪 Full-length timed simulations</li>
+            <li id="sim-li2">📈 Performance analytics</li>
+            <li id="sim-li3">🧬 Real exam experience</li>
+          </ul>
+        </div>
+      </a>
+  </div>
+
+  <div class="text-center mt-10">
+    <a id="compare-plans-btn"
+      href="upgrade.html"
+      class="inline-block text-white px-8 py-4 rounded-full text-lg font-bold transition"
+      style="background-color: #F59E0B; font-family: 'Poppins', sans-serif;"
+      onmouseover="this.style.backgroundColor='#D97706'"
+      onmouseout="this.style.backgroundColor='#F59E0B'">
+      🧮 Compare Plans
+    </a>
+  </div>
+
+  <div class="text-center mt-10">
+    <a href="Quiz/demo-quiz.html" class="inline-block bg-purple-600 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-purple-700 transition">
+      <span id="try-free-quiz-text">🎁 Try a Free Quiz Before Choosing a Plan</span>
+    </a>
+  </div>
 
   <div class="mt-20 bg-white rounded-xl shadow-lg p-8 border border-gray-200 max-w-4xl mx-auto text-center">
   <h3 class="text-2xl font-bold mb-2" id="institutional-title" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
@@ -168,37 +198,35 @@
 
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
     <div class="bg-gray-50 p-4 rounded-lg border border-gray-300">
-      <p class="text-sm font-semibold text-gray-700">👥 Up to 10 users</p>
+      <p id="inst-10" class="text-sm font-semibold text-gray-700">👥 Up to 10 users</p>
       <p class="text-lg text-gray-900 font-bold mt-2">$79.99/mo</p>
       <p class="text-sm text-gray-600">or $799.99/yr</p>
     </div>
     <div class="bg-gray-50 p-4 rounded-lg border border-gray-300">
-      <p class="text-sm font-semibold text-gray-700">👥 Up to 50 users</p>
-      <p class="text-lg text-gray-900 font-bold mt-2">$299.99/mo</p>
-      <p class="text-sm text-gray-600">or $2,999.99/yr</p>
+      <p id="inst-50" class="text-sm font-semibold text-gray-700">👥 Up to 50 users</p>
+      <p class="text-lg text-gray-900 font-bold mt-2">$79.99/mo</p>
+      <p class="text-sm text-gray-600">or $799.99/yr</p>
     </div>
     <div class="bg-gray-50 p-4 rounded-lg border border-gray-300">
-      <p class="text-sm font-semibold text-gray-700">👥 Up to 100 users</p>
+      <p id="inst-100" class="text-sm font-semibold text-gray-700">👥 Up to 100 users</p>
       <p class="text-lg text-gray-900 font-bold mt-2">$499.99/mo</p>
       <p class="text-sm text-gray-600">or $4,999.99/yr</p>
     </div>
-    <div class="bg-purple-100 p-4 rounded-lg border-2 border-purple-500">
-      <p class="text-sm font-semibold text-purple-700">🏥 More than 100 users</p>
-      <p class="text-md mt-2 text-purple-900 font-bold italic">Contact us</p>
+    <div class="bg-purple-100 p-4 rounded-lg border-2 border-purple-500 text-center">
+      <p id="inst-100plus" class="text-sm font-semibold text-purple-700">🏥 Mais de 100 usuários</p>
+      <p id="inst-contact" class="text-md mt-2 text-purple-900 font-bold italic">Entre em contato</p>
     </div>
   </div>
-
-  <a href="mailto:contact@brainboxmed.com"
-     class="inline-block bg-purple-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-purple-700 transition"
-     style="font-family: 'Poppins', sans-serif;">
-    📩 Request Institutional Access
-  </a>
-</div>
-
-
-</div>
+    <div class="text-center mt-6">
+      <a id="institutional-btn" href="mailto:contact@brainboxmed.com"
+        class="inline-block bg-purple-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-purple-700 transition"
+        style="font-family: 'Poppins', sans-serif;">
+        📩 Request Institutional Access
+      </a>
+    </div>
   </div>
-</section>
+    </div>
+  </section>
 
 <!-- Bloco de tradução já funcional -->
 <script>
@@ -223,6 +251,36 @@ const translations = {
     'site-slogan': 'Train your brain. Master medicine.',
     'plan-sim-badge': '⭐ Best Way to Study',
     'plan-focused-badge': '🔥 Most Popular',
+    "compare-plans-btn": "🧮 Compare Plans",
+    "plan-starter-btn": "🎁 Try Free",
+    "starter-li1": "✅ Simulated test formats (USMLE, etc)",
+    "starter-li2": "✅ All specialties included",
+    "starter-li3": "✅ Updated weekly by doctors",
+    "starter-li4": "⚠️ With ads",
+    "adfree-li1": "✅ Everything in Starter",
+    "adfree-li2": "🚫 No ads",
+    "adfree-li3": "⚡ Faster access",
+    "focused-li1": "✅ Everything in Ad-Free",
+    "focused-li2": "🎯 Choose specialty & topic",
+    "focused-li3": "🧠 Adaptive recommendations",
+    "sim-li1": "🧪 Full-length timed simulations",
+    "sim-li2": "📈 Performance analytics",
+    "sim-li3": "🧬 Real exam experience",
+    "institutional-title": "🏥 Institutional Plans",
+    "institutional-desc": "For universities, hospitals & residency programs",
+    "inst-10": "👥 Up to 10 users",
+    "inst-50": "👥 Up to 50 users",
+    "inst-100": "👥 Up to 100 users",
+    "inst-100plus": "🏥 More than 100 users",
+    "inst-contact": "Contact us",
+    "price-10": "$79.99/mo",
+    "price-10-year": "or $799.99/yr",
+    "price-50": "$299.99/mo",
+    "price-50-year": "or $2,999.99/yr",
+    "price-100": "$499.99/mo",
+    "price-100-year": "or $4,999.99/yr",
+    "institutional-btn": "📩 Request Institutional Access",
+    "try-free-quiz-text": "🎁 Try a Free Quiz Before Choosing a Plan"
   },
   pt: {
     'pricing-title': 'Escolha Seu Plano',
@@ -243,6 +301,36 @@ const translations = {
     'plan-sim-btn': 'Simular Agora',
     'plan-sim-badge': '⭐ Melhor forma de estudar',
     'plan-focused-badge': '🔥 Mais popular',
+    "compare-plans-btn": "🧮 Comparar Planos",
+    "plan-starter-btn": "🎁 Teste Grátis",
+    "starter-li1": "✅ Formatos simulados de prova (USMLE, etc)",
+    "starter-li2": "✅ Todas as especialidades incluídas",
+    "starter-li3": "✅ Atualizado semanalmente por médicos",
+    "starter-li4": "⚠️ Com anúncios",
+    "adfree-li1": "✅ Tudo do plano Inicial",
+    "adfree-li2": "🚫 Sem anúncios",
+    "adfree-li3": "⚡ Acesso mais rápido",
+    "focused-li1": "✅ Tudo do plano Sem Anúncios",
+    "focused-li2": "🎯 Escolha especialidade e tema",
+    "focused-li3": "🧠 Recomendações adaptativas",
+    "sim-li1": "🧪 Simulados completos com tempo",
+    "sim-li2": "📈 Análises de desempenho",
+    "sim-li3": "🧬 Experiência de prova real",
+    "institutional-title": "🏥 Planos Institucionais",
+    "institutional-desc": "Para universidades, hospitais e programas de residência",
+    "inst-10": "👥 Até 10 usuários",
+    "inst-50": "👥 Até 50 usuários",
+    "inst-100": "👥 Até 100 usuários",
+    "inst-100plus": "🏥 Mais de 100 usuários",
+    "inst-contact": "Entre em contato",
+    "price-10": "R$79,99/mês",
+    "price-10-year": "ou R$799,99/ano",
+    "price-50": "R$299,99/mês",
+    "price-50-year": "ou R$2.999,99/ano",
+    "price-100": "R$499,99/mês",
+    "price-100-year": "ou R$4.999,99/ano",
+    "institutional-btn": "📩 Solicitar Acesso Institucional",
+    "try-free-quiz-text": "🎁 Experimente um Quiz Grátis Antes de Escolher um Plano"
   },
   es: {
     'pricing-title': 'Elige Tu Plan',
@@ -263,6 +351,36 @@ const translations = {
     'plan-sim-btn': 'Simular Ahora',
     'plan-sim-badge': '⭐ Mejor forma de estudiar',
     'plan-focused-badge': '🔥 Más popular',
+    "compare-plans-btn": "🧮 Comparar Planes",
+    "plan-starter-btn": "🎁 Probar Gratis",
+    "starter-li1": "✅ Formatos simulados de examen (USMLE, etc)",
+    "starter-li2": "✅ Todas las especialidades incluidas",
+    "starter-li3": "✅ Actualizado semanalmente por médicos",
+    "starter-li4": "⚠️ Con anuncios",
+    "adfree-li1": "✅ Todo lo del plan Inicial",
+    "adfree-li2": "🚫 Sin anuncios",
+    "adfree-li3": "⚡ Acceso más rápido",
+    "focused-li1": "✅ Todo lo del plan Sin Anuncios",
+    "focused-li2": "🎯 Elige especialidad y tema",
+    "focused-li3": "🧠 Recomendaciones adaptativas",
+    "sim-li1": "🧪 Simulacros completos cronometrados",
+    "sim-li2": "📈 Análisis de rendimiento",
+    "sim-li3": "🧬 Experiencia real de examen",
+    "institutional-title": "🏥 Planes Institucionales",
+    "institutional-desc": "Para universidades, hospitales y programas de residencia",
+    "inst-10": "👥 Hasta 10 usuarios",
+    "inst-50": "👥 Hasta 50 usuarios",
+    "inst-100": "👥 Hasta 100 usuarios",
+    "inst-100plus": "🏥 Más de 100 usuarios",
+    "inst-contact": "Contáctanos",
+    "price-10": "$79.99/mes",
+    "price-10-year": "o $799.99/año",
+    "price-50": "$299.99/mes",
+    "price-50-year": "o $2,999.99/año",
+    "price-100": "$499.99/mes",
+    "price-100-year": "o $4,999.99/año",
+    "institutional-btn": "📩 Solicitar Acceso Institucional",
+    "try-free-quiz-text": "🎁 Prueba un Quiz Gratis Antes de Elegir un Plan"
   }
 };
 
@@ -287,6 +405,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const selector = document.getElementById('language-switch');
   if (selector) selector.value = lang;
 });
+</script>
+<!-- Footer legal -->
+<footer class="text-center text-xs text-gray-500 mt-12 py-6 border-t border-gray-200">
+  <p>&copy; 2024 BrainboxMed. All rights reserved.</p>
+  <p>BrainboxMed™ is a registered educational platform. Unauthorized use is prohibited.</p>
+  <p>
+    <a href="privacy.html" class="text-purple-600 hover:underline">Privacy Policy</a> |
+    <a href="terms.html" class="text-purple-600 hover:underline">Terms of Use</a>
+  </p>
+</footer>
+<script>
+  document.getElementById("flag-en").addEventListener("click", function () {
+    localStorage.setItem("selectedLanguage", "en");
+  });
+  document.getElementById("flag-es").addEventListener("click", function () {
+    localStorage.setItem("selectedLanguage", "es");
+  });
+  document.getElementById("flag-pt").addEventListener("click", function () {
+    localStorage.setItem("selectedLanguage", "pt");
+  });
 </script>
 </body>
 </html>

@@ -76,7 +76,7 @@ function generateSpecialtyCheckboxes(bank, lang = "en") {
   easy: { pt: "Fácil", en: "Easy", es: "Fácil" },
   moderate: { pt: "Moderada", en: "Moderate", es: "Moderada" },
   hard: { pt: "Difícil", en: "Hard", es: "Difícil" },
-  muito_hard: { pt: "Muito Difícil", en: "Very Hard", es: "Muy Difícil" }
+  very_hard: { pt: "Muito Difícil", en: "Very Hard", es: "Muy Difícil" }
   };
 
  // Textos multilíngues
@@ -182,7 +182,7 @@ function generateSpecialtyCheckboxes(bank, lang = "en") {
           "es": "Difícil",
           "pt": "Difícil"
         },
-        "muito_hard": {
+        "very_hard": {
           "en": "Very Hard",
           "es": "Muy Difícil",
           "pt": "Muito Difícil"
@@ -626,7 +626,7 @@ if (linkEl) {
      "easy": t.easy,
      "moderate": t.medium,
      "hard": t.hard,
-     "muito_hard": t.very_hard};
+     "very hard": t.very_hard};
       document.querySelectorAll('.difficulty-filter').forEach(el => {
     const label = el.parentElement;
      label.childNodes[1].textContent = " " + (difficultyLabels[el.value] || el.value);
