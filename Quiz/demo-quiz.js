@@ -217,6 +217,9 @@ function renderQuestion(index) {
 }, 100); // pequeno delay para garantir que os <ins> estejam no DOM
 
   setupFormEventListeners(index);
+  window.scrollTo(0, 0);
+  console.log("Scrolled to top after rendering question.");
+
 }
 
 // Configura os event listeners para o formulário da pergunta atual
@@ -473,6 +476,9 @@ function showFinalAnalytics() {
 
 // Inicializa o quiz quando o DOM estiver carregado
 document.addEventListener("DOMContentLoaded", () => {
+  window.scrollTo(0, 0);
+  console.log("Scrolled to top after rendering question.");
+
   if (typeof demoQuestionBank !== 'undefined' && demoQuestionBank && demoQuestionBank.length > 0) {
     renderQuestion(currentIndex);
   } else {

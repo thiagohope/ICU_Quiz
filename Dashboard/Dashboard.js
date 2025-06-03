@@ -3,6 +3,9 @@
 console.log("📊 user-dashboard.js loaded");
 
 document.addEventListener("DOMContentLoaded", () => {
+    window.scrollTo(0, 0);
+  console.log("Scrolled to top after rendering question.");
+
   const lang = localStorage.getItem("selectedLanguage") || "en";
 
   const translations = {

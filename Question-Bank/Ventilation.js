@@ -2,7 +2,7 @@ const bancoVentilation = [
   {
     "id": 501,
     "code": "pneumo01-q501",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "easy",
     "correct": 2,
@@ -77,7 +77,7 @@ const bancoVentilation = [
   {
     "id": 502,
     "code": "pneumo01-q502",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "easy",
     "correct": 0,
@@ -132,7 +132,7 @@ const bancoVentilation = [
   {
     "id": 503,
     "code": "pneumo01-q503",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "easy",
     "correct": 3,
@@ -207,7 +207,7 @@ const bancoVentilation = [
   {
     "id": 504,
     "code": "pneumo01-q504",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "easy",
     "correct": 4,
@@ -282,7 +282,7 @@ const bancoVentilation = [
   {
     "id": 505,
     "code": "pneumo01-q505",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "easy",
     "correct": 2,
@@ -357,7 +357,7 @@ const bancoVentilation = [
   {
     "id": 506,
     "code": "pneumo01-q506",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "easy",
     "correct": 1,
@@ -432,7 +432,7 @@ const bancoVentilation = [
   {
     "id": 507,
     "code": "pneumo01-q507",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "easy",
     "correct": 0,
@@ -507,7 +507,7 @@ const bancoVentilation = [
   {
     "id": 508,
     "code": "pneumo01-q508",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "easy",
     "correct": 2,
@@ -582,7 +582,7 @@ const bancoVentilation = [
   {
     "id": 509,
     "code": "pneumo01-q509",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "easy",
     "correct": 4,
@@ -657,7 +657,7 @@ const bancoVentilation = [
   {
     "id": 510,
     "code": "pneumo01-q510",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "easy",
     "correct": 3,
@@ -732,7 +732,7 @@ const bancoVentilation = [
   {
     "id": 511,
     "code": "pneumo01-q511",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "moderate",
     "correct": 4,
@@ -807,7 +807,7 @@ const bancoVentilation = [
   {
     "id": 512,
     "code": "pneumo01-q512",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "moderate",
     "correct": 0,
@@ -882,7 +882,7 @@ const bancoVentilation = [
   {
     "id": 513,
     "code": "pneumo01-q513",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "moderate",
     "correct": 1,
@@ -957,7 +957,7 @@ const bancoVentilation = [
   {
     "id": 514,
     "code": "pneumo01-q514",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "moderate",
     "correct": 3,
@@ -1032,7 +1032,7 @@ const bancoVentilation = [
   {
     "id": 515,
     "code": "pneumo01-q515",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "moderate",
     "correct": 2,
@@ -1107,7 +1107,7 @@ const bancoVentilation = [
   {
     "id": 516,
     "code": "pneumo01-q516",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "moderate",
     "correct": 1,
@@ -1182,7 +1182,7 @@ const bancoVentilation = [
   {
     "id": 517,
     "code": "pneumo01-q517",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "moderate",
     "correct": 0,
@@ -1257,7 +1257,7 @@ const bancoVentilation = [
   {
     "id": 518,
     "code": "pneumo01-q518",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "moderate",
     "correct": 3,
@@ -1332,7 +1332,7 @@ const bancoVentilation = [
   {
     "id": 519,
     "code": "pneumo01-q519",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "moderate",
     "correct": 0,
@@ -1407,7 +1407,7 @@ const bancoVentilation = [
   {
     "id": 520,
     "code": "pneumo01-q520",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "moderate",
     "correct": 4,
@@ -1482,7 +1482,7 @@ const bancoVentilation = [
   {
     "id": 521,
     "code": "pneumo01-q521",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "hard",
     "correct": 2,
@@ -1557,7 +1557,7 @@ const bancoVentilation = [
   {
     "id": 522,
     "code": "pneumo01-q522",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation"],
     "level": "hard",
     "correct": 3,
@@ -1632,7 +1632,7 @@ const bancoVentilation = [
   {
     "id": 523,
     "code": "pneumo01-q523",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "ARDS"],
     "level": "hard",
     "correct": 1,
@@ -1707,7 +1707,7 @@ const bancoVentilation = [
   {
     "id": 524,
     "code": "pneumo01-q524",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "ARDS", "pregnancy"],
     "level": "hard",
     "correct": 4,
@@ -1782,7 +1782,7 @@ const bancoVentilation = [
   {
     "id": 525,
     "code": "pneumo01-q525",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "post-arrest"],
     "level": "hard",
     "correct": 4,
@@ -1857,7 +1857,7 @@ const bancoVentilation = [
   {
     "id": 526,
     "code": "pneumo01-q526",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "neuro"],
     "level": "hard",
     "correct": 0,
@@ -1932,7 +1932,7 @@ const bancoVentilation = [
   {
     "id": 527,
     "code": "pneumo01-q527",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "ARDS"],
     "level": "hard",
     "correct": 3,
@@ -2007,7 +2007,7 @@ const bancoVentilation = [
   {
     "id": 528,
     "code": "pneumo01-q528",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "ecmo"],
     "level": "hard",
     "correct": 2,
@@ -2082,7 +2082,7 @@ const bancoVentilation = [
   {
     "id": 529,
     "code": "pneumo01-q529",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "inhalation injury", "burns"],
     "level": "hard",
     "correct": 4,
@@ -2157,7 +2157,7 @@ const bancoVentilation = [
   {
     "id": 530,
     "code": "pneumo01-q530",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "abdominal compartment syndrome"],
     "level": "hard",
     "correct": 1,
@@ -2232,7 +2232,7 @@ const bancoVentilation = [
   {
     "id": 531,
     "code": "pneumo01-q531",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "ARDS", "COPD", "barotrauma"],
     "level": "very_hard",
     "correct": 3,
@@ -2307,7 +2307,7 @@ const bancoVentilation = [
   {
     "id": 532,
     "code": "pneumo01-q532",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "pulmonary embolism", "DAH", "ARDS"],
     "level": "very_hard",
     "correct": 2,
@@ -2382,7 +2382,7 @@ const bancoVentilation = [
   {
     "id": 533,
     "code": "pneumo01-q533",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "ARDS", "hepatic encephalopathy", "acidosis"],
     "level": "very_hard",
     "correct": 4,
@@ -2457,7 +2457,7 @@ const bancoVentilation = [
   {
     "id": 534,
     "code": "pneumo01-q534",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "abdominal compartment syndrome", "ARDS"],
     "level": "very_hard",
     "correct": 1,
@@ -2532,7 +2532,7 @@ const bancoVentilation = [
   {
     "id": 535,
     "code": "pneumo01-q535",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "obesity", "ARDS", "atelectasis"],
     "level": "very_hard",
     "correct": 3,
@@ -2607,7 +2607,7 @@ const bancoVentilation = [
   {
     "id": 536,
     "code": "pneumo01-q536",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "pulmonary hypertension", "RV dysfunction"],
     "level": "very_hard",
     "correct": 2,
@@ -2682,7 +2682,7 @@ const bancoVentilation = [
   {
     "id": 537,
     "code": "pneumo01-q537",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "metabolic acidosis", "DKA", "lactic acidosis"],
     "level": "very_hard",
     "correct": 1,
@@ -2757,7 +2757,7 @@ const bancoVentilation = [
   {
     "id": 538,
     "code": "pneumo01-q538",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "asynchrony", "COPD"],
     "level": "very_hard",
     "correct": 2,
@@ -2832,7 +2832,7 @@ const bancoVentilation = [
   {
     "id": 539,
     "code": "pneumo01-q539",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "asynchrony", "neurocritical care"],
     "level": "very_hard",
     "correct": 4,
@@ -2907,7 +2907,7 @@ const bancoVentilation = [
   {
     "id": 540,
     "code": "pneumo01-q540",
-    "area": ["pneumo"],
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
     "topic": ["ventilation", "asynchrony", "ARDS"],
     "level": "very_hard",
     "correct": 3,
@@ -2979,6 +2979,757 @@ const bancoVentilation = [
       }
     ]
   },
-
+[
+  {
+    "id": 541,
+    "code": "pneumo01-q541",
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
+    "topic": ["niv"],
+    "level": "easy",
+    "correct": 2,
+    "question": {
+      "pt": "Qual das seguintes situações clínicas é uma indicação clássica para o uso de ventilação não invasiva (VNI)?",
+      "en": "Which of the following clinical scenarios is a classic indication for the use of non-invasive ventilation (NIV)?",
+      "es": "¿Cuál de los siguientes escenarios clínicos es una indicación clásica para el uso de ventilación no invasiva (VNI)?"
+    },
+    "options": [
+      {
+        "text": {
+          "pt": "Pneumotórax hipertensivo com instabilidade hemodinâmica",
+          "en": "Tension pneumothorax with hemodynamic instability",
+          "es": "Neumotórax a tensión con inestabilidad hemodinámica"
+        },
+        "explanation": {
+          "pt": "Contraindicação absoluta para VNI. Requer drenagem torácica imediata.",
+          "en": "Absolute contraindication for NIV. Requires immediate chest drainage.",
+          "es": "Contraindicación absoluta para VNI. Requiere drenaje torácico inmediato."
+        }
+      },
+      {
+        "text": {
+          "pt": "Paciente em parada cardiorrespiratória",
+          "en": "Patient in cardiopulmonary arrest",
+          "es": "Paciente en paro cardiorrespiratorio"
+        },
+        "explanation": {
+          "pt": "Contraindicação absoluta. Necessita intubação orotraqueal imediata.",
+          "en": "Absolute contraindication. Requires immediate intubation.",
+          "es": "Contraindicación absoluta. Requiere intubación orotraqueal inmediata."
+        }
+      },
+      {
+        "text": {
+          "pt": "Exacerbação aguda de DPOC com retenção de CO₂ e esforço respiratório aumentado",
+          "en": "Acute COPD exacerbation with CO₂ retention and increased respiratory effort",
+          "es": "Exacerbación aguda de EPOC con retención de CO₂ y aumento del esfuerzo respiratorio"
+        },
+        "explanation": {
+          "pt": "RESPOSTA CORRETA. Indicação clássica com redução de mortalidade e intubação. 📚 Rochwerg B et al. Eur Respir J. 2017;50(2):1602426.",
+          "en": "CORRECT ANSWER. Gold-standard indication with reduced mortality/intubation. 📚 Rochwerg B et al. Eur Respir J. 2017;50(2):1602426.",
+          "es": "RESPUESTA CORRECTA. Indicación bien establecida que reduce mortalidad/intubación. 📚 Rochwerg B et al. Eur Respir J. 2017;50(2):1602426."
+        }
+      },
+      {
+        "text": {
+          "pt": "Traumatismo cranioencefálico grave com rebaixamento do nível de consciência",
+          "en": "Severe traumatic brain injury with decreased level of consciousness",
+          "es": "Traumatismo craneoencefálico grave con disminución del nivel de conciencia"
+        },
+        "explanation": {
+          "pt": "Contraindicação por risco de aspiração e incapacidade de proteger vias aéreas.",
+          "en": "Contraindicated due to aspiration risk and inability to protect airway.",
+          "es": "Contraindicado por riesgo de aspiración e incapacidad para proteger vía aérea."
+        }
+      },
+      {
+        "text": {
+          "pt": "Asma refratária com necessidade de intubação orotraqueal imediata",
+          "en": "Refractory asthma requiring immediate orotracheal intubation",
+          "es": "Asma refractaria que requiere intubación orotraqueal inmediata"
+        },
+        "explanation": {
+          "pt": "VNI geralmente ineficaz; intubação é prioridade.",
+          "en": "NIV typically ineffective; intubation is priority.",
+          "es": "VNI generalmente ineficaz; la intubación es prioritaria."
+        }
+      }
+    ]
+  },
+  {
+    "id": 542,
+    "code": "ventilation-q542",
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
+    "topic": ["niv"],
+    "level": "easy",
+    "correct": 1,
+    "question": {
+      "pt": "Qual das seguintes situações clínicas representa uma contraindicação absoluta ao uso de ventilação não invasiva (VNI)?",
+      "en": "Which of the following clinical conditions is an absolute contraindication to the use of non-invasive ventilation (NIV)?",
+      "es": "¿Cuál de las siguientes condiciones clínicas representa una contraindicación absoluta para el uso de ventilación no invasiva (VNI)?"
+    },
+    "options": [
+      {
+        "text": {
+          "pt": "Edema agudo de pulmão sem instabilidade hemodinâmica",
+          "en": "Acute pulmonary edema without hemodynamic instability",
+          "es": "Edema agudo de pulmón sin inestabilidad hemodinámica"
+        },
+        "explanation": {
+          "pt": "Indicação válida para VNI. Melhora oxigenação e reduz pré-carga.",
+          "en": "Valid indication for NIV. Improves oxygenation and reduces preload.",
+          "es": "Indicación válida para VNI. Mejora oxigenación y reduce precarga."
+        }
+      },
+      {
+        "text": {
+          "pt": "Comprometimento da consciência com Glasgow < 8 e incapacidade de proteger vias aéreas",
+          "en": "Impaired consciousness with Glasgow < 8 and inability to protect the airway",
+          "es": "Compromiso de conciencia con Glasgow < 8 e incapacidad para proteger la vía aérea"
+        },
+        "explanation": {
+          "pt": "RESPOSTA CORRETA. Contraindicação absoluta por risco de aspiração. 📚 Rochwerg B et al. Eur Respir J. 2017;50(2):1602426.",
+          "en": "CORRECT ANSWER. Absolute contraindication due to aspiration risk. 📚 Rochwerg B et al. Eur Respir J. 2017;50(2):1602426.",
+          "es": "RESPUESTA CORRECTA. Contraindicación absoluta por riesgo de aspiración. 📚 Rochwerg B et al. Eur Respir J. 2017;50(2):1602426."
+        }
+      },
+      {
+        "text": {
+          "pt": "Crise asmática moderada em paciente colaborativo",
+          "en": "Moderate asthma exacerbation in a cooperative patient",
+          "es": "Exacerbación asmática moderada en paciente colaborativo"
+        },
+        "explanation": {
+          "pt": "Pode ser tentada com monitorização rigorosa, apesar de não ser primeira escolha.",
+          "en": "May be attempted under close monitoring though not first-line.",
+          "es": "Puede intentarse con monitorización estricta, aunque no es primera elección."
+        }
+      },
+      {
+        "text": {
+          "pt": "Pós-operatório de cirurgia bariátrica com hipoventilação",
+          "en": "Postoperative period after bariatric surgery with hypoventilation",
+          "es": "Postoperatorio de cirugía bariátrica con hipoventilación"
+        },
+        "explanation": {
+          "pt": "Indicação válida para prevenção de atelectasias e insuficiência respiratória.",
+          "en": "Valid indication for preventing atelectasis and respiratory failure.",
+          "es": "Indicación válida para prevenir atelectasias e insuficiencia respiratoria."
+        }
+      },
+      {
+        "text": {
+          "pt": "Pneumonia em paciente com DPOC estável hemodinamicamente",
+          "en": "Pneumonia in a COPD patient who is hemodynamically stable",
+          "es": "Neumonía en paciente con EPOC hemodinámicamente estable"
+        },
+        "explanation": {
+          "pt": "Pode ser utilizada com cautela em casos selecionados.",
+          "en": "May be used cautiously in selected cases.",
+          "es": "Puede utilizarse con precaución en casos seleccionados."
+        }
+      }
+    ]
+  },
+  {
+    "id": 543,
+    "code": "ventilation-q543",
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
+    "topic": ["niv"],
+    "level": "hard",
+    "correct": 2,
+    "question": {
+      "pt": "Homem de 74 anos, tabagista e portador de DPOC GOLD 4, é admitido com dispneia intensa, uso de musculatura acessória, gasometria com pH 7,26, PaCO₂ 78 mmHg e PaO₂ 52 mmHg em ar ambiente. Iniciado suporte com VNI (modo BiPAP). Sobre o manejo desse paciente, assinale a alternativa INCORRETA:",
+      "en": "A 74-year-old man, smoker with GOLD 4 COPD, is admitted with severe dyspnea, use of accessory muscles, ABG showing pH 7.26, PaCO₂ 78 mmHg, and PaO₂ 52 mmHg on room air. NIV (BiPAP mode) is initiated. Regarding the management of this patient, mark the INCORRECT option:",
+      "es": "Hombre de 74 años, fumador y con EPOC GOLD 4, es admitido con disnea intensa, uso de músculos accesorios, GSA con pH 7,26, PaCO₂ 78 mmHg y PaO₂ 52 mmHg en aire ambiente. Se inicia VNI (modo BiPAP). En relación al manejo de este paciente, señale la opción INCORRECTA:"
+    },
+    "options": [
+      {
+        "text": {
+          "pt": "A monitorização do pH e da PaCO₂ nas primeiras 2 horas de VNI é fundamental para avaliar a resposta.",
+          "en": "Monitoring pH and PaCO₂ within the first 2 hours of NIV is crucial to assess response.",
+          "es": "La monitorización del pH y PaCO₂ en las primeras 2 horas de VNI es fundamental para evaluar la respuesta."
+        },
+        "explanation": {
+          "pt": "Correto. Avaliação precoce é essencial para detectar falha da VNI.",
+          "en": "Correct. Early assessment is essential to detect NIV failure.",
+          "es": "Correcto. Evaluación temprana es esencial para detectar fallo de VNI."
+        }
+      },
+      {
+        "text": {
+          "pt": "A ausência de melhora clínica ou laboratorial após 1 a 2 horas pode indicar falha da VNI.",
+          "en": "Lack of clinical or laboratory improvement after 1–2 hours may indicate NIV failure.",
+          "es": "La ausencia de mejoría clínica o de laboratorio tras 1–2 horas puede indicar fallo de la VNI."
+        },
+        "explanation": {
+          "pt": "Correto. Sinais de falha exigem reconsideração da intubação.",
+          "en": "Correct. Signs of failure require reconsideration of intubation.",
+          "es": "Correcto. Signos de fallo exigen reconsiderar intubación."
+        }
+      },
+      {
+        "text": {
+          "pt": "A VNI está contraindicada nesse caso devido à acidose respiratória grave.",
+          "en": "NIV is contraindicated in this case due to severe respiratory acidosis.",
+          "es": "La VNI está contraindicada en este caso debido a acidosis respiratoria grave."
+        },
+        "explanation": {
+          "pt": "RESPOSTA INCORRETA. Acidose respiratória (pH 7.25-7.35) é indicação clássica para VNI em DPOC. 📚 Rochwerg B et al. Eur Respir J. 2017;50(2):1602426.",
+          "en": "INCORRECT STATEMENT. Respiratory acidosis (pH 7.25-7.35) is a key NIV indication in COPD. 📚 Rochwerg B et al. Eur Respir J. 2017;50(2):1602426.",
+          "es": "AFIRMACIÓN INCORRECTA. Acidosis respiratoria (pH 7.25-7.35) es indicación clave de VNI en EPOC. 📚 Rochwerg B et al. Eur Respir J. 2017;50(2):1602426."
+        }
+      },
+      {
+        "text": {
+          "pt": "O paciente deve ser mantido com máscara facial bem ajustada para garantir a eficácia da VNI.",
+          "en": "The patient should be kept on a well-fitted face mask to ensure effective NIV.",
+          "es": "El paciente debe mantenerse con mascarilla facial bien ajustada para garantizar la eficacia de la VNI."
+        },
+        "explanation": {
+          "pt": "Correto. Vazamentos comprometem a eficácia da ventilação.",
+          "en": "Correct. Air leaks compromise ventilation efficacy.",
+          "es": "Correcto. Las fugas comprometen la eficacia de la ventilación."
+        }
+      },
+      {
+        "text": {
+          "pt": "A VNI pode reduzir a necessidade de intubação e a mortalidade em exacerbações de DPOC.",
+          "en": "NIV can reduce intubation needs and mortality in COPD exacerbations.",
+          "es": "La VNI puede reducir la necesidad de intubación y la mortalidad en exacerbaciones de EPOC."
+        },
+        "explanation": {
+          "pt": "Correto. Evidência robusta de benefícios em DPOC hipercápnica.",
+          "en": "Correct. Strong evidence of benefits in hypercapnic COPD.",
+          "es": "Correcto. Evidencia sólida de beneficios en EPOC hipercápnica."
+        }
+      }
+    ]
+  },
+  {
+    "id": 544,
+    "code": "ventilation-q544",
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
+    "topic": ["niv"],
+    "level": "hard",
+    "correct": 3,
+    "question": {
+      "pt": "Mulher de 68 anos, com histórico de ICC e FEVE de 25%, apresenta dispneia súbita, estertores crepitantes difusos e hipoxemia refratária. Está sudoreica, com PA 85x55 mmHg e SpO₂ 86% em máscara não reinalante. A equipe decide iniciar VNI como ponte até estabilização hemodinâmica. Sobre essa conduta, assinale a alternativa INCORRETA:",
+      "en": "A 68-year-old woman with a history of heart failure and LVEF of 25% presents with sudden dyspnea, diffuse crackles, and refractory hypoxemia. She is diaphoretic, BP 85/55 mmHg, SpO₂ 86% on non-rebreather mask. The team initiates NIV as a bridge to hemodynamic stabilization. Regarding this management, select the INCORRECT statement:",
+      "es": "Mujer de 68 años con antecedentes de insuficiencia cardíaca y FEVI de 25% presenta disnea súbita, estertores difusos e hipoxemia refractaria. Está diaforética, con TA 85x55 mmHg y SpO₂ 86% en mascarilla de no reinhalación. El equipo inicia VNI como puente hacia estabilización hemodinámica. Sobre esta conducta, señale la opción INCORRECTA:"
+    },
+    "options": [
+      {
+        "text": {
+          "pt": "A VNI pode melhorar rapidamente a troca gasosa e reduzir a pré-carga em pacientes com edema agudo de pulmão.",
+          "en": "NIV can rapidly improve gas exchange and reduce preload in patients with acute pulmonary edema.",
+          "es": "La VNI puede mejorar rápidamente el intercambio gaseoso y reducir la precarga en pacientes con edema agudo de pulmón."
+        },
+        "explanation": {
+          "pt": "Correto. Mecanismo fisiológico bem estabelecido.",
+          "en": "Correct. Well-established physiological mechanism.",
+          "es": "Correcto. Mecanismo fisiológico bien establecido."
+        }
+      },
+      {
+        "text": {
+          "pt": "A aplicação de pressão positiva pode reduzir o trabalho respiratório e melhorar o débito cardíaco.",
+          "en": "Positive pressure can reduce respiratory effort and improve cardiac output.",
+          "es": "La presión positiva puede reducir el trabajo respiratorio y mejorar el gasto cardíaco."
+        },
+        "explanation": {
+          "pt": "Correto. Benefícios hemodinâmicos em ICC descompensada.",
+          "en": "Correct. Hemodynamic benefits in decompensated heart failure.",
+          "es": "Correcto. Beneficios hemodinámicos en ICC descompensada."
+        }
+      },
+      {
+        "text": {
+          "pt": "A VNI deve ser monitorizada de perto, com avaliação hemodinâmica e da resposta respiratória precoce.",
+          "en": "NIV must be closely monitored, with early assessment of hemodynamic and respiratory response.",
+          "es": "La VNI debe ser monitorizada de cerca, evaluando la respuesta hemodinámica y respiratoria temprana."
+        },
+        "explanation": {
+          "pt": "Correto. Monitorização contínua é mandatória em pacientes instáveis.",
+          "en": "Correct. Continuous monitoring is mandatory in unstable patients.",
+          "es": "Correcto. Monitorización continua es obligatoria en pacientes inestables."
+        }
+      },
+      {
+        "text": {
+          "pt": "A presença de hipotensão moderada isoladamente contraindica o uso de VNI.",
+          "en": "The presence of isolated moderate hypotension contraindicates the use of NIV.",
+          "es": "La presencia de hipotensión moderada aislada contraindica el uso de VNI."
+        },
+        "explanation": {
+          "pt": "RESPOSTA INCORRETA. Hipotensão moderada não é contraindicação absoluta; VNI pode melhorar hemodinâmica. 📚 Vital FM et al. Cochrane Database Syst Rev. 2013;(5):CD005351.",
+          "en": "INCORRECT STATEMENT. Moderate hypotension isn't an absolute contraindication; NIV may improve hemodynamics. 📚 Vital FM et al. Cochrane Database Syst Rev. 2013;(5):CD005351.",
+          "es": "AFIRMACIÓN INCORRECTA. Hipotensión moderada no es contraindicación absoluta; VNI puede mejorar hemodinámica. 📚 Vital FM et al. Cochrane Database Syst Rev. 2013;(5):CD005351."
+        }
+      },
+      {
+        "text": {
+          "pt": "A VNI é frequentemente eficaz e segura no edema agudo de pulmão, mesmo em pacientes graves.",
+          "en": "NIV is often effective and safe in acute pulmonary edema, even in severe patients.",
+          "es": "La VNI es frecuentemente eficaz y segura en edema agudo de pulmón, incluso en pacientes graves."
+        },
+        "explanation": {
+          "pt": "Correto. Segurança demonstrada em ensaios clínicos.",
+          "en": "Correct. Safety demonstrated in clinical trials.",
+          "es": "Correcto. Seguridad demostrada en ensayos clínicos."
+        }
+      }
+    ]
+  },
+  {
+    "id": 545,
+    "code": "ventilation-q545",
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
+    "topic": ["niv"],
+    "level": "very_hard",
+    "correct": 1,
+    "question": {
+      "pt": "Homem de 59 anos, IMC 47 kg/m², é admitido por sonolência progressiva, dispneia e taquicardia. Gasometria arterial revela pH 7,21, PaCO₂ 82 mmHg, HCO₃⁻ 34 mEq/L e PaO₂ 56 mmHg. Diagnóstico provável de síndrome da hipoventilação da obesidade. Está estável hemodinamicamente e é iniciada VNI. Assinale a alternativa INCORRETA:",
+      "en": "A 59-year-old man, BMI 47 kg/m², is admitted with progressive drowsiness, dyspnea, and tachycardia. ABG shows pH 7.21, PaCO₂ 82 mmHg, HCO₃⁻ 34 mEq/L, and PaO₂ 56 mmHg. Probable diagnosis: obesity hypoventilation syndrome. Hemodynamically stable, NIV is initiated. Select the INCORRECT statement:",
+      "es": "Hombre de 59 años, IMC 47 kg/m², ingresa con somnolencia progresiva, disnea y taquicardia. GSA: pH 7,21, PaCO₂ 82 mmHg, HCO₃⁻ 34 mEq/L y PaO₂ 56 mmHg. Diagnóstico probable: síndrome de hipoventilación por obesidad. Estable hemodinámicamente, se inicia VNI. Señale la opción INCORRECTA:"
+    },
+    "options": [
+      {
+        "text": {
+          "pt": "A hipercapnia crônica com compensação metabólica indica adaptação parcial ao distúrbio.",
+          "en": "Chronic hypercapnia with metabolic compensation indicates partial adaptation to the disorder.",
+          "es": "La hipercapnia crónica con compensación metabólica indica una adaptación parcial al trastorno."
+        },
+        "explanation": {
+          "pt": "Correto. HCO₃⁻ elevado reflete compensação renal crônica.",
+          "en": "Correct. Elevated HCO₃⁻ reflects chronic renal compensation.",
+          "es": "Correcto. HCO₃⁻ elevado refleja compensación renal crónica."
+        }
+      },
+      {
+        "text": {
+          "pt": "A VNI está contraindicada em pacientes com pH < 7,25, mesmo que estáveis.",
+          "en": "NIV is contraindicated in patients with pH < 7.25, even if stable.",
+          "es": "La VNI está contraindicada en pacientes con pH < 7,25, incluso si están estables."
+        },
+        "explanation": {
+          "pt": "RESPOSTA INCORRETA. VNI pode ser tentada com pH ≥ 7.20 sob monitorização rigorosa. 📚 Piper AJ, Grunstein RR. Am J Respir Crit Care Med. 2011;183(3):292–298.",
+          "en": "INCORRECT STATEMENT. NIV can be attempted at pH ≥ 7.20 under close monitoring. 📚 Piper AJ, Grunstein RR. Am J Respir Crit Care Med. 2011;183(3):292–298.",
+          "es": "AFIRMACIÓN INCORRECTA. VNI puede intentarse con pH ≥ 7.20 bajo monitorización estricta. 📚 Piper AJ, Grunstein RR. Am J Respir Crit Care Med. 2011;183(3):292–298."
+        }
+      },
+      {
+        "text": {
+          "pt": "A VNI pode reduzir o esforço respiratório e melhorar a ventilação alveolar.",
+          "en": "NIV can reduce respiratory effort and improve alveolar ventilation.",
+          "es": "La VNI puede reducir el esfuerzo respiratorio y mejorar la ventilación alveolar."
+        },
+        "explanation": {
+          "pt": "Correto. Principal mecanismo de ação na síndrome de hipoventilação.",
+          "en": "Correct. Primary mechanism of action in hypoventilation syndromes.",
+          "es": "Correcto. Mecanismo principal de acción en síndromes de hipoventilación."
+        }
+      },
+      {
+        "text": {
+          "pt": "A síndrome da hipoventilação da obesidade associa-se frequentemente a apneia do sono.",
+          "en": "Obesity hypoventilation syndrome is often associated with sleep apnea.",
+          "es": "El síndrome de hipoventilación por obesidad se asocia frecuentemente a apnea del sueño."
+        },
+        "explanation": {
+          "pt": "Correto. >90% dos casos têm SAOS concomitante.",
+          "en": "Correct. >90% of cases have concomitant OSA.",
+          "es": "Correcto. >90% de los casos tienen SAOS concomitante."
+        }
+      },
+      {
+        "text": {
+          "pt": "Monitorização gasométrica nas primeiras horas é essencial para avaliar resposta à VNI.",
+          "en": "ABG monitoring in the first hours is essential to assess NIV response.",
+          "es": "La monitorización de GSA en las primeras horas es esencial para evaluar la respuesta a la VNI."
+        },
+        "explanation": {
+          "pt": "Correto. Avaliação precoce previne falha terapêutica.",
+          "en": "Correct. Early assessment prevents therapeutic failure.",
+          "es": "Correcto. Evaluación temprana previene fallo terapéutico."
+        }
+      }
+    ]
+  },
+  {
+    "id": 546,
+    "code": "ventilation-q546",
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
+    "topic": ["niv"],
+    "level": "very_hard",
+    "correct": 1,
+    "question": {
+      "pt": "Homem de 76 anos, ex-tabagista, com DPOC GOLD IV, apresenta dispneia aguda e sonolência. Gasometria: pH 7,30, PaCO₂ 60 mmHg, HCO₃⁻ 30 mEq/L. Iniciada VNI com melhora parcial. Após 1h, piora da dispneia e crepitações subcutâneas no pescoço. Suspeita-se de pneumotórax oculto. Sobre o caso, assinale a alternativa INCORRETA:",
+      "en": "A 76-year-old man, former smoker with GOLD IV COPD, presents with acute dyspnea and drowsiness. ABG: pH 7.30, PaCO₂ 60 mmHg, HCO₃⁻ 30 mEq/L. NIV is started with partial improvement. After 1 hour, dyspnea worsens and subcutaneous crepitus is found in the neck. A hidden pneumothorax is suspected. Select the INCORRECT statement:",
+      "es": "Hombre de 76 años, exfumador, con EPOC GOLD IV, presenta disnea aguda y somnolencia. GSA: pH 7,30, PaCO₂ 60 mmHg, HCO₃⁻ 30 mEq/L. Se inicia VNI con mejoría parcial. Tras 1h, empeora la disnea y se detectan crepitaciones subcutáneas en el cuello. Se sospecha neumotórax oculto. Señale la opción INCORRECTA:"
+    },
+    "options": [
+      {
+        "text": {
+          "pt": "Pacientes com DPOC avançado têm risco aumentado de barotrauma durante a VNI.",
+          "en": "Patients with advanced COPD have increased risk of barotrauma during NIV.",
+          "es": "Los pacientes con EPOC avanzado tienen mayor riesgo de barotrauma durante la VNI."
+        },
+        "explanation": {
+          "pt": "Correto. Enfisema e bolhas aumentam vulnerabilidade.",
+          "en": "Correct. Emphysema and bullae increase vulnerability.",
+          "es": "Correcto. Enfisema y bullas aumentan vulnerabilidad."
+        }
+      },
+      {
+        "text": {
+          "pt": "A VNI deve sempre ser mantida, mesmo após o aparecimento de sinais clínicos de pneumotórax oculto.",
+          "en": "NIV should always be maintained, even after clinical signs of hidden pneumothorax appear.",
+          "es": "La VNI debe mantenerse siempre, incluso tras aparición de signos clínicos de neumotórax oculto."
+        },
+        "explanation": {
+          "pt": "RESPOSTA INCORRETA. VNI deve ser interrompida imediatamente sob suspeita de pneumotórax. 📚 Light RW. Pleural Diseases. 6th ed. 2013.",
+          "en": "INCORRECT STATEMENT. NIV must be stopped immediately if pneumothorax is suspected. 📚 Light RW. Pleural Diseases. 6th ed. 2013.",
+          "es": "AFIRMACIÓN INCORRECTA. VNI debe interrumpirse inmediatamente ante sospecha de neumotórax. 📚 Light RW. Pleural Diseases. 6ª ed. 2013."
+        }
+      },
+      {
+        "text": {
+          "pt": "Pneumotórax oculto pode não ser evidente na radiografia de tórax inicial, exigindo TC em casos selecionados.",
+          "en": "Hidden pneumothorax may not be evident on initial chest X-ray, requiring CT scan in selected cases.",
+          "es": "El neumotórax oculto puede no ser evidente en la radiografía inicial, requiriendo TAC en casos seleccionados."
+        },
+        "explanation": {
+          "pt": "Correto. Sensibilidade da radiografia é limitada.",
+          "en": "Correct. Chest X-ray sensitivity is limited.",
+          "es": "Correcto. La sensibilidad de la radiografía es limitada."
+        }
+      },
+      {
+        "text": {
+          "pt": "A detecção precoce de enfisema subcutâneo ou instabilidade clínica deve levar à interrupção da VNI e avaliação urgente.",
+          "en": "Early detection of subcutaneous emphysema or clinical instability should lead to NIV interruption and urgent evaluation.",
+          "es": "La detección precoz de enfisema subcutáneo o inestabilidad clínica debe conducir a la interrupción de la VNI y evaluación urgente."
+        },
+        "explanation": {
+          "pt": "Correto. Sinais de alarme para complicações graves.",
+          "en": "Correct. Red flags for serious complications.",
+          "es": "Correcto. Signos de alarma para complicaciones graves."
+        }
+      },
+      {
+        "text": {
+          "pt": "Em casos de dúvida diagnóstica, o pneumotórax pode ser confirmado por ultrassonografia à beira-leito.",
+          "en": "In diagnostic uncertainty, pneumothorax may be confirmed by bedside ultrasound.",
+          "es": "En casos de duda diagnóstica, el neumotórax puede confirmarse com ecografía a pie de cama."
+        },
+        "explanation": {
+          "pt": "Correto. Método rápido e confiável para diagnóstico.",
+          "en": "Correct. Rapid and reliable diagnostic method.",
+          "es": "Correcto. Método rápido y fiable para diagnóstico."
+        }
+      }
+    ]
+  },
+  {
+    "id": 547,
+    "code": "ventilation-q547",
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
+    "topic": ["recruitment"],
+    "level": "easy",
+    "correct": 3,
+    "question": {
+      "pt": "Qual das seguintes afirmativas descreve corretamente o conceito de recrutamento alveolar durante a ventilação mecânica?",
+      "en": "Which of the following statements correctly describes the concept of alveolar recruitment during mechanical ventilation?",
+      "es": "¿Cuál de las siguientes afirmaciones describe correctamente el concepto de reclutamiento alveolar durante la ventilación mecánica?"
+    },
+    "options": [
+      {
+        "text": {
+          "pt": "Consiste na redução do volume corrente para evitar barotrauma.",
+          "en": "It consists of reducing tidal volume to avoid barotrauma.",
+          "es": "Consiste en reducir el volumen corriente para evitar barotrauma."
+        },
+        "explanation": {
+          "pt": "Errado. Descreve ventilação protetora, não recrutamento.",
+          "en": "Incorrect. Describes protective ventilation, not recruitment.",
+          "es": "Incorrecto. Describe ventilación protectora, no reclutamiento."
+        }
+      },
+      {
+        "text": {
+          "pt": "Refere-se ao uso de bloqueadores neuromusculares para sedação profunda.",
+          "en": "Refers to the use of neuromuscular blockers for deep sedation.",
+          "es": "Se refiere al uso de bloqueadores neuromusculares para sedación profunda."
+        },
+        "explanation": {
+          "pt": "Errado. Relaciona-se ao manejo da SDRA grave, não ao recrutamento.",
+          "en": "Incorrect. Related to ARDS management, not recruitment.",
+          "es": "Incorrecto. Relacionado con manejo de SDRA, no reclutamiento."
+        }
+      },
+      {
+        "text": {
+          "pt": "É a técnica de substituir o modo volume-controlado por pressão-suporte.",
+          "en": "It is the technique of switching from volume control mode to pressure support.",
+          "es": "Es la técnica de cambiar del modo volumen controlado a soporte de presión."
+        },
+        "explanation": {
+          "pt": "Errado. Modos ventilatórios não definem recrutamento.",
+          "en": "Incorrect. Ventilation modes don't define recruitment.",
+          "es": "Incorrecto. Modos ventilatorios no definen reclutamiento."
+        }
+      },
+      {
+        "text": {
+          "pt": "É o processo de reabertura de unidades alveolares previamente colapsadas por meio de manobras ventilatórias específicas.",
+          "en": "It is the process of reopening previously collapsed alveolar units through specific ventilatory maneuvers.",
+          "es": "Es el proceso de reapertura de unidades alveolares previamente colapsadas mediante maniobras ventilatorias específicas."
+        },
+        "explanation": {
+          "pt": "RESPOSTA CORRETA. Definição precisa de recrutamento alveolar. 📚 Fan E et al. Am J Respir Crit Care Med. 2017;195(9):1253–63.",
+          "en": "CORRECT ANSWER. Precise definition of alveolar recruitment. 📚 Fan E et al. Am J Respir Crit Care Med. 2017;195(9):1253–63.",
+          "es": "RESPUESTA CORRECTA. Definición precisa de reclutamiento alveolar. 📚 Fan E et al. Am J Respir Crit Care Med. 2017;195(9):1253–63."
+        }
+      },
+      {
+        "text": {
+          "pt": "Implica suspender a PEEP por alguns ciclos respiratórios.",
+          "en": "It implies suspending PEEP for a few respiratory cycles.",
+          "es": "Implica suspender la PEEP durante algunos ciclos respiratorios."
+        },
+        "explanation": {
+          "pt": "Errado. Descreve desrecrutamento, não recrutamento.",
+          "en": "Incorrect. Describes derecruitment, not recruitment.",
+          "es": "Incorrecto. Describe desreclutamiento, no reclutamiento."
+        }
+      }
+    ]
+  },
+  {
+    "id": 548,
+    "code": "ventilation-q548",
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
+    "topic": ["recruitment"],
+    "level": "moderate",
+    "correct": 0,
+    "question": {
+      "pt": "Paciente de 63 anos, submetido a cirurgia abdominal superior, evolui no 1º dia pós-operatório com dessaturação e ausculta reduzida na base pulmonar direita. A radiografia mostra opacidade sugestiva de atelectasia. Qual das condutas abaixo é mais apropriada para promover recrutamento alveolar nesse cenário?",
+      "en": "A 63-year-old patient, post upper abdominal surgery, presents on the first postoperative day with desaturation and decreased breath sounds in the right lung base. Chest X-ray shows opacity suggestive of atelectasis. Which of the following is the most appropriate strategy to promote alveolar recruitment in this scenario?",
+      "es": "Paciente de 63 años, tras cirugía abdominal superior, presenta en el primer día postoperatorio desaturación y ruidos respiratorios disminuidos en la base pulmonar derecha. La radiografía muestra opacidad sugestiva de atelectasia. ¿Cuál de las siguientes es la estrategia más apropiada para promover reclutamiento alveolar en este escenario?"
+    },
+    "options": [
+      {
+        "text": {
+          "pt": "Aplicar manobra de recrutamento com aumento gradual de PEEP sob vigilância hemodinâmica.",
+          "en": "Apply recruitment maneuver with gradual PEEP increase under hemodynamic monitoring.",
+          "es": "Aplicar maniobra de reclutamiento con aumento gradual de PEEP bajo monitorización hemodinámica."
+        },
+        "explanation": {
+          "pt": "RESPOSTA CORRETA. Estratégia efetiva para reverter atelectasia pós-operatória. 📚 Duggan M, Kavanagh BP. Anesthesiology. 2005;102(4):838-854.",
+          "en": "CORRECT ANSWER. Effective strategy to reverse postoperative atelectasis. 📚 Duggan M, Kavanagh BP. Anesthesiology. 2005;102(4):838-854.",
+          "es": "RESPUESTA CORRECTA. Estrategia efectiva para revertir atelectasia postoperatoria. 📚 Duggan M, Kavanagh BP. Anesthesiology. 2005;102(4):838-854."
+        }
+      },
+      {
+        "text": {
+          "pt": "Suspender ventilação e iniciar oxigenoterapia por máscara de Venturi.",
+          "en": "Discontinue ventilation and start oxygen therapy via Venturi mask.",
+          "es": "Suspender la ventilación e iniciar oxigenoterapia con máscara de Venturi."
+        },
+        "explanation": {
+          "pt": "Pode agravar atelectasia ao reduzir pressão positiva.",
+          "en": "May worsen atelectasis by reducing positive pressure.",
+          "es": "Puede agravar atelectasia al reducir presión positiva."
+        }
+      },
+      {
+        "text": {
+          "pt": "Utilizar ventilação espontânea com FiO₂ de 100% por 6 horas.",
+          "en": "Use spontaneous ventilation with 100% FiO₂ for 6 hours.",
+          "es": "Utilizar ventilación espontánea con FiO₂ al 100% durante 6 horas."
+        },
+        "explanation": {
+          "pt": "Oxigenação isolada não reverte colapso alveolar.",
+          "en": "Oxygenation alone doesn't reverse alveolar collapse.",
+          "es": "Oxigenación aislada no revierte colapso alveolar."
+        }
+      },
+      {
+        "text": {
+          "pt": "Reduzir a PEEP para valores entre 2 e 3 cmH₂O.",
+          "en": "Reduce PEEP to values between 2 and 3 cmH₂O.",
+          "es": "Reducir la PEEP a valores entre 2 y 3 cmH₂O."
+        },
+        "explanation": {
+          "pt": "Piora o recrutamento ao diminuir pressão de distensão.",
+          "en": "Worsens recruitment by reducing distending pressure.",
+          "es": "Empeora el reclutamiento al disminuir presión de distensión."
+        }
+      },
+      {
+        "text": {
+          "pt": "Evitar qualquer intervenção, pois a atelectasia é autolimitada no pós-operatório.",
+          "en": "Avoid any intervention as atelectasis is self-limiting postoperatively.",
+          "es": "Evitar cualquier intervención, ya que la atelectasia es autolimitada en el postoperatorio."
+        },
+        "explanation": {
+          "pt": "Atelectasia não tratada pode evoluir para pneumonia.",
+          "en": "Untreated atelectasis may progress to pneumonia.",
+          "es": "La atelectasia no tratada puede evolucionar a neumonía."
+        }
+      }
+    ]
+  },
+  {
+    "id": 549,
+    "code": "ventilation-q549",
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
+    "topic": ["recruitment", "ards"],
+    "level": "very_hard",
+    "correct": 1,
+    "question": {
+      "pt": "Paciente com 38 anos, previamente hígido, internado por pneumonia grave com necessidade de ventilação mecânica. Após 48h, evolui com PaO₂/FiO₂ de 90 sob PEEP de 15 cmH₂O e pressão de platô de 28 cmH₂O. TC mostra infiltrados difusos. Qual das alternativas a seguir é INCORRETA quanto ao manejo com manobras de recrutamento alveolar neste caso de SDRA grave?",
+      "en": "A 38-year-old previously healthy patient is admitted with severe pneumonia requiring mechanical ventilation. After 48 hours, PaO₂/FiO₂ is 90 under PEEP 15 cmH₂O and plateau pressure of 28 cmH₂O. CT shows diffuse infiltrates. Which of the following statements is INCORRECT regarding alveolar recruitment maneuvers in this severe ARDS case?",
+      "es": "Paciente de 38 años, previamente sano, ingresado por neumonía grave con necesidad de ventilación mecánica. Tras 48 horas, PaO₂/FiO₂ de 90 con PEEP de 15 cmH₂O y presión plateau de 28 cmH₂O. TC muestra infiltrados difusos. ¿Cuál de las siguientes afirmaciones es INCORRECTA respecto al uso de maniobras de reclutamiento en este caso de SDRA grave?"
+    },
+    "options": [
+      {
+        "text": {
+          "pt": "Manobras de recrutamento podem ser benéficas, mas devem ser individualizadas e monitoradas cuidadosamente.",
+          "en": "Recruitment maneuvers can be beneficial but must be individualized and carefully monitored.",
+          "es": "Las maniobras de reclutamiento pueden ser beneficiosas, pero deben individualizarse y monitorizarse cuidadosamente."
+        },
+        "explanation": {
+          "pt": "Correto. Princípio fundamental do manejo de SDRA.",
+          "en": "Correct. Fundamental principle of ARDS management.",
+          "es": "Correcto. Principio fundamental del manejo de SDRA."
+        }
+      },
+      {
+        "text": {
+          "pt": "Deve-se utilizar PEEP ≥ 20 cmH₂O e pressão de platô acima de 40 cmH₂O como rotina em todos os casos.",
+          "en": "PEEP ≥ 20 cmH₂O and plateau pressure above 40 cmH₂O should routinely be used in all cases.",
+          "es": "Se debe utilizar PEEP ≥ 20 cmH₂O y presión plateau por encima de 40 cmH₂O de forma rutinaria en todos los casos."
+        },
+        "explanation": {
+          "pt": "RESPOSTA INCORRETA. Pressões elevadas não são padrão universal; risco de barotrauma. 📚 Fan E et al. Am J Respir Crit Care Med. 2017;195(9):1253–63.",
+          "en": "INCORRECT STATEMENT. High pressures aren't universal; risk of barotrauma. 📚 Fan E et al. Am J Respir Crit Care Med. 2017;195(9):1253–63.",
+          "es": "AFIRMACIÓN INCORRECTA. Presiones elevadas no son estándar universal; riesgo de barotrauma. 📚 Fan E et al. Am J Respir Crit Care Med. 2017;195(9):1253–63."
+        }
+      },
+      {
+        "text": {
+          "pt": "Há risco de barotrauma com uso agressivo de pressões elevadas.",
+          "en": "There is a risk of barotrauma with aggressive use of high pressures.",
+          "es": "Existe riesgo de barotrauma con el uso agresivo de presiones elevadas."
+        },
+        "explanation": {
+          "pt": "Correto. Complicação bem documentada em SDRA.",
+          "en": "Correct. Well-documented complication in ARDS.",
+          "es": "Correcto. Complicación bien documentada en SDRA."
+        }
+      },
+      {
+        "text": {
+          "pt": "Pacientes com complacência pulmonar muito baixa podem responder de forma limitada.",
+          "en": "Patients with very low pulmonary compliance may have limited response.",
+          "es": "Los pacientes con compliance pulmonar muy baja pueden tener una respuesta limitada."
+        },
+        "explanation": {
+          "pt": "Correto. Fatores mecânicos influenciam resposta ao recrutamento.",
+          "en": "Correct. Mechanical factors influence recruitment response.",
+          "es": "Correcto. Factores mecánicos influyen en respuesta al reclutamiento."
+        }
+      },
+      {
+        "text": {
+          "pt": "A resposta ao recrutamento deve ser avaliada por melhora da oxigenação e estabilidade hemodinâmica.",
+          "en": "Response to recruitment should be assessed by improvement in oxygenation and hemodynamic stability.",
+          "es": "La respuesta al reclutamiento debe evaluarse por mejoría de la oxigenación y estabilidad hemodinámica."
+        },
+        "explanation": {
+          "pt": "Correto. Parâmetros-chave para avaliação de eficácia.",
+          "en": "Correct. Key parameters for efficacy assessment.",
+          "es": "Correcto. Parámetros clave para evaluación de eficacia."
+        }
+      }
+    ]
+  },
+  {
+    "id": 550,
+    "code": "ventilation-q550",
+    "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
+    "topic": ["recruitment", "asynchrony", "pneumonia", "niv"],
+    "level": "very_hard",
+    "correct": 4,
+    "question": {
+      "pt": "Paciente de 64 anos, hipertenso e diabético, é internado por pneumonia grave e colocado inicialmente em VNI. Após 6 horas, apresenta piora da gasometria (PaO₂/FiO₂ < 120) e aumento do trabalho respiratório, sendo intubado. Na ventilação invasiva, evolui com assincronia de esforço (trigger ineficaz), assincronia de ciclagem (ciclagem precoce) e assincronia de fluxo (demanda alta não atendida). Apesar do ajuste dos parâmetros, continua hipoxêmico com colapso alveolar em bases pulmonares à TC. Considera-se manobra de recrutamento, mas o paciente encontra-se em uso de noradrenalina em dose moderada. Qual das alternativas é INCORRETA nesse contexto?",
+      "en": "A 64-year-old hypertensive and diabetic patient is admitted with severe pneumonia and initially placed on NIV. After 6 hours, arterial blood gas worsens (PaO₂/FiO₂ < 120) with increased respiratory effort, leading to intubation. Under invasive ventilation, the patient presents effort asynchrony (ineffective trigger), cycling asynchrony (premature cycling), and flow asynchrony (high unmet demand). Despite parameter adjustments, hypoxemia persists with alveolar collapse seen in basal lungs on CT. Recruitment maneuver is considered, but the patient is on moderate-dose norepinephrine. Which of the following is INCORRECT in this context?",
+      "es": "Paciente de 64 años, hipertenso y diabético, ingresa por neumonía grave y se inicia con VNI. Tras 6 horas, empeora la gasometría (PaO₂/FiO₂ < 120) con aumento del trabajo respiratorio, siendo intubado. En ventilación invasiva, presenta asincronía de esfuerzo (disparo ineficaz), asincronía de ciclaje (ciclaje precoz) y asincronía de flujo (alta demanda no atendida). A pesar de ajustes ventilatorios, persiste hipoxemia con colapso alveolar en bases pulmonares según TC. Se considera maniobra de reclutamiento, pero el paciente recibe noradrenalina en dosis moderada. ¿Cuál de las siguientes afirmaciones es INCORRECTA en este contexto?"
+    },
+    "options": [
+      {
+        "text": {
+          "pt": "A presença de assincronias pode contribuir para a hipoxemia persistente e deve ser corrigida antes de considerar recrutamento.",
+          "en": "Presence of asynchronies may contribute to persistent hypoxemia and should be corrected before considering recruitment.",
+          "es": "La presencia de asincronías puede contribuir a la hipoxemia persistente y debe corregirse antes de considerar reclutamiento."
+        },
+        "explanation": {
+          "pt": "Correto. Prioridade para otimizar ventilação.",
+          "en": "Correct. Priority to optimize ventilation.",
+          "es": "Correcto. Prioridad para optimizar ventilación."
+        }
+      },
+      {
+        "text": {
+          "pt": "Recrutamento alveolar pode agravar a instabilidade hemodinâmica, especialmente com PEEP elevada.",
+          "en": "Alveolar recruitment may worsen hemodynamic instability, especially with high PEEP.",
+          "es": "El reclutamiento alveolar puede agravar la inestabilidad hemodinámica, especialmente con PEEP elevada."
+        },
+        "explanation": {
+          "pt": "Correto. Risco em pacientes sob vasopressores.",
+          "en": "Correct. Risk in patients on vasopressors.",
+          "es": "Correcto. Riesgo en pacientes con vasopresores."
+        }
+      },
+      {
+        "text": {
+          "pt": "A utilização de modos assistidos pode atenuar parte das assincronias, se bem ajustados ao esforço do paciente.",
+          "en": "Use of assisted modes may reduce asynchronies if well matched to the patient’s effort.",
+          "es": "El uso de modos asistidos puede reducir las asincronías si se ajustan bien al esfuerzo del paciente."
+        },
+        "explanation": {
+          "pt": "Correto. Estratégia válida para sincronização.",
+          "en": "Correct. Valid strategy for synchronization.",
+          "es": "Correcto. Estrategia válida para sincronización."
+        }
+      },
+      {
+        "text": {
+          "pt": "A monitorização contínua da complacência e da pressão de platô é fundamental para avaliar resposta ao recrutamento.",
+          "en": "Continuous monitoring of compliance and plateau pressure is essential to assess recruitment response.",
+          "es": "El monitoreo continuo de la compliance y la presión plateau es fundamental para evaluar la respuesta al reclutamiento."
+        },
+        "explanation": {
+          "pt": "Correto. Parâmetros essenciais para segurança.",
+          "en": "Correct. Essential parameters for safety.",
+          "es": "Correcto. Parámetros esenciales para seguridad."
+        }
+      },
+      {
+        "text": {
+          "pt": "Manobra de recrutamento deve ser realizada imediatamente, mesmo sem controle das assincronias ou estabilidade hemodinâmica.",
+          "en": "Recruitment maneuver should be performed immediately, even without addressing asynchronies or hemodynamic stability.",
+          "es": "La maniobra de reclutamiento debe realizarse de inmediato, incluso sin corregir las asincronías o lograr estabilidad hemodinámica."
+        },
+        "explanation": {
+          "pt": "RESPOSTA INCORRETA. Recrutamento exige estabilização prévia. 📚 Thille AW et al. Intensive Care Med. 2006;32:1515–1522.",
+          "en": "INCORRECT STATEMENT. Recruitment requires prior stabilization. 📚 Thille AW et al. Intensive Care Med. 2006;32:1515–1522.",
+          "es": "AFIRMACIÓN INCORRECTA. Reclutamiento exige estabilización previa. 📚 Thille AW et al. Intensive Care Med. 2006;32:1515–1522."
+        }
+      }
+    ]
+  },
+]
 ];
 questionBank.addBank(bancoVentilation);

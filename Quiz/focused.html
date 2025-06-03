@@ -6,7 +6,7 @@
   <title>Focused Mode - BrainboxMed™</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body>
   <div id="top-controls-bar" class="w-full py-2 px-4 sm:px-6 bg-gray-100 shadow-sm">
@@ -66,7 +66,8 @@
     }
   };
   const t = translations[lang] || translations['en'];
-document.getElementById("logout_button_text_content").textContent = t.logout_button_text_content;
+const logoutTextSpan = document.getElementById("dashboard_logout_text");
+if (logoutTextSpan) logoutTextSpan.textContent = t.logout_button_text_content;
 document.getElementById("legal-notice-text").textContent = t["legal-notice-text"];
 
 document.getElementById('logout-button-interactive').addEventListener('click', () => {
@@ -104,6 +105,8 @@ if (goDashboardBtn) {
 <script src="../Question-Bank/Cardio04.js"></script>
 <script src="../Question-Bank/Pneumo01.js"></script>
 <script src="../Question-Bank/Pneumo02.js"></script>
+<script src="../Question-Bank/Pneumo03.js"></script>
+<script src="../Question-Bank/Pneumo04.js"></script>
 <script src="../Question-Bank/Ventilation.js"></script>
 <script src="focused.js"></script>
 </body>

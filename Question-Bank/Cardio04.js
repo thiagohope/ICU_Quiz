@@ -2,7 +2,7 @@ const bancoCardioDificilima = [
 {
   id: 401,
   code: "cardio04-q401",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["myocardial infarction", "valvular complications", "cardiogenic shock", "echocardiography", "surgery"],
   level: "very_hard",
   correct: 1,
@@ -77,7 +77,7 @@ const bancoCardioDificilima = [
   {
   id: 402,
   code: "cardio04-q402",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["myocardial infarction", "septal rupture", "cardiogenic shock", "echocardiography", "emergency surgery"],
   level: "very_hard",
   correct: 2,
@@ -152,7 +152,7 @@ const bancoCardioDificilima = [
 {
   id: 403,
   code: "cardio04-q403",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["myocardial infarction", "free wall rupture", "cardiac tamponade", "pericardial effusion", "emergency surgery"],
   level: "very_hard",
   correct: 0,
@@ -227,7 +227,7 @@ const bancoCardioDificilima = [
 {
   id: 404,
   code: "cardio04-q404",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["cardiogenic shock", "ecmo", "myocardial infarction", "advanced support", "multiorgan failure"],
   level: "very_hard",
   correct: 4,
@@ -302,7 +302,7 @@ const bancoCardioDificilima = [
 {
   id: 405,
   code: "cardio04-q405",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["heart failure", "acute kidney injury", "renal replacement therapy", "hemodynamics", "multiorgan interaction"],
   level: "very_hard",
   correct: 2,
@@ -377,7 +377,7 @@ const bancoCardioDificilima = [
 {
   id: 406,
   code: "cardio04-q406",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["acute pulmonary edema", "hypertensive emergency", "vasodilators", "noninvasive ventilation", "diuretics"],
   level: "very_hard",
   correct: 3,
@@ -452,7 +452,7 @@ const bancoCardioDificilima = [
 {
   id: 407,
   code: "cardio04-q407",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["pulmonary embolism", "heart failure", "post-myocardial infarction", "prolonged hospitalization", "differential diagnosis"],
   level: "very_hard",
   correct: 1,
@@ -527,7 +527,7 @@ const bancoCardioDificilima = [
 {
   id: 408,
   code: "cardio04-q408",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["septic shock", "echocardiography", "hemodynamic monitoring", "volume responsiveness", "vasoplegia"],
   level: "very_hard",
   correct: 1,
@@ -602,7 +602,7 @@ const bancoCardioDificilima = [
 {
   id: 409,
   code: "cardio04-q409",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["cardiogenic shock", "echocardiography", "left ventricular dysfunction", "mechanical support", "hemodynamics"],
   level: "very_hard",
   correct: 0,
@@ -677,7 +677,7 @@ const bancoCardioDificilima = [
 {
   id: 410,
   code: "cardio04-q410",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["obstructive shock", "echocardiography", "tamponade", "pulmonary embolism", "right ventricular failure"],
   level: "very_hard",
   correct: 2,
@@ -752,7 +752,7 @@ const bancoCardioDificilima = [
 {
   id: 411,
   code: "cardio04-q411",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["hypovolemic shock", "echocardiography", "preload", "volume status", "fluid resuscitation"],
   level: "very_hard",
   correct: 3,
@@ -827,7 +827,7 @@ const bancoCardioDificilima = [
 {
   id: 412,
   code: "cardio04-q412",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["pacemaker", "heart failure", "atrial fibrillation", "junctional rhythm", "electrophysiology"],
   level: "very_hard",
   correct: 4,
@@ -902,7 +902,7 @@ const bancoCardioDificilima = [
 {
   id: 413,
   code: "cardio04-q413",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["intra-aortic balloon pump", "cardiogenic shock", "mechanical support", "myocardial infarction", "perfusion"],
   level: "very_hard",
   correct: 1,
@@ -977,7 +977,7 @@ const bancoCardioDificilima = [
 {
   id: 414,
   code: "cardio04-q414",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["ecmo", "complications", "critical care", "vascular access", "hemodynamics"],
   level: "very_hard",
   correct: 2,
@@ -1052,7 +1052,7 @@ const bancoCardioDificilima = [
 {
   id: 415,
   code: "cardio04-q415",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["ecmo", "heparin-induced thrombocytopenia", "anticoagulation", "cardiogenic shock", "stroke"],
   level: "very_hard",
   correct: 3,
@@ -1127,7 +1127,7 @@ const bancoCardioDificilima = [
 {
   id: 416,
   code: "cardio04-q416",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["lvad", "advanced heart failure", "mechanical circulatory support", "bridge to transplant", "complications"],
   level: "very_hard",
   correct: 2,
@@ -1202,7 +1202,7 @@ const bancoCardioDificilima = [
 {
   id: 417,
   code: "cardio04-q417",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["ecmo", "monitoring", "oxygenator", "circuit pressure", "continuous blood pressure"],
   level: "very_hard",
   correct: 2,
@@ -1277,7 +1277,7 @@ const bancoCardioDificilima = [
 {
   id: 418,
   code: "cardio04-q418",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["aortic dissection", "shock", "neurological complications", "emergency surgery", "diagnostic approach"],
   level: "very_hard",
   correct: 4,
@@ -1352,7 +1352,7 @@ const bancoCardioDificilima = [
 {
   "id": 419,
   "code": "cardio04-q419",
-  "area": ["cardio+icu", "cardio"],
+  "area": ["cardio+icu", "cardio", "icu", "medicine"],
   "topic": [
     "postoperative care",
     "cardiac surgery",

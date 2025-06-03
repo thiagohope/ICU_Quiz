@@ -153,7 +153,7 @@ const bancoPneumoFacil = [
  {
   "id": 603,
   "code": "pneumo01-q603",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["bronchoscopy"],
   "level": "easy",
   "correct": 2,
@@ -228,7 +228,7 @@ const bancoPneumoFacil = [
 {
   "id": 604,
   "code": "pneumo01-q604",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["respiratory_physiology"],
   "level": "easy",
   "correct": 3,
@@ -303,7 +303,7 @@ const bancoPneumoFacil = [
 {
   "id": 605,
   "code": "pneumo01-q605",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["respiratory_physiology"],
   "level": "easy",
   "correct": 1,
@@ -378,7 +378,7 @@ const bancoPneumoFacil = [
 {
   "id": 606,
   "code": "pneumo01-q606",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["bronchoscopy"],
   "level": "easy",
   "correct": 0,
@@ -453,7 +453,7 @@ const bancoPneumoFacil = [
 {
   "id": 607,
   "code": "pneumo01-q607",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["lung_ultrasound"],
   "level": "easy",
   "correct": 0,
@@ -528,7 +528,7 @@ const bancoPneumoFacil = [
 {
   "id": 608,
   "code": "pneumo01-q608",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["lung_ultrasound"],
   "level": "easy",
   "correct": 3,
@@ -603,7 +603,7 @@ const bancoPneumoFacil = [
 {
   "id": 609,
   "code": "pneumo01-q609",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["asthma"],
   "level": "easy",
   "correct": 4,
@@ -678,7 +678,7 @@ const bancoPneumoFacil = [
 {
   "id": 610,
   "code": "pneumo01-q610",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["copd"],
   "level": "easy",
   "correct": 2,
@@ -753,7 +753,7 @@ const bancoPneumoFacil = [
 {
   "id": 611,
   "code": "pneumo01-q611",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["ards"],
   "level": "easy",
   "correct": 1,
@@ -828,7 +828,7 @@ const bancoPneumoFacil = [
 {
   "id": 612,
   "code": "pneumo01-q612",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["ards"],
   "level": "easy",
   "correct": 0,
@@ -903,7 +903,7 @@ const bancoPneumoFacil = [
 {
   "id": 613,
   "code": "pneumo01-q613",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["ards"],
   "level": "easy",
   "correct": 2,
@@ -978,7 +978,7 @@ const bancoPneumoFacil = [
 {
   "id": 614,
   "code": "pneumo01-q614",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["ards"],
   "level": "easy",
   "correct": 3,
@@ -1053,7 +1053,7 @@ const bancoPneumoFacil = [
 {
   "id": 615,
   "code": "pneumo01-q615",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["near_drowning"],
   "level": "easy",
   "correct": 0,
@@ -1128,7 +1128,7 @@ const bancoPneumoFacil = [
 {
   "id": 616,
   "code": "pneumo01-q616",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["acute_respiratory_failure"],
   "level": "easy",
   "correct": 3,
@@ -1203,7 +1203,7 @@ const bancoPneumoFacil = [
 {
   "id": 617,
   "code": "pneumo01-q617",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["ecmo_vv"],
   "level": "easy",
   "correct": 4,
@@ -1278,7 +1278,7 @@ const bancoPneumoFacil = [
 {
   "id": 619,
   "code": "pneumo01-q619",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["pneumonia"],
   "level": "easy",
   "correct": 1,
@@ -1353,7 +1353,7 @@ const bancoPneumoFacil = [
 {
   "id": 620,
   "code": "pneumo01-q620",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["airway_management", "tracheostomy"],
   "level": "easy",
   "correct": 3,
@@ -1428,7 +1428,7 @@ const bancoPneumoFacil = [
 {
   "id": 621,
   "code": "pneumo01-q621",
-  "area": ["pneumo"],
+  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topic": ["airway_management", "tracheostomy"],
   "level": "easy",
   "correct": 1,

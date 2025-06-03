@@ -29,7 +29,11 @@ function getTranslations() {
     "unmarkReview": { en: "Unmark Review", pt: "Desmarcar revisão", es: "Desmarcar revisión" },
     "previousButton": { en: "Previous", pt: "Anterior", es: "Anterior" },
     "nextButton": { en: "Next", pt: "Próxima", es: "Siguiente" },
-    "returnToQuizButton": { en: "➕ Next Block", pt: "➕ Próximo Bloco", es: "➕ Siguiente Bloque" }, // Usado em showReviewMode [1]
+    "returnToQuizButton": { en: "➕ Next Block", pt: "➕ Próximo Bloco", es: "➕ Siguiente Bloque" },
+    "logout_button_text_content": { en: "Logout", pt: "Sair", es: "Cerrar Sesión" },
+    "logout_confirm_message": { en: "Your progress will be saved. Are you sure you want to logout and go to the login page?", pt: "Seu progresso será salvo. Tem certeza que deseja sair e ir para a página de login?", es: "Tu progreso se guardará. ¿Estás seguro de que quieres cerrar sesión e ir a la página de inicio de sesión?" },
+    "legal-notice-text": { en: "© 2025 BrainboxMed. All rights reserved. This content is for educational purposes only and does not replace professional medical advice.", pt: "© 2025 BrainboxMed. Todos os direitos reservados. Este conteúdo é apenas para fins educacionais e não substitui o aconselhamento médico profissional.", es: "© 2025 BrainboxMed. Todos los derechos reservados. Este contenido es solo para fines educativos y no reemplaza el asesoramiento médico profesional." },
+    "go_dashboard_text_basic": { en: "Dashboard", pt: "Painel", es: "Panel" },
 
     // Chaves para alertas e mensagens de erro
     "selectOptionPrompt": { en: "Please select an option before proceeding.", pt: "Por favor, selecione uma opção antes de prosseguir.", es: "Por favor, seleccione una opción antes de continuar." },
@@ -38,13 +42,12 @@ function getTranslations() {
     "error_no_questions_found": { en: "No questions found in the database.", pt: "Nenhuma questão encontrada no banco de dados.", es: "No se encontraron preguntas en la base de datos."},
     "error_question_bank_not_loaded": { en: "Question bank not loaded or empty.", pt: "Banco de questões não carregado ou vazio.", es: "Banco de preguntas no cargado o vacío."},
     "error_loading_questions": { en: "Error loading questions.", pt: "Erro ao carregar as questões.", es: "Error al cargar las preguntas."},
-
+    "advertisement_placeholder_text": { en: "Advertisement", pt: "Publicidade", es: "Publicidad" },
     // Chaves para níveis de dificuldade (IMPORTANTE: use "very_hard" se seus dados usam "very_hard")
     "difficulty_easy": { en: "Easy", pt: "Fácil", es: "Fácil" },
     "difficulty_moderate": { en: "Moderate", pt: "Moderada", es: "Moderada" }, // A chave no seu arquivo estava "moderado", deve ser "moderate" se o dado for "moderate"
     "difficulty_hard": { en: "Hard", pt: "Difícil", es: "Difícil" },
     "difficulty_very_hard": { en: "Very Hard", pt: "Muito Difícil", es: "Muy Difícil" }, // Alterado de "difficulty_muito_dificil" para "difficulty_very_hard"
-
     // Chaves para a interface do quiz e revisão
     "question_label_placeholder": { en: "Question X/Y", pt: "Questão X/Y", es: "Pregunta X/Y" },
     "revisitingMarkedLabel": { en: "Revisiting Marked ${num}/${total}", pt: "Revisando Marcada ${num}/${total}", es: "Revisando Marcada ${num}/${total}" },
@@ -55,7 +58,6 @@ function getTranslations() {
     "No_marked_questions_to_review_in_this_block": { en: "No marked questions to review in this block.", pt: "Nenhuma questão marcada para revisar neste bloco.", es: "No hay preguntas marcadas para revisar en este bloque." },
     "Question_text_not_available": { en: "Question text not available", pt: "Texto da questão não disponível", es: "Texto de la pregunta no disponible"},
     "explanation_not_available_default": { en: "Explanation not available", pt: "Explicação não disponível", es: "Explicación no disponible"},
-    
     // Chaves genéricas de revisão (se ainda não existirem de forma mais específica)
     "Question": { en: "Question", pt: "Questão", es: "Pregunta" },
     "Correct": { en: "Correct", pt: "Correta", es: "Correcta" }, // Para indicar a resposta correta
@@ -73,32 +75,57 @@ function getTranslations() {
   };
 }
 
-function initializeFocusedProQuiz() { // Inicializa o quiz do Focused Pro
-  console.log("Initializing Focused Pro Mode Quiz...");
 
-  if (!loadProgress()) {
-    prepareNextBlock();
-  } else {
-    console.log("🧠 currentQuestions loaded:", currentQuestions);
+// Defina simSelectedAreas no escopo global ou acessível para prepareNextBlock
+let simSelectedAreas = [];
 
-    // Verifica se há uma questão válida no índice atual
-    if (
-  Array.isArray(currentQuestions) &&
-  currentQuestions.length > 0 &&
-  Number.isInteger(currentIndex) &&
-  currentIndex >= 0 &&
-  currentIndex < currentQuestions.length &&
-  typeof currentQuestions[currentIndex] === 'object' &&
-  currentQuestions[currentIndex] !== null
-)
- {
-      renderQuestion(currentQuestions[currentIndex]);
+function initializeQuizBasic() {
+    console.log("Initializing Quiz Basic...");
+
+    // 1. Ler o parâmetro 'areas' da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const areasParam = urlParams.get('areas'); // 'areas' é o nome do parâmetro que o Dashboard-Basic.js envia
+
+    if (areasParam) {
+        // Se um parâmetro 'areas' foi passado na URL
+        // Como o Dashboard-Basic envia apenas uma área, não precisamos de split(',') por agora.
+        // Se no futuro puderem ser múltiplas, você pode adaptar para:
+        // simSelectedAreas = areasParam.split(',').map(area => area.trim().toLowerCase()).filter(area => area);
+        const singleArea = areasParam.trim().toLowerCase();
+        if (singleArea) {
+            simSelectedAreas = [singleArea];
+        } else {
+            simSelectedAreas = []; // Parâmetro 'areas' estava presente mas vazio
+        }
+        console.log("Area parameter found in URL:", singleArea);
     } else {
-            console.warn("❌ Invalid data when restoring progress. Clearing and restarting block...");
-      localStorage.removeItem('focusedProState');
-      prepareNextBlock();
+        // Se NENHUM parâmetro 'areas' foi passado na URL, carregar todas as áreas (para testes ou por defeito)
+        simSelectedAreas = [];
+        console.log("No specific area parameter in URL. Quiz Basic will load questions from all areas.");
     }
-  }
+    console.log("Quiz Basic - Selected areas for current session:", simSelectedAreas);
+
+    // 2. Continuar com a lógica existente de carregar progresso ou preparar novo bloco
+    if (!loadProgress()) { // loadProgress() e saveProgress() usam 'focusedProState'. Considere renomear para 'quizBasicState'
+        prepareNextBlock(); // Esta função DEVE agora usar a variável simSelectedAreas
+    } else {
+        console.log("🧠 currentQuestions loaded:", currentQuestions);
+        if (
+            Array.isArray(currentQuestions) &&
+            currentQuestions.length > 0 &&
+            Number.isInteger(currentIndex) &&
+            currentIndex >= 0 &&
+            currentIndex < currentQuestions.length &&
+            typeof currentQuestions[currentIndex] === 'object' &&
+            currentQuestions[currentIndex] !== null
+        ) {
+            renderQuestion(currentQuestions[currentIndex]);
+        } else {
+            console.warn("❌ Invalid data when restoring progress. Clearing and restarting block...");
+            localStorage.removeItem('quizBasicState'); // Considere renomear para 'quizBasicState'
+            prepareNextBlock();
+        }
+    }
 }
 
 function fetchAndDisplayFirstQuestion() { // Busca e exibe a primeira questão do quiz
@@ -304,6 +331,9 @@ const adPlaceholderVisual = `<div class="ad-placeholder-content text-xs text-gra
       console.log("✅ Option selected:", event.target.value, "for question ID:", question.id);
     });
   });
+  window.scrollTo(0, 0);
+  console.log("Scrolled to top after rendering question.");
+
 }
  
 function displayQuizError(message) { // Função para exibir um erro no quiz
@@ -401,8 +431,83 @@ function fetchAndDisplayNextQuestion() { // Função para buscar e exibir a pró
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log("DOM da página focused-pro.html carregado. Preparando para iniciar o quiz...");
+  window.scrollTo(0, 0);
+  console.log("Scrolled to top after rendering question.");
+  console.log("DOM da página quiz-basic.html carregado. Preparando para iniciar o quiz...");
 
+    const translate = getTranslations(); // Obtém a função de tradução deste ficheiro
+
+    // --- DEFINIR TEXTOS ESTÁTICOS DA PÁGINA ---
+    const goDashboardButtonTextEl = document.getElementById("go_dashboard_text_basic");
+    if (goDashboardButtonTextEl) {
+        // Certifique-se que "go_dashboard_text_basic" está no objeto de traduções do getTranslations()
+        goDashboardButtonTextEl.textContent = translate("go_dashboard_text_basic") || "Dashboard"; 
+    }
+
+    const logoutTextSpan = document.getElementById("dashboard_logout_text"); // ID CORRETO do span
+    if (logoutTextSpan) {
+        // A chave "logout_button_text_content" deve existir no getTranslations()
+        logoutTextSpan.textContent = translate("logout_button_text_content") || "Logout";
+    }
+
+    const legalNoticeEl = document.getElementById("legal-notice-text");
+    if (legalNoticeEl) {
+        // A chave "legal-notice-text" deve existir no getTranslations()
+        legalNoticeEl.textContent = translate("legal-notice-text");
+    }
+    // --- FIM DA DEFINIÇÃO DE TEXTOS ---
+
+  // --- BOTÃO PARA VOLTAR AO DASHBOARD (NOVO) ---
+    const goDashboardButton = document.getElementById('go-basic-dashboard-button');
+    if (goDashboardButton) {
+        goDashboardButton.addEventListener('click', () => {
+            console.log("Quiz Basic: Saving progress and returning to Dashboard-Basic.html");
+            saveProgress(); // Chama a função para salvar o progresso atual
+
+            // Determina para qual dashboard voltar.
+            // Você pode tornar isso mais dinâmico se precisar no futuro,
+            // mas para o quiz-basic, ele sempre volta para o Dashboard-Basic.
+            let targetDashboard = "../Dashboard/Dashboard-Basic.html"; // Caminho relativo correto
+
+            // Se você adicionou o data-attribute ao body do quiz-basic.html:
+            // const originDashboard = document.body.getAttribute('data-current-dashboard');
+            // if (originDashboard) {
+            //     targetDashboard = `../${originDashboard}`;
+            // }
+
+            window.location.href = targetDashboard;
+        });
+    } else {
+        console.warn("Botão 'go-basic-dashboard-button' não encontrado no quiz-basic.html.");
+    }
+    // --- FIM DO BOTÃO DASHBOARD ---
+
+        // --- LÓGICA DE LOGOUT ---
+    const logoutButton = document.getElementById('dashboard-logout-button'); // ID do BOTÃO
+    if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+            const confirmMessage = translate("logout_confirm_message"); // Chave deve existir no getTranslations()
+            if (confirm(confirmMessage)) {
+                console.log("Quiz Basic Logout: Salvando progresso, limpando dados e redirecionando...");
+                saveProgress(); // Salva o progresso antes de sair
+                localStorage.removeItem('userDetails');
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('quizBasicState'); // Chave específica deste quiz
+                localStorage.removeItem('proSimulationState');
+                localStorage.removeItem('focusedProState');
+                localStorage.removeItem('focusedState');
+                localStorage.removeItem('quizAdFreeState');
+                window.location.href = '../login.html';
+            } else {
+                console.log("Logout cancelado pelo usuário.");
+            }
+        });
+    } else {
+        console.error("Quiz-Basic: Botão 'dashboard-logout-button' não encontrado.");
+    }
+
+  // --- INICIALIZAÇÃO DO QUIZ ---
+  // (Sua lógica existente com waitForQuestionBankAndStart chamando initializeQuizBasic)
   function waitForQuestionBankAndStart() {
     console.log("Função waitForQuestionBankAndStart: Verificando se o questionBank está pronto...");
     if (
@@ -414,8 +519,8 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log("questionBank parece definido. Aguardando um instante para ter certeza que está populado...");
       setTimeout(() => {
         if (questionBank.externalBanks.length > 0) {
-          console.log("Banco de questões populado. Inicializando o quiz do Focused Pro...");
-          initializeFocusedProQuiz();
+          console.log("Banco de questões populado. Inicializando o quiz do Basic...");
+          initializeQuizBasic();
         } else {
           console.error("ERRO: Banco de questões está vazio mesmo após espera.");
           displayQuizError("Erro ao carregar as questões.");
@@ -430,7 +535,6 @@ document.addEventListener('DOMContentLoaded', () => {
   waitForQuestionBankAndStart();
 });
 
-// No seu quiz-basic.js [1]
 function showReviewMode() {
   const translate = getTranslations();
   const container = document.getElementById('quiz-container');
@@ -526,11 +630,39 @@ function prepareNextBlock() {
   console.log("Previous wrong IDs to prioritize:", previousWrongIds.length, JSON.stringify(previousWrongIds));
   console.log("Length of newBlockQuestions BEFORE slice:", newBlockQuestions.length);
 
+      // --- FILTRAR QUESTÕES PELA ÁREA SELECIONADA ---
+    let allRelevantQuestions = questionBank.getAllQuestions(); // Começa com todas as questões
+
+    if (simSelectedAreas && simSelectedAreas.length > 0) { // simSelectedAreas é definido em initializeQuizBasic
+        console.log("Filtering questions by selected areas:", simSelectedAreas);
+        allRelevantQuestions = allRelevantQuestions.filter(q => {
+            const questionAreas = q.areas || q.area || []; // Lida com 'areas' ou 'area'
+            const areasToTest = Array.isArray(questionAreas) ? questionAreas : [questionAreas]; // Garante que é um array
+            if (areasToTest.length === 0) return false; // Questão precisa ter uma área
+            
+            return areasToTest.some(singleQuestionArea => 
+                simSelectedAreas.includes(String(singleQuestionArea).toLowerCase().trim())
+            );
+          });
+        console.log(`Found ${allRelevantQuestions.length} questions for areas: ${simSelectedAreas.join(', ')}`);
+    } else {
+        console.log("No specific areas selected for Quiz Basic, using all available questions for the block.");
+    }
+
+    if (allRelevantQuestions.length === 0) {
+        const translate = getTranslations();
+        console.error("Quiz Basic ERROR: No questions found for the selected criteria (areas).");
+        displayQuizError(translate("error_no_questions_found"));
+        currentQuestions = []; // Garante que currentQuestions está vazio
+        return; // Interrompe se não houver questões relevantes
+    }
+    // --- FIM DO FILTRO DE ÁREA ---
+
   const questionsToExclude = [...shownQuestionIds, ...previousWrongIds.filter(id => shownQuestionIds.includes(id))]; // Não mostrar imediatamente o que já foi mostrado ou o que errou e já foi mostrado
 
   // Tenta preencher com questões "novas" (não vistas recentemente) e que não são erros recentes já mostrados
-  let availableNewQuestions = questionBank.getAllQuestions().filter(q => !questionsToExclude.includes(q.id));
-  console.log("Available NEW questions (not in shown/recent_wrong):", availableNewQuestions.length);
+    let availableNewQuestions = allRelevantQuestions.filter(q => !questionsToExclude.includes(q.id));
+    console.log("Available NEW questions (after area filter and exclusion):", availableNewQuestions.length);
 
   // Tenta manter proporções de dificuldade para questões novas
   if (availableNewQuestions.length > 0) {
@@ -551,8 +683,8 @@ function prepareNextBlock() {
   if (newBlockQuestions.length < BLOCK_SIZE) {
     console.log("Not enough new questions. Re-showing questions (infinite mode).");
     
-    let questionsToRecycle = questionBank.getAllQuestions();
-    questionsToRecycle = questionBank.shuffleArray([...questionsToRecycle]);
+    let questionsToRecycle = questionBank.shuffleArray([...allRelevantQuestions]);
+
 
     let neededToFill = BLOCK_SIZE - newBlockQuestions.length;
     for (const q of questionsToRecycle) {
@@ -578,16 +710,18 @@ function prepareNextBlock() {
   currentQuestions = newBlockQuestions.slice(0, BLOCK_SIZE);
   console.log("Length of currentQuestions AFTER slice:", currentQuestions.length);
 
-  if (currentQuestions.length > 0 && currentQuestions[currentIndex]) {
-    renderQuestion(currentQuestions[currentIndex]);
-  } else {
-  }
-  if (currentQuestions.length === 0) {
-    const translate = getTranslations();
-    console.error("ERROR: No questions could be selected for the block. Question bank might be empty.");
-    displayQuizError(translate("error_no_questions_found"));
-    return;
-  }
+      if (currentQuestions.length === 0 && allRelevantQuestions.length > 0) {
+        // Se há questões relevantes, mas não conseguimos formar um bloco (ex: todas já vistas)
+        // Poderia tentar reciclar de allRelevantQuestions sem o filtro de questionsToExclude
+        // ou simplesmente mostrar o erro como abaixo.
+        const translate = getTranslations();
+        console.error("ERROR: Could not form a new block from relevant questions. Resetting or try different filters.");
+        displayQuizError(translate("error_no_questions_found"));
+        return;
+    } else if (currentQuestions.length === 0) { // Se allRelevantQuestions já era 0
+        // O erro já foi tratado acima
+        return;
+    }
 
   // Embaralha as opções de TODAS as questões no bloco CADA VEZ que um bloco é preparado.
   currentQuestions.forEach(q => {
@@ -630,12 +764,12 @@ function saveProgress() {
     previousWrongIds,
     shownQuestionIds
   };
-  localStorage.setItem('focusedProState', JSON.stringify(state));
+  localStorage.setItem('quizBasicState', JSON.stringify(state));
   console.log("💾 Progress saved.");
 }
 
 function loadProgress() {
-  const state = JSON.parse(localStorage.getItem('focusedProState'));
+  const state = JSON.parse(localStorage.getItem('quizBasicState'));
   if (!state) return false;
 
   currentQuestions = state.currentQuestions;

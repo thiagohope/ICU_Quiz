@@ -2,7 +2,7 @@ const bancoCardiomoderate = [
 {
     id: 201,
     code: "cardio02-q201",
-    area: ["cardio+icu", "cardio"],
+    areas: ["cardio+icu", "cardio", "icu", "medicine"],
     topic: ["heart failure", "hemodynamics"],
     level: "moderate",
     correct: 3,
@@ -65,7 +65,7 @@ const bancoCardiomoderate = [
 {
     id: 202,
     code: "cardio02-q202",
-    area: ["cardio+icu", "cardio"],
+    areas: ["cardio+icu", "cardio", "icu", "medicine"],
     topic: ["myocardial infarction", "shock"],
     level: "moderate",
     correct: 0,
@@ -128,7 +128,7 @@ const bancoCardiomoderate = [
   {
     id: 203,
     code: "cardio02-q203",
-    area: ["cardio+icu", "cardio"],
+    areas: ["cardio+icu", "cardio", "icu", "medicine"],
     topic: ["echocardiography", "shock"],
     level: "moderate",
     correct: 2,
@@ -191,7 +191,7 @@ const bancoCardiomoderate = [
   {
     id: 204,
     code: "cardio02-q204",
-    area: ["cardio+icu", "cardio"],
+    areas: ["cardio+icu", "cardio", "icu", "medicine"],
     topic: ["arrhythmias", "atrial fibrillation"],
     level: "moderate",
     correct: 1,
@@ -254,7 +254,7 @@ const bancoCardiomoderate = [
   {
     id: 205,
     code: "cardio02-q205",
-    area: ["cardio+icu", "cardio"],
+    areas: ["cardio+icu", "cardio", "icu", "medicine"],
     topic: ["pacemaker", "bradyarrhythmias"],
     level: "moderate",
     correct: 0,
@@ -317,7 +317,7 @@ const bancoCardiomoderate = [
   {
     id: 206,
     code: "cardio02-q206",
-    area: ["cardio+icu", "cardio"],
+    areas: ["cardio+icu", "cardio", "icu", "medicine"],
     topic: ["IABP", "mechanical support"],
     level: "moderate",
     correct: 0,
@@ -380,7 +380,7 @@ const bancoCardiomoderate = [
   {
     id: 207,
     code: "cardio02-q207",
-    area: ["cardio+icu", "cardio"],
+    areas: ["cardio+icu", "cardio", "icu", "medicine"],
     topic: ["ECMO-VA", "mechanical support"],
     level: "moderate",
     correct: 2,
@@ -443,7 +443,7 @@ const bancoCardiomoderate = [
   {
     id: 208,
     code: "cardio02-q208",
-    area: ["cardio+icu", "cardio"],
+    areas: ["cardio+icu", "cardio", "icu", "medicine"],
     topic: ["shock", "hemodynamics"],
     level: "moderate",
     correct: 1,
@@ -506,7 +506,7 @@ const bancoCardiomoderate = [
   {
     id: 209,
     code: "cardio02-q209",
-    area: ["cardio+icu", "cardio"],
+    areas: ["cardio+icu", "cardio", "icu", "medicine"],
     topic: ["electrolyte disorders", "arrhythmias"],
     level: "moderate",
     correct: 2,
@@ -569,7 +569,7 @@ const bancoCardiomoderate = [
   {
     id: 210,
     code: "cardio02-q210",
-    area: ["cardio+icu", "cardio"],
+    areas: ["cardio+icu", "cardio", "icu", "medicine"],
     topic: ["anticoagulation", "myocardial infarction"],
     level: "moderate",
     correct: 3,
@@ -632,7 +632,7 @@ const bancoCardiomoderate = [
   {
     id: 211,
     code: "cardio02-q211",
-    area: ["cardio+icu", "cardio"],
+    areas: ["cardio+icu", "cardio", "icu", "medicine"],
     topic: ["pericardiocentesis", "tamponade"],
     level: "moderate",
     correct: 0,
@@ -695,7 +695,7 @@ const bancoCardiomoderate = [
   {
   id: 212,
   code: "cardio02-q212",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["aortic dissection", "hypertensive emergencies", "chest pain"],
   level: "moderate",
   correct: 0,
@@ -758,7 +758,7 @@ const bancoCardiomoderate = [
 {
   id: 213,
   code: "cardio02-q213",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["ACLS", "cardiac arrest", "defibrillation"],
   level: "moderate",
   correct: 0,
@@ -821,7 +821,7 @@ const bancoCardiomoderate = [
 {
   id: 214,
   code: "cardio02-q214",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["ACLS", "cardiac arrest", "PEA", "asystole"],
   level: "moderate",
   correct: 1,
@@ -884,7 +884,7 @@ const bancoCardiomoderate = [
 {
   id: 213,
   code: "cardio02-q213",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["ACLS", "cardiac arrest", "defibrillation"],
   level: "moderate",
   correct: 0,
@@ -947,7 +947,7 @@ const bancoCardiomoderate = [
 {
   id: 214,
   code: "cardio02-q214",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["ACLS", "cardiac arrest", "PEA", "asystole"],
   level: "moderate",
   correct: 1,
@@ -1010,7 +1010,7 @@ const bancoCardiomoderate = [
 {
   id: 215,
   code: "cardio02-q215",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["ACLS", "cardiac arrest", "PEA", "asystole"],
   level: "moderate",
   correct: 1,
@@ -1073,7 +1073,7 @@ const bancoCardiomoderate = [
 {
   id: 216,
   code: "cardio02-q216",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["pulmonary embolism", "ACLS", "cardiac arrest", "5Ts"],
   level: "moderate",
   correct: 2,
@@ -1136,7 +1136,7 @@ const bancoCardiomoderate = [
 {
   id: 217,
   code: "cardio02-q217",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["shock", "hemodynamics", "critical care"],
   level: "moderate",
   correct: 3,
@@ -1199,7 +1199,7 @@ const bancoCardiomoderate = [
 {
   id: 218,
   code: "cardio02-q218",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["cardiac trauma", "blunt chest trauma", "ECG", "echocardiography"],
   level: "moderate",
   correct: 1,
@@ -1262,7 +1262,7 @@ const bancoCardiomoderate = [
 {
   id: 219,
   code: "cardio02-q219",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["LVAD", "mechanical support", "heart failure", "critical care"],
   level: "moderate",
   correct: 2,
@@ -1325,7 +1325,7 @@ const bancoCardiomoderate = [
 {
   id: 220,
   code: "cardio02-q220",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["pacemaker", "CABG", "postoperative care", "bradyarrhythmia"],
   level: "moderate",
   correct: 3,

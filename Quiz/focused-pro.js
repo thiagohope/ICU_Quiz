@@ -73,7 +73,7 @@ function getTranslations() {
 }
 
 function initializeFocusedProQuiz() { // Inicializa o quiz do Focused Pro
-  console.log("Initializing Focused Pro Mode Quiz...");
+  console.log("Initializing FocusedProQuiz...");
 
   if (!loadProgress()) {
     prepareNextBlock();
@@ -285,6 +285,9 @@ function renderQuestion(question) {
       console.log("✅ Option selected:", event.target.value, "for question ID:", question.id);
     });
   });
+  window.scrollTo(0, 0);
+  console.log("Scrolled to top after rendering question.");
+
 }
  
 function displayQuizError(message) { // Função para exibir um erro no quiz
@@ -382,6 +385,9 @@ function fetchAndDisplayNextQuestion() { // Função para buscar e exibir a pró
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  window.scrollTo(0, 0);
+  console.log("Scrolled to top after rendering question.");
+
   console.log("DOM da página focused-pro.html carregado. Preparando para iniciar o quiz...");
 
   function waitForQuestionBankAndStart() {

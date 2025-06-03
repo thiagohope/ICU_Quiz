@@ -110,8 +110,8 @@ function getTranslations() {
   };
 }
 
-function initializeFocusedProQuiz() { // Inicializa o quiz do Focused Pro
-  console.log("Initializing Focused Pro Mode Quiz...");
+function initializeFocusedQuiz() { // Inicializa o quiz do Focused 
+  console.log("Initializing Focused Mode Quiz...");
 
   if (!loadProgress()) {
     prepareNextBlock();
@@ -132,7 +132,7 @@ function initializeFocusedProQuiz() { // Inicializa o quiz do Focused Pro
       renderQuestion(currentQuestions[currentIndex]);
     } else {
             console.warn("❌ Invalid data when restoring progress. Clearing and restarting block...");
-      localStorage.removeItem('focusedProState');
+      localStorage.removeItem('focusedState');
       prepareNextBlock();
     }
   }
@@ -323,6 +323,9 @@ function renderQuestion(question) {
       console.log("✅ Option selected:", event.target.value, "for question ID:", question.id);
     });
   });
+  window.scrollTo(0, 0);
+  console.log("Scrolled to top after rendering question.");
+
 }
  
 function displayQuizError(message) { // Função para exibir um erro no quiz
@@ -420,7 +423,10 @@ function fetchAndDisplayNextQuestion() { // Função para buscar e exibir a pró
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log("DOM da página focused-pro.html carregado. Preparando para iniciar o quiz...");
+    window.scrollTo(0, 0);
+  console.log("Scrolled to top after rendering question.");
+
+  console.log("DOM da página focused.html carregado. Preparando para iniciar o quiz...");
 
   function waitForQuestionBankAndStart() {
     console.log("Função waitForQuestionBankAndStart: Verificando se o questionBank está pronto...");
@@ -434,7 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         if (questionBank.externalBanks.length > 0) {
           console.log("Banco de questões populado. Inicializando o quiz do Focused Pro...");
-          initializeFocusedProQuiz();
+          initializeFocusedQuiz();
         } else {
           console.error("ERRO: Banco de questões está vazio mesmo após espera.");
           displayQuizError("Erro ao carregar as questões.");
@@ -678,12 +684,12 @@ function saveProgress() {
     previousWrongIds,
     shownQuestionIds
   };
-  localStorage.setItem('focusedProState', JSON.stringify(state));
+  localStorage.setItem('focusedState', JSON.stringify(state));
   console.log("💾 Progress saved.");
 }
 
 function loadProgress() {
-  const state = JSON.parse(localStorage.getItem('focusedProState'));
+  const state = JSON.parse(localStorage.getItem('focusedState'));
   if (!state) return false;
 
   currentQuestions = state.currentQuestions;

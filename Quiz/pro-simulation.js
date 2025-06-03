@@ -435,6 +435,9 @@ function renderQuestion(question) {
       // }
     });
   });
+  window.scrollTo(0, 0);
+  console.log("Scrolled to top after rendering question.");
+
 }
  
 function displayQuizError(message) { // Função para exibir um erro no quiz
@@ -532,6 +535,9 @@ function fetchAndDisplayNextQuestion() { // Função para buscar e exibir a pró
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    window.scrollTo(0, 0);
+  console.log("Scrolled to top after rendering question.");
+
   console.log("Pro Simulation HTML DOM loaded. Preparing to start quiz..."); 
 
   waitForQuestionBankAndStart(initializeProSimulationQuiz) 

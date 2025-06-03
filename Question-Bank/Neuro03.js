@@ -2,7 +2,7 @@ const bancoNeuroDificil = [
 {
   id: 301,
   code: "neuro03-q301",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["ischemic stroke", "thrombolysis", "mechanical thrombectomy", "imaging", "ttm"],
   level: "hard",
   correct: 3,
@@ -77,7 +77,7 @@ const bancoNeuroDificil = [
 {
   id: 302,
   code: "neuro03-q302",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["brain death", "coma", "brainstem reflexes", "apnea test", "legal criteria"],
   level: "hard",
   correct: 2,
@@ -152,7 +152,7 @@ const bancoNeuroDificil = [
 {
   id: 303,
   code: "neuro03-q303",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["hyponatremia", "siadh", "cerebral salt wasting", "osmotic demyelination", "neuroendocrinology"],
   level: "hard",
   correct: 2,
@@ -227,7 +227,7 @@ const bancoNeuroDificil = [
 {
   id: 304,
   code: "neuro03-q304",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["metabolic coma", "neurological exam", "reversible causes", "toxic encephalopathy", "pupil reactivity"],
   level: "hard",
   correct: 4,
@@ -302,7 +302,7 @@ const bancoNeuroDificil = [
 {
   id: 305,
   code: "neuro03-q305",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["transcranial doppler", "vasospasm", "subarachnoid hemorrhage", "lindegaard index", "hyperemia"],
   level: "hard",
   correct: 2,
@@ -377,7 +377,7 @@ const bancoNeuroDificil = [
 {
   id: 306,
   code: "neuro03-q306",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["neurosurgery", "postoperative care", "neuromonitoring", "infection", "rebleeding"],
   level: "hard",
   correct: 4,
@@ -452,7 +452,7 @@ const bancoNeuroDificil = [
 {
   id: 307,
   code: "neuro03-q307",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["multimodal monitoring", "pbto2", "sjvo2", "microdialysis", "intracranial pressure"],
   level: "hard",
   correct: 3,
@@ -527,7 +527,7 @@ const bancoNeuroDificil = [
 {
   id: 308,
   code: "neuro03-q308",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["status epilepticus", "super-refractory", "deep sedation", "ketamine", "alternative therapies"],
   level: "hard",
   correct: 3,
@@ -602,7 +602,7 @@ const bancoNeuroDificil = [
 {
   id: 309,
   code: "neuro03-q309",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["vasospasm", "subarachnoid hemorrhage", "nimodipine", "perfusion", "invasive therapy"],
   level: "hard",
   correct: 2,
@@ -677,7 +677,7 @@ const bancoNeuroDificil = [
 {
   id: 310,
   code: "neuro03-q310",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["traumatic brain injury", "intracranial pressure", "decompressive craniectomy", "cpp", "sedation"],
   level: "hard",
   correct: 4,
@@ -752,7 +752,7 @@ const bancoNeuroDificil = [
 {
   id: 311,
   code: "neuro03-q311",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["neuroprotection", "brain injury", "tbi", "ischemia", "management"],
   level: "hard",
   correct: 2,
@@ -827,7 +827,7 @@ const bancoNeuroDificil = [
 {
   id: 312,
   code: "neuro03-q312",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["cerebral autoregulation", "cpp", "blood flow", "tbi", "dynamic response"],
   level: "hard",
   correct: 1,
@@ -902,7 +902,7 @@ const bancoNeuroDificil = [
 {
   id: 313,
   code: "neuro03-q313",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["eeg", "nonconvulsive status", "burst suppression", "coma prognosis", "neurocritical care"],
   level: "hard",
   correct: 2,
@@ -977,7 +977,7 @@ const bancoNeuroDificil = [
 {
   id: 314,
   code: "neuro03-q314",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["intracranial hypertension", "tiered therapy", "osmotherapy", "surgical decompression", "monitoring"],
   level: "hard",
   correct: 2,
@@ -1052,7 +1052,7 @@ const bancoNeuroDificil = [
 {
   id: 315,
   code: "neuro03-q315",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["venous hypertension", "intracranial pressure", "sinus thrombosis", "cerebral edema", "neuroimaging"],
   level: "hard",
   correct: 3,
@@ -1127,7 +1127,7 @@ const bancoNeuroDificil = [
 {
   id: 316,
   code: "neuro03-q316",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["ischemic stroke", "late thrombolysis", "ct perfusion", "mismatch", "advanced imaging"],
   level: "hard",
   correct: 3,
@@ -1202,7 +1202,7 @@ const bancoNeuroDificil = [
 {
   id: 317,
   code: "neuro03-q317",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["myelitis", "inflammatory myelopathy", "csf", "immunotherapy", "infection"],
   level: "hard",
   correct: 1,
@@ -1277,7 +1277,7 @@ const bancoNeuroDificil = [
 {
   id: 318,
   code: "neuro03-q318",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["guillain-barre", "respiratory failure", "emg", "csf", "misdiagnosis"],
   level: "hard",
   correct: 3,
@@ -1352,7 +1352,7 @@ const bancoNeuroDificil = [
 {
   id: 319,
   code: "neuro03-q319",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["myasthenia gravis", "myasthenic crisis", "neuromuscular blockade", "immunotherapy", "icu management"],
   level: "hard",
   correct: 4,
@@ -1427,7 +1427,7 @@ const bancoNeuroDificil = [
 {
   id: 320,
   code: "neuro03-q320",
-  area: ["neuro+icu", "neuro"],
+  areas: ["neuro+icu", "neuro", "icu", "medicine"],
   topic: ["sedation", "analgesia", "neurocritical care", "ICP", "EEG monitoring"],
   level: "hard",
   correct: 1,

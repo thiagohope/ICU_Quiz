@@ -6,13 +6,14 @@
   <title>Ad Free - BrainboxMed™ </title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
     </head>
 <body>
     <div id="top-controls-bar" class="w-full py-2 px-4 sm:px-6 bg-gray-100 shadow-sm">
-        <div class="max-w-6xl mx-auto flex justify-end items-center"> 
-            <div class="ml-2">
-                <button id="dashboard-logout-button"
+        <div class="max-w-6xl mx-auto flex justify-end items-center space-x-2">
+            <button id="go-basic-dashboard-button" class="bg-yellow-500 text-white hover:bg-yellow-600 text-xs font-semibold py-1.5 px-4 rounded-md shadow-sm transition-colors whitespace-nowrap">
+                <span id="go_dashboard_text_basic">Dashboard</span> 🏠 </button>
+            <div class="ml-2"> <button id="dashboard-logout-button"
                         class="bg-red-500 text-white hover:bg-red-600 text-xs font-semibold py-1.5 px-4 rounded-md shadow-sm transition-colors whitespace-nowrap">
                   <span id="dashboard_logout_text">Logout</span> 🚪
                 </button>
@@ -62,23 +63,11 @@
     }
   };
   const t = translations[lang] || translations['en'];
-  const trackTitleEl = document.getElementById("track-title");
-  if (trackTitleEl) trackTitleEl.textContent = t["track-title"]; 
   const logoutButtonTextEl = document.getElementById("logout_button_text_content");
   if (logoutButtonTextEl) logoutButtonTextEl.textContent = t["logout_button_text_content"];
   const legalNoticeEl = document.getElementById("legal-notice-text");
   if (legalNoticeEl) legalNoticeEl.textContent = t["legal-notice-text"];
-  function handleInteractiveLogout() {
-  const confirmMessage = t.logout_confirm_message; // Usar a tradução carregada
-    console.log("User progress would be saved here."); // Placeholder para salvar progresso
-    if (confirm(confirmMessage)) {
-      window.location.href = 'landing.html'; 
-    }
-  }
-  const logoutBtn = document.getElementById('logout-button-interactive');
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', handleInteractiveLogout);
-  }
+  
 </script>
 <script src="../Question-bank/banco-questoes.js"></script>
 <script src="../Question-Bank/Neuro01.js"></script>
@@ -91,6 +80,8 @@
 <script src="../Question-Bank/Cardio04.js"></script>
 <script src="../Question-Bank/Pneumo01.js"></script>
 <script src="../Question-Bank/Pneumo02.js"></script>
+<script src="../Question-Bank/Pneumo03.js"></script>
+<script src="../Question-Bank/Pneumo04.js"></script>
 <script src="../Question-Bank/Ventilation.js"></script>
 <script src="quiz-ad-free.js"></script>
 </body>

@@ -1,5 +1,8 @@
 // dashboard-pro.js
 document.addEventListener('DOMContentLoaded', () => {
+    window.scrollTo(0, 0);
+  console.log("Scrolled to top after rendering question.");
+
     // Use o ID correto do seu botão no Dashboard-Pro.html
     // Se for "start-session-button" como no seu HTML, use-o aqui.
     const startButton = document.getElementById('start-session-button'); 

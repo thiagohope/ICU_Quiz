@@ -1,5 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
+  window.scrollTo(0, 0);
   const userEmailDisplay = document.getElementById('user-email');
   const logoutBtn = document.getElementById('logout-btn');
 

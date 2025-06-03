@@ -1,7 +1,6 @@
-// Dashboard-Basic.js (Versão Focada e Limpa)
 document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo(0, 0);
-    console.log("Dashboard-Basic: DOM carregado e página rolada para o topo.");
+    console.log("Dashboard-d: DOM carregado e página rolada para o topo.");
 
     // --- Elementos do DOM ---
     const startButton = document.getElementById('start-session-button');
@@ -74,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- LÓGICA PARA POPULAR O SELETOR DE ÁREA ---
     function populateAreaSelector() {
         if (!areaSelector) { //
-            console.error("Dashboard-Basic: Elemento 'basic-area-selector' não encontrado no HTML."); //
+            console.error("Dashboard-AdFree: Elemento 'basic-area-selector' não encontrado no HTML."); //
             if (startButton) startButton.disabled = true; //
             return; //
         }
@@ -107,14 +106,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                     if (startButton) startButton.disabled = false; // Habilita se houver áreas
                 }
-                console.log("Dashboard-Basic: Seletor de áreas populado."); //
+                console.log("Dashboard-AdFree: Seletor de áreas populado."); //
             } catch (e) {
-                console.error("Dashboard-Basic: Erro ao popular o seletor de áreas:", e); //
+                console.error("Dashboard-AdFree: Erro ao popular o seletor de áreas:", e); //
                 if (areaSelector) areaSelector.options.add(new Option(s_t["error_loading_areas"], "")); //
                 if (startButton) startButton.disabled = true; //
             }
         } else {
-            console.warn("Dashboard-Basic: questionBank não está pronto ou não definido."); //
+            console.warn("Dashboard-AdFree: questionBank não está pronto ou não definido."); //
             if (areaSelector) areaSelector.options.add(new Option(s_t["areas_unavailable"], "")); //
             if (startButton) startButton.disabled = true; //
         }
@@ -136,13 +135,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 return; // Não continua se nenhuma área válida for selecionada
             }
 
-            let quizUrl = `../Quiz/quiz-basic.html?areas=${encodeURIComponent(selectedArea)}`; // Passa a área selecionada
+            let quizUrl = `../Quiz/quiz-ad-free.html?areas=${encodeURIComponent(selectedArea)}`; // Passa a área selecionada
 
-            console.log("Dashboard-Basic: Redirecionando para Quiz Basic com URL:", quizUrl);
+            console.log("Dashboard-AdFree: Redirecionando para Quiz Ad Free com URL:", quizUrl);
             window.location.href = quizUrl;
         });
     } else {
-        let errorMsg = "Dashboard-Basic: Erro! Elementos essenciais não encontrados: ";
+        let errorMsg = "Dashboard-AdFree: Erro! Elementos essenciais não encontrados: ";
         if (!startButton) errorMsg += "'start-session-button' ";
         if (!areaSelector) errorMsg += "'basic-area-selector' "; // Informa se o seletor de área não foi encontrado
         console.error(errorMsg.trim());
@@ -168,6 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     } else {
-        console.error("Dashboard-Basic: Botão 'dashboard-logout-button' não encontrado.");
+        console.error("Dashboard-AdFree: Botão 'dashboard-logout-button' não encontrado.");
     }
 });

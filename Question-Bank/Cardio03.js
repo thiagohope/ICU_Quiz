@@ -2,7 +2,7 @@ const bancoCardioDificil = [
 {
   id: 301,
   code: "cardio03-q301",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["myocardial infarction", "cardiogenic shock", "mechanical support", "ecmo", "iabp"],
   level: "hard",
   correct: 2,
@@ -77,7 +77,7 @@ const bancoCardioDificil = [
 {
   id: 302,
   code: "cardio03-q302",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["ecmo", "impella", "cardiogenic shock", "mechanical support", "lv unloading"],
   level: "hard",
   correct: 4,
@@ -152,7 +152,7 @@ const bancoCardioDificil = [
 {
   id: 303,
   code: "cardio03-q303",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["aortic dissection", "type a", "hypertension", "emergency surgery", "imaging"],
   level: "hard",
   correct: 2,
@@ -227,7 +227,7 @@ const bancoCardioDificil = [
 {
   id: 304,
   code: "cardio03-q304",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["hypertensive emergency", "pulmonary edema", "acute heart failure", "iv antihypertensives", "organ damage"],
   level: "hard",
   correct: 3,
@@ -302,7 +302,7 @@ const bancoCardioDificil = [
 {
   id: 305,
   code: "cardio03-q305",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["atrial fibrillation", "anticoagulation", "critical care", "bleeding risk", "decision-making"],
   level: "hard",
   correct: 1,
@@ -377,7 +377,7 @@ const bancoCardioDificil = [
 {
   id: 306,
   code: "cardio03-q306",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["pocus", "echocardiography", "hemodynamic instability", "icu", "shock"],
   level: "hard",
   correct: 1,
@@ -452,7 +452,7 @@ const bancoCardioDificil = [
 {
   id: 307,
   code: "cardio03-q307",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["temporary pacemaker", "weaning test", "postoperative care", "capture", "dependency"],
   level: "hard",
   correct: 1,
@@ -527,7 +527,7 @@ const bancoCardioDificil = [
 {
   id: 308,
   code: "cardio03-q308",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["iabp", "mechanical support", "cardiogenic shock", "timing", "contraindications"],
   level: "hard",
   correct: 4,
@@ -602,7 +602,7 @@ const bancoCardioDificil = [
 {
   id: 309,
   code: "cardio03-q309",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["ecmo", "cardiogenic shock", "hypoxemia", "inotropes", "mechanical support"],
   level: "hard",
   correct: 3,
@@ -677,7 +677,7 @@ const bancoCardioDificil = [
 {
   id: 310,
   code: "cardio03-q310",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["myocardial infarction", "cardiogenic shock", "revascularization", "culprit lesion", "multi-vessel disease"],
   level: "hard",
   correct: 1,
@@ -752,7 +752,7 @@ const bancoCardioDificil = [
 {
   id: 311,
   code: "cardio03-q311",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["massive pulmonary embolism", "thrombectomy", "shock", "contraindications to thrombolysis", "ecmo"],
   level: "hard",
   correct: 2,
@@ -827,7 +827,7 @@ const bancoCardioDificil = [
 {
   id: 312,
   code: "cardio03-q312",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["hemodynamic monitoring", "picco", "shock", "fluid responsiveness", "transpulmonary thermodilution"],
   level: "hard",
   correct: 3,
@@ -902,7 +902,7 @@ const bancoCardioDificil = [
 {
   id: 313,
   code: "cardio03-q313",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["ventricular arrhythmia", "vf", "tv", "refractory", "advanced management"],
   level: "hard",
   correct: 4,
@@ -977,7 +977,7 @@ const bancoCardioDificil = [
 {
   id: 315,
   code: "cardio03-q315",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["shock", "tamponade", "differential diagnosis", "pocus", "emergency"],
   level: "hard",
   correct: 4,
@@ -1052,7 +1052,7 @@ const bancoCardioDificil = [
 {
   id: 316,
   code: "cardio03-q316",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["myocarditis", "acute coronary syndrome", "troponin", "echocardiography", "mri"],
   level: "hard",
   correct: 3,
@@ -1127,7 +1127,7 @@ const bancoCardioDificil = [
 {
   id: 317,
   code: "cardio03-q317",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["atrial fibrillation", "anticoagulation", "critical care", "bleeding risk", "clinical decision"],
   level: "hard",
   correct: 2,
@@ -1202,7 +1202,7 @@ const bancoCardioDificil = [
 {
   id: 318,
   code: "cardio03-q318",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["echocardiography", "shock", "pocus", "cardiac function", "decision-making"],
   level: "hard",
   correct: 2,
@@ -1277,7 +1277,7 @@ const bancoCardioDificil = [
 {
   id: 319,
   code: "cardio03-q319",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["fluid responsiveness", "ivc", "svv", "ppv", "mechanical ventilation"],
   level: "hard",
   correct: 4,
@@ -1352,7 +1352,7 @@ const bancoCardioDificil = [
 {
   id: 320,
   code: "cardio03-q320",
-  area: ["cardio+icu", "cardio"],
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
   topic: ["obstructive shock", "tamponade", "massive PE", "tension pneumothorax", "clinical reasoning"],
   level: "hard",
   correct: 2,
