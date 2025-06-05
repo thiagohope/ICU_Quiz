@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="report-title">Performance Report | BrainboxMed</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" /> <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f9fafb; }
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+    /* Adicione estilos específicos para o relatório aqui, se necessário */
+    
+  </style>
+</head>
+<body class="text-gray-800">
+
+  <div id="top-report-bar" class="w-full py-3 px-4 sm:px-6 bg-white shadow-md">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <a href="../landing.html"> <img src="../assets/img/logo-brainboxmed-cube.png" alt="BrainboxMed Logo" class="h-10"> </a>
+      <button id="back-to-dashboard-button"
+              class="bg-blue-500 text-white hover:bg-blue-600 text-xs font-semibold py-1.5 px-4 rounded-md shadow-sm transition-colors whitespace-nowrap">
+        <span data-i18n="back_to_dashboard_text">Back to Dashboard</span> 🚪
+      </button>
+    </div>
+  </div>
+
+  <main class="max-w-5xl mx-auto p-4 sm:p-6 md:p-8">
+    <header class="mb-8 pt-4 text-center">
+      <h1 class="text-2xl sm:text-3xl font-bold text-purple-700" data-i18n="performance_report_main_title">
+        Performance Report
+      </h1>
+      <p id="report-user-info" class="text-gray-600 mt-2">
+        </p>
+    </header>
+
+    <section id="overall-summary-section" class="mb-6 bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+      <h2 class="text-xl sm:text-2xl font-semibold text-purple-600 mb-4" data-i18n="overall_summary_title">Overall Summary</h2>
+      <div id="overall-summary-content">
+        </div>
+    </section>
+
+    <section id="area-analysis-section" class="mb-6 bg-white p-6 rounded-xl shadow-lg border border-gray-200" style="display: none;">
+      <h2 class="text-xl sm:text-2xl font-semibold text-purple-600 mb-4" data-i18n="area_analysis_title">Detailed Area Analysis</h2>
+      <div id="area-analysis-content">
+        </div>
+    </section>
+    <section id="level-analysis-section" class="mb-6 bg-white p-6 rounded-xl shadow-lg border border-gray-200" style="display: none;">
+      <h2 class="text-xl sm:text-2xl font-semibold text-purple-600 mb-4" data-i18n="level_analysis_title">Performance by Difficulty Level</h2>
+      <div id="level-analysis-content">
+        </div>
+    </section>
+
+    <section id="question-review-section" class="mb-6 bg-white p-6 rounded-xl shadow-lg border border-gray-200" style="display: none;">
+    <section id="question-review-section" class="mb-6 bg-white p-6 rounded-xl shadow-lg border border-gray-200" style="display: none;">
+      <h2 class="text-xl sm:text-2xl font-semibold text-purple-600 mb-4" data-i18n="question_review_title">Question Review</h2>
+      <div id="question-review-content">
+        </div>
+    </section>
+
+  </main>
+
+  <footer class="text-center text-xs text-gray-500 mt-12 py-6 border-t border-gray-200">
+    <p>&copy; <span id="current-year">2025</span> BrainboxMed. All rights reserved.</p>
+    <p>BrainboxMed™ is a registered educational platform. Unauthorized use is prohibited.</p>
+    <p>
+        <a href="../privacy.html" class="text-purple-600 hover:underline">Privacy Policy</a> |
+        <a href="../terms.html" class="text-purple-600 hover:underline">Terms of Use</a>
+    </p>
+  </footer>
+
+<script src="../Question-bank/banco-questoes.js"></script>
+<script src="../Question-Bank/Neuro01.js"></script><script src="../Question-Bank/Neuro02.js"></script><script src="../Question-Bank/Neuro03.js"></script><script src="../Question-Bank/Neuro04.js"></script>
+<script src="../Question-Bank/Cardio01.js"></script><script src="../Question-Bank/Cardio02.js"></script><script src="../Question-Bank/Cardio03.js"></script><script src="../Question-Bank/Cardio04.js"></script>
+<script src="../Question-Bank/Pneumo01.js"></script><script src="../Question-Bank/Pneumo02.js"></script><script src="../Question-Bank/Pneumo03.js"></script><script src="../Question-Bank/Pneumo04.js"></script>
+<script src="../Question-Bank/Ventilation.js"></script>
+<script src="../Question-Bank/Nephro01.js"></script><script src="../Question-Bank/Nephro02.js"></script><script src="../Question-Bank/Nephro03.js"></script><script src="../Question-Bank/Nephro04.js"></script>
+<script src="../Question-Bank/Dialysis.js"></script>
+<script src="performance-report.js"></script> </body>
+</html>

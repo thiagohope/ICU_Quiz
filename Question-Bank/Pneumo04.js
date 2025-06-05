@@ -4,7 +4,7 @@ const bancoPneumoDificilima = [
   "code": "pneumo04-q901",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topics": ["oxygen_therapy", "community_acquired_pneumonia", "hiflow", "niv", "respiratory_failure"],
-  "level": "muito_dificil",
+  "level": "very_hard",
   "correct": 2,
   "question": {
     "pt": "Homem de 72 anos, hipertenso e ex-tabagista, é admitido na UTI por quadro de pneumonia da comunidade grave. Apresenta febre, taquidispneia, confusão leve e SpO₂ de 88% com máscara de reservatório a 15 L/min. Gasometria: pH 7,45, PaCO₂ 34 mmHg, PaO₂ 58 mmHg. PCR elevada, procalcitonina limítrofe. Radiografia mostra infiltrado extenso em base direita e opacificação incipiente na esquerda. O painel viral está pendente. Qual das seguintes estratégias iniciais de suporte ventilatório é a menos adequada neste momento?",
@@ -79,7 +79,7 @@ const bancoPneumoDificilima = [
   "code": "pneumo04-q902",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topics": ["ards", "compliance", "mechanical_ventilation", "recruitment", "peep"],
-  "level": "muito_dificil",
+  "level": "very_hard",
   "correct": 4,
   "question": {
     "pt": "Paciente de 58 anos, sexo masculino, internado na UTI com pancreatite aguda grave, evolui com necessidade de ventilação mecânica por hipoxemia refratária (PaO₂/FiO₂ = 102 com PEEP 8 cmH₂O). Radiografia de tórax mostra infiltrados bilaterais difusos. A complacência estática do sistema respiratório é de 42 mL/cmH₂O. Não há sinais de sobrecarga hídrica ou infecção respiratória. Diante da hipótese de SDRA de origem extrapulmonar, qual das abordagens abaixo é menos apropriada neste momento?",
@@ -154,7 +154,7 @@ const bancoPneumoDificilima = [
   "code": "pneumo04-q903",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topics": ["tension_pneumothorax", "trauma", "ultrasound", "emergency", "chest_drain"],
-  "level": "muito_dificil",
+  "level": "very_hard",
   "correct": 3,
   "question": {
     "pt": "Homem de 35 anos é admitido no pronto-socorro após acidente automobilístico. Está consciente, porém com taquidispneia intensa, uso de musculatura acessória e SpO₂ de 84% em máscara não reinalante. Hipotenso (PA 80/50 mmHg), turgência jugular visível e ausência de murmúrio vesicular à direita. A radiografia portátil está sendo solicitada. Ultrassom torácico à beira-leito revela ausência de deslizamento pleural (“lung sliding”) e presença do sinal do código de barras no modo M. Quais das condutas abaixo é a mais inadequada frente à hipótese clínica?",
@@ -229,7 +229,7 @@ const bancoPneumoDificilima = [
   "code": "pneumo04-q904",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topics": ["bronchoscopy", "hemoptysis", "airway_management", "icu_procedures", "pulmonary_bleeding"],
-  "level": "muito_dificil",
+  "level": "very_hard",
   "correct": 1,
   "question": {
     "pt": "Homem de 67 anos, com DPOC e uso crônico de anticoagulação oral por FA, apresenta hemoptise volumosa (cerca de 250 mL em 24h) e queda de saturação para 86% com cateter nasal de 3 L/min. É entubado e admitido na UTI. Após estabilização, é realizada broncoscopia flexível que mostra sangramento difuso no brônquio principal esquerdo, sem ponto de sangramento evidente. Não há evidências de neoplasia ou corpo estranho. O sangramento permanece ativo e moderado após aspiração. Qual das condutas abaixo é mais questionável neste momento?",
@@ -304,7 +304,7 @@ const bancoPneumoDificilima = [
   "code": "pneumo04-q905",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topics": ["hemoptysis", "lung_cancer", "interventional_radiology", "airway_management", "icu_oncology"],
-  "level": "muito_dificil",
+  "level": "very_hard",
   "correct": 2,
   "question": {
     "pt": "Paciente masculino de 61 anos, tabagista com diagnóstico recente de carcinoma epidermoide de pulmão central à esquerda, apresenta hemoptise volumosa súbita com queda de SpO₂ para 81% em máscara de alta concentração. Está intubado e em ventilação mecânica. A broncoscopia mostra sangramento ativo no brônquio fonte esquerdo, com tecido friável e distorção da arquitetura local. Foi tentada instilação de vasoconstritores sem sucesso. Considerando o contexto clínico e oncológico, qual das condutas abaixo representa a abordagem mais controversa neste cenário?",
@@ -379,7 +379,7 @@ const bancoPneumoDificilima = [
   "code": "pneumo04-q906",
  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topics": ["staphylococcus_aureus", "pneumonia", "antibiotic_resistance", "icu_infection", "microbiology"],
-  "level": "muito_dificil",
+  "level": "very_hard",
   "correct": 3,
   "question": {
     "pt": "Mulher de 36 anos, previamente hígida, é internada na UTI com pneumonia grave após quadro gripal. Apresenta febre, hemoptise, dessaturação progressiva e infiltrado cavitário no lobo superior direito. O escarro induzido é positivo para *Staphylococcus aureus* sensível à meticilina pela PCR rápida multiplex (target mecA negativo), e a cultura posterior mostra crescimento com MIC de vancomicina = 2 µg/mL. A paciente está com instabilidade hemodinâmica e em ventilação invasiva. Qual das seguintes abordagens terapêuticas é menos indicada neste momento?",
@@ -454,7 +454,7 @@ const bancoPneumoDificilima = [
   "code": "pneumo04-q907",
  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topics": ["lung_ultrasound", "ARDS", "pulmonary_edema", "differential_diagnosis", "POCUS"],
-  "level": "muito_dificil",
+  "level": "very_hard",
   "correct": 1,
   "question": {
     "pt": "Homem de 68 anos, hipertenso e diabético, é admitido na UTI com insuficiência respiratória aguda, SpO₂ 84% em máscara com reservatório, taquipneia e ausculta com murmúrio diminuído difusamente. Ele é rapidamente avaliado com POCUS pulmonar, que revela padrão bilateral de linhas B difusas com linha pleural regular e deslizante (lung sliding preservado), sem consolidações. Não há derrames pleurais. A ecocardiografia mostra VE hipertrofiado com disfunção diastólica. Com base nas evidências atuais e nas recomendações do International Lung Ultrasound Consensus, qual das alternativas abaixo é a interpretação **menos compatível** com esse achado?",
@@ -529,7 +529,7 @@ const bancoPneumoDificilima = [
   "code": "pneumo04-q908",
  "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topics": ["diaphragm_ultrasound", "weaning", "extubation", "icu_monitoring", "mechanical_ventilation"],
-  "level": "muito_dificil",
+  "level": "very_hard",
   "correct": 4,
   "question": {
     "pt": "Homem de 73 anos, internado por pneumonia e sepse respiratória, está há 10 dias em ventilação mecânica. Após estabilização clínica, sedação suspensa e melhora laboratorial, ele inicia protocolo de desmame. Em ventilação espontânea com suporte mínimo, é submetido a avaliação de ultrassom diafragmático, que mostra excursão de 0,8 cm bilateralmente e fração de espessamento (DTF) de 15% à direita e 13% à esquerda. O índice f/VT está em 85. Qual das abordagens abaixo é mais consistente com a evidência atual sobre predição de sucesso da extubação?",
@@ -604,7 +604,7 @@ const bancoPneumoDificilima = [
     "code": "pneumo04-q909",
    "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
     "topics": ["ECCO2R", "ARDS", "hypercapnia", "ventilation", "extracorporeal_support"],
-    "level": "muito_dificil",
+    "level": "very_hard",
     "correct": 3,
     "question": {
       "pt": "Homem de 61 anos com DPOC grave e história de múltiplas internações é admitido por pneumonia e desenvolve insuficiência respiratória aguda hipercápnica. Após tentativa de ventilação não invasiva sem sucesso, evolui com PaCO₂ de 98 mmHg e pH 7,12 sob ventilação invasiva protetora. Dada a dificuldade em manter volume corrente adequado sem agravar a hipercapnia, considera-se uso de ECCO₂R. Qual das alternativas abaixo reflete melhor as indicações e limitações dessa técnica, segundo consensos atuais (ERS 2023, ELSO)?",
@@ -667,7 +667,7 @@ const bancoPneumoDificilima = [
     "code": "pneumo04-q910",
    "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
     "topics": ["empyema", "pleural_drainage", "ultrasound", "CT_scan", "interventional_radiology"],
-    "level": "muito_dificil",
+    "level": "very_hard",
     "correct": 2,
     "question": {
       "pt": "Mulher de 68 anos, diabética e hipertensa, está internada por pneumonia com derrame pleural à esquerda. Após 72 horas de antibióticoterapia empírica, permanece febril, com leucocitose e PCR elevada. A ultrassonografia torácica evidencia septações finas no líquido pleural, e a tomografia revela coleção loculada no espaço pleural posterior. Qual das abordagens a seguir é mais apropriada, considerando evidências atuais (BTS, American Thoracic Society, Fleischner Society)?",
@@ -730,7 +730,7 @@ const bancoPneumoDificilima = [
     "code": "pneumo04-q911",
     "areas": ["pneumo+icu", "pneumo", "icu", "vent", "medicine"],
     "topics": ["guillain_barre", "weaning", "extubation", "respiratory_muscles", "neuromuscular_failure"],
-    "level": "muito_dificil",
+    "level": "very_hard",
     "correct": 0,
     "question": {
       "pt": "Homem de 43 anos, previamente hígido, foi admitido na UTI com diagnóstico de síndrome de Guillain-Barré. Evoluiu com tetraparesia flácida e insuficiência respiratória, sendo intubado no terceiro dia de internação. Após 10 dias de suporte ventilatório, apresenta melhora progressiva da força muscular (MRC > 3 em todos os membros), sem sinais de disautonomia e com capacidade vital forçada (CVF) de 22 mL/kg. Gasometria arterial em ar ambiente mostra PaO₂ de 78 mmHg e PaCO₂ de 39 mmHg. Qual das estratégias abaixo é mais apropriada neste momento?",
@@ -793,7 +793,7 @@ const bancoPneumoDificilima = [
     "code": "pneumo04-q912",
    "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
     "topics": ["COPD", "exacerbation", "ventilatory_support", "acidosis", "clinical_decision"],
-    "level": "muito_dificil",
+    "level": "very_hard",
     "correct": 1,
     "question": {
       "pt": "Paciente de 74 anos com diagnóstico de DPOC GOLD IV, ex-tabagista, dá entrada na UTI com dispneia intensa, uso de musculatura acessória, confusão mental e hipoxemia refratária à oxigenioterapia de baixo fluxo. Gasometria arterial revela pH 7,22, PaCO₂ de 78 mmHg e PaO₂ de 58 mmHg com FiO₂ de 35%. Apresenta PA 135/80 mmHg, FC 110 bpm e SatO₂ 87%. Qual conduta inicial é mais indicada, considerando as evidências mais robustas?",
@@ -856,7 +856,7 @@ const bancoPneumoDificilima = [
     "code": "pneumo04-q913",
    "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
     "topics": ["burn_injury", "restrictive_ventilation", "chest_wall", "mechanical_ventilation", "airway_management"],
-    "level": "muito_dificil",
+    "level": "very_hard",
     "correct": 3,
     "question": {
       "pt": "Homem de 56 anos, previamente saudável, é admitido na UTI após explosão com queimaduras térmicas de 38% da superfície corporal total, incluindo parede torácica anterior e abdome superior. Ao exame, encontra-se intubado, ventilado com pressão de platô de 34 cmH₂O, driving pressure de 18 cmH₂O e complacência estática de 22 mL/cmH₂O. SatO₂ estável em 92% com FiO₂ de 50%, PaCO₂ de 54 mmHg e pH 7,29. Apresenta hipoxemia leve, mas padrão respiratório visivelmente restritivo. Qual das estratégias abaixo é mais indicada como próxima medida?",
@@ -919,7 +919,7 @@ const bancoPneumoDificilima = [
     "code": "pneumo04-q914",
    "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
     "topics": ["ards", "ecmo", "ecco2r", "refractory_hypoxemia", "mechanical_ventilation"],
-    "level": "muito_dificil",
+    "level": "very_hard",
     "correct": 2,
     "question": {
       "pt": "Homem de 52 anos com SDRA grave secundária a pneumonia viral é ventilado em volume corrente de 6 mL/kg, PEEP de 14 cmH₂O, FiO₂ de 100%, pressão de platô de 32 cmH₂O e driving pressure de 17. Apesar do uso de bloqueador neuromuscular e posição prona por 16 horas, persiste com PaO₂/FiO₂ de 68 mmHg, pH 7,19 e PaCO₂ de 92 mmHg. A equipe discute estratégias extracorpóreas. Qual das alternativas representa a melhor indicação neste cenário?",
@@ -982,7 +982,7 @@ const bancoPneumoDificilima = [
     "code": "pneumo04-q915",
    "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
     "topics": ["airway_management", "trauma", "facial_trauma", "emergency", "intubation"],
-    "level": "muito_dificil",
+    "level": "very_hard",
     "correct": 0,
     "question": {
       "pt": "Homem de 33 anos é vítima de acidente automobilístico e chega ao pronto-socorro com rebaixamento do nível de consciência (Glasgow 7), fratura evidente de face e mandíbula com sangramento ativo e crepitação, além de trauma torácico fechado. Está hipoxêmico (SatO₂ 88% em O₂ por máscara não reinalante), taquipneico e com dificuldade progressiva para manter via aérea pérvia. Qual das estratégias abaixo representa a conduta mais adequada para manejo da via aérea neste cenário?",
@@ -1045,7 +1045,7 @@ const bancoPneumoDificilima = [
     "code": "pneumo04-q916",
    "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
     "topics": ["difficult_airway", "retrograde_intubation", "emergency", "airway_management", "critical_care"],
-    "level": "muito_dificil",
+    "level": "very_hard",
     "correct": 1,
     "question": {
       "pt": "Homem de 58 anos com câncer de laringe em tratamento paliativo apresenta hipoxemia grave (SpO₂ 82% com máscara de O₂) e confusão mental progressiva. Apresenta traços de estridor, múltiplas tentativas de intubação com laringoscópio direto sem sucesso, e indisponibilidade de videolaringoscópio. A equipe considera estratégias para via aérea difícil. Qual é o papel da intubação retrógrada neste contexto?",
@@ -1108,7 +1108,7 @@ const bancoPneumoDificilima = [
     "code": "pneumo04-q917",
    "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
     "topics": ["viral_pneumonia", "bacterial_superinfection", "fungal_infection", "ARDS", "critical_illness"],
-    "level": "muito_dificil",
+    "level": "very_hard",
     "correct": 3,
     "question": {
       "pt": "Mulher de 54 anos, previamente saudável, foi internada com pneumonia viral confirmada por PCR positivo para Influenza A, evoluindo com febre persistente, infiltrado alveolar bilateral e hipoxemia progressiva. Após 5 dias, apresentou piora clínica com secreção purulenta, leucocitose e instabilidade hemodinâmica. Culturas de escarro e BAL revelaram Streptococcus pneumoniae sensível e, posteriormente, crescimento de Aspergillus fumigatus. Apesar da antibioticoterapia, desenvolve SDRA grave, necessitando ventilação protetora e pronação. Qual das condutas abaixo está mais alinhada com as recomendações baseadas em evidência neste cenário?",
@@ -1171,7 +1171,7 @@ const bancoPneumoDificilima = [
     "code": "pneumo04-q918",
     "areas": ["pneumo+icu", "pneumo", "icu", "vent", "medicine"],
     "topics": ["atelectasis", "mechanical_ventilation", "bronchoscopy", "airway_obstruction", "critical_care"],
-    "level": "muito_dificil",
+    "level": "very_hard",
     "correct": 2,
     "question": {
       "pt": "Homem de 67 anos, intubado há 4 dias por pneumonia, apresenta piora da oxigenação (PaO₂/FiO₂ 120), hipercapnia leve e aumento da pressão de platô (Pplat 33 cmH₂O). A ausculta revela murmúrio vesicular abolido na base direita. Radiografia de tórax mostra opacificação homogênea no lobo inferior direito. A equipe suspeita de atelectasia lobar extensa por rolha de secreção. Qual conduta inicial é mais apropriada?",
@@ -1234,7 +1234,7 @@ const bancoPneumoDificilima = [
     "code": "pneumo04-q919",
    "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
     "topics": ["tracheostomy", "airway_management", "critical_care", "subacute_complications"],
-    "level": "muito_dificil",
+    "level": "very_hard",
     "correct": 3,
     "question": {
       "pt": "Homem de 71 anos, internado há 21 dias por AVC isquêmico extenso e pneumonia associada à ventilação mecânica, evolui com dificuldade de desmame ventilatório e picos de agitação ao tentar interrupção da sedação. Está traqueostomizado há 6 dias por técnica percutânea com broncoscopia. Nas últimas 48h, apresenta saída de secreção espessa ao redor do sítio, pequeno enfisema subcutâneo e discreta queda da saturação ao movimentar-se no leito. Qual das condutas abaixo é a mais adequada neste momento?",
@@ -1297,7 +1297,7 @@ const bancoPneumoDificilima = [
   "code": "pneumo04-q920",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
   "topics": ["interstitial_lung_disease", "mechanical_ventilation", "ARDS", "fibrosis", "ECMO"],
-  "level": "muito_dificil",
+  "level": "very_hard",
   "correct": 0,
   "question": {
     "pt": "Paciente de 61 anos com fibrose pulmonar idiopática (FPI) conhecida, em uso de nintedanibe, é admitido na UTI por desconforto respiratório progressivo e queda de saturação refratária (SpO₂ 84% com máscara de O₂). TC mostra vidro fosco bilateral sobreposto às áreas de fibrose basal, sem sinais claros de infecção ou tromboembolismo. Após 24h de ventilação mecânica protetora, Pplat 28 cmH₂O, driving pressure 16 cmH₂O, PaO₂/FiO₂ = 88. Apesar da pronação e bloqueio neuromuscular, a oxigenação continua precária. A família recusa ECMO por motivos religiosos. Qual das condutas a seguir é mais fundamentada para este cenário?",

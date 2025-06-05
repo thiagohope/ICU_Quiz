@@ -45,12 +45,15 @@
 
     <section id="last-mock-exam-results-section" class="mb-10 bg-white p-6 rounded-xl shadow-lg border border-gray-200" style="display:none;">
         <h2 class="text-xl sm:text-2xl font-semibold text-purple-600 mb-4 text-center" data-i18n="last_mock_exam_results_title">Last Mock Exam Result</h2>
-        <div id="last-mock-exam-details" class="result-item space-y-1 text-sm">
-            {/* Detalhes serão preenchidos por JS */}
-        </div>
+        <div id="last-mock-exam-summary" class="result-item space-y-2 text-sm mb-4">
+            </div>
         <div class="mt-6 text-center">
-            <button id="review-last-mock-exam-btn" class="bg-blue-500 text-white hover:bg-blue-600 font-semibold py-2 px-4 rounded-lg text-sm" style="display:none;" data-i18n="review_last_mock_exam_button">Review Questions</button>
-        </div>
+            <button id="access-performance-report-btn" 
+                    class="bg-green-600 text-white hover:bg-green-700 font-semibold py-2.5 px-5 rounded-lg shadow-md transition-colors text-base" 
+                    data-i18n="access_performance_report_button_text">
+                Access Performance Report
+            </button>
+            </div>
     </section>
     
     <section id="mock-exam-history-section" class="mb-10 bg-white p-6 rounded-xl shadow-lg border border-gray-200">
@@ -107,12 +110,13 @@
     </p>
   </footer>
 
-<script src="../Question-Bank/banco-questoes.js"></script>
-<script src="../Question-Bank/Neuro01.js"></script>
-<script src="../Question-Bank/Cardio01.js"></script>
-<script src="../Question-Bank/Pneumo01.js"></script>
+<script src="../Question-bank/banco-questoes.js"></script>
+<script src="../Question-Bank/Neuro01.js"></script><script src="../Question-Bank/Neuro02.js"></script><script src="../Question-Bank/Neuro03.js"></script><script src="../Question-Bank/Neuro04.js"></script>
+<script src="../Question-Bank/Cardio01.js"></script><script src="../Question-Bank/Cardio02.js"></script><script src="../Question-Bank/Cardio03.js"></script><script src="../Question-Bank/Cardio04.js"></script>
+<script src="../Question-Bank/Pneumo01.js"></script><script src="../Question-Bank/Pneumo02.js"></script><script src="../Question-Bank/Pneumo03.js"></script><script src="../Question-Bank/Pneumo04.js"></script>
 <script src="../Question-Bank/Ventilation.js"></script>
-<script src="../Question-Bank/Nephro01.js"></script>
+<script src="../Question-Bank/Nephro01.js"></script><script src="../Question-Bank/Nephro02.js"></script><script src="../Question-Bank/Nephro03.js"></script><script src="../Question-Bank/Nephro04.js"></script>
+<script src="../Question-Bank/Dialysis.js"></script>
 <script src="Dashboard-Simulation.js"></script>
 </body>
 </html>

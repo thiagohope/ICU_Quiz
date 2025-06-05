@@ -1435,7 +1435,7 @@ const bancoCardioDificilima = [
   "code": "cardio04-q420",
   "areas": ["cardio+icu", "cardio", "icu", "medicine"],
   "topics": ["myocardial infarction", "ventricular arrhythmias", "mechanical support", "heart failure", "critical care"],
-  "level": "muito_dificil",
+  "level": "very_hard",
   "correct": 3,
   "question": {
     "pt": "Homem de 63 anos, previamente hipertenso e tabagista, foi internado há 4 dias por IAM extenso de parede anterior, tratado com ICP primária. Evolui com fração de ejeção de 25%, congestão pulmonar, hipotensão refratária (PAM 58 mmHg), e episódios de TV sustentada necessitando cardioversão. Está em uso de noradrenalina e ventilação invasiva. Diante da instabilidade clínica e disfunção multissistêmica iminente, qual é a melhor conduta terapêutica?",

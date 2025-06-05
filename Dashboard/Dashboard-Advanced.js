@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (simulationButton) {
         simulationButton.addEventListener('click', () => {
             console.log("Redirecionando para Dashboard-Pro.html");
-            window.location.href = 'Dashboard-Pro.html'; // Ajuste o caminho se necessário
+            window.location.href = 'Dashboard-Simulation.html'; // Ajuste o caminho se necessário
         });
     } else {
         console.error("Dashboard-Advanced: Botão 'start-simulation-mode-button' não encontrado.");

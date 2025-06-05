@@ -403,3 +403,137 @@ body, p, label, select, input, td, th {
   border-left: 3px solid var(--color-primary);
   border-radius: 4px;
 }
+
+/*========================*/
+/* Estilos do Relatório de Performance*/
+/*========================*/
+
+.area-performance-chart {
+    font-family: Arial, sans-serif;
+    font-size: 0.875rem; /* text-sm */
+    line-height: 1.25rem;
+    border: 1px solid #e5e7eb; /* border-gray-200 */
+    padding: 1rem; /* p-4 */
+    border-radius: 0.5rem; /* rounded-lg */
+}
+.area-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem; /* mb-3 */
+    padding-bottom: 0.75rem; /* pb-3 */
+    border-bottom: 1px solid #f3f4f6; /* border-gray-100 */
+}
+.area-row:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+.area-name-label {
+    width: 35%; /* Ajuste conforme necessário */
+    padding-right: 1rem; /* pr-4 */
+    color: #374151; /* text-gray-700 */
+    font-weight: 500; /* medium (um pouco mais de destaque) */
+}
+.bar-graph-container {
+    width: 55%; /* Ajuste conforme necessário */
+    height: 20px; /* Altura da barra e do container */
+    background-color: #e5e7eb; /* bg-gray-200 */
+    border-radius: 0.25rem; /* rounded-sm */
+    position: relative;
+    overflow: hidden; /* Para arredondar a barra interna */
+}
+.performance-actual-bar {
+    height: 100%;
+    background-color: #6d28d9; /* bg-purple-700 - Cor para o desempenho */
+    border-radius: 0.25rem; /* rounded-sm */
+    transition: width 0.5s ease-in-out;
+}
+.borderline-marker-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px; /* Largura da linha de borderline */
+    background-color: #ef4444; /* bg-red-500 - Cor para a linha de borderline */
+    /* 'left' será definido por JS */
+}
+.area-accuracy-value {
+    width: 10%; /* Ajuste conforme necessário */
+    text-align: right;
+    padding-left: 1rem; /* pl-4 */
+    color: #4b5563; /* text-gray-600 */
+    font-weight: 500;
+}
+
+/* Para a legenda do gráfico (Lower, Borderline, Higher) */
+.graph-legend {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem; /* text-xs */
+    color: #6b7280; /* text-gray-500 */
+    margin-top: 0.5rem; /* mt-2 */
+    padding: 0 35% 0 calc(35% + 1rem); /* Alinha com o bar-graph-container, ajuste o padding-left se .area-name-label mudar */
+}
+.legend-lower, .legend-borderline, .legend-higher {
+    text-align: center;
+}
+.legend-borderline {
+    /* Pode precisar de ajuste para centralizar com a linha */
+}
+
+/* ===================
+* Gráfico de Nível de Dificuldade
+=======================  */
+.level-performance-chart {
+    font-family: Arial, sans-serif;
+    font-size: 0.875rem; /* text-sm */
+    padding: 1rem; /* p-4 */
+    /* Mantendo consistência com .area-performance-chart, mas sem a borda externa aqui,
+       já que ele estará dentro da seção #level-analysis-section que já tem borda e padding.
+       Você pode adicionar uma borda se preferir:
+       border: 1px solid #e5e7eb;
+       border-radius: 0.5rem; 
+    */
+}
+
+.level-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem; /* mb-3 */
+}
+
+.level-name-label {
+    width: 25%; /* Ajuste conforme necessário */
+    padding-right: 1rem; /* pr-4 */
+    color: #374151; /* text-gray-700 */
+    font-weight: 500;
+    text-align: right; /* Alinha o nome do nível à direita para ficar perto da barra */
+}
+
+.level-bar-container {
+    width: 65%; /* Ajuste conforme necessário */
+    height: 20px;
+    background-color: #e5e7eb; /* bg-gray-200 */
+    border-radius: 0.25rem; /* rounded-sm */
+    position: relative;
+    overflow: hidden;
+}
+
+.level-accuracy-bar {
+    height: 100%;
+    background-color: #3b82f6; /* bg-blue-500 - Cor para as barras de dificuldade */
+    border-radius: 0.25rem; /* rounded-sm */
+    transition: width 0.5s ease-in-out;
+    text-align: right; /* Para alinhar o texto da acurácia dentro da barra, se desejar */
+    color: white;
+    font-size: 0.75rem; /* text-xs */
+    line-height: 20px; /* Mesma altura da barra para centralizar verticalmente */
+    padding-right: 0.25rem; /* Pequeno padding para o texto não colar na borda */
+}
+
+.level-accuracy-value-outside { /* Se preferir o valor fora da barra */
+    width: 10%;
+    text-align: left; /* Alinha à esquerda após a barra */
+    padding-left: 0.5rem; /* pl-2 */
+    color: #4b5563; /* text-gray-600 */
+    font-weight: 500;
+}

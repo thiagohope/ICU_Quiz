@@ -18,8 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const topicMultiSelectTip = topicSelector ? topicSelector.nextElementSibling : null;
     const startSessionButtonTextSpan = startSessionButton ? startSessionButton.querySelector('span') : null;
     const continueSessionButtonTextSpan = continueSessionButton ? continueSessionButton.querySelector('span') : null;
+    const goToSimulationButton = document.getElementById('go-to-simulation-dashboard-btn');
+    const simulationButtonIcon = document.getElementById('simulation-btn-icon');
     // #endregion
-
     // #region --- Traduções ---
     function getCurrentLanguage() {
         return localStorage.getItem('selectedLanguage') || 'en';
@@ -47,7 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 "max_topics_selected_alert": "You can select a maximum of 5 topics.",
                 "please_select_areas_alert": "Please select at least one area.", // Corrigido de "Please select a specialty to continue."
                 "please_select_topics_alert": "Please select at least one topic.", 
-                "confirm_overwrite_focused_pro_progress": "Starting a new session with these selections will overwrite your previously saved Focused Pro quiz progress. Are you sure you want to continue?", // Chave específica
+                "confirm_overwrite_focused_pro_progress": "Starting a new session with these selections will overwrite your previously saved Focused Pro quiz progress. Are you sure you want to continue?",
+                "go_to_simulation_dashboard_button_text": "Start Mock Exam",
+                "tooltip_mock_exam_advanced_feature": "Premium Feature: Access with Advanced Plan",
+                "alert_upgrade_title": "Upgrade Required",
+                "alert_upgrade_message_mock_exam": "Mock Exams are an exclusive feature of the Advanced plan. Upgrade now to access this and many other benefits!",
                 "cardio": "Cardiology",
                 "neuro": "Neurology",
                 "pneumo": "Pulmonology",
@@ -59,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "medicine": "Medicine",
                 "nephro": "Nephrology",
                 "nephro+icu": "Nephrology-ICU",
-                "rrt": "Renal Replacement Therapy - RRT - Dialysis"
+                "rrt": "Renal Replacement Therapy - RRT - Dialysis",
             },
             pt: {
                 "dashboard_logout_text": "Sair",
@@ -80,6 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 "please_select_areas_alert": "Por favor, selecione pelo menos uma área.",
                 "please_select_topics_alert": "Por favor, selecione pelo menos um tópico.",
                 "confirm_overwrite_focused_pro_progress": "Iniciar uma nova sessão com estas seleções substituirá o seu progresso salvo anteriormente no quiz Focado Pro. Tem certeza que deseja continuar?",
+                "go_to_simulation_dashboard_button_text": "Iniciar Simulado Completo",
+                "tooltip_mock_exam_advanced_feature": "Recurso Premium: Exclusivo do Plano Avançado",
+                "alert_upgrade_title": "Upgrade Necessário",
+                "alert_upgrade_message_mock_exam": "Os Simulados Completos são um recurso exclusivo do plano Avançado. Atualize seu plano para acessar esta e muitas outras vantagens!",
                 "cardio": "Cardiologia",
                 "neuro": "Neurologia",
                 "pneumo": "Pneumologia",
@@ -112,6 +121,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 "please_select_areas_alert": "Por favor, selecciona al menos un área.",
                 "please_select_topics_alert": "Por favor, selecciona al menos un tema.",
                 "confirm_overwrite_focused_pro_progress": "Iniciar una nueva sesión con estas selecciones sobrescribirá tu progreso guardado anteriormente en el cuestionario Enfocado Pro. ¿Estás seguro de que quieres continuar?",
+                "go_to_simulation_dashboard_button_text": "Iniciar Simulacro de Examen",
+                "tooltip_mock_exam_advanced_feature": "Función Premium: Exclusiva del Plan Avanzado",
+                "alert_upgrade_title": "Actualización Requerida",
+                "alert_upgrade_message_mock_exam": "Los Simulacros de Examen son una función exclusiva del plan Avanzado. ¡Actualiza tu plan para acceder a esta y muchas otras ventajas!",
                 "cardio": "Cardiología",
                 "neuro": "Neurología",
                 "pneumo": "Neumología",
@@ -142,7 +155,65 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     applyStaticTranslations();
     // #endregion
+    // #region --- Lógica do botão Iniciar Mock Exam ---
+if (goToSimulationButton) {
+    // Aplicar texto traduzido ao span dentro do botão
+    const buttonTextSpan = goToSimulationButton.querySelector('span[data-i18n="go_to_simulation_dashboard_button_text"]');
+    if (buttonTextSpan) {
+        buttonTextSpan.textContent = translate("go_to_simulation_dashboard_button_text");
+    } else {
+        // Fallback se o span não for encontrado (improvável com o HTML fornecido)
+        goToSimulationButton.childNodes.forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0) {
+                // Tenta substituir o texto do nó de texto principal, mantendo o ícone se houver
+            } else if (node.tagName === 'SPAN' && !node.id) { // Se o span principal de texto não tiver data-i18n
+                 node.textContent = translate("go_to_simulation_dashboard_button_text");
+            }
+        });
+         // Se não houver span, como último recurso (remova o emoji se não desejar):
+         // goToSimulationButton.textContent = translate("go_to_simulation_dashboard_button_text") + " 🚀";
+    }
 
+    const userTier = localStorage.getItem('userTier');
+
+    if (userTier === 'advanced') {
+        if (simulationButtonIcon) {
+            simulationButtonIcon.style.display = 'none'; // Garante que o ícone premium não apareça
+        }
+        // Garante que o botão não está esmaecido (remova a classe se você a usar)
+        // Ex: goToSimulationButton.classList.remove('opacity-70');
+        // Ex: goToSimulationButton.style.opacity = '1'; // Se estiver aplicando opacidade diretamente
+        goToSimulationButton.removeAttribute('title'); // Remove o tooltip
+
+        goToSimulationButton.addEventListener('click', () => {
+            console.log("Redirecting from Focused Pro Dashboard to Simulation Dashboard (Advanced User).");
+            window.location.href = '../Dashboard/Dashboard-Simulation.html'; // Ajuste o caminho se necessário
+        });
+    } else {
+        // Usuário NÃO é Advanced - configurar como "teaser"
+        if (simulationButtonIcon) {
+            simulationButtonIcon.textContent = '🔒'; // Ou '⭐'
+            simulationButtonIcon.style.display = 'inline'; // Mostra o ícone
+        }
+        // Adiciona um estilo "esmaecido" - escolha UMA das opções abaixo ou use sua própria classe CSS
+        // Opção 1: Usando uma classe Tailwind (se você estiver usando Tailwind e essa classe existir/for definida)
+        // goToSimulationButton.classList.add('opacity-70');
+        // Opção 2: Aplicando estilo diretamente (mais simples se não estiver usando classes para isso)
+        goToSimulationButton.style.opacity = '0.7';
+
+
+        goToSimulationButton.setAttribute('title', translate("tooltip_mock_exam_advanced_feature"));
+
+        goToSimulationButton.addEventListener('click', () => {
+            alert(translate("alert_upgrade_title") + "\n\n" + translate("alert_upgrade_message_mock_exam"));
+            // Opcional: Redirecionar para uma página de planos/upgrade após o alerta
+            // Exemplo: setTimeout(() => { window.location.href = '../plans.html'; }, 500);
+        });
+    }
+} else {
+    console.warn("Dashboard-FocusedPro: Botão 'go-to-simulation-dashboard-btn' não encontrado no DOM.");
+}
+    //#endregion
     // #region --- Lógica de Logout (Preserva focusedProState) ---
     if (logoutButton) {
         logoutButton.addEventListener('click', () => {
@@ -163,7 +234,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Dashboard-FocusedPro: Botão 'dashboard-logout-button' não encontrado.");
     }
     // #endregion
-
     // #region --- Lógica do Botão "Continue Previous Session" ---
     if (continueSessionButton) {
         const focusedProQuizProgress = localStorage.getItem('focusedProState');
@@ -185,7 +255,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn("Dashboard-FocusedPro: Botão 'continue-session-button-focusedpro' não encontrado.");
     }
     // #endregion
-
     // #region --- Lógica para Popular Seletores (Áreas e Tópicos dependentes) ---
     function populateAreaSelector() {
         if (!areaSelector) {
@@ -299,7 +368,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     initializeSelectors();
     // #endregion
-
     // #region --- Lógica do Botão "Start New Session" ---
     if (startSessionButton) {
         startSessionButton.addEventListener('click', () => {

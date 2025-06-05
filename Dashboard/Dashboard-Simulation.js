@@ -14,6 +14,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const reviewLastMockExamBtn = document.getElementById('review-last-mock-exam-btn');
     const advancedNavSection = document.getElementById('advanced-user-nav-section');
     const goToFocusedProBtn = document.getElementById('go-to-focused-pro-dashboard-btn');
+    const accessReportBtn = document.getElementById('access-performance-report-btn');
+    if (accessReportBtn) {
+        accessReportBtn.addEventListener('click', () => {
+            console.log("Access Performance Report button clicked. Navigation to full report page (e.g., performance-report.html) to be implemented later.");
+
+            // Linha de exemplo para o futuro redirecionamento (mantenha comentada por enquanto):
+            // const lastResult = localStorage.getItem('lastMockExamResult');
+            // if (lastResult) {
+        window.location.href = '../Report/performance-report.html'; 
+            // } else {
+            //    alert("No last mock exam result available to generate a report.");
+            // }
+        });
+    } else {
+        console.error("Dashboard-Simulation: Button with ID 'access-performance-report-btn' not found.");
+    }
 
     function getCurrentLanguage() {
         return localStorage.getItem('selectedLanguage') || 'en';
@@ -51,11 +67,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 "go_to_focused_pro_dashboard_text": "Access Focused Pro Study 🎯",
                 "mock_exam_history_title": "Mock Exam History",
                 "historical_results_placeholder_text": "[Your historical performance in Mock Exams will appear here - future feature]",
-                 // Adicionando traduções para as áreas que podem vir do questionBank
+                "label_user_id": "User:",
+                "label_test_id": "Test:",
+                "label_completed_on": "Completed:",
+                "label_allotted_duration": "Allotted Duration:",
+                "label_time_taken": "Time Taken:",
+                "access_performance_report_button_text": "Access Performance Report",
+                 // Traduções para as áreas do QuestionBank
                 "cardio": "Cardiology", "neuro": "Neurology", "pneumo": "Pulmonology", "icu": "Intensive Care Unit",
                 "pneumo+icu": "Pulmonology-ICU", "cardio+icu": "Cardiology-ICU", "neuro+icu": "Neurology-ICU",
                 "vent": "Mechanical Ventilation", "medicine": "Medicine", "nephro": "Nephrology",
-                "nephro+icu": "Nephrology-ICU", "rrt": "Renal Replacement Therapy - RRT - Dialysis", "dialysis": "Dialysis" // Adicionei dialysis se for uma área
+                "nephro+icu": "Nephrology-ICU", "rrt": "Renal Replacement Therapy - RRT - Dialysis", "dialysis": "Dialysis"
             },
             pt: {
                 "dashboard_sim_main_title": "Dashboard do Simulado",
@@ -86,6 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 "go_to_focused_pro_dashboard_text": "Acessar Estudo Focado Pro 🎯",
                 "mock_exam_history_title": "Histórico de Simulados",
                 "historical_results_placeholder_text": "[Seu histórico de performance em Simulados aparecerá aqui - funcionalidade futura]",
+                "label_user_id": "Usuário:",
+                "label_test_id": "Teste:",
+                "label_completed_on": "Concluído em:",
+                "label_allotted_duration": "Duração Prevista:",
+                "label_time_taken": "Tempo Utilizado:",
+                "access_performance_report_button_text": "Aceder ao Relatório de Performance",
+                 // Traduções para as áreas do QuestionBank
                 "cardio": "Cardiologia", "neuro": "Neurologia", "pneumo": "Pneumologia", "icu": "UTI",
                 "pneumo+icu": "UTI-Pneumologia", "cardio+icu": "UTI-Cardiologia", "neuro+icu": "UTI-Neurologia",
                 "vent": "Ventilação Mecânica", "medicine": "Medicina", "nephro": "Nefrologia",
@@ -119,7 +148,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 "review_last_mock_exam_button": "Revisar Preguntas",
                 "go_to_focused_pro_dashboard_text": "Acceder a Estudio Enfocado Pro 🎯",
                 "mock_exam_history_title": "Historial de Simulacros",
-                "historical_results_placeholder_text": "[Tu historial de rendimiento en Simulacros aparecerá aquí - funcionalidad futura]",
+                "historical_results_placeholder_text": "[Tu historial de rendimiento en Simulacros aparecerá aquí - funcionalidad futura]",                
+                "label_user_id": "Usuario:",
+                "label_test_id": "Test:",
+                "label_completed_on": "Completado el:",
+                "label_allotted_duration": "Duración Prevista:",
+                "label_time_taken": "Tiempo Utilizado:",
+                "access_performance_report_button_text": "Acceder al Informe de Rendimiento",
+                // Traduções para as áreas do QuestionBank
                 "cardio": "Cardiología", "neuro": "Neurología", "pneumo": "Neumología", "icu": "UCI",
                 "pneumo+icu": "UCI Neumología", "cardio+icu": "UCI Cardiología", "neuro+icu": "UCI Neurología",
                 "vent": "Ventilación Mecánica", "medicine": "Medicina", "nephro": "Nefrología",
@@ -134,45 +170,36 @@ document.addEventListener('DOMContentLoaded', () => {
         document.title = translateDashboardSim("dashboard_sim_main_title");
         const mainTitle = document.getElementById("user-welcome-message");
         if(mainTitle) mainTitle.textContent = translateDashboardSim("dashboard_sim_main_title");
-        
         const logoutTextS = document.getElementById("dashboard_logout_text");
         if(logoutTextS) logoutTextS.textContent = translateDashboardSim("dashboard_logout_text");
-
         const configTitle = document.querySelector('#mock-exam-launch-controls h2[data-i18n="configure_new_mock_exam_title"]');
         if(configTitle) configTitle.textContent = translateDashboardSim("configure_new_mock_exam_title");
-        
         const durationLabel = document.querySelector('label[for="sim-duration-selector"]');
         if(durationLabel) durationLabel.textContent = translateDashboardSim("sim_duration_label");
         const durationTip = durationLabel ? durationLabel.closest('div').querySelector('p[data-i18n="sim_duration_tip"]') : null;
         if(durationTip) durationTip.textContent = translateDashboardSim("sim_duration_tip");
-
         const numQLabel = document.querySelector('label[for="sim-num-questions-selector"]');
         if(numQLabel) numQLabel.textContent = translateDashboardSim("sim_num_questions_label");
         const numQTip = numQLabel ? numQLabel.closest('div').querySelector('p[data-i18n="sim_num_questions_tip"]') : null;
         if(numQTip) numQTip.textContent = translateDashboardSim("sim_num_questions_tip");
-
+        const accessReportButton = document.getElementById('access-performance-report-btn');
+        if (accessReportButton) accessReportButton.textContent = translateDashboardSim("access_performance_report_button_text");
         const areaLabel = document.querySelector('label[for="sim-area-selector"]');
         if(areaLabel) areaLabel.textContent = translateDashboardSim("sim_area_selector_label");
         const areaTip = areaLabel ? areaLabel.closest('div').querySelector('p[data-i18n="sim_multi_select_tip"]') : null;
         if(areaTip) areaTip.textContent = translateDashboardSim("sim_multi_select_tip");
-
         const startButtonSpan = startButton ? startButton.querySelector('span') : null;
         if(startButtonSpan) startButtonSpan.textContent = translateDashboardSim("start_simulation_button_text");
-        
         const lastResultsTitleEl = document.querySelector('#last-mock-exam-results-section h2[data-i18n="last_mock_exam_results_title"]');
         if(lastResultsTitleEl) lastResultsTitleEl.textContent = translateDashboardSim("last_mock_exam_results_title");
-
         if(reviewLastMockExamBtn) reviewLastMockExamBtn.textContent = translateDashboardSim("review_last_mock_exam_button");
-        
         const goToFocusedProBtnSpan = goToFocusedProBtn ? goToFocusedProBtn.querySelector('span') : null;
         if(goToFocusedProBtnSpan) goToFocusedProBtnSpan.textContent = translateDashboardSim("go_to_focused_pro_dashboard_text");
-
         const historyTitleEl = document.querySelector('#mock-exam-history-section h2[data-i18n="mock_exam_history_title"]');
         if(historyTitleEl) historyTitleEl.textContent = translateDashboardSim("mock_exam_history_title");
         const historyPlaceholderEl = document.querySelector('#historical-results-placeholder p[data-i18n="historical_results_placeholder_text"]');
         if(historyPlaceholderEl) historyPlaceholderEl.textContent = translateDashboardSim("historical_results_placeholder_text");
     }
-    
     if (logoutButton) {
         logoutButton.addEventListener('click', () => {
             if (confirm(translateDashboardSim("logout_confirm_message_dashboard"))) {
@@ -206,48 +233,78 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function displayLastMockExamResult() {
-        const resultString = localStorage.getItem('lastMockExamResult');
-        if (resultString && lastResultsSection && lastResultsDetailsDiv) {
-            try {
-                const result = JSON.parse(resultString);
-                const timeTakenInSeconds = result.timeTakenInSeconds || 0;
-                const minutes = Math.floor(timeTakenInSeconds / 60);
-                const seconds = timeTakenInSeconds % 60;
+function displayLastMockExamResult() {
+    const resultString = localStorage.getItem('lastMockExamResult');
+    // Certifique-se de que o ID corresponde ao que você definiu no HTML (sugeri 'last-mock-exam-summary')
+    const lastMockExamSummaryDiv = document.getElementById('last-mock-exam-summary');
+    const lastResultsSection = document.getElementById('last-mock-exam-results-section');
+    const accessReportBtn = document.getElementById('access-performance-report-btn'); // Para controlar a visibilidade
 
-                lastResultsDetailsDiv.innerHTML = `
-                    <p><strong>${translateDashboardSim("performance_total_qs")}</strong> ${result.totalQuestions || 'N/A'}</p>
-                    <p><strong>${translateDashboardSim("performance_answered")}</strong> ${result.answeredQuestions || 'N/A'}</p>
-                    <p><strong>${translateDashboardSim("performance_correct")}</strong> ${result.correctAnswers || 'N/A'}</p>
-                    <p><strong>${translateDashboardSim("performance_accuracy")}</strong> ${result.accuracy !== undefined ? result.accuracy + '%' : 'N/A'}</p>
-                    <p><strong>${translateDashboardSim("performance_areas_tested")}</strong> ${result.areas || 'N/A'}</p>
-                    <p><strong>${translateDashboardSim("performance_duration_set")}</strong> ${result.durationSettingInMinutes || 'N/A'} min</p>
-                    <p><strong>${translateDashboardSim("performance_time_taken")}</strong> ${minutes} min ${seconds} seg</p>
-                    <p><strong>${translateDashboardSim("performance_timestamp")}</strong> ${result.timestamp ? new Date(result.timestamp).toLocaleString() : 'N/A'}</p>
-                `;
-                lastResultsSection.style.display = 'block';
-                if(reviewLastMockExamBtn) {
-                    reviewLastMockExamBtn.style.display = 'inline-block'; // Mostrar botão
-                    reviewLastMockExamBtn.onclick = () => {
-                        localStorage.setItem('reviewMockExamData', JSON.stringify(result.questions));
-                        // Idealmente, redirecionar para uma página de revisão dedicada
-                        // window.location.href = '../Quiz/mock-exam-review.html'; 
-                        alert("Funcionalidade de revisão detalhada do Mock Exam (ver questões) ainda a ser implementada.");
-                    };
+    if (resultString && lastMockExamSummaryDiv && lastResultsSection) {
+        try {
+            const result = JSON.parse(resultString);
+
+            // User Identification (Exemplo: buscando do localStorage)
+            const userDetailsString = localStorage.getItem('userDetails');
+            let userName = 'N/A';
+            if (userDetailsString) {
+                try {
+                    const userDetails = JSON.parse(userDetailsString);
+                    userName = userDetails.name || userDetails.username || 'User'; // Ajuste conforme a estrutura real
+                } catch (e) {
+                    console.error("Dashboard-Simulation: Error parsing userDetails from localStorage", e);
                 }
-
-            } catch (e) {
-                console.error("Erro ao carregar resultado do último Mock Exam:", e);
-                lastResultsDetailsDiv.innerHTML = `<p>${translateDashboardSim("no_last_result")}</p>`;
-                lastResultsSection.style.display = 'block';
-                if(reviewLastMockExamBtn) reviewLastMockExamBtn.style.display = 'none';
             }
-        } else if (lastResultsDetailsDiv) {
-            lastResultsDetailsDiv.innerHTML = `<p>${translateDashboardSim("no_last_result")}</p>`;
-            lastResultsSection.style.display = 'block'; // Mostra a seção mesmo que não haja resultado, para a mensagem
-            if(reviewLastMockExamBtn) reviewLastMockExamBtn.style.display = 'none';
-        }
+            // Test/Simulation Identification
+            let testName = 'General Simulation'; // Valor padrão
+            if (result.areas) {
+                if (Array.isArray(result.areas) && result.areas.length > 0) {
+                    testName = result.areas.join(', ');
+                } else if (typeof result.areas === 'string') { // Se for uma string única, use-a diretamente
+                    testName = result.areas;
+                } else {
+                    // Se 'areas' existir mas não for um array nem uma string,
+                    // você pode logar um aviso ou usar um placeholder.
+                    console.warn("displayLastMockExamResult: result.areas is present but not an array or string. Value:", result.areas);
+                    testName = 'Multiple Areas (Format Unknown)'; // Ou mantenha 'General Simulation'
     }
+}            // Date and Time
+            const completedTimestamp = result.timestamp ? new Date(result.timestamp).toLocaleString(getCurrentLanguage()) : 'N/A';
+            // Durations
+            const allottedMinutes = result.durationSettingInMinutes || 'N/A';
+            const timeTakenInSeconds = result.timeTakenInSeconds || 0;
+            const takenMinutes = Math.floor(timeTakenInSeconds / 60);
+            const takenSeconds = timeTakenInSeconds % 60;
+            const timeTakenFormatted = `${takenMinutes} min ${takenSeconds} sec`;
+
+            lastMockExamSummaryDiv.innerHTML = `
+                <p><strong>${translateDashboardSim("label_user_id")}</strong> ${userName}</p>
+                <p><strong>${translateDashboardSim("label_test_id")}</strong> ${testName}</p>
+                <p><strong>${translateDashboardSim("label_completed_on")}</strong> ${completedTimestamp}</p>
+                <div class="duration-comparison mt-1">
+                    <p><strong>${translateDashboardSim("label_allotted_duration")}</strong> ${allottedMinutes} min</p>
+                    <p><strong>${translateDashboardSim("label_time_taken")}</strong> ${timeTakenFormatted}</p>
+                </div>
+            `;
+
+            lastResultsSection.style.display = 'block';
+            if (accessReportBtn) accessReportBtn.style.display = 'inline-block'; // Mostra o botão
+
+            // A lógica do botão 'reviewLastMockExamBtn' foi removida daqui,
+            // pois o acesso à revisão será pelo relatório completo.
+
+        } catch (e) {
+            console.error("Dashboard-Simulation: Error loading last mock exam result:", e);
+            if (lastMockExamSummaryDiv) lastMockExamSummaryDiv.innerHTML = `<p>${translateDashboardSim("no_last_result")}</p>`;
+            lastResultsSection.style.display = 'block'; // Mostra a seção para a mensagem de erro/sem resultado
+            if (accessReportBtn) accessReportBtn.style.display = 'none'; // Esconde o botão se não houver resultado
+        }
+    } else if (lastMockExamSummaryDiv && lastResultsSection) {
+        lastMockExamSummaryDiv.innerHTML = `<p>${translateDashboardSim("no_last_result")}</p>`;
+        lastResultsSection.style.display = 'block';
+        if (accessReportBtn) accessReportBtn.style.display = 'none';
+    }
+}
     
     const userTier = localStorage.getItem('userTier');
     if (userTier === 'advanced' && advancedNavSection && goToFocusedProBtn) {

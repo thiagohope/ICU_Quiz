@@ -21,6 +21,12 @@
       <a href="../landing.html">
         <img src="../assets/img/logo-brainboxmed-cube.png" alt="BrainboxMed Logo" class="h-10">
       </a>
+      <button id="go-to-simulation-dashboard-btn"
+              class="text-xs sm:text-sm font-semibold py-1.5 px-3 sm:px-4 rounded-md shadow-sm transition-colors whitespace-nowrap
+                    bg-blue-600 text-white hover:bg-blue-700 relative">
+          <span id="simulation-btn-icon" class="mr-1" style="display: none;"></span>
+          <span data-i18n="go_to_simulation_dashboard_button_text">Start Mock Exam</span>
+      </button>      
       <button id="dashboard-logout-button"
               class="bg-red-500 text-white hover:bg-red-600 text-xs font-semibold py-1.5 px-4 rounded-md shadow-sm transition-colors whitespace-nowrap">
         <span id="dashboard_logout_text">Logout</span> 🚪
@@ -38,7 +44,6 @@
         Member Since: <span id="user-subscription-date-placeholder" class="italic">[Subscription Date]</span>
       </p>
     </header>
-
     <section id="user-stats-display" class="mb-10 bg-white p-6 rounded-xl shadow-lg border border-gray-200">
       <h2 class="text-xl sm:text-2xl font-semibold text-purple-600 mb-6 text-center" data-i18n="stats_title">Your Statistics</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 text-center">
