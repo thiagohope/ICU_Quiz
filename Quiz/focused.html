@@ -33,67 +33,15 @@
     </p>
   </header>
 
-  <!-- 📚 Quiz Container -->
   <main id="quiz-container" class="max-w-4xl mx-auto p-4">
-    <!-- Dynamic content injected here -->
-  </main>
+    </main>
 
-  <!-- 📊 Statistics and Recommendations -->
   <section id="final-stats" style="display:none;" class="max-w-4xl mx-auto p-4"></section>
 
-  <!-- ⚖️ Footer -->
   <footer class="text-center text-sm text-gray-500 py-6 border-t border-gray-200 mt-8 px-4">
     <p id="legal-notice-text"></p>
   </footer>
 
-<script>
-  const lang = localStorage.getItem('selectedLanguage') || 'en';
-  const translations = {
-    en: {
-      "logout_button_text_content": "Logout",
-      "logout_confirm_message": "Your progress will be saved. Are you sure you want to logout and return to the homepage?",
-      "legal-notice-text": "© 2025 BrainboxMed. All rights reserved. This content is for educational purposes only and does not replace professional medical advice."
-    },
-    pt: {
-      "logout_button_text_content": "Sair",
-      "logout_confirm_message": "Seu progresso será salvo. Tem certeza que deseja sair e retornar à página inicial?",
-      "legal-notice-text": "© 2025 BrainboxMed. Todos os direitos reservados. Este conteúdo é apenas para fins educacionais e não substitui o aconselhamento médico profissional."
-    },
-    es: {
-      "logout_button_text_content": "Cerrar Sesión",
-      "logout_confirm_message": "Tu progreso será guardado. ¿Estás seguro de que quieres cerrar sesión y volver a la página principal?",
-      "legal-notice-text": "© 2025 BrainboxMed. Todos los derechos reservados. Este contenido es solo para fines educativos y no reemplaza el asesoramiento médico profesional."
-    }
-  };
-  const t = translations[lang] || translations['en'];
-const logoutTextSpan = document.getElementById("dashboard_logout_text");
-if (logoutTextSpan) logoutTextSpan.textContent = t.logout_button_text_content;
-document.getElementById("legal-notice-text").textContent = t["legal-notice-text"];
-
-document.getElementById('logout-button-interactive').addEventListener('click', () => {
-  if (confirm(t.logout_confirm_message)) {
-    window.location.href = 'landing.html';
-  }
-});
-
-// ✅ Dashboard: sessão será perdida
-const goDashboardBtn = document.getElementById('go-dashboard-button');
-if (goDashboardBtn) {
-  goDashboardBtn.addEventListener('click', () => {
-    const warnings = {
-      en: "⚠️ Warning: Going to the dashboard will cancel your current session. Progress will not be saved.",
-      pt: "⚠️ Atenção: Ir para o painel irá cancelar sua sessão atual. O progresso não será salvo.",
-      es: "⚠️ Atención: Ir al panel cancelará tu sesión actual. El progreso no se guardará."
-    };
-    if (confirm(warnings[lang])) {
-      localStorage.removeItem('focusedState');
-      window.location.href = 'dashboard.html';
-    }
-  });
-}
-</script>
-
-<!-- Scripts do banco de questões -->
 <script src="../Question-Bank/banco-questoes.js"></script>
 <script src="../Question-Bank/Neuro01.js"></script>
 <script src="../Question-Bank/Neuro02.js"></script>
@@ -108,6 +56,11 @@ if (goDashboardBtn) {
 <script src="../Question-Bank/Pneumo03.js"></script>
 <script src="../Question-Bank/Pneumo04.js"></script>
 <script src="../Question-Bank/Ventilation.js"></script>
+<script src="../Question-Bank/Nephro01.js"></script>
+<script src="../Question-Bank/Nephro02.js"></script>
+<script src="../Question-Bank/Nephro03.js"></script>
+<script src="../Question-Bank/Nephro04.js"></script>
+<script src="../Question-Bank/Dialysis.js"></script>
 <script src="focused.js"></script>
 </body>
 </html>

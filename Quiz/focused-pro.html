@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Focused Pro Mode - BrainboxMed™</title>
+  <title>Focused Pro Quiz | BrainboxMed™</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/style.css" />
-    </head>
+</head>
 <body>
   <div id="top-controls-bar" class="w-full py-2 px-4 sm:px-6 bg-gray-100 shadow-sm">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
@@ -15,110 +15,44 @@
         <p id="music-player-label" class="text-xs font-semibold text-purple-700 mr-1 whitespace-nowrap">Study Music</p>
         <div id="music-bar" class="flex items-center gap-x-1 sm:gap-x-2 text-sm text-gray-700 flex-grow min-w-0">
           <button onclick="prevTrack()" title="Previous Track" class="p-1 hover:text-purple-600 transition-colors">⏮️</button>
-          <button id="music-play-pause-button" onclick="togglePlay()" title="Play/Pause" class="p-1 hover:text-purple-600 transition-colors">▶️</button>          
+          <button id="music-play-pause-button" onclick="togglePlay()" title="Play/Pause" class="p-1 hover:text-purple-600 transition-colors">▶️</button>
           <button onclick="nextTrack()" title="Next Track" class="p-1 hover:text-purple-600 transition-colors">⏭️</button>
           <input type="range" min="0" max="100" value="50" id="volume-control" title="Volume"
-          class="w-16 sm:w-20 h-4 accent-purple-600 cursor-pointer">
-        </div>
+                 class="w-16 sm:w-20 h-4 accent-purple-600 cursor-pointer">
+          </div>
       </div>
-      <div class="max-w-6xl mx-auto flex justify-end items-center space-x-2">
+      <div class="flex justify-end items-center space-x-2">
         <button id="go-dashboard-button"
                 class="bg-yellow-500 text-white hover:bg-yellow-600 text-xs font-semibold py-1.5 px-4 rounded-md shadow-sm transition-colors whitespace-nowrap">
             <span id="go_dashboard_text">Dashboard</span> 🏠
         </button>
-
-        <button id="dashboard-logout-button"
+        <button id="quiz-logout-button" 
                 class="bg-red-500 text-white hover:bg-red-600 text-xs font-semibold py-1.5 px-4 rounded-md shadow-sm transition-colors whitespace-nowrap">
-            <span id="dashboard_logout_text">Logout</span> 🚪
+            <span id="quiz_logout_text">Logout</span> 🚪
         </button>
-        </div>
+      </div>
     </div>
   </div>
+
   <header class="text-center">
     <div style="width: 100%; background-color: #f3f0eb; display: flex; justify-content: center; align-items: center; padding: 48px 0;">
       <img src="../assets/img/logo-brainboxmed-cube.png" alt="BrainboxMed Icon" style="height: 120px; width: auto; margin-right: 32px;" />
       <img src="../assets/img/logo-brainboxmed-name.png" alt="BrainboxMed Text Logo" style="height: 120px; width: auto;" />
     </div>
     <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: #333; text-align: center; margin: 1.5rem auto 2rem auto;">
-      Train your brain. Master medicine.
+      Train your brain. Master medicine. (Focused Pro)
     </p>
   </header>
 
-  <!-- 📚 Quiz Container -->
   <main id="quiz-container" class="max-w-4xl mx-auto p-4">
-    <!-- Dynamic content injected here -->
-  </main>
+    </main>
 
-  <!-- 📊 Statistics and Recommendations -->
   <section id="final-stats" style="display:none;" class="max-w-4xl mx-auto p-4"></section>
 
-  <!-- ⚖️ Footer -->
   <footer class="text-center text-sm text-gray-500 py-6 border-t border-gray-200 mt-8 px-4">
     <p id="legal-notice-text"></p>
   </footer>
 
-<script>
-  const lang = localStorage.getItem('selectedLanguage') || 'en';
-  const translations = {
-    en: {
-      "music-player-label": "🎧 Study Music",
-      "track-title": "Loading track...",
-      "logout_button_text_content": "Logout", // Para o ID do span
-      "logout_confirm_message": "Your progress will be saved. Are you sure you want to logout and return to the homepage?",
-      "legal-notice-text": "© 2025 BrainboxMed. All rights reserved. This content is for educational purposes only and does not replace professional medical advice."
-    },
-    pt: {
-      "music-player-label": "🎧 Música para Estudo",
-      "track-title": "Carregando faixa...",
-      "logout_button_text_content": "Sair",
-      "logout_confirm_message": "Seu progresso será salvo. Tem certeza que deseja sair e retornar à página inicial?",
-      "legal-notice-text": "© 2025 BrainboxMed. Todos os direitos reservados. Este conteúdo é apenas para fins educacionais e não substitui o aconselhamento médico profissional."
-    },
-    es: {
-      "music-player-label": "🎧 Música para Estudiar",
-      "track-title": "Cargando pista...",
-      "logout_button_text_content": "Cerrar Sesión",
-      "logout_confirm_message": "Tu progreso será guardado. ¿Estás seguro de que quieres cerrar sesión y volver a la página principal?",
-      "legal-notice-text": "© 2025 BrainboxMed. Todos los derechos reservados. Este contenido es solo para fines educativos y no reemplaza el asesoramiento médico profesional."
-    }
-  };
-  const t = translations[lang] || translations['en'];
-  const musicPlayerLabelEl = document.getElementById("music-player-label");
-  if (musicPlayerLabelEl) musicPlayerLabelEl.textContent = t["music-player-label"];
-  const trackTitleEl = document.getElementById("track-title");
-  if (trackTitleEl) trackTitleEl.textContent = t["track-title"]; 
-  const logoutButtonTextEl = document.getElementById("logout_button_text_content");
-  if (logoutButtonTextEl) logoutButtonTextEl.textContent = t["logout_button_text_content"];
-  const legalNoticeEl = document.getElementById("legal-notice-text");
-  if (legalNoticeEl) legalNoticeEl.textContent = t["legal-notice-text"];
-  function handleInteractiveLogout() {
-  const confirmMessage = t.logout_confirm_message; // Usar a tradução carregada
-    console.log("User progress would be saved here."); // Placeholder para salvar progresso
-    if (confirm(confirmMessage)) {
-      window.location.href = 'landing.html'; 
-    }
-  }
-  const logoutBtn = document.getElementById('logout-button-interactive');
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', handleInteractiveLogout);
-  }
-
-  // ✅ Dashboard: sessão será perdida
-const goDashboardBtn = document.getElementById('go-dashboard-button');
-if (goDashboardBtn) {
-  goDashboardBtn.addEventListener('click', () => {
-    const warnings = {
-      en: "⚠️ Warning: Going to the dashboard will cancel your current session. Progress will not be saved.",
-      pt: "⚠️ Atenção: Ir para o painel irá cancelar sua sessão atual. O progresso não será salvo.",
-      es: "⚠️ Atención: Ir al panel cancelará tu sesión actual. El progreso no se guardará."
-    };
-    if (confirm(warnings[lang])) {
-      localStorage.removeItem('focusedState');
-      window.location.href = '../Dashboard/Dashboard-FocusedPro.html';
-    }
-  });
-}
-</script>
 <script src="../Question-Bank/banco-questoes.js"></script>
 <script src="../Question-Bank/Neuro01.js"></script>
 <script src="../Question-Bank/Neuro02.js"></script>
@@ -128,11 +62,16 @@ if (goDashboardBtn) {
 <script src="../Question-Bank/Cardio02.js"></script>
 <script src="../Question-Bank/Cardio03.js"></script>
 <script src="../Question-Bank/Cardio04.js"></script>
-<script src="../Question-Bank/Ventilation.js"></script>
 <script src="../Question-Bank/Pneumo01.js"></script>
 <script src="../Question-Bank/Pneumo02.js"></script>
 <script src="../Question-Bank/Pneumo03.js"></script>
 <script src="../Question-Bank/Pneumo04.js"></script>
+<script src="../Question-Bank/Ventilation.js"></script>
+<script src="../Question-Bank/Nephro01.js"></script>
+<script src="../Question-Bank/Nephro02.js"></script>
+<script src="../Question-Bank/Nephro03.js"></script>
+<script src="../Question-Bank/Nephro04.js"></script>
+<script src="../Question-Bank/Dialysis.js"></script>
 <script src="focused-pro.js"></script>
 </body>
 </html>

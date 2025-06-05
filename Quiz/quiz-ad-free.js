@@ -33,7 +33,7 @@ const t = {
     "logout_button_text_content": { en: "Logout", pt: "Sair", es: "Cerrar Sesión" },
     "logout_confirm_message": { en: "Your progress will be saved. Are you sure you want to logout and go to the login page?", pt: "Seu progresso será salvo. Tem certeza que deseja sair e ir para a página de login?", es: "Tu progreso se guardará. ¿Estás seguro de que quieres cerrar sesión e ir a la página de inicio de sesión?" },
     "legal-notice-text": { en: "© 2025 BrainboxMed. All rights reserved. This content is for educational purposes only and does not replace professional medical advice.", pt: "© 2025 BrainboxMed. Todos os direitos reservados. Este conteúdo é apenas para fins educacionais e não substitui o aconselhamento médico profissional.", es: "© 2025 BrainboxMed. Todos los derechos reservados. Este contenido es solo para fines educativos y no reemplaza el asesoramiento médico profesional." },
-    "go_dashboard_text_basic": { en: "Dashboard", pt: "Painel", es: "Panel" },
+    "go_dashboard_text_adfree": { en: "Dashboard", pt: "Painel", es: "Panel" },
 
     // Chaves para alertas e mensagens de erro
     "selectOptionPrompt": { en: "Please select an option before proceeding.", pt: "Por favor, selecione uma opção antes de prosseguir.", es: "Por favor, seleccione una opción antes de continuar." },
@@ -43,6 +43,9 @@ const t = {
     "error_question_bank_not_loaded": { en: "Question bank not loaded or empty.", pt: "Banco de questões não carregado ou vazio.", es: "Banco de preguntas no cargado o vacío."},
     "error_loading_questions": { en: "Error loading questions.", pt: "Erro ao carregar as questões.", es: "Error al cargar las preguntas."},
     "advertisement_placeholder_text": { en: "Advertisement", pt: "Publicidade", es: "Publicidad" },
+    "error_no_questions_found_for_area": { en: "No questions found for the selected area(s). Please try another area.", pt: "Nenhuma questão encontrada para a(s) área(s) selecionada(s). Por favor, tente outra área.", es: "No se encontraron preguntas para el/las área(s) seleccionada(s). Por favor, intente con otra área." },
+    "confirm_exit_to_dashboard": {en: "Your current progress will be saved. Are you sure you want to return to the Dashboard?", pt: "Seu progresso atual será salvo. Tem certeza que deseja retornar ao Painel?", es: "Tu progreso actual se guardará. ¿Estás seguro de que quieres volver al Panel?" },
+
     // Chaves para níveis de dificuldade (IMPORTANTE: use "very_hard" se seus dados usam "very_hard")
     "difficulty_easy": { en: "Easy", pt: "Fácil", es: "Fácil" },
     "difficulty_moderate": { en: "Moderate", pt: "Moderada", es: "Moderada" }, // A chave no seu arquivo estava "moderado", deve ser "moderate" se o dado for "moderate"
@@ -76,32 +79,59 @@ const t = {
 
 function initializeAdFreeQuiz() {
     console.log("Initializing Ad-Free Quiz...");
-
     const urlParams = new URLSearchParams(window.location.search);
     const areasParam = urlParams.get('areas');
+    const newSessionParam = urlParams.get('new'); // Ler o novo parâmetro 'new'
+
+    // Define simSelectedAreas com base no parâmetro 'areas'
     if (areasParam) {
         const singleArea = areasParam.trim().toLowerCase();
         if (singleArea) {
-            simSelectedAreas = [singleArea]; // Ad-Free provavelmente usa uma área por vez
+            simSelectedAreas = [singleArea];
         } else {
             simSelectedAreas = [];
         }
         console.log("Ad-Free Quiz: Area parameter found:", singleArea);
     } else {
-        simSelectedAreas = []; // Default para todas as áreas se nenhum parâmetro for passado
-        console.log("Ad-Free Quiz: No area parameter, loading all areas.");
+        simSelectedAreas = []; // Default se nenhum parâmetro 'areas' for passado
+        console.log("Ad-Free Quiz: No area parameter found initially.");
     }
-    console.log("Ad-Free Quiz - Selected areas:", simSelectedAreas);
+    console.log("Ad-Free Quiz - Initial selected areas based on URL:", simSelectedAreas);
 
-    // Limpar o estado anterior para garantir que as novas configurações de área sejam usadas
-    // e que o BLOCK_SIZE seja respeitado em vez de carregar um quiz antigo com muitas questões.
-    localStorage.removeItem('quizAdFreeState'); 
-
-    if (!loadProgress()) { // loadProgress() agora usará 'quizAdFreeState'
-        prepareNextBlock(); // Deve usar simSelectedAreas
+    // Decide se é uma nova sessão ou se deve tentar continuar
+    if (newSessionParam === 'true' || areasParam) {
+        // É uma nova sessão se 'new=true' OU se 'areas' foi especificado na URL
+        console.log("Ad-Free Quiz: Starting a new session (new=true or areas specified). Clearing previous state.");
+        localStorage.removeItem('quizAdFreeState'); // Limpa o estado anterior
+        
+        // Se 'areasParam' não estiver presente mas 'new=true' estiver,
+        // simSelectedAreas já terá sido definido como [] (todas as áreas), o que é correto para um novo quiz genérico.
+        prepareNextBlock(); // Prepara um novo bloco (usará simSelectedAreas se definido)
     } else {
-        // ... lógica de restaurar se houver um estado válido e recente
-        // No entanto, como limpamos acima, prepareNextBlock() será chamado.
+        // Não é 'new=true' nem 'areas' na URL - Tenta continuar uma sessão existente
+        console.log("Ad-Free Quiz: Attempting to continue a previous session.");
+        if (loadProgress()) { // Tenta carregar o progresso
+            console.log("Ad-Free Quiz: Progress loaded successfully. Rendering current question.");
+            // Se o progresso foi carregado, currentQuestions, currentIndex, simSelectedAreas (se salvas)
+            // e userAnswers estarão definidos. Apenas renderize.
+            if (currentQuestions && currentQuestions.length > 0 && currentIndex < currentQuestions.length) {
+                // Importante: Se simSelectedAreas não é salva/carregada explicitamente por loadProgress,
+                // a filtragem original das currentQuestions salvas deve ser mantida.
+                // Ou, melhore loadProgress/saveProgress para incluir simSelectedAreas.
+                // Por agora, assumimos que currentQuestions já está corretamente filtrado.
+                renderQuestion(currentQuestions[currentIndex]);
+            } else {
+                console.warn("Ad-Free Quiz: Progress loaded, but question data is invalid. Starting new block.");
+                localStorage.removeItem('quizAdFreeState'); // Limpa estado inválido
+                simSelectedAreas = []; // Reseta áreas para um novo quiz genérico
+                prepareNextBlock();
+            }
+        } else {
+            // Nenhum progresso para carregar, inicia um novo quiz genérico (sem filtro de área)
+            console.log("Ad-Free Quiz: No progress to load. Starting a new generic session.");
+            simSelectedAreas = []; // Garante que não há filtro de área para um novo quiz genérico
+            prepareNextBlock();
+        }
     }
 }
 
@@ -407,33 +437,52 @@ document.addEventListener('DOMContentLoaded', () => {
     const legalNoticeEl = document.getElementById("legal-notice-text");
     if (legalNoticeEl) legalNoticeEl.textContent = translate("legal-notice-text");
 
-    // Botão para Dashboard
-    const goDashboardButton = document.getElementById('go-adfree-dashboard-button');
+  // --- BOTÃO PARA VOLTAR AO DASHBOARD
+  const goDashboardButton = document.getElementById('go-adfree-dashboard-button');
     if (goDashboardButton) {
         goDashboardButton.addEventListener('click', () => {
-            console.log("Quiz Ad-Free: Salvando progresso e retornando ao Dashboard.");
-            saveProgress(); // Usa 'quizAdFreeState'
-            window.location.href = "../Dashboard-Adfree.html"; // Ajuste o caminho
-        });
-    }
+            const translate = getTranslations(); // Obter a função de tradução
+            const confirmMessage = translate("confirm_exit_to_dashboard"); // Usar a nova chave
 
-    // Botão de Logout
-    const logoutButton = document.getElementById('dashboard-logout-button');
-    if (logoutButton) {
-        logoutButton.addEventListener('click', () => {
-            const confirmMessage = translate("logout_confirm_message");
-            if (confirm(confirmMessage)) {
-                console.log("Quiz Ad-Free Logout: Salvando progresso, limpando dados...");
+            if (confirm(confirmMessage)) { // Mostrar o pop-up de confirmação
+                console.log("Quiz AdFree: User confirmed exit. Saving progress and returning to Dashboard-AdFree.html");
                 saveProgress(); // Salva o progresso atual
-                localStorage.removeItem('userDetails');
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('quizAdFreeState'); // Chave específica
-                // ... outras chaves globais de quiz ...
-                window.location.href = '../login.html'; // Ajuste o caminho
+                localStorage.setItem('cameFromAdFreeQuiz', 'true'); // Sinaliza para o dashboard
+                let targetDashboard = "../Dashboard/Dashboard-Adfree.html";
+                window.location.href = targetDashboard;
+            } else {
+                console.log("Quiz AdFree: User cancelled exit to Dashboard.");
+                // Nenhuma ação é necessária se o usuário cancelar
             }
         });
-    }
+    } else {
+    console.warn("Botão 'go-adfree-dashboard-button' não encontrado no quiz-adfree.html.");
+  }
+    // FIM DO BOTÃO DASHBOARD ---
 
+        // --- BOTÃO DE LOGOUT ---
+  const logoutButton = document.getElementById('dashboard-logout-button'); // ID do BOTÃO
+    if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+            const confirmMessage = translate("logout_confirm_message"); // Chave deve existir no getTranslations()
+            if (confirm(confirmMessage)) {
+                console.log("Quiz Basic Logout: Salvando progresso, limpando dados e redirecionando...");
+                saveProgress(); // Salva o progresso antes de sair
+                localStorage.removeItem('userDetails');
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('quizBasicState'); // Chave específica deste quiz
+                localStorage.removeItem('proSimulationState');
+                localStorage.removeItem('focusedProState');
+                localStorage.removeItem('focusedState');
+                localStorage.removeItem('quizAdFreeState');
+                window.location.href = '../login.html';
+            } else {
+                console.log("Logout cancelado pelo usuário.");
+            }
+        });
+    } else {
+        console.error("Quiz-AdFree: Botão 'dashboard-logout-button' não encontrado.");
+    }
     // Inicialização do Quiz
     function waitForQuestionBankAndStart() {
         // ... (lógica existente)
@@ -444,8 +493,8 @@ document.addEventListener('DOMContentLoaded', () => {
             } else { /* ... erro ... */ }
         }, 500);
         // ...
-    }
-    waitForQuestionBankAndStart();
+  }
+  waitForQuestionBankAndStart();
 });
 
 function showReviewMode() {
@@ -536,6 +585,36 @@ function showReviewMode() {
 
 function prepareNextBlock() {
   console.log("🎯 Preparing new block of questions...");
+    let allRelevantQuestions = questionBank.getAllQuestions(); // Pega todas as questões
+
+  // Filtra por simSelectedAreas SE houver áreas selecionadas
+  if (simSelectedAreas && simSelectedAreas.length > 0) {
+    console.log("Filtering questions by selected areas:", simSelectedAreas);
+    allRelevantQuestions = allRelevantQuestions.filter(q => {
+      if (!q.areas && !q.area) return false; // Se a questão não tem 'areas' ou 'area' definida, exclui
+      
+      // Normaliza q.areas ou q.area para ser sempre um array de strings em minúsculas
+      let questionAreaCodes = [];
+      if (q.areas) { // Se 'areas' (plural) existe
+        questionAreaCodes = Array.isArray(q.areas) ? q.areas.map(String).map(s => s.toLowerCase().trim()) : [String(q.areas).toLowerCase().trim()];
+      } else if (q.area) { // Senão, se 'area' (singular) existe
+        questionAreaCodes = Array.isArray(q.area) ? q.area.map(String).map(s => s.toLowerCase().trim()) : [String(q.area).toLowerCase().trim()];
+      }
+      
+      // Verifica se ALGUMA das áreas da questão corresponde a ALGUMA das áreas selecionadas pelo usuário
+      return simSelectedAreas.some(selectedArea => questionAreaCodes.includes(selectedArea.toLowerCase().trim()));
+    });
+    console.log("Number of questions after filtering by area:", allRelevantQuestions.length);
+    if (allRelevantQuestions.length === 0) {
+        const translate = getTranslations();
+        displayQuizError(translate("error_no_questions_found_for_area") || `No questions found for the selected area(s): ${simSelectedAreas.join(', ')}. Please try another area or check question bank configuration.`);
+        // Adicionar a chave "error_no_questions_found_for_area" nas suas traduções
+        // Ex: "error_no_questions_found_for_area": { en: "No questions found for the selected area(s).", pt: "Nenhuma questão encontrada para a(s) área(s) selecionada(s).", es: "No se encontraron preguntas para el/las área(s) seleccionada(s)." },
+        return; // Interrompe se nenhuma questão for encontrada para a área
+    }
+  } else {
+    console.log("No specific areas selected, or simSelectedAreas is empty. Using all questions.");
+  }
   console.log("Total questions in bank at start:", questionBank.getAllQuestions().length);
   console.log("Shown question IDs before this block:", shownQuestionIds.length, JSON.stringify(shownQuestionIds));
   console.log("Previous wrong IDs to prioritize:", previousWrongIds.length, JSON.stringify(previousWrongIds));
@@ -544,8 +623,8 @@ function prepareNextBlock() {
   const questionsToExclude = [...shownQuestionIds, ...previousWrongIds.filter(id => shownQuestionIds.includes(id))]; // Não mostrar imediatamente o que já foi mostrado ou o que errou e já foi mostrado
   
   // Tenta preencher com questões "novas" (não vistas recentemente) e que não são erros recentes já mostrados
-  let availableNewQuestions = questionBank.getAllQuestions().filter(q => !questionsToExclude.includes(q.id));
-  console.log("Available NEW questions (not in shown/recent_wrong):", availableNewQuestions.length);
+  let availableNewQuestions = allRelevantQuestions.filter(q => !questionsToExclude.includes(q.id)); // MODIFICADO
+  console.log("Available NEW questions (not in shown/recent_wrong, from relevant set):", availableNewQuestions.length);
 
   // Tenta manter proporções de dificuldade para questões novas
   if (availableNewQuestions.length > 0) {
@@ -582,7 +661,7 @@ function prepareNextBlock() {
     console.log("New block after first recycling pass (unique from all):", newBlockQuestions.length, newBlockQuestions.map(q=>q.id));
     // Se mesmo assim faltar (banco pequeno), permite repetições para atingir BLOCK_SIZE
     let emergencyFillIndex = 0;
-    while (newBlockQuestions.length < BLOCK_SIZE && questionBank.getAllQuestions().length > 0) {
+    while (newBlockQuestions.length < BLOCK_SIZE && allRelevantQuestions.length > 0) {
         newBlockQuestions.push(questionsToRecycle[emergencyFillIndex % questionsToRecycle.length]);
         emergencyFillIndex++;
     }

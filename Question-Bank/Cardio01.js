@@ -3,7 +3,7 @@ const bancoCardioFacil = [
     id: 501,
     code: "cardio01-q01",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["hemodynamics"],
+    topics: ["hemodynamics"],
     level: "easy",
     correct: 0,
     question: {
@@ -66,7 +66,7 @@ const bancoCardioFacil = [
     id: 502,
     code: "cardio01-q02",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["circulatory shock"],
+    topics: ["circulatory shock"],
     level: "easy",
     correct: 1,
     question: {
@@ -129,7 +129,7 @@ const bancoCardioFacil = [
     id: 503,
     code: "cardio01-q03",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["ACLS"],
+    topics: ["ACLS"],
     level: "easy",
     correct: 2,
     question: {
@@ -192,7 +192,7 @@ const bancoCardioFacil = [
     id: 504,
     code: "cardio01-q04",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["vascular access"],
+    topics: ["vascular access"],
     level: "easy",
     correct: 0,
     question: {
@@ -255,7 +255,7 @@ const bancoCardioFacil = [
     id: 505,
     code: "cardio01-q05",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["echocardiography"],
+    topics: ["echocardiography"],
     level: "easy",
     correct: 3,
     question: {
@@ -318,7 +318,7 @@ const bancoCardioFacil = [
     id: 506,
     code: "cardio01-q06",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["pacemaker"],
+    topics: ["pacemaker"],
     level: "easy",
     correct: 1,
     question: {
@@ -381,7 +381,7 @@ const bancoCardioFacil = [
     id: 507,
     code: "cardio01-q07",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["IABP"],
+    topics: ["IABP"],
     level: "easy",
     correct: 0,
     question: {
@@ -444,7 +444,7 @@ const bancoCardioFacil = [
     id: 508,
     code: "cardio01-q08",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["ECMO-VA"],
+    topics: ["ECMO-VA"],
     level: "easy",
     correct: 2,
     question: {
@@ -507,7 +507,7 @@ const bancoCardioFacil = [
     id: 509,
     code: "cardio01-q09",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["LVAD"],
+    topics: ["LVAD"],
     level: "easy",
     correct: 1,
     question: {
@@ -570,7 +570,7 @@ const bancoCardioFacil = [
     id: 510,
     code: "cardio01-q10",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["arrhythmias"],
+    topics: ["arrhythmias"],
     level: "easy",
     correct: 0,
     question: {
@@ -633,7 +633,7 @@ const bancoCardioFacil = [
     id: 511,
     code: "cardio01-q11",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["myocardial infarction"],
+    topics: ["myocardial infarction"],
     level: "easy",
     correct: 3,
     question: {
@@ -696,7 +696,7 @@ const bancoCardioFacil = [
     id: 512,
     code: "cardio01-q12",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["pulmonary embolism"],
+    topics: ["pulmonary embolism"],
     level: "easy",
     correct: 2,
     question: {
@@ -759,7 +759,7 @@ const bancoCardioFacil = [
     id: 513,
     code: "cardio01-q13",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["hemodynamics"],
+    topics: ["hemodynamics"],
     level: "easy",
     correct: 1,
     question: {
@@ -822,7 +822,7 @@ const bancoCardioFacil = [
     id: 514,
     code: "cardio01-q14",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["hemodynamics"],
+    topics: ["hemodynamics"],
     level: "easy",
     correct: 1,
     question: {
@@ -885,7 +885,7 @@ const bancoCardioFacil = [
     id: 515,
     code: "cardio01-q15",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["myocardial infarction"],
+    topics: ["myocardial infarction"],
     level: "easy",
     correct: 2,
     question: {
@@ -948,7 +948,7 @@ const bancoCardioFacil = [
     id: 516,
     code: "cardio01-q16",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["arrhythmias"],
+    topics: ["arrhythmias"],
     level: "easy",
     correct: 1,
     question: {
@@ -1011,7 +1011,7 @@ const bancoCardioFacil = [
     id: 517,
     code: "cardio01-q17",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["hypertensive emergencies"],
+    topics: ["hypertensive emergencies"],
     level: "easy",
     correct: 3,
     question: {
@@ -1074,7 +1074,7 @@ const bancoCardioFacil = [
     id: 518,
     code: "cardio01-q18",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["anticoagulation"],
+    topics: ["anticoagulation"],
     level: "easy",
     correct: 0,
     question: {
@@ -1137,7 +1137,7 @@ const bancoCardioFacil = [
     id: 519,
     code: "cardio01-q19",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["echocardiography"],
+    topics: ["echocardiography"],
     level: "easy",
     correct: 2,
     question: {
@@ -1200,7 +1200,7 @@ const bancoCardioFacil = [
     id: 520,
     code: "cardio01-q20",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["hemodynamics", "shock"],
+    topics: ["hemodynamics", "shock"],
     level: "easy",
     correct: 3,
     question: {

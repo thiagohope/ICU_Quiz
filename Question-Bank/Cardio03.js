@@ -3,7 +3,7 @@ const bancoCardioDificil = [
   id: 301,
   code: "cardio03-q301",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["myocardial infarction", "cardiogenic shock", "mechanical support", "ecmo", "iabp"],
+  topics: ["myocardial infarction", "cardiogenic shock", "mechanical support", "ecmo", "iabp"],
   level: "hard",
   correct: 2,
   question: {
@@ -78,7 +78,7 @@ const bancoCardioDificil = [
   id: 302,
   code: "cardio03-q302",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["ecmo", "impella", "cardiogenic shock", "mechanical support", "lv unloading"],
+  topics: ["ecmo", "impella", "cardiogenic shock", "mechanical support", "lv unloading"],
   level: "hard",
   correct: 4,
   question: {
@@ -153,7 +153,7 @@ const bancoCardioDificil = [
   id: 303,
   code: "cardio03-q303",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["aortic dissection", "type a", "hypertension", "emergency surgery", "imaging"],
+  topics: ["aortic dissection", "type a", "hypertension", "emergency surgery", "imaging"],
   level: "hard",
   correct: 2,
   question: {
@@ -228,7 +228,7 @@ const bancoCardioDificil = [
   id: 304,
   code: "cardio03-q304",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["hypertensive emergency", "pulmonary edema", "acute heart failure", "iv antihypertensives", "organ damage"],
+  topics: ["hypertensive emergency", "pulmonary edema", "acute heart failure", "iv antihypertensives", "organ damage"],
   level: "hard",
   correct: 3,
   question: {
@@ -303,7 +303,7 @@ const bancoCardioDificil = [
   id: 305,
   code: "cardio03-q305",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["atrial fibrillation", "anticoagulation", "critical care", "bleeding risk", "decision-making"],
+  topics: ["atrial fibrillation", "anticoagulation", "critical care", "bleeding risk", "decision-making"],
   level: "hard",
   correct: 1,
   question: {
@@ -378,7 +378,7 @@ const bancoCardioDificil = [
   id: 306,
   code: "cardio03-q306",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["pocus", "echocardiography", "hemodynamic instability", "icu", "shock"],
+  topics: ["pocus", "echocardiography", "hemodynamic instability", "icu", "shock"],
   level: "hard",
   correct: 1,
   question: {
@@ -453,7 +453,7 @@ const bancoCardioDificil = [
   id: 307,
   code: "cardio03-q307",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["temporary pacemaker", "weaning test", "postoperative care", "capture", "dependency"],
+  topics: ["temporary pacemaker", "weaning test", "postoperative care", "capture", "dependency"],
   level: "hard",
   correct: 1,
   question: {
@@ -528,7 +528,7 @@ const bancoCardioDificil = [
   id: 308,
   code: "cardio03-q308",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["iabp", "mechanical support", "cardiogenic shock", "timing", "contraindications"],
+  topics: ["iabp", "mechanical support", "cardiogenic shock", "timing", "contraindications"],
   level: "hard",
   correct: 4,
   question: {
@@ -603,7 +603,7 @@ const bancoCardioDificil = [
   id: 309,
   code: "cardio03-q309",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["ecmo", "cardiogenic shock", "hypoxemia", "inotropes", "mechanical support"],
+  topics: ["ecmo", "cardiogenic shock", "hypoxemia", "inotropes", "mechanical support"],
   level: "hard",
   correct: 3,
   question: {
@@ -678,7 +678,7 @@ const bancoCardioDificil = [
   id: 310,
   code: "cardio03-q310",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["myocardial infarction", "cardiogenic shock", "revascularization", "culprit lesion", "multi-vessel disease"],
+  topics: ["myocardial infarction", "cardiogenic shock", "revascularization", "culprit lesion", "multi-vessel disease"],
   level: "hard",
   correct: 1,
   question: {
@@ -753,7 +753,7 @@ const bancoCardioDificil = [
   id: 311,
   code: "cardio03-q311",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["massive pulmonary embolism", "thrombectomy", "shock", "contraindications to thrombolysis", "ecmo"],
+  topics: ["massive pulmonary embolism", "thrombectomy", "shock", "contraindications to thrombolysis", "ecmo"],
   level: "hard",
   correct: 2,
   question: {
@@ -828,7 +828,7 @@ const bancoCardioDificil = [
   id: 312,
   code: "cardio03-q312",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["hemodynamic monitoring", "picco", "shock", "fluid responsiveness", "transpulmonary thermodilution"],
+  topics: ["hemodynamic monitoring", "picco", "shock", "fluid responsiveness", "transpulmonary thermodilution"],
   level: "hard",
   correct: 3,
   question: {
@@ -903,7 +903,7 @@ const bancoCardioDificil = [
   id: 313,
   code: "cardio03-q313",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["ventricular arrhythmia", "vf", "tv", "refractory", "advanced management"],
+  topics: ["ventricular arrhythmia", "vf", "tv", "refractory", "advanced management"],
   level: "hard",
   correct: 4,
   question: {
@@ -975,10 +975,73 @@ const bancoCardioDificil = [
   ]
 },
 {
+  "id": 314,
+  "code": "cardio03-q314",
+  "areas": ["cardio+icu", "cardio", "icu", "medicine"],
+  "topics": ["shock", "myocardial infarction", "hemodynamics", "echocardiography"],
+  "level": "hard",
+  "correct": 2,
+  "question": {
+    "pt": "Homem de 69 anos com IAM anterior há 4 dias é readmitido por fadiga progressiva, hipotensão (PA 84/52 mmHg) e oligúria. ECG com ritmo sinusal e infra de ST em V2–V4. Ecocardiograma revela acinesia anterior extensa, derrame pericárdico leve sem sinais de tamponamento e dilatação do ventrículo direito com septo interventricular desviado para a esquerda. Qual a principal hipótese e conduta inicial?",
+    "en": "A 69-year-old man with an anterior MI 4 days ago is readmitted with progressive fatigue, hypotension (BP 84/52 mmHg), and oliguria. ECG shows sinus rhythm and ST depression in V2–V4. Echocardiogram reveals extensive anterior akinesia, small pericardial effusion without tamponade, and right ventricular dilation with interventricular septum deviated leftward. What is the most likely diagnosis and initial management?",
+    "es": "Un hombre de 69 años con infarto anterior hace 4 días es readmitido por fatiga progresiva, hipotensión (PA 84/52 mmHg) y oliguria. El ECG muestra ritmo sinusal y descenso de ST en V2–V4. El ecocardiograma revela aquinesia anterior extensa, leve derrame pericárdico sin signos de taponamiento y dilatación del ventrículo derecho con desviación septal hacia la izquierda. ¿Cuál es el diagnóstico más probable y la conducta inicial?"
+  },
+  "options": [
+    {
+      "text": {
+        "pt": "Ruptura livre do miocárdio com tamponamento — realizar pericardiocentese de urgência",
+        "en": "Free wall rupture with tamponade — perform emergency pericardiocentesis",
+        "es": "Rotura libre de la pared con taponamiento — realizar pericardiocentesis urgente"
+      },
+      "explanation": {
+        "pt": "Apesar do derrame pericárdico, não há sinais ecocardiográficos de tamponamento. A hipótese de ruptura livre é menos provável sem colapso de câmaras direitas ou sinal de diástole precoce.",
+        "en": "Despite the pericardial effusion, there are no echocardiographic signs of tamponade. Free wall rupture is less likely without chamber collapse or early diastolic signs.",
+        "es": "A pesar del derrame pericárdico, no hay signos ecocardiográficos de taponamiento. La rotura libre es menos probable sin colapso de cámaras ni signos diastólicos."
+      }
+    },
+    {
+      "text": {
+        "pt": "Disfunção ventricular esquerda isolada — iniciar inotrópico e suporte com noradrenalina",
+        "en": "Isolated left ventricular dysfunction — start inotropic support and norepinephrine",
+        "es": "Disfunción ventricular izquierda aislada — iniciar inotrópico y soporte con noradrenalina"
+      },
+      "explanation": {
+        "pt": "A presença de desvio septal para a esquerda e dilatação do VD sugerem disfunção direita importante, tornando o suporte inotrópico isolado para VE inadequado neste momento.",
+        "en": "Septal deviation to the left and RV dilation suggest significant right-sided dysfunction, making isolated LV inotropes insufficient initially.",
+        "es": "La desviación septal a la izquierda y la dilatación del VD sugieren disfunción derecha significativa, por lo que el soporte inotrópico solo para el VI es inadecuado."
+      }
+    },
+    {
+      "text": {
+        "pt": "Ruptura de septo interventricular — confirmar com doppler e considerar suporte circulatório",
+        "en": "Interventricular septal rupture — confirm with Doppler and consider circulatory support",
+        "es": "Rotura del tabique interventricular — confirmar con Doppler y considerar soporte circulatorio"
+      },
+      "explanation": {
+        "pt": "A combinação de novo desvio septal, dilatação do VD e instabilidade hemodinâmica em paciente pós-IAM é altamente sugestiva de ruptura do septo interventricular. O ecocardiograma com doppler deve ser realizado imediatamente para confirmar o shunt esquerda-direita. Suporte com balão intra-aórtico ou ECMO pode ser necessário até cirurgia corretiva.",
+        "en": "New septal deviation, RV dilation, and hemodynamic collapse post-MI are highly suggestive of septal rupture. Doppler echo should be performed to confirm left-to-right shunt. Circulatory support (IABP or ECMO) may be required until surgery.",
+        "es": "Desviación septal nueva, dilatación del VD e inestabilidad post-infarto son altamente sugestivas de rotura septal. Se debe realizar Doppler para confirmar el cortocircuito izquierda-derecha. Puede requerirse soporte circulatorio hasta la cirugía."
+      }
+    },
+    {
+      "text": {
+        "pt": "Tromboembolismo pulmonar agudo — iniciar anticoagulação e realizar angio-TC",
+        "en": "Acute pulmonary embolism — start anticoagulation and perform CT angiography",
+        "es": "Embolia pulmonar aguda — iniciar anticoagulación y realizar angio-TC"
+      },
+      "explanation": {
+        "pt": "O contexto clínico de IAM recente com achados de VE hipocinético e padrão de ECG não é compatível com TEP como causa primária da instabilidade atual.",
+        "en": "Recent MI with hypokinetic LV and ECG changes are not compatible with PE as the primary cause of current instability.",
+        "es": "El contexto de infarto reciente con VI hipocinético y cambios en el ECG no es compatible con embolia pulmonar como causa primaria."
+      }
+    }
+  ]
+},
+{
   id: 315,
   code: "cardio03-q315",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["shock", "tamponade", "differential diagnosis", "pocus", "emergency"],
+  topics: ["shock", "tamponade", "differential diagnosis", "pocus", "emergency"],
   level: "hard",
   correct: 4,
   question: {
@@ -1053,7 +1116,7 @@ const bancoCardioDificil = [
   id: 316,
   code: "cardio03-q316",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["myocarditis", "acute coronary syndrome", "troponin", "echocardiography", "mri"],
+  topics: ["myocarditis", "acute coronary syndrome", "troponin", "echocardiography", "mri"],
   level: "hard",
   correct: 3,
   question: {
@@ -1128,7 +1191,7 @@ const bancoCardioDificil = [
   id: 317,
   code: "cardio03-q317",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["atrial fibrillation", "anticoagulation", "critical care", "bleeding risk", "clinical decision"],
+  topics: ["atrial fibrillation", "anticoagulation", "critical care", "bleeding risk", "clinical decision"],
   level: "hard",
   correct: 2,
   question: {
@@ -1203,7 +1266,7 @@ const bancoCardioDificil = [
   id: 318,
   code: "cardio03-q318",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["echocardiography", "shock", "pocus", "cardiac function", "decision-making"],
+  topics: ["echocardiography", "shock", "pocus", "cardiac function", "decision-making"],
   level: "hard",
   correct: 2,
   question: {
@@ -1278,7 +1341,7 @@ const bancoCardioDificil = [
   id: 319,
   code: "cardio03-q319",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["fluid responsiveness", "ivc", "svv", "ppv", "mechanical ventilation"],
+  topics: ["fluid responsiveness", "ivc", "svv", "ppv", "mechanical ventilation"],
   level: "hard",
   correct: 4,
   question: {
@@ -1353,7 +1416,7 @@ const bancoCardioDificil = [
   id: 320,
   code: "cardio03-q320",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["obstructive shock", "tamponade", "massive PE", "tension pneumothorax", "clinical reasoning"],
+  topics: ["obstructive shock", "tamponade", "massive PE", "tension pneumothorax", "clinical reasoning"],
   level: "hard",
   correct: 2,
   question: {

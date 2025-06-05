@@ -3,7 +3,7 @@ const bancoCardiomoderate = [
     id: 201,
     code: "cardio02-q201",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["heart failure", "hemodynamics"],
+    topics: ["heart failure", "hemodynamics"],
     level: "moderate",
     correct: 3,
     question: {
@@ -66,7 +66,7 @@ const bancoCardiomoderate = [
     id: 202,
     code: "cardio02-q202",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["myocardial infarction", "shock"],
+    topics: ["myocardial infarction", "shock"],
     level: "moderate",
     correct: 0,
     question: {
@@ -129,7 +129,7 @@ const bancoCardiomoderate = [
     id: 203,
     code: "cardio02-q203",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["echocardiography", "shock"],
+    topics: ["echocardiography", "shock"],
     level: "moderate",
     correct: 2,
     question: {
@@ -192,7 +192,7 @@ const bancoCardiomoderate = [
     id: 204,
     code: "cardio02-q204",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["arrhythmias", "atrial fibrillation"],
+    topics: ["arrhythmias", "atrial fibrillation"],
     level: "moderate",
     correct: 1,
     question: {
@@ -255,7 +255,7 @@ const bancoCardiomoderate = [
     id: 205,
     code: "cardio02-q205",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["pacemaker", "bradyarrhythmias"],
+    topics: ["pacemaker", "bradyarrhythmias"],
     level: "moderate",
     correct: 0,
     question: {
@@ -318,7 +318,7 @@ const bancoCardiomoderate = [
     id: 206,
     code: "cardio02-q206",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["IABP", "mechanical support"],
+    topics: ["IABP", "mechanical support"],
     level: "moderate",
     correct: 0,
     question: {
@@ -381,7 +381,7 @@ const bancoCardiomoderate = [
     id: 207,
     code: "cardio02-q207",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["ECMO-VA", "mechanical support"],
+    topics: ["ECMO-VA", "mechanical support"],
     level: "moderate",
     correct: 2,
     question: {
@@ -444,7 +444,7 @@ const bancoCardiomoderate = [
     id: 208,
     code: "cardio02-q208",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["shock", "hemodynamics"],
+    topics: ["shock", "hemodynamics"],
     level: "moderate",
     correct: 1,
     question: {
@@ -507,7 +507,7 @@ const bancoCardiomoderate = [
     id: 209,
     code: "cardio02-q209",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["electrolyte disorders", "arrhythmias"],
+    topics: ["electrolyte disorders", "arrhythmias"],
     level: "moderate",
     correct: 2,
     question: {
@@ -570,7 +570,7 @@ const bancoCardiomoderate = [
     id: 210,
     code: "cardio02-q210",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["anticoagulation", "myocardial infarction"],
+    topics: ["anticoagulation", "myocardial infarction"],
     level: "moderate",
     correct: 3,
     question: {
@@ -633,7 +633,7 @@ const bancoCardiomoderate = [
     id: 211,
     code: "cardio02-q211",
     areas: ["cardio+icu", "cardio", "icu", "medicine"],
-    topic: ["pericardiocentesis", "tamponade"],
+    topics: ["pericardiocentesis", "tamponade"],
     level: "moderate",
     correct: 0,
     question: {
@@ -696,7 +696,7 @@ const bancoCardiomoderate = [
   id: 212,
   code: "cardio02-q212",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["aortic dissection", "hypertensive emergencies", "chest pain"],
+  topics: ["aortic dissection", "hypertensive emergencies", "chest pain"],
   level: "moderate",
   correct: 0,
   question: {
@@ -759,7 +759,7 @@ const bancoCardiomoderate = [
   id: 213,
   code: "cardio02-q213",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["ACLS", "cardiac arrest", "defibrillation"],
+  topics: ["ACLS", "cardiac arrest", "defibrillation"],
   level: "moderate",
   correct: 0,
   question: {
@@ -822,133 +822,7 @@ const bancoCardiomoderate = [
   id: 214,
   code: "cardio02-q214",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["ACLS", "cardiac arrest", "PEA", "asystole"],
-  level: "moderate",
-  correct: 1,
-  question: {
-    pt: "Homem de 67 anos, internado em UTI por sepse, evolui com parada cardiorrespiratória. Monitor mostra ritmo sem complexos QRS organizados e sem pulso palpável. Qual a conduta correct de acordo com o algoritmo de ACLS?",
-    en: "A 67-year-old man in the ICU for sepsis develops cardiac arrest. The monitor shows no organized QRS complexes and no palpable pulse. What is the correct management according to the ACLS algorithm?",
-    es: "Hombre de 67 años en UCI por sepsis presenta paro cardiorrespiratorio. El monitor no muestra complejos QRS organizados ni pulso palpable. ¿Cuál es la conducta correcta según el algoritmo ACLS?"
-  },
-  options: [
-    {
-      text: {
-        pt: "Desfibrilação imediata com carga máxima",
-        en: "Immediate defibrillation with maximum energy",
-        es: "Desfibrilación inmediata con energía máxima"
-      },
-      explanation: {
-        pt: "A desfibrilação está indicada apenas em ritmos chocáveis como FV ou TV sem pulso. Em assistolia/AESP não há indicação.",
-        en: "Defibrillation is indicated only for shockable rhythms like VF or pulseless VT. It is not indicated in asystole/PEA.",
-        es: "La desfibrilación está indicada solo en ritmos desfibrilables como FV o TV sin pulso. No se indica en asistolia/PEA."
-      }
-    },
-    {
-      text: {
-        pt: "Início imediato de RCP e administração de adrenalina a cada 3-5 minutos",
-        en: "Immediate CPR and administration of epinephrine every 3–5 minutes",
-        es: "Inicio inmediato de RCP y administración de epinefrina cada 3–5 minutos"
-      },
-      explanation: {
-        pt: "O manejo da AESP ou assistolia exige RCP imediata e adrenalina a cada 3–5 minutos, além de investigação das causas reversíveis (5Hs e 5Ts).",
-        en: "PEA or asystole requires immediate CPR and epinephrine every 3–5 minutes, plus investigation of reversible causes (5 Hs and 5 Ts).",
-        es: "La AESP o asistolia exige RCP inmediata y epinefrina cada 3–5 minutos, además de investigar causas reversibles (5H y 5T)."
-      }
-    },
-    {
-      text: {
-        pt: "Cardioversão sincronizada com sedação",
-        en: "Synchronized cardioversion with sedation",
-        es: "Cardioversión sincronizada con sedación"
-      },
-      explanation: {
-        pt: "Cardioversão é indicada em ritmos instáveis com QRS organizados (ex: taquicardia com pulso), não em parada com AESP.",
-        en: "Synchronized cardioversion is used for unstable rhythms with organized QRS (e.g., tachycardia with pulse), not in PEA.",
-        es: "La cardioversión sincronizada se usa para ritmos inestables con QRS organizado (como taquicardia con pulso), no en AESP."
-      }
-    },
-    {
-      text: {
-        pt: "Administração precoce de amiodarona e sulfato de magnésio",
-        en: "Early administration of amiodarone and magnesium sulfate",
-        es: "Administración precoz de amiodarona y sulfato de magnesio"
-      },
-      explanation: {
-        pt: "Esses fármacos são indicados em casos específicos (TV/FV refratárias, torsades de pointes), não na AESP ou assistolia.",
-        en: "These drugs are indicated in specific situations (refractory VF/VT, torsades de pointes), not in PEA or asystole.",
-        es: "Estos fármacos se indican en situaciones específicas (FV/TV refractaria, torsades de pointes), no en AESP o asistolia."
-      }
-    }
-  ]
- },
-{
-  id: 213,
-  code: "cardio02-q213",
-  areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["ACLS", "cardiac arrest", "defibrillation"],
-  level: "moderate",
-  correct: 0,
-  question: {
-    pt: "Paciente de 60 anos sofre parada cardiorrespiratória no hospital. Monitor mostra fibrilação ventricular. Após início imediato de RCP de alta qualidade, qual a próxima intervenção recomendada?",
-    en: "A 60-year-old patient suffers a cardiac arrest in the hospital. The monitor shows ventricular fibrillation. After initiating high-quality CPR, what is the next recommended intervention?",
-    es: "Paciente de 60 años sufre un paro cardiorrespiratorio en el hospital. El monitor muestra fibrilación ventricular. Tras iniciar RCP de alta calidad, ¿cuál es la siguiente intervención recomendada?"
-  },
-  options: [
-    {
-      text: {
-        pt: "Desfibrilação com carga adequada o mais rápido possível",
-        en: "Defibrillation with appropriate energy as soon as possible",
-        es: "Desfibrilación con energía adecuada lo antes posible"
-      },
-      explanation: {
-        pt: "A desfibrilação precoce é essencial em ritmos chocáveis como FV e TV sem pulso. Deve ser realizada o mais rapidamente possível após o início da RCP.",
-        en: "Early defibrillation is critical in shockable rhythms like VF and pulseless VT. It should be performed as soon as possible after starting CPR.",
-        es: "La desfibrilación precoz es esencial en ritmos desfibrilables como la FV y la TV sin pulso. Debe realizarse lo antes posible tras iniciar la RCP."
-      }
-    },
-    {
-      text: {
-        pt: "Administração imediata de adrenalina IV",
-        en: "Immediate administration of IV epinephrine",
-        es: "Administración inmediata de epinefrina IV"
-      },
-      explanation: {
-        pt: "A adrenalina é administrada após a segunda desfibrilação, não de forma imediata no início do protocolo em FV/TV sem pulso.",
-        en: "Epinephrine is administered after the second defibrillation, not immediately at the beginning of the VF/pulseless VT algorithm.",
-        es: "La epinefrina se administra después de la segunda desfibrilación, no de forma inmediata al iniciar el protocolo de FV/TV sin pulso."
-      }
-    },
-    {
-      text: {
-        pt: "Intubação orotraqueal imediata para proteger via aérea",
-        en: "Immediate endotracheal intubation to secure airway",
-        es: "Intubación orotraqueal inmediata para asegurar la vía aérea"
-      },
-      explanation: {
-        pt: "A prioridade inicial em ritmos chocáveis é RCP e desfibrilação. Intubação não deve atrasar essas medidas.",
-        en: "Initial priority in shockable rhythms is CPR and defibrillation. Intubation should not delay these measures.",
-        es: "La prioridad inicial en ritmos desfibrilables es RCP y desfibrilación. La intubación no debe retrasar estas medidas."
-      }
-    },
-    {
-      text: {
-        pt: "Administração de amiodarona antes da primeira desfibrilação",
-        en: "Administration of amiodarone before the first defibrillation",
-        es: "Administración de amiodarona antes de la primera desfibrilación"
-      },
-      explanation: {
-        pt: "Amiodarona é considerada após a terceira desfibrilação em ritmos refratários, não antes da primeira.",
-        en: "Amiodarone is considered after the third shock in refractory rhythms, not before the first defibrillation.",
-        es: "La amiodarona se considera tras la tercera desfibrilación en ritmos refractarios, no antes de la primera."
-      }
-    }
-  ]
- },
-{
-  id: 214,
-  code: "cardio02-q214",
-  areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["ACLS", "cardiac arrest", "PEA", "asystole"],
+  topics: ["ACLS", "cardiac arrest", "PEA", "asystole"],
   level: "moderate",
   correct: 1,
   question: {
@@ -1011,7 +885,133 @@ const bancoCardiomoderate = [
   id: 215,
   code: "cardio02-q215",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["ACLS", "cardiac arrest", "PEA", "asystole"],
+  topics: ["ACLS", "cardiac arrest", "defibrillation"],
+  level: "moderate",
+  correct: 0,
+  question: {
+    pt: "Paciente de 60 anos sofre parada cardiorrespiratória no hospital. Monitor mostra fibrilação ventricular. Após início imediato de RCP de alta qualidade, qual a próxima intervenção recomendada?",
+    en: "A 60-year-old patient suffers a cardiac arrest in the hospital. The monitor shows ventricular fibrillation. After initiating high-quality CPR, what is the next recommended intervention?",
+    es: "Paciente de 60 años sufre un paro cardiorrespiratorio en el hospital. El monitor muestra fibrilación ventricular. Tras iniciar RCP de alta calidad, ¿cuál es la siguiente intervención recomendada?"
+  },
+  options: [
+    {
+      text: {
+        pt: "Desfibrilação com carga adequada o mais rápido possível",
+        en: "Defibrillation with appropriate energy as soon as possible",
+        es: "Desfibrilación con energía adecuada lo antes posible"
+      },
+      explanation: {
+        pt: "A desfibrilação precoce é essencial em ritmos chocáveis como FV e TV sem pulso. Deve ser realizada o mais rapidamente possível após o início da RCP.",
+        en: "Early defibrillation is critical in shockable rhythms like VF and pulseless VT. It should be performed as soon as possible after starting CPR.",
+        es: "La desfibrilación precoz es esencial en ritmos desfibrilables como la FV y la TV sin pulso. Debe realizarse lo antes posible tras iniciar la RCP."
+      }
+    },
+    {
+      text: {
+        pt: "Administração imediata de adrenalina IV",
+        en: "Immediate administration of IV epinephrine",
+        es: "Administración inmediata de epinefrina IV"
+      },
+      explanation: {
+        pt: "A adrenalina é administrada após a segunda desfibrilação, não de forma imediata no início do protocolo em FV/TV sem pulso.",
+        en: "Epinephrine is administered after the second defibrillation, not immediately at the beginning of the VF/pulseless VT algorithm.",
+        es: "La epinefrina se administra después de la segunda desfibrilación, no de forma inmediata al iniciar el protocolo de FV/TV sin pulso."
+      }
+    },
+    {
+      text: {
+        pt: "Intubação orotraqueal imediata para proteger via aérea",
+        en: "Immediate endotracheal intubation to secure airway",
+        es: "Intubación orotraqueal inmediata para asegurar la vía aérea"
+      },
+      explanation: {
+        pt: "A prioridade inicial em ritmos chocáveis é RCP e desfibrilação. Intubação não deve atrasar essas medidas.",
+        en: "Initial priority in shockable rhythms is CPR and defibrillation. Intubation should not delay these measures.",
+        es: "La prioridad inicial en ritmos desfibrilables es RCP y desfibrilación. La intubación no debe retrasar estas medidas."
+      }
+    },
+    {
+      text: {
+        pt: "Administração de amiodarona antes da primeira desfibrilação",
+        en: "Administration of amiodarone before the first defibrillation",
+        es: "Administración de amiodarona antes de la primera desfibrilación"
+      },
+      explanation: {
+        pt: "Amiodarona é considerada após a terceira desfibrilação em ritmos refratários, não antes da primeira.",
+        en: "Amiodarone is considered after the third shock in refractory rhythms, not before the first defibrillation.",
+        es: "La amiodarona se considera tras la tercera desfibrilación en ritmos refractarios, no antes de la primera."
+      }
+    }
+  ]
+ },
+{
+  id: 216,
+  code: "cardio02-q216",
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
+  topics: ["ACLS", "cardiac arrest", "PEA", "asystole"],
+  level: "moderate",
+  correct: 1,
+  question: {
+    pt: "Homem de 67 anos, internado em UTI por sepse, evolui com parada cardiorrespiratória. Monitor mostra ritmo sem complexos QRS organizados e sem pulso palpável. Qual a conduta correct de acordo com o algoritmo de ACLS?",
+    en: "A 67-year-old man in the ICU for sepsis develops cardiac arrest. The monitor shows no organized QRS complexes and no palpable pulse. What is the correct management according to the ACLS algorithm?",
+    es: "Hombre de 67 años en UCI por sepsis presenta paro cardiorrespiratorio. El monitor no muestra complejos QRS organizados ni pulso palpable. ¿Cuál es la conducta correcta según el algoritmo ACLS?"
+  },
+  options: [
+    {
+      text: {
+        pt: "Desfibrilação imediata com carga máxima",
+        en: "Immediate defibrillation with maximum energy",
+        es: "Desfibrilación inmediata con energía máxima"
+      },
+      explanation: {
+        pt: "A desfibrilação está indicada apenas em ritmos chocáveis como FV ou TV sem pulso. Em assistolia/AESP não há indicação.",
+        en: "Defibrillation is indicated only for shockable rhythms like VF or pulseless VT. It is not indicated in asystole/PEA.",
+        es: "La desfibrilación está indicada solo en ritmos desfibrilables como FV o TV sin pulso. No se indica en asistolia/PEA."
+      }
+    },
+    {
+      text: {
+        pt: "Início imediato de RCP e administração de adrenalina a cada 3-5 minutos",
+        en: "Immediate CPR and administration of epinephrine every 3–5 minutes",
+        es: "Inicio inmediato de RCP y administración de epinefrina cada 3–5 minutos"
+      },
+      explanation: {
+        pt: "O manejo da AESP ou assistolia exige RCP imediata e adrenalina a cada 3–5 minutos, além de investigação das causas reversíveis (5Hs e 5Ts).",
+        en: "PEA or asystole requires immediate CPR and epinephrine every 3–5 minutes, plus investigation of reversible causes (5 Hs and 5 Ts).",
+        es: "La AESP o asistolia exige RCP inmediata y epinefrina cada 3–5 minutos, además de investigar causas reversibles (5H y 5T)."
+      }
+    },
+    {
+      text: {
+        pt: "Cardioversão sincronizada com sedação",
+        en: "Synchronized cardioversion with sedation",
+        es: "Cardioversión sincronizada con sedación"
+      },
+      explanation: {
+        pt: "Cardioversão é indicada em ritmos instáveis com QRS organizados (ex: taquicardia com pulso), não em parada com AESP.",
+        en: "Synchronized cardioversion is used for unstable rhythms with organized QRS (e.g., tachycardia with pulse), not in PEA.",
+        es: "La cardioversión sincronizada se usa para ritmos inestables con QRS organizado (como taquicardia con pulso), no en AESP."
+      }
+    },
+    {
+      text: {
+        pt: "Administração precoce de amiodarona e sulfato de magnésio",
+        en: "Early administration of amiodarone and magnesium sulfate",
+        es: "Administración precoz de amiodarona y sulfato de magnesio"
+      },
+      explanation: {
+        pt: "Esses fármacos são indicados em casos específicos (TV/FV refratárias, torsades de pointes), não na AESP ou assistolia.",
+        en: "These drugs are indicated in specific situations (refractory VF/VT, torsades de pointes), not in PEA or asystole.",
+        es: "Estos fármacos se indican en situaciones específicas (FV/TV refractaria, torsades de pointes), no en AESP o asistolia."
+      }
+    }
+  ]
+ },
+{
+  id: 217,
+  code: "cardio02-q217",
+  areas: ["cardio+icu", "cardio", "icu", "medicine"],
+  topics: ["ACLS", "cardiac arrest", "PEA", "asystole"],
   level: "moderate",
   correct: 1,
   question: {
@@ -1071,10 +1071,10 @@ const bancoCardiomoderate = [
   ]
 },
 {
-  id: 216,
-  code: "cardio02-q216",
+  id: 218,
+  code: "cardio02-q218",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["pulmonary embolism", "ACLS", "cardiac arrest", "5Ts"],
+  topics: ["pulmonary embolism", "ACLS", "cardiac arrest", "5Ts"],
   level: "moderate",
   correct: 2,
   question: {
@@ -1134,10 +1134,10 @@ const bancoCardiomoderate = [
   ]
 },
 {
-  id: 217,
-  code: "cardio02-q217",
+  id: 219,
+  code: "cardio02-q219",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["shock", "hemodynamics", "critical care"],
+  topics: ["shock", "hemodynamics", "critical care"],
   level: "moderate",
   correct: 3,
   question: {
@@ -1197,10 +1197,10 @@ const bancoCardiomoderate = [
   ]
 },
 {
-  id: 218,
-  code: "cardio02-q218",
+  id: 220,
+  code: "cardio02-q220",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["cardiac trauma", "blunt chest trauma", "ECG", "echocardiography"],
+  topics: ["cardiac trauma", "blunt chest trauma", "ECG", "echocardiography"],
   level: "moderate",
   correct: 1,
   question: {
@@ -1260,10 +1260,10 @@ const bancoCardiomoderate = [
   ]
 },
 {
-  id: 219,
-  code: "cardio02-q219",
+  id: 221,
+  code: "cardio02-q221",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["LVAD", "mechanical support", "heart failure", "critical care"],
+  topics: ["LVAD", "mechanical support", "heart failure", "critical care"],
   level: "moderate",
   correct: 2,
   question: {
@@ -1323,10 +1323,10 @@ const bancoCardiomoderate = [
   ]
 },
 {
-  id: 220,
-  code: "cardio02-q220",
+  id: 222,
+  code: "cardio02-q222",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["pacemaker", "CABG", "postoperative care", "bradyarrhythmia"],
+  topics: ["pacemaker", "CABG", "postoperative care", "bradyarrhythmia"],
   level: "moderate",
   correct: 3,
   question: {

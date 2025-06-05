@@ -3,7 +3,7 @@ const bancoNeuroDificilima = [
   id: 401,
   code: "neuro04-q401",
     areas: ["neuro+icu", "neuro"],
-  topic: ["ischemic stroke", "atrial fibrillation", "anticoagulation", "thrombolysis", "decision-making"],
+  topics: ["ischemic stroke", "atrial fibrillation", "anticoagulation", "thrombolysis", "decision-making"],
   level: "very_hard",
   correct: 3,
   question: {
@@ -78,7 +78,7 @@ const bancoNeuroDificilima = [
   id: 402,
   code: "neuro04-q402",
     areas: ["neuro+icu", "neuro"],
-  topic: ["subarachnoid hemorrhage", "vasospasm", "endovascular therapy", "ethics", "informed refusal"],
+  topics: ["subarachnoid hemorrhage", "vasospasm", "endovascular therapy", "ethics", "informed refusal"],
   level: "very_hard",
   correct: 1,
   question: {
@@ -153,7 +153,7 @@ const bancoNeuroDificilima = [
   id: 403,
   code: "neuro04-q403",
     areas: ["neuro+icu", "neuro"],
-  topic: ["post-cardiac arrest", "brain death", "ethics", "prognosis", "EEG"],
+  topics: ["post-cardiac arrest", "brain death", "ethics", "prognosis", "EEG"],
   level: "very_hard",
   correct: 2,
   question: {
@@ -228,7 +228,7 @@ const bancoNeuroDificilima = [
   id: 404,
   code: "neuro04-q404",
     areas: ["neuro+icu", "neuro"],
-  topic: ["vasospasm", "subarachnoid hemorrhage", "endovascular therapy", "angioplasty", "nimodipine"],
+  topics: ["vasospasm", "subarachnoid hemorrhage", "endovascular therapy", "angioplasty", "nimodipine"],
   level: "very_hard",
   correct: 1,
   question: {
@@ -303,7 +303,7 @@ const bancoNeuroDificilima = [
   id: 405,
   code: "neuro04-q405",
     areas: ["neuro+icu", "neuro"],
-  topic: ["intracranial hypertension", "uremia", "renal replacement therapy", "dialysis", "osmolarity"],
+  topics: ["intracranial hypertension", "uremia", "renal replacement therapy", "dialysis", "osmolarity"],
   level: "very_hard",
   correct: 2,
   question: {
@@ -378,7 +378,7 @@ const bancoNeuroDificilima = [
   id: 406,
   code: "neuro04-q406",
     areas: ["neuro+icu", "neuro"],
-  topic: ["brain death", "transcranial doppler", "ancillary testing", "neurosonology", "ethics"],
+  topics: ["brain death", "transcranial doppler", "ancillary testing", "neurosonology", "ethics"],
   level: "very_hard",
   correct: 3,
   question: {
@@ -441,7 +441,7 @@ const bancoNeuroDificilima = [
   id: 407,
   code: "neuro04-q407",
     areas: ["neuro+icu", "neuro"],
-  topic: ["intracerebral hemorrhage", "venous hypertension", "cerebral venous thrombosis", "posterior fossa", "anticoagulation"],
+  topics: ["intracerebral hemorrhage", "venous hypertension", "cerebral venous thrombosis", "posterior fossa", "anticoagulation"],
   level: "very_hard",
   correct: 1,
   question: {
@@ -504,7 +504,7 @@ const bancoNeuroDificilima = [
   id: 408,
   code: "neuro04-q408",
     areas: ["neuro+icu", "neuro"],
-  topic: ["intracranial hypertension", "neuroprotection", "cerebral hyperperfusion", "autoregulation", "carotid revascularization", "osmotherapy"],
+  topics: ["intracranial hypertension", "neuroprotection", "cerebral hyperperfusion", "autoregulation", "carotid revascularization", "osmotherapy"],
   level: "very_hard",
   correct: 2,
   question: {
@@ -567,7 +567,7 @@ const bancoNeuroDificilima = [
     id: 409,
     code: "neuro04-q409",
     areas: ["neuro+icu", "neuro", "icu", "medicine"],
-    topic: ["ischemic stroke", "COVID-19", "hypercoagulability", "thrombosis", "anticoagulation"],
+    topics: ["ischemic stroke", "COVID-19", "hypercoagulability", "thrombosis", "anticoagulation"],
     level: "very_hard",
     correct: 2,
     question: {
@@ -642,7 +642,7 @@ const bancoNeuroDificilima = [
     id: 410,
     code: "neuro04-q410",
     areas: ["neuro+icu", "neuro", "icu", "medicine"],
-    topic: ["ARDS", "ventilation", "intracranial pressure", "permissive hypercapnia", "neuroprotection", "lung-brain interaction"],
+    topics: ["ARDS", "ventilation", "intracranial pressure", "permissive hypercapnia", "neuroprotection", "lung-brain interaction"],
     level: "very_hard",
     correct: 3,
     question: {
@@ -705,7 +705,7 @@ const bancoNeuroDificilima = [
     id: 411,
     code: "neuro04-q411",
     areas: ["neuro+icu", "neuro", "icu", "medicine"],
-    topic: ["intracranial hypertension", "tiered therapy", "decompressive craniectomy", "prognosis", "ethics"],
+    topics: ["intracranial hypertension", "tiered therapy", "decompressive craniectomy", "prognosis", "ethics"],
     level: "very_hard",
     correct: 1,
     question: {
@@ -768,7 +768,7 @@ const bancoNeuroDificilima = [
     id: 412,
     code: "neuro04-q412",
     areas: ["neuro+icu", "neuro", "icu", "medicine"],
-    topic: ["ventriculitis", "empirical antibiotics", "external ventricular drain", "intracranial hypertension", "CNS infections"],
+    topics: ["ventriculitis", "empirical antibiotics", "external ventricular drain", "intracranial hypertension", "CNS infections"],
     level: "very_hard",
     correct: 3,
     question: {
@@ -831,7 +831,7 @@ const bancoNeuroDificilima = [
     id: 413,
     code: "neuro04-q413",
     areas: ["neuro+icu", "neuro", "icu", "medicine"],
-    topic: ["biofilm", "external ventricular drain", "antimicrobial pharmacodynamics", "multidrug resistance", "CNS infections"],
+    topics: ["biofilm", "external ventricular drain", "antimicrobial pharmacodynamics", "multidrug resistance", "CNS infections"],
     level: "very_hard",
     correct: 1,
     question: {
@@ -894,7 +894,7 @@ const bancoNeuroDificilima = [
     id: 414,
     code: "neuro04-q414",
     areas: ["neuro+icu", "neuro", "icu", "medicine"],
-    topic: ["TBI", "multimodal monitoring", "ICP", "PbtO2", "tiered therapy"],
+    topics: ["TBI", "multimodal monitoring", "ICP", "PbtO2", "tiered therapy"],
     level: "very_hard",
     correct: 1,
     question: {
@@ -957,7 +957,7 @@ const bancoNeuroDificilima = [
     id: 415,
     code: "neuro04-q415",
     areas: ["neuro+icu", "neuro", "icu", "medicine"],
-    topic: ["TBI", "prognosis", "decompressive craniectomy", "ethical decision", "withdrawal of care"],
+    topics: ["TBI", "prognosis", "decompressive craniectomy", "ethical decision", "withdrawal of care"],
     level: "very_hard",
     correct: 2,
     question: {
@@ -1020,7 +1020,7 @@ const bancoNeuroDificilima = [
     id: 416,
     code: "neuro04-q416",
     areas: ["neuro+icu", "neuro", "icu", "medicine"],
-    topic: ["tracheostomy", "neurosurgery", "ICP", "procedural risk", "ventilator weaning"],
+    topics: ["tracheostomy", "neurosurgery", "ICP", "procedural risk", "ventilator weaning"],
     level: "very_hard",
     correct: 0,
     question: {
@@ -1083,7 +1083,7 @@ const bancoNeuroDificilima = [
     id: 417,
     code: "neuro04-q417",
     areas: ["neuro+icu", "neuro", "icu", "medicine"],
-    topic: ["postoperative care", "brain tumor", "seizure prevention", "corticosteroids", "complications"],
+    topics: ["postoperative care", "brain tumor", "seizure prevention", "corticosteroids", "complications"],
     level: "very_hard",
     correct: 1,
     question: {
@@ -1146,7 +1146,7 @@ const bancoNeuroDificilima = [
     id: 418,
     code: "neuro04-q418",
     areas: ["neuro+icu", "neuro", "icu", "medicine"],
-    topic: ["cervical trauma", "spinal cord injury", "immobilization", "neurogenic shock", "airway management"],
+    topics: ["cervical trauma", "spinal cord injury", "immobilization", "neurogenic shock", "airway management"],
     level: "very_hard",
     correct: 3,
     question: {
@@ -1209,7 +1209,7 @@ const bancoNeuroDificilima = [
     id: 419,
     code: "neuro04-q419",
     areas: ["neuro+icu", "neuro", "icu", "medicine"],
-    topic: ["multimodal monitoring", "ICP", "PbtO2", "EEG", "microdialysis"],
+    topics: ["multimodal monitoring", "ICP", "PbtO2", "EEG", "microdialysis"],
     level: "very_hard",
     correct: 1,
     question: {
@@ -1272,7 +1272,7 @@ const bancoNeuroDificilima = [
     id: 420,
     code: "neuro04-q420",
     areas: ["neuro+icu", "neuro", "icu", "medicine"],
-    topic: ["hyponatremia", "diabetes insipidus", "SIADH", "CSW", "subarachnoid hemorrhage"],
+    topics: ["hyponatremia", "diabetes insipidus", "SIADH", "CSW", "subarachnoid hemorrhage"],
     level: "very_hard",
     correct: 2,
     question: {

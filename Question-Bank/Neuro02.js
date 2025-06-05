@@ -3,7 +3,7 @@ const bancoNeuromoderate = [
   id: 201,
   code: "neuro02-q201",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["intracranial hypertension", "neuromonitoring", "head trauma", "ct scan", "emergency"],
+  topics: ["intracranial hypertension", "neuromonitoring", "head trauma", "ct scan", "emergency"],
   level: "moderate",
   correct: 1,
   question: {
@@ -66,7 +66,7 @@ const bancoNeuromoderate = [
   id: 202,
   code: "neuro02-q202",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["intracranial hypertension", "tiered therapy", "neurocritical care", "sedation", "osmotherapy"],
+  topics: ["intracranial hypertension", "tiered therapy", "neurocritical care", "sedation", "osmotherapy"],
   level: "moderate",
   correct: 3,
   question: {
@@ -129,7 +129,7 @@ const bancoNeuromoderate = [
   id: 203,
   code: "neuro02-q203",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["jugular bulb", "brain oxygenation", "neuromonitoring", "svjO2", "neurocritical care"],
+  topics: ["jugular bulb", "brain oxygenation", "neuromonitoring", "svjO2", "neurocritical care"],
   level: "moderate",
   correct: 0,
   question: {
@@ -192,7 +192,7 @@ const bancoNeuromoderate = [
   id: 204,
   code: "neuro02-q204",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["malignant stroke", "middle cerebral artery", "mass effect", "neuroimaging", "surgical management"],
+  topics: ["malignant stroke", "middle cerebral artery", "mass effect", "neuroimaging", "surgical management"],
   level: "moderate",
   correct: 2,
   question: {
@@ -255,7 +255,7 @@ const bancoNeuromoderate = [
   id: 205,
   code: "neuro02-q205",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["ischemic stroke", "thrombolysis", "alteplase", "contraindications", "time window"],
+  topics: ["ischemic stroke", "thrombolysis", "alteplase", "contraindications", "time window"],
   level: "moderate",
   correct: 0,
   question: {
@@ -318,7 +318,7 @@ const bancoNeuromoderate = [
   id: 206,
   code: "neuro02-q206",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["prolonged seizure", "status epilepticus", "anticonvulsants", "emergency", "neurology"],
+  topics: ["prolonged seizure", "status epilepticus", "anticonvulsants", "emergency", "neurology"],
   level: "moderate",
   correct: 1,
   question: {
@@ -381,7 +381,7 @@ const bancoNeuromoderate = [
   id: 207,
   code: "neuro02-q207",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["multimodal monitoring", "pbto2", "intracranial pressure", "neurocritical care", "cerebral hypoxia"],
+  topics: ["multimodal monitoring", "pbto2", "intracranial pressure", "neurocritical care", "cerebral hypoxia"],
   level: "moderate",
   correct: 2,
   question: {
@@ -444,7 +444,7 @@ const bancoNeuromoderate = [
   id: 208,
   code: "neuro02-q208",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["intracerebral hemorrhage", "blood pressure", "surgery indication", "emergency", "neuroimaging"],
+  topics: ["intracerebral hemorrhage", "blood pressure", "surgery indication", "emergency", "neuroimaging"],
   level: "moderate",
   correct: 1,
   question: {
@@ -507,7 +507,7 @@ const bancoNeuromoderate = [
   id: 209,
   code: "neuro02-q209",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["mannitol", "intracranial hypertension", "osmotherapy", "renal function", "contraindications"],
+  topics: ["mannitol", "intracranial hypertension", "osmotherapy", "renal function", "contraindications"],
   level: "moderate",
   correct: 3,
   question: {
@@ -570,7 +570,7 @@ const bancoNeuromoderate = [
   id: 210,
   code: "neuro02-q210",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["transcranial doppler", "vasospasm", "saeh", "mca velocity", "monitoring limitations"],
+  topics: ["transcranial doppler", "vasospasm", "saeh", "mca velocity", "monitoring limitations"],
   level: "moderate",
   correct: 2,
   question: {
@@ -633,7 +633,7 @@ const bancoNeuromoderate = [
   id: 211,
   code: "neuro02-q211",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["meningitis", "critical care", "antibiotics", "lumbar puncture", "neuroinfection"],
+  topics: ["meningitis", "critical care", "antibiotics", "lumbar puncture", "neuroinfection"],
   level: "moderate",
   correct: 0,
   question: {
@@ -696,7 +696,7 @@ const bancoNeuromoderate = [
   id: 211,
   code: "neuro02-q211",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["meningitis", "nosocomial infection", "empirical therapy", "antibiotics", "treatment duration"],
+  topics: ["meningitis", "nosocomial infection", "empirical therapy", "antibiotics", "treatment duration"],
   level: "moderate",
   correct: 1,
   question: {
@@ -759,7 +759,7 @@ const bancoNeuromoderate = [
   id: 212,
   code: "neuro02-q212",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["ventriculitis", "external ventricular drain", "csf infection", "intraventricular antibiotics", "device management"],
+  topics: ["ventriculitis", "external ventricular drain", "csf infection", "intraventricular antibiotics", "device management"],
   level: "moderate",
   correct: 3,
   question: {
@@ -822,7 +822,7 @@ const bancoNeuromoderate = [
   id: 213,
   code: "neuro02-q213",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["evd", "vp shunt", "hydrocephalus", "csf drainage", "shunt complications"],
+  topics: ["evd", "vp shunt", "hydrocephalus", "csf drainage", "shunt complications"],
   level: "moderate",
   correct: 2,
   question: {
@@ -885,7 +885,7 @@ const bancoNeuromoderate = [
   id: 214,
   code: "neuro02-q214",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["microdialysis", "lactate pyruvate ratio", "cerebral metabolism", "ischemia", "brain monitoring"],
+  topics: ["microdialysis", "lactate pyruvate ratio", "cerebral metabolism", "ischemia", "brain monitoring"],
   level: "moderate",
   correct: 1,
   question: {
@@ -948,7 +948,7 @@ const bancoNeuromoderate = [
   id: 215,
   code: "neuro02-q215",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["neuroplasticity", "brain injury", "rehabilitation", "functional recovery", "intensive care"],
+  topics: ["neuroplasticity", "brain injury", "rehabilitation", "functional recovery", "intensive care"],
   level: "moderate",
   correct: 0,
   question: {
@@ -1011,7 +1011,7 @@ const bancoNeuromoderate = [
   id: 216,
   code: "neuro02-q216",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["status epilepticus", "refractory seizures", "sedation", "neurocritical care", "icu management"],
+  topics: ["status epilepticus", "refractory seizures", "sedation", "neurocritical care", "icu management"],
   level: "moderate",
   correct: 2,
   question: {
@@ -1074,7 +1074,7 @@ const bancoNeuromoderate = [
   id: 217,
   code: "neuro02-q217",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["traumatic brain injury", "subdural hematoma", "surgical criteria", "neurosurgery", "neuroimaging"],
+  topics: ["traumatic brain injury", "subdural hematoma", "surgical criteria", "neurosurgery", "neuroimaging"],
   level: "moderate",
   correct: 0,
   question: {
@@ -1137,7 +1137,7 @@ const bancoNeuromoderate = [
   id: 218,
   code: "neuro02-q218",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["postoperative care", "craniotomy", "neuromonitoring", "sedation", "infection prevention"],
+  topics: ["postoperative care", "craniotomy", "neuromonitoring", "sedation", "infection prevention"],
   level: "moderate",
   correct: 1,
   question: {
@@ -1200,7 +1200,7 @@ const bancoNeuromoderate = [
   id: 219,
   code: "neuro02-q219",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["delirium", "prevention", "icu care", "nonpharmacological strategies", "neurology"],
+  topics: ["delirium", "prevention", "icu care", "nonpharmacological strategies", "neurology"],
   level: "moderate",
   correct: 0,
   question: {
@@ -1263,7 +1263,7 @@ const bancoNeuromoderate = [
   id: 220,
   code: "neuro02-q220",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["therapeutic hypothermia", "cardiac arrest", "brain protection", "postresuscitation care", "hypothermia complications"],
+  topics: ["therapeutic hypothermia", "cardiac arrest", "brain protection", "postresuscitation care", "hypothermia complications"],
   level: "moderate",
   correct: 3,
   question: {

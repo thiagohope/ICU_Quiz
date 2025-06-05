@@ -1,668 +1,802 @@
 // focused-pro.js
-console.log("focused-pro.js LOADED - Initializing quiz logic.");
-const markedQuestions = new Set(); // 🔖 Armazena as questões marcadas para revisão
-let questionHistory = []; // 📚 Histórico de navegação entre as questões
-// Variáveis Globais para o Quiz (serão expandidas depois)
-let shownQuestionIds = [];     // IDs das últimas 300 questões exibidas
-let currentQuestions = [];     // Bloco atual de 15 questões
-let currentIndex = 0;          // Índice da questão atual
-let userAnswers = {};          // Respostas do usuário
-let previousWrongIds = [];     // IDs das erradas do bloco anterior
-let isRevisitingMarkedQuestions = false; // Nova flag de estado
-let markedQuestionsToRevisit = [];       // Lista de objetos de questão para revisitar
-let currentRevisitIndex = 0;             // Índice para navegar em markedQuestionsToRevisit
-let currentQuestionObject = null;
-let questionsAnsweredInBlock = 0;
+// Script para o modo Focused Pro, adaptado de focused.js.
+// Inclui filtros de área/tópico via URL e usa 'focusedProState' no localStorage.
+// Funções do music player (prevTrack, togglePlay, nextTrack, volume) são globais ou em outro script.
+
+console.log("focused-pro.js CARREGADO - Inicializando Quiz Modo Focused Pro...");
+
+// #region --- Variáveis Globais e Configuração ---
+const markedQuestions = new Set();
+let shownQuestionIds = [];
+let currentQuestions = []; // Bloco atual de questões filtradas
+let currentIndex = 0;
+let userAnswers = {};
+let previousWrongIds = [];
+let isRevisitingMarkedQuestions = false;
+let markedQuestionsToRevisit = [];
+let currentRevisitIndex = 0;
 const BLOCK_SIZE = 15;
 
-// --- Funções do Quiz ---
+// Filtros da URL (preenchidos em initializeFocusedProQuiz)
+let simSelectedAreas = [];
+let simSelectedTopics = [];
+// #endregion
+
+// #region --- Funções de Utilidade e Estado (Salvar/Carregar/Idioma) ---
 function getCurrentLanguage() {
-  return localStorage.getItem('selectedLanguage') || 'en';
-}
-
-function getTranslations() {
-  const lang = getCurrentLanguage();   
-  const t = {
-    // Chaves para botões de navegação e marcação
-    "markForReview": { en: "Mark for Review", pt: "Marcar para revisão", es: "Marcar para revisar" },
-    "unmarkReview": { en: "Unmark Review", pt: "Desmarcar revisão", es: "Desmarcar revisión" },
-    "previousButton": { en: "Previous", pt: "Anterior", es: "Anterior" },
-    "nextButton": { en: "Next", pt: "Próxima", es: "Siguiente" },
-    "returnToQuizButton": { en: "➕ Next Block", pt: "➕ Próximo Bloco", es: "➕ Siguiente Bloque" }, // Usado em showReviewMode [1]
-
-    // Chaves para alertas e mensagens de erro
-    "selectOptionPrompt": { en: "Please select an option before proceeding.", pt: "Por favor, selecione uma opção antes de prosseguir.", es: "Por favor, seleccione una opción antes de continuar." },
-    "error_processing_question": { en: "An error occurred while processing the current question. Please try reloading or contact support.", pt: "Ocorreu um erro ao processar a questão atual. Tente recarregar ou contate o suporte.", es: "Ocurrió un error al procesar la pregunta actual. Intente recargar o contacte al soporte."},
-    "error_rendering_question": { en: "Error rendering question.", pt: "Erro ao renderizar questão.", es: "Error al renderizar la pregunta." },
-    "error_no_questions_found": { en: "No questions found in the database.", pt: "Nenhuma questão encontrada no banco de dados.", es: "No se encontraron preguntas en la base de datos."},
-    "error_question_bank_not_loaded": { en: "Question bank not loaded or empty.", pt: "Banco de questões não carregado ou vazio.", es: "Banco de preguntas no cargado o vacío."},
-    "error_loading_questions": { en: "Error loading questions.", pt: "Erro ao carregar as questões.", es: "Error al cargar las preguntas."},
-
-    // Chaves para níveis de dificuldade (IMPORTANTE: use "very_hard" se seus dados usam "very_hard")
-    "difficulty_easy": { en: "Easy", pt: "Fácil", es: "Fácil" },
-    "difficulty_moderate": { en: "Moderate", pt: "Moderada", es: "Moderada" }, // A chave no seu arquivo estava "moderado", deve ser "moderate" se o dado for "moderate"
-    "difficulty_hard": { en: "Hard", pt: "Difícil", es: "Difícil" },
-    "difficulty_very_hard": { en: "Very Hard", pt: "Muito Difícil", es: "Muy Difícil" }, // Alterado de "difficulty_muito_dificil" para "difficulty_very_hard"
-
-    // Chaves para a interface do quiz e revisão
-    "question_label_placeholder": { en: "Question X/Y", pt: "Questão X/Y", es: "Pregunta X/Y" },
-    "revisitingMarkedLabel": { en: "Revisiting Marked ${num}/${total}", pt: "Revisando Marcada ${num}/${total}", es: "Revisando Marcada ${num}/${total}" },
-    "blockReviewTitle": { en: "Block Review", pt: "Revisão do Bloco", es: "Revisión del Bloque" },
-    "markedQuestionsReviewTitle": { en: "Review Your Marked Questions", pt: "Revise Suas Questões Marcadas", es: "Revise Sus Preguntas Marcadas" },
-    "unmarkButtonText": { en: "Unmark this question", pt: "Desmarcar esta questão", es: "Desmarcar esta pregunta" },
-    "Unmarked": { en: "Unmarked", pt: "Desmarcada", es: "Desmarcada" },
-    "No_marked_questions_to_review_in_this_block": { en: "No marked questions to review in this block.", pt: "Nenhuma questão marcada para revisar neste bloco.", es: "No hay preguntas marcadas para revisar en este bloque." },
-    "Question_text_not_available": { en: "Question text not available", pt: "Texto da questão não disponível", es: "Texto de la pregunta no disponible"},
-    "explanation_not_available_default": { en: "Explanation not available", pt: "Explicação não disponível", es: "Explicación no disponible"},
-    
-    // Chaves genéricas de revisão (se ainda não existirem de forma mais específica)
-    "Question": { en: "Question", pt: "Questão", es: "Pregunta" },
-    "Correct": { en: "Correct", pt: "Correta", es: "Correcta" }, // Para indicar a resposta correta
-    "YourAnswer": { en: "Your Answer", pt: "Sua Resposta", es: "Tu Respuesta" },
-    "Explanation": { en: "Explanation", pt: "Explicação", es: "Explicación" }
-  };
-
-  // Retorna uma função que busca a tradução
-  return (key) => {
-    if (t[key] && t[key][lang]) {
-      return t[key][lang];
-    }
-    console.warn(`Translation key not found for "${key}" in language "${lang}". Using key as fallback.`);
-    return key; // Retorna a própria chave como fallback
-  };
-}
-
-function initializeFocusedProQuiz() { // Inicializa o quiz do Focused Pro
-  console.log("Initializing FocusedProQuiz...");
-
-  if (!loadProgress()) {
-    prepareNextBlock();
-  } else {
-    console.log("🧠 currentQuestions loaded:", currentQuestions);
-
-    // Verifica se há uma questão válida no índice atual
-    if (
-  Array.isArray(currentQuestions) &&
-  currentQuestions.length > 0 &&
-  Number.isInteger(currentIndex) &&
-  currentIndex >= 0 &&
-  currentIndex < currentQuestions.length &&
-  typeof currentQuestions[currentIndex] === 'object' &&
-  currentQuestions[currentIndex] !== null
-)
- {
-      renderQuestion(currentQuestions[currentIndex]);
-    } else {
-            console.warn("❌ Invalid data when restoring progress. Clearing and restarting block...");
-      localStorage.removeItem('focusedProState');
-      prepareNextBlock();
-    }
-  }
-}
-
-function fetchAndDisplayFirstQuestion() { // Busca e exibe a primeira questão do quiz
-    if (typeof questionBank !== 'undefined' && questionBank.externalBanks && questionBank.externalBanks.length > 0) {
-        const allQuestions = [].concat(...questionBank.externalBanks);
-    if (allQuestions.length > 0) {
-      const randomIndex = Math.floor(Math.random() * allQuestions.length);
-      currentQuestionObject = allQuestions[randomIndex];
-      
-      // Embaralha as opções desta questão específica
-      questionBank.shuffleOptionsAndUpdateCorrect(currentQuestionObject); // Usa a função do banco-questoes.js
-      
-      renderQuestion(currentQuestionObject);
-    } else {
-      displayQuizError("Nenhuma questão encontrada no banco de dados.");
-    }
-  } else {
-    displayQuizError("Banco de questões não carregado ou vazio.");
-  }
-}
-
-function getOptionText(opt, lang = 'en') { // Função para obter o texto da opção com fallback
-  if (opt && typeof opt === 'object') {
-    if (opt.text && typeof opt.text === 'object') {
-      return opt.text[lang] || opt.text.en || '[no text]';
-    }
-  }
-  return '[no text]';
-}
-
-function markForReview(questionId) { // Função para marcar uma questão para revisão
-  markedQuestions.add(questionId);
-  saveProgress(); // saveProgress() já deve estar definida
-  updateMarkButton(questionId); // Atualiza o visual do botão
-  console.log(`Question ${questionId} marked for review.`);
-  }
-
-function unmarkQuestion(questionId) { // Função para desmarcar uma questão para revisão
-  markedQuestions.delete(questionId);
-  saveProgress(); // saveProgress() já deve estar definida
-  updateMarkButton(questionId); // Atualiza o visual do botão
-  console.log(`Question ${questionId} unmarked for review.`);
- }
-
-function updateMarkButton(questionId) { // Função para alternar entre marcar e desmarcar uma questão
-  const markBtn = document.getElementById("mark-btn");
-  const translate = getTranslations(); // Chama a função que agora existe
-  
-  if (!markBtn) {
-    // console.warn('"mark-btn" não encontrado no DOM para updateMarkButton');
-    return; // Adicionado para evitar erro se o botão não existir temporariamente durante o render
-  }
-
-  const isMarked = markedQuestions.has(questionId);
-  const buttonTextKey = isMarked ? "unmarkReview" : "markForReview";
-  const buttonText = translate(buttonTextKey);
-  const emoji = "🔖 ";
-
-  markBtn.innerHTML = emoji + buttonText; // innerHTML para o emoji
-
-  const baseClasses = "text-sm font-medium py-2 px-3 rounded-md hover:bg-gray-100 transition-colors";
-  if (isMarked) {
-    markBtn.className = `${baseClasses} text-red-600 hover:underline`;
-  } else {
-    markBtn.className = `${baseClasses} text-yellow-600 hover:underline`;
-  }
-}
-
-function toggleMark(questionId) { // Função para alternar o estado de marcação de uma questão
-  if (markedQuestions.has(questionId)) {
-    unmarkQuestion(questionId);
-  } else {
-    markForReview(questionId);
-  }
-}
-
-function renderQuestion(question) {
-  const quizContainer = document.getElementById('quiz-container');   
-  const lang = getCurrentLanguage();
-  const translate = getTranslations();
-
-  // Validação inicial robusta da questão e do container
-  if (!quizContainer || !question || typeof question.id === 'undefined') {   
-    console.error("Error rendering question: container, question object, or question.id is invalid.", "Question:", question);
-    displayQuizError(translate("error_rendering_question"));
-    return;   
-  }
-
-  console.log("🧪 container found?", quizContainer);    ('en')
-  console.log("📄 question received:", question, "isRevisitingMarkedQuestions:", isRevisitingMarkedQuestions);    ('en')
-
-  let questionLabelText;
-  let prevButtonDisabled;
-
-  // Adapta o rótulo da questão e o estado do botão "Previous" para o modo de revisão de marcadas
-  if (isRevisitingMarkedQuestions) {
-    questionLabelText = translate("revisitingMarkedLabel")
-                          .replace("${num}", currentRevisitIndex + 1)
-                          .replace("${total}", markedQuestionsToRevisit.length);
-    prevButtonDisabled = currentRevisitIndex === 0;
-  } else {
-    questionLabelText = translate("question_label_placeholder").replace('X/Y', `${currentIndex + 1}/${currentQuestions.length}`);   
-    prevButtonDisabled = currentIndex === 0;   
-  }
-
-  // Determina o texto do nível de dificuldade
-  const difficultyMap = {   
-    pt: { easy: "Fácil", moderate: "Moderada", hard: "Difícil", very_hard: "Muito Difícil" },
-    en: { easy: "Easy", moderate: "Moderate", hard: "Hard", very_hard: "Very Hard" },
-    es: { easy: "Fácil", moderate: "Moderada", hard: "Difícil", very_hard: "Muy Difícil" }
-  };
-  // Acesso ao question.level, normalizando para minúsculas caso haja variação nos dados.
-  const levelKey = question.level ? question.level.toLowerCase().replace(/\s+/g, '_') : 'unknown';
-  const difficultyText = (difficultyMap[lang] && difficultyMap[lang][levelKey]) || question.level || 'N/A';
-  // HTML das opções (sua versão que estava funcionando visualmente para seleção)
-  const optionsHTML = (Array.isArray(question.options) ? question.options : []).map((opt, index) => {   
-      const texto = getOptionText(opt, lang);
-      const isChecked = userAnswers[question.id] === index;   
-      return `
-      <div class="flex items-center option-container py-1">
-        <input type="radio" name="question_${question.id}" value="${index}" 
-                id="q${question.id}_opt${index}" ${isChecked ? 'checked' : ''}
-                class="peer h-4 w-4 transform scale-125 accent-purple-600 focus:ring-purple-500 focus:ring-offset-0 focus:ring-2">
-        <label for="q${question.id}_opt${index}" 
-                class="ml-3 block flex-1 text-gray-800 bg-white border border-gray-300 rounded-lg p-4 cursor-pointer 
-                        hover:border-purple-400 hover:bg-purple-50 transition-colors duration-150
-                        peer-checked:border-purple-500 peer-checked:bg-purple-50">
-          ${texto}
-        </label>
-      </div>
-     `; 
-  }).join('');
-
-  quizContainer.innerHTML = `
-    <div class="bg-white p-6 rounded-xl shadow-md">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-lg font-semibold text-purple-700">${questionLabelText}</h2>
-        <span class="text-xs font-bold px-2 py-1 rounded-full 
-          ${levelKey === 'easy' ? 'bg-green-100 text-green-700' :
-            levelKey === 'moderate' ? 'bg-yellow-100 text-yellow-700' :
-            levelKey === 'hard' ? 'bg-red-100 text-red-700' :
-            levelKey === 'very_hard' ? 'bg-purple-100 text-purple-700' : 
-            'bg-gray-100 text-gray-700'}">
-          ${difficultyText}
-        </span>
-      </div>
-
-      <p class="text-gray-800 mb-6 text-base">
-        ${(question.question && question.question[lang]) || (question.question && question.question['en']) || translate("Question_text_not_available")}
-      </p>
-
-      <form id="question-form" class="space-y-3">
-        ${optionsHTML}
-      </form>
-     
-      <div class="flex flex-col sm:flex-row justify-between items-center mt-8 pt-6 border-t border-gray-200">
-        <button type="button" id="mark-btn" onclick="toggleMark(${question.id})" class="mb-3 sm:mb-0">
-          {/* O conteúdo e classes serão definidos por updateMarkButton */}
-        </button>
-        <div class="flex gap-x-3">
-          <button type="button" onclick="handlePreviousQuestionClick()" id="prev-btn" 
-                  class="px-6 py-2.5 text-sm font-medium bg-gray-200 text-gray-700 rounded-lg 
-                         hover:bg-gray-300 transition-colors 
-                         disabled:opacity-50 disabled:cursor-not-allowed"
-                  ${prevButtonDisabled ? 'disabled' : ''}>
-            ⬅️ ${translate("previousButton")}
-          </button>
-          <button type="button" onclick="handleNextQuestionClick()" id="next-btn" 
-                  class="px-6 py-2.5 text-sm font-medium bg-purple-600 text-white rounded-lg 
-                         hover:bg-purple-700 transition-colors focus:ring-4 focus:ring-purple-300">
-            ${translate("nextButton")} ➡️
-          </button>
-        </div>
-      </div>
-    </div>`;   
-  updateMarkButton(question.id);
-  console.log("📦 Question rendered successfully:", question.id);
-
-  // Adicionar listeners aos inputs de rádio
-  const radios = document.querySelectorAll(`input[type="radio"][name="question_${question.id}"]`);   
-  radios.forEach(radio => {   
-    radio.addEventListener('change', (event) => {   
-      userAnswers[question.id] = parseInt(event.target.value);   
-      saveProgress();   
-      console.log("✅ Option selected:", event.target.value, "for question ID:", question.id);
-    });
-  });
-  window.scrollTo(0, 0);
-  console.log("Scrolled to top after rendering question.");
-
-}
- 
-function displayQuizError(message) { // Função para exibir um erro no quiz
-  const container = document.getElementById('quiz-container');
-  
-  if (container) {
-    container.innerHTML = `
-      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center mt-4" role="alert">
-        <strong class="font-bold">⚠️ Error:</strong>
-        <span class="block sm:inline">${message}</span>
-      </div>
-    `;
-  } else {
-    console.error("⚠️ Container não encontrado para exibir o erro.");
-  }
-
-  console.error("❌", message);
-}
-
-function handleNextQuestionClick() { // Lógica para avançar para a próxima questão
-  let currentQuestionForValidation;
-  let questionIdForValidation;
-  const translate = getTranslations();
-
-  if (isRevisitingMarkedQuestions) {
-    currentQuestionForValidation = markedQuestionsToRevisit[currentRevisitIndex];
-  } else {
-    currentQuestionForValidation = currentQuestions[currentIndex];   
-  }
-
-  // Validação da questão atual
-  if (!currentQuestionForValidation || typeof currentQuestionForValidation.id === 'undefined') {
-    console.error("Critical error: Current question object or its ID is undefined in handleNextQuestionClick.");
-    displayQuizError(translate("error_processing_question"));
-    return;
-  }
-  questionIdForValidation = currentQuestionForValidation.id;
-
-  const selected = document.querySelector(`input[name="question_${questionIdForValidation}"]:checked`);   
-  if (!selected) {   
-    alert(translate("selectOptionPrompt"));
-    return;   
-  }
-  
-  if (isRevisitingMarkedQuestions) {
-    currentRevisitIndex++;
-    if (currentRevisitIndex < markedQuestionsToRevisit.length) {
-      renderQuestion(markedQuestionsToRevisit[currentRevisitIndex]);
-    } else {
-      isRevisitingMarkedQuestions = false;
-      markedQuestionsToRevisit = [];
-      currentRevisitIndex = 0;
-      console.log("Finished revisiting marked questions. Proceeding to full block review.");
-      showReviewMode();
-    }
-  } else {
-    if (currentIndex < currentQuestions.length - 1) {   
-      currentIndex++;   
-      renderQuestion(currentQuestions[currentIndex]);   
-    } else {
-      const markedInThisBlock = currentQuestions.filter(q => q && typeof q.id !== 'undefined' && markedQuestions.has(q.id));   
-      if (markedInThisBlock.length > 0) {
-        isRevisitingMarkedQuestions = true;
-        markedQuestionsToRevisit = markedInThisBlock;
-        currentRevisitIndex = 0;
-        console.log("Block ended. Starting revisit of marked questions:", markedQuestionsToRevisit.map(q => q.id));
-        renderQuestion(markedQuestionsToRevisit[currentRevisitIndex]);
-      } else {
-        console.log("Block ended. No marked questions to revisit. Proceeding to full block review.");
-        showReviewMode();
-      }
-    }
-  }
-}
-
-function handlePreviousQuestionClick() { // Lógica para voltar à questão anterior
-  if (isRevisitingMarkedQuestions) {
-    if (currentRevisitIndex > 0) {
-      currentRevisitIndex--;
-      renderQuestion(markedQuestionsToRevisit[currentRevisitIndex]);   
-    }
-  } else {
-
-    if (currentIndex > 0) {   
-      currentIndex--;   
-      renderQuestion(currentQuestions[currentIndex]);   
-    }
-    
-  }
-}
-
-function fetchAndDisplayNextQuestion() { // Função para buscar e exibir a próxima questão
-  console.log("🔄 Carregando próxima questão...");
-  fetchAndDisplayFirstQuestion();
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  window.scrollTo(0, 0);
-  console.log("Scrolled to top after rendering question.");
-
-  console.log("DOM da página focused-pro.html carregado. Preparando para iniciar o quiz...");
-
-  function waitForQuestionBankAndStart() {
-    console.log("Função waitForQuestionBankAndStart: Verificando se o questionBank está pronto...");
-    if (
-      typeof questionBank !== 'undefined' &&
-      questionBank.externalBanks &&
-      Array.isArray(questionBank.externalBanks) &&
-      typeof questionBank.shuffleOptionsAndUpdateCorrect === 'function'
-    ) {
-      console.log("questionBank parece definido. Aguardando um instante para ter certeza que está populado...");
-      setTimeout(() => {
-        if (questionBank.externalBanks.length > 0) {
-          console.log("Banco de questões populado. Inicializando o quiz do Focused Pro...");
-          initializeFocusedProQuiz();
-        } else {
-          console.error("ERRO: Banco de questões está vazio mesmo após espera.");
-          displayQuizError("Erro ao carregar as questões.");
-        }
-      }, 500);
-    } else {
-      console.log("Aguardando definição do questionBank. Tentando novamente em 300ms.");
-      setTimeout(waitForQuestionBankAndStart, 300);
-    }
-  }
- 
-  waitForQuestionBankAndStart();
-});
-
-function showReviewMode() { // Função para exibir o modo de revisão do bloco
-  const translate = getTranslations();
-  const container = document.getElementById('quiz-container');
-  const lang = localStorage.getItem('selectedLanguage') || 'en';
-
-  if (!container) {
-    console.error("❌ quiz-container não encontrado.");
-    return;
-  }
-
-  container.innerHTML = `<h2 class="text-xl font-bold text-center mb-6">🔁 ${translate("blockReviewTitle")}</h2>`;   
-
-  currentQuestions.forEach((q, i) => {
-    const userAnswer = userAnswers[q.id];
-    const isCorrect = userAnswer === q.correct;
-    let explanationToDisplay = "Explanation not available";
-      if (q.options && Array.isArray(q.options) && q.options[q.correct] !== undefined && q.options[q.correct] !== null && typeof q.options[q.correct] === 'object' && q.options[q.correct].explanation) {
-        explanationToDisplay = q.options[q.correct].explanation[lang] || q.options[q.correct].explanation['en'] || "Explanation (EN fallback) not found or text for this language is missing.";
-      }
-    const options = q.options.map((opt, idx) => {
-    const optText = getOptionText(opt, lang);      
-    const isRight = idx === q.correct;
-    const isChosen = idx === userAnswer;
-
-      return `
-        <li class="${isRight ? 'text-green-700 font-bold' : isChosen ? 'text-red-700' : 'text-gray-700'}">
-          ${String.fromCharCode(65 + idx)}. ${optText}
-        </li>`;
-    }).join('');
-
-    const questionText = (q.question && q.question[lang]) || (q.question && q.question['en']) || 'Question not available';
-
-    container.innerHTML += `
-      <div class="border rounded-lg p-4 mb-4 ${isCorrect ? 'bg-green-50' : 'bg-red-50'}">
-        <p class="font-semibold mb-2">Q${i + 1}: ${questionText}</p>
-        <ul class="mb-2 space-y-1">${options}</ul>
-        <p class="text-sm text-gray-600 italic">🧠 ${explanationToDisplay}</p>
-      </div>`;
-  });
-
-  container.innerHTML += `
-    <div class="text-center mt-8">
-      <button id="resume-quiz-btn" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
-        ${lang === 'pt' ? '➕ Voltar ao Quiz' : lang === 'es' ? '➕ Volver al Quiz' : '➕ Return to Quiz'}
-      </button>
-    </div>
-  `;
-
-  document.getElementById('resume-quiz-btn').addEventListener('click', () => {
-    if (Object.keys(userAnswers).length >= 45) {
-      showFinalReport();
-    } else {
-      prepareNextBlock();
-    }
-  });
-}
-
-function prepareNextBlock() {
-  console.log("🎯 Preparing new block of questions...");
-
-  let newBlockQuestions = [];
-  const questionsToExclude = [...shownQuestionIds, ...previousWrongIds.filter(id => shownQuestionIds.includes(id))]; // Não mostrar imediatamente o que já foi mostrado ou o que errou e já foi mostrado
-
-  // Tenta preencher com questões "novas" (não vistas recentemente) e que não são erros recentes já mostrados
-  let availableNewQuestions = questionBank.getAllQuestions().filter(q => !questionsToExclude.includes(q.id));
-  
-  // Tenta manter proporções de dificuldade para questões novas
-  if (availableNewQuestions.length > 0) {
-     const difficultyProportions = { easy: 0.2, moderate: 0.2, hard: 0.3, very_hard: 0.3 };
-     let tempSelectedByProportion = [];
-     Object.entries(difficultyProportions).forEach(([level, fraction]) => {
-         const countForLevel = Math.round(fraction * BLOCK_SIZE);
-         const subset = availableNewQuestions.filter(q => q.level === level);
-         tempSelectedByProportion.push(...questionBank.shuffleArray([...subset]).slice(0, countForLevel));
-     });
-     newBlockQuestions.push(...questionBank.shuffleArray(tempSelectedByProportion));
-     // Remove duplicatas caso a seleção por proporção pegue as mesmas questões
-     newBlockQuestions = Array.from(new Set(newBlockQuestions.map(q => q.id))).map(id => newBlockQuestions.find(q => q.id === id));
-  }
-
-  // Se não houver questões novas suficientes, ou para completar o bloco, preenche com questões já vistas (modo "infinito")
-  if (newBlockQuestions.length < BLOCK_SIZE) {
-    console.log("Not enough new questions. Re-showing questions (infinite mode).");
-    
-    let questionsToRecycle = questionBank.getAllQuestions();
-    questionsToRecycle = questionBank.shuffleArray([...questionsToRecycle]);
-
-    let neededToFill = BLOCK_SIZE - newBlockQuestions.length;
-    for (const q of questionsToRecycle) {
-      if (neededToFill <= 0) break;
-      // Adiciona mesmo que já esteja em newBlockQuestions se for para completar o tamanho,
-      // ou adicione uma lógica para evitar duplicatas DENTRO do mesmo bloco, se preferir.
-      // Para garantir variedade, vamos tentar não duplicar no mesmo bloco se possível.
-      if (!newBlockQuestions.some(nbq => nbq.id === q.id)) {
-          newBlockQuestions.push(q);
-          neededToFill--;
-      }
-    }
-    // Se mesmo assim faltar (banco pequeno), permite repetições para atingir BLOCK_SIZE
-    let emergencyFillIndex = 0;
-    while (newBlockQuestions.length < BLOCK_SIZE && questionBank.getAllQuestions().length > 0) {
-        newBlockQuestions.push(questionsToRecycle[emergencyFillIndex % questionsToRecycle.length]);
-        emergencyFillIndex++;
-    }
-  }
-  
-  currentQuestions = newBlockQuestions.slice(0, BLOCK_SIZE);
-
-  // Se NENHUMA questão foi selecionada (banco de questões vazio), mostra erro.
-  if (currentQuestions.length === 0) {
-    const translate = getTranslations();
-    console.error("ERROR: No questions could be selected for the block. Question bank might be empty.");
-    displayQuizError(translate("error_no_questions_found"));
-    return;
-  }
-
-  // Embaralha as opções de TODAS as questões no bloco CADA VEZ que um bloco é preparado.
-  currentQuestions.forEach(q => {
-    if (q && q.options && typeof questionBank.shuffleOptionsAndUpdateCorrect === 'function') {
-      questionBank.shuffleOptionsAndUpdateCorrect(q);
-    } else if (q) {
-      console.warn("Question object or its options are invalid, cannot shuffle. ID:", q.id);
-    }
-  });
-
-  // Atualiza o histórico e reseta os controles para o novo bloco
-  const newQuestionIds = currentQuestions.map(q => q.id);
-  // Adiciona apenas IDs que não estão nos últimos 100 para tentar evitar repetição muito imediata
-  newQuestionIds.forEach(id => {
-     if(!shownQuestionIds.slice(-150).includes(id)) { // Evita adicionar se já foi mostrado muito recentemente
-         shownQuestionIds.push(id);
-     }
-  });
-  shownQuestionIds = shownQuestionIds.slice(-100); // Mantém o histórico das últimas 100 questões únicas mostradas
-                                                // Para um modo "verdadeiramente infinito" e com mais repetição, você poderia limpar shownQuestionIds
-                                                // ou ter uma lógica diferente aqui. Manter os últimos 150 ainda tenta dar alguma variedade.
-
-  currentIndex = 0;
-  userAnswers = {};
-  // previousWrongIds deve ser populado com base nas respostas do bloco que ACABOU de ser concluído.
-  // Esta lógica deve ser movida para ANTES de userAnswers ser resetado, idealmente ao sair de showReviewMode.
-  // Por agora, vamos assumir que previousWrongIds é gerenciado externamente a esta função imediata.
-  // previousWrongIds = []; // Comentado por enquanto, pois a população dele é complexa aqui
-
-  renderQuestion(currentQuestions[currentIndex]);
-}
-
-function showFinalReport() {
-  const lang = localStorage.getItem('selectedLanguage') || 'en';
-
-  const reportText = {
-    title: {
-      pt: "📊 Relatório de Performance",
-      en: "📊 Performance Report",
-      es: "📊 Informe de Rendimiento"
-    },
-    restart: {
-      pt: "🔁 Recomeçar Quiz",
-      en: "🔁 Restart Quiz",
-      es: "🔁 Reiniciar Quiz"
-    },
-    correct: {
-      pt: "Acertos",
-      en: "Correct",
-      es: "Aciertos"
-    },
-    of: {
-      pt: "de",
-      en: "of",
-      es: "de"
-    },
-    levelNames: {
-      easy: { pt: "Fácil", en: "Easy", es: "Fácil" },
-      moderate: { pt: "Moderada", en: "Moderate", es: "Moderada" },
-      hard: { pt: "Difícil", en: "Hard", es: "Difícil" },
-      very_hard: { pt: "Muito Difícil", en: "Very Hard", es: "Muy Difícil" }
-    }
-  };
-
-  const container = document.getElementById('quiz-container');
-  if (!container) {
-    console.error("❌ quiz-container não encontrado.");
-    return;
-  }
-
-  container.innerHTML = `<h2 class="text-2xl font-bold text-center mb-6">${reportText.title[lang]}</h2>`;
-
-  const totals = { easy: 0, moderate: 0, hard: 0, very_hard: 0 };
-  const acertos = { easy: 0, moderate: 0, hard: 0, very_hard: 0 };
-
-  Object.entries(userAnswers).forEach(([qid, resp]) => {
-    const q = questionBank.getQuestionById(parseInt(qid));
-    if (q && totals.hasOwnProperty(q.level)) {
-      totals[q.level]++;
-      if (resp === q.correct) acertos[q.level]++;
-    }
-  });
-
-  container.innerHTML += `
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      ${Object.keys(totals).map(level => {
-        const percent = totals[level] ? acertos[level] / totals[level] : 0;
-        return `
-          <div class="border p-4 rounded-lg ${percent >= 0.6 ? 'bg-green-50' : 'bg-red-50'}">
-            <h3 class="text-lg font-semibold">${reportText.levelNames[level][lang]}</h3>
-            <p class="text-sm">${reportText.correct[lang]}: ${acertos[level]} ${reportText.of[lang]} ${totals[level]}</p>
-          </div>
-        `;
-      }).join('')}
-    </div>
-
-    <div class="text-center mt-8">
-      <button onclick="location.reload()" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
-        ${reportText.restart[lang]}
-      </button>
-    </div>
-  `;
+    return localStorage.getItem('selectedLanguage') || 'en';
 }
 
 function saveProgress() {
-  const state = {
-    currentQuestions,
-    currentIndex,
-    userAnswers,
-    markedQuestions: Array.from(markedQuestions),
-    questionHistory,
-    previousWrongIds,
-    shownQuestionIds
-  };
-  localStorage.setItem('focusedProState', JSON.stringify(state));
-  console.log("💾 Progress saved.");
+    if (currentQuestions.length === 0 && currentIndex === 0 && Object.keys(userAnswers).length === 0) {
+        console.log("💾 FocusedPro Progresso não salvo: Nenhuma questão carregada ou resposta dada ainda.");
+        return;
+    }
+    
+    const state = {
+        currentQuestions,
+        currentIndex,
+        userAnswers,
+        markedQuestions: Array.from(markedQuestions),
+        previousWrongIds,
+        shownQuestionIds,
+        savedAreas: simSelectedAreas, 
+        savedTopics: simSelectedTopics
+    };
+    
+    localStorage.setItem('focusedProState', JSON.stringify(state));
+    console.log("💾 FocusedPro Progresso salvo em focusedProState.");
 }
 
 function loadProgress() {
-  const state = JSON.parse(localStorage.getItem('focusedProState'));
-  if (!state) return false;
+    const stateString = localStorage.getItem('focusedProState');
+    if (!stateString) return false;
 
-  currentQuestions = state.currentQuestions;
-  currentIndex = state.currentIndex;
-  userAnswers = state.userAnswers;
-  markedQuestions.clear();
-  state.markedQuestions.forEach(id => markedQuestions.add(id));
-  questionHistory = state.questionHistory;
-  previousWrongIds = state.previousWrongIds;
-  shownQuestionIds = state.shownQuestionIds;
+    try {
+        const state = JSON.parse(stateString);
+        if (!state) {
+            console.warn("❌ focusedProState parseado é nulo ou indefinido.");
+            localStorage.removeItem('focusedProState');
+            return false;
+        }
 
-  console.log("✅ Progresso restaurado com sucesso.");
-  return true;
+        if (simSelectedAreas.length === 0 && Array.isArray(state.savedAreas)) {
+            simSelectedAreas = state.savedAreas;
+        }
+        if (simSelectedTopics.length === 0 && Array.isArray(state.savedTopics)) {
+            simSelectedTopics = state.savedTopics;
+        }
+
+        currentQuestions = state.currentQuestions || [];
+        currentIndex = state.currentIndex || 0;
+        userAnswers = state.userAnswers || {};
+        previousWrongIds = state.previousWrongIds || [];
+        shownQuestionIds = state.shownQuestionIds || [];
+        
+        markedQuestions.clear();
+        (state.markedQuestions || []).forEach(id => markedQuestions.add(id));
+
+        if (currentQuestions.length > 0 && currentIndex < currentQuestions.length && currentQuestions[currentIndex]) {
+            console.log("✅ Progresso 'focusedProState' restaurado. Áreas:", simSelectedAreas, "Tópicos:", simSelectedTopics);
+            return true;
+        } else if (currentQuestions.length > 0 && currentQuestions[0]) {
+            currentIndex = 0;
+            console.log("✅ Progresso 'focusedProState' restaurado (índice ajustado). Áreas:", simSelectedAreas, "Tópicos:", simSelectedTopics);
+            return true;
+        }
+        
+        console.warn("❌ Progresso 'focusedProState' carregado, mas dados inválidos. Será ignorado.");
+    } catch (error) {
+        console.error("Erro ao parsear focusedProState do localStorage:", error);
+    }
+    
+    localStorage.removeItem('focusedProState');
+    return false;
 }
+
+function getTranslations() {
+    const lang = getCurrentLanguage();   
+    const t = {
+        // Traduções de interação do Quiz
+        "markForReview": { en: "Mark for Review", pt: "Marcar para revisão", es: "Marcar para revisar" },
+        "unmarkReview": { en: "Unmark Review", pt: "Desmarcar revisão", es: "Desmarcar revisión" },
+        "previousButton": { en: "Previous", pt: "Anterior", es: "Anterior" },
+        "nextButton": { en: "Next", pt: "Próxima", es: "Siguiente" },
+        "returnToQuizButton": { en: "➕ Next Block", pt: "➕ Próximo Bloco", es: "➕ Siguiente Bloque" },
+        "selectOptionPrompt": { en: "Please select an option before proceeding.", pt: "Por favor, selecione uma opção antes de prosseguir.", es: "Por favor, seleccione una opción antes de continuar." },
+        
+        // Mensagens de Erro
+        "error_processing_question": { en: "An error occurred processing the question. Please try reloading.", pt: "Ocorreu um erro ao processar a questão. Tente recarregar.", es: "Ocurrió un error procesando la pregunta. Intente recargar."},
+        "error_rendering_question": { en: "Error rendering question.", pt: "Erro ao renderizar questão.", es: "Error al renderizar la pregunta." },
+        "error_no_questions_found": { en: "No questions found for the selected criteria.", pt: "Nenhuma questão encontrada para os critérios selecionados.", es: "No se encontraron preguntas para los criterios seleccionados."},
+        "error_question_bank_not_loaded": { en: "Question bank not loaded or empty.", pt: "Banco de questões não carregado ou vazio.", es: "Banco de preguntas no cargado o vacío."},
+        "error_try_different_filters": { en: "Please try different filter criteria from the dashboard.", pt: "Por favor, tente critérios de filtro diferentes no painel.", es: "Por favor, intente con diferentes criterios de filtro desde el panel." },
+        "all_questions_answered_for_criteria_title": { en: "Criteria Exhausted", pt: "Critérios Esgotados", es: "Criterios Agotados" },
+        "all_questions_answered_for_criteria_message": { en: "You have answered all available questions for the current selection. Please review your answers or select different criteria from the dashboard.", pt: "Você respondeu a todas as questões disponíveis para a seleção atual. Por favor, revise suas respostas ou selecione critérios diferentes no painel.", es: "Has respondido a todas las preguntas disponibles para la selección actual. Por favor, revisa tus respuestas o selecciona diferentes criterios desde el panel." },
+        "error_prefix_text": { en: "Error:", pt: "Erro:", es: "Error:" },
+
+        // Níveis de Dificuldade
+        "difficulty_easy": { en: "Easy", pt: "Fácil", es: "Fácil" },
+        "difficulty_moderate": { en: "Moderate", pt: "Moderada", es: "Moderada" },
+        "difficulty_hard": { en: "Hard", pt: "Difícil", es: "Difícil" },
+        "difficulty_very_hard": { en: "Very Hard", pt: "Muito Difícil", es: "Muy Difícil" },
+        "difficulty_unknown": { en: "Unknown Difficulty", pt: "Dificuldade Desconhecida", es: "Dificultad Desconocida" },
+        
+        // UI de Questão e Revisão
+        "question_label_placeholder": { en: "Question ${x}/${y}", pt: "Questão ${x}/${y}", es: "Pregunta ${x}/${y}" },
+        "revisitingMarkedLabel": { en: "Revisiting Marked ${num}/${total}", pt: "Revisando Marcada ${num}/${total}", es: "Revisando Marcada ${num}/${total}" },
+        "blockReviewTitle": { en: "Block Review", pt: "Revisão do Bloco", es: "Revisión del Bloque" },
+        "Question_text_not_available": { en: "Question text not available", pt: "Texto da questão não disponível", es: "Texto de la pregunta no disponible"},
+        "option_text_not_available": { en: "[No text for this option]", pt: "[Sem texto para esta opção]", es: "[Sin texto para esta opción]" },
+        "explanation_not_available_default": { en: "Explanation not available", pt: "Explicação não disponível", es: "Explicación no disponible"},
+        "Correct": { en: "Correct", pt: "Correta", es: "Correcta" },
+        "YourAnswer": { en: "Your Answer", pt: "Sua Resposta", es: "Tu Respuesta" },
+
+        // Chaves movidas do script inline do focused-pro.html
+        "go_dashboard_text_content": { en: "Dashboard", pt: "Painel", es: "Panel" },
+        "quiz_logout_text_content": { en: "Logout", pt: "Sair", es: "Cerrar Sesión" },
+        "confirm_exit_to_dashboard_pro": { en: "Your current quiz progress will be saved. Are you sure you want to return to the Dashboard?", pt: "Seu progresso atual do quiz será salvo. Tem certeza que deseja retornar ao Painel?", es: "Tu progreso actual del cuestionario se guardará. ¿Estás seguro de que quieres volver al Panel?"},
+        "confirm_logout_quiz_lose_progress_pro": { en: "Your current quiz progress will be lost. Are you sure you want to logout and go to the login page?", pt: "O progresso atual do seu quiz será perdido. Tem certeza que deseja sair e ir para a página de login?", es: "El progreso actual de tu cuestionario se perderá. ¿Estás seguro de que quieres cerrar sesión e ir a la página de inicio de sesión?" },
+        "legal_notice_text_content": { en: "© 2025 BrainboxMed. All rights reserved. This content is for educational purposes only and does not replace professional medical advice.", pt: "© 2025 BrainboxMed. Todos os direitos reservados. Este conteúdo é apenas para fins educacionais e não substitui o aconselhamento médico profissional.", es: "© 2025 BrainboxMed. Todos los derechos reservados. Este contenido es solo para fines educativos y no reemplaza el asesoramiento médico profesional." },
+        "music_player_label_content": { en: "🎧 Study Music", pt: "🎧 Música para Estudo", es: "🎧 Música para Estudiar" }
+    };
+    
+    return (key, replacements = {}) => {
+        let text = t[key]?.[lang] || t[key]?.['en'] || key;
+        for (const [placeholder, value] of Object.entries(replacements)) {
+            text = text.replace(new RegExp(`\\$\\{${placeholder}\\}`, 'g'), String(value));
+        }
+        return text;
+    };
+}
+const translate = getTranslations(); // Inicializa a função de tradução globalmente
+// #endregion
+
+// #region --- Configuração de Elementos Estáticos da Página e Listeners da Barra Superior ---
+function setupStaticElementsAndListeners() {
+    // Aplica traduções aos elementos estáticos
+    const goDashboardTextEl = document.getElementById('go_dashboard_text');
+    if (goDashboardTextEl) goDashboardTextEl.textContent = translate("go_dashboard_text_content");
+
+    const quizLogoutTextEl = document.getElementById('quiz_logout_text');
+    if (quizLogoutTextEl) quizLogoutTextEl.textContent = translate("quiz_logout_text_content");
+    
+    const legalNoticeEl = document.getElementById('legal-notice-text');
+    if (legalNoticeEl) legalNoticeEl.textContent = translate("legal_notice_text_content");
+
+    const musicPlayerLabelEl = document.getElementById("music-player-label");
+    if (musicPlayerLabelEl) musicPlayerLabelEl.textContent = translate("music_player_label_content");
+
+    // Listener do Botão "Ir para Dashboard"
+    const goDashboardBtn = document.getElementById('go-dashboard-button');
+    if (goDashboardBtn) {
+        goDashboardBtn.addEventListener('click', () => {
+            if (typeof saveProgress === 'function') { // saveProgress é definida neste arquivo
+                if (confirm(translate("confirm_exit_to_dashboard_pro"))) {
+                    saveProgress(); // Salva progresso
+                    localStorage.setItem('cameFromFocusedProQuiz', 'true'); // Define flag
+                    window.location.href = '../Dashboard/Dashboard-Focused-Pro.html';
+                }
+            } else {
+                if (confirm(translate("confirm_exit_to_dashboard_pro").replace("will be saved.", "might not be saved."))) {
+                    localStorage.setItem('cameFromFocusedProQuiz', 'true');
+                    window.location.href = '../Dashboard/Dashboard-Focused-Pro.html';
+                }
+                console.warn('Função saveProgress não encontrada durante navegação para dashboard. Progresso pode não ter sido salvo.');
+            }
+        });
+    } else {
+        console.warn("Botão Ir para Dashboard (go-dashboard-button) não encontrado.");
+    }
+
+    // Listener do Botão "Logout" (na página do Quiz)
+    const quizLogoutBtn = document.getElementById('quiz-logout-button');
+    if (quizLogoutBtn) {
+        quizLogoutBtn.addEventListener('click', () => {
+            if (confirm(translate("confirm_logout_quiz_lose_progress_pro"))) {
+                console.log("Focused Pro Quiz Logout: Limpando autenticação e PROGRESSO DO QUIZ FOCADO PRO, depois redirecionando.");
+                localStorage.removeItem('userDetails');
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('focusedProState'); // Progresso do quiz Focused Pro é APAGADO
+                localStorage.removeItem('quizBasicState');
+                localStorage.removeItem('focusedState'); // Limpa também o estado do focused não-pro
+                window.location.href = '../login.html';
+            }
+        });
+    } else {
+        console.warn("Botão Logout do Quiz (quiz-logout-button) não encontrado.");
+    }
+}
+// #endregion
+
+// #region --- Funções de Atualização da UI (Botão Marcar) ---
+function updateMarkButton(questionId) {
+    const markBtn = document.getElementById("mark-btn");
+    if (!markBtn) return;
+
+    const isMarked = markedQuestions.has(questionId);
+    const buttonText = translate(isMarked ? "unmarkReview" : "markForReview");
+    markBtn.innerHTML = `🔖 ${buttonText}`; 
+
+    const baseClasses = "text-sm font-medium py-2 px-3 rounded-md hover:bg-gray-100 transition-colors";
+    if (isMarked) {
+        markBtn.className = `${baseClasses} text-red-600 hover:underline`;
+    } else {
+        markBtn.className = `${baseClasses} text-yellow-600 hover:underline`;
+    }
+}
+
+function toggleMark(questionId) { // Chamada pelo atributo onclick no template da questão
+    if (markedQuestions.has(questionId)) {
+        markedQuestions.delete(questionId);
+    } else {
+        markedQuestions.add(questionId);
+    }
+    saveProgress(); 
+    updateMarkButton(questionId);
+}
+// #endregion
+
+// #region --- Lógica Principal do Quiz ---
+function initializeFocusedProQuiz() {
+    console.log("Inicializando Quiz Modo Focused Pro...");
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    simSelectedAreas = (urlParams.get('areas')?.split(',').map(a => a.trim().toLowerCase()).filter(a => a)) || [];
+    simSelectedTopics = (urlParams.get('topics')?.split(',').map(t => t.trim().toLowerCase()).filter(t => t)) || [];
+    const newSessionParam = urlParams.get('new');
+
+    console.log("Focused Pro Quiz - Filtros da URL: Áreas:", simSelectedAreas, "Tópicos:", simSelectedTopics, "Nova Sessão:", newSessionParam);
+
+    if (newSessionParam === 'true') {
+        console.log("Focused Pro Quiz: 'new=true' detectado. Limpando 'focusedProState' e resetando.");
+        localStorage.removeItem('focusedProState');
+        resetQuizState();
+        prepareNextBlock();
+    } else {
+        if (loadProgress()) {
+            console.log("Focused Pro Quiz: Progresso carregado. Verificando e renderizando.");
+            if (currentQuestions.length > 0 && currentIndex < currentQuestions.length && currentQuestions[currentIndex]) {
+                if (typeof questionBank !== 'undefined' && questionBank.shuffleOptionsAndUpdateCorrect) {
+                    questionBank.shuffleOptionsAndUpdateCorrect(currentQuestions[currentIndex]);
+                }
+                renderQuestion(currentQuestions[currentIndex]);
+            } else {
+                console.warn("Focused Pro Quiz: Progresso carregado, mas dados inválidos. Preparando novo bloco.");
+                localStorage.removeItem('focusedProState');
+                resetQuizState();
+                prepareNextBlock();
+            }
+        } else {
+            console.log("Focused Pro Quiz: Nenhum progresso. Resetando e preparando novo bloco.");
+            resetQuizState(); 
+            prepareNextBlock();
+        }
+    }
+}
+
+function resetQuizState() {
+    console.log("Resetando variáveis de estado do quiz Focused Pro.");
+    userAnswers = {};
+    currentIndex = 0;
+    markedQuestions.clear();
+    currentQuestions = [];
+    isRevisitingMarkedQuestions = false;
+    markedQuestionsToRevisit = [];
+    currentRevisitIndex = 0;
+}
+
+function prepareNextBlock() {
+    console.log("🎯 Focused Pro: Preparando novo bloco. Áreas:", simSelectedAreas, "Tópicos:", simSelectedTopics);
+
+    if (typeof questionBank === 'undefined' || !questionBank.getAllQuestions) {
+        displayQuizError(translate("error_question_bank_not_loaded"));
+        return;
+    }
+
+    const allQuestionsFromBank = questionBank.getAllQuestions();
+    if (!allQuestionsFromBank || allQuestionsFromBank.length === 0) {
+        displayQuizError(translate("error_no_questions_found")); // Erro mais genérico se o banco estiver realmente vazio
+        return;
+    }
+    
+    let filteredQuestions = applyFilters(allQuestionsFromBank);
+
+    if (filteredQuestions.length === 0) {
+        console.warn("Focused Pro: Filtro inicial resultou em 0 questões para os critérios atuais.");
+        const quizContainer = document.getElementById('quiz-container');
+        if (quizContainer) {
+             quizContainer.innerHTML = `<div class="text-center p-8">
+                <h2 class="text-xl font-semibold mb-4">${translate("error_no_questions_found")}</h2>
+                <p class="text-gray-600">${translate("error_try_different_filters")}</p>
+                <button onclick="window.location.href='../Dashboard/Dashboard-Focused-Pro.html'"
+                        class="mt-4 bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
+                    ${translate("go_dashboard_text_content")}
+                </button>
+            </div>`;
+        }
+        currentQuestions = []; // Garante que currentQuestions esteja vazio
+        return;
+    }
+
+    currentQuestions = selectBlockQuestions(filteredQuestions);
+
+    if (currentQuestions.length === 0) {
+        console.log("Focused Pro: Nenhuma questão disponível para o próximo bloco (possivelmente todas mostradas ou erro de seleção).");
+        const quizContainer = document.getElementById('quiz-container');
+        if (quizContainer) {
+            quizContainer.innerHTML = `<div class="text-center p-8">
+                <h2 class="text-xl font-semibold mb-4">${translate("all_questions_answered_for_criteria_title")}</h2>
+                <p class="text-gray-600">${translate("all_questions_answered_for_criteria_message")}</p>
+                <button onclick="window.location.href='../Dashboard/Dashboard-Focused-Pro.html'"
+                        class="mt-4 bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
+                     ${translate("go_dashboard_text_content")}
+                </button>
+            </div>`;
+        }
+        return;
+    }
+    
+    currentIndex = 0; 
+    renderQuestion(currentQuestions[currentIndex]);
+    console.log(`Focused Pro: Bloco preparado com ${currentQuestions.length} questões. ID da primeira Q: ${currentQuestions[0]?.id}`);
+}
+
+function applyFilters(questions) {
+    let result = [...questions];
+    
+    if (simSelectedAreas && simSelectedAreas.length > 0) {
+        result = result.filter(q => {
+            const questionAreas = (q.areas || (q.area ? [q.area] : [])).map(a => String(a).toLowerCase().trim());
+            return simSelectedAreas.some(selectedArea => questionAreas.includes(selectedArea));
+        });
+    }
+
+    if (simSelectedTopics && simSelectedTopics.length > 0) {
+        result = result.filter(q => {
+            const questionTopics = (q.topics || (q.topic ? [q.topic] : [])).map(t => String(t).toLowerCase().trim());
+            return simSelectedTopics.some(selectedTopic => questionTopics.includes(selectedTopic));
+        });
+    }
+    console.log(`Focused Pro: Após todos os filtros: ${result.length} questões.`);
+    return result;
+}
+
+function selectBlockQuestions(filteredQs) {
+    let questionsForBlock;
+
+    if (!filteredQs || filteredQs.length === 0) {
+        return [];
+    }
+
+    const lookback = Math.max(filteredQs.length, 100); // Aumentar lookback para mais variedade
+    let uniqueAvailableQs = filteredQs.filter(q => !shownQuestionIds.slice(-lookback).includes(q.id));
+
+    if (uniqueAvailableQs.length < BLOCK_SIZE && filteredQs.length > uniqueAvailableQs.length) {
+        // Se não houver questões "novas" suficientes, recicla das mais antigas não mostradas recentemente
+        // Isso ajuda a evitar a situação de "critérios esgotados" muito rapidamente se o filtro for restritivo
+        const olderRecyclable = filteredQs.filter(q => !uniqueAvailableQs.some(uq => uq.id === q.id) && !shownQuestionIds.slice(-50).includes(q.id)); // Exemplo: não vistas nas últimas 50
+        uniqueAvailableQs.push(...questionBank.shuffleArray(olderRecyclable));
+        uniqueAvailableQs = Array.from(new Set(uniqueAvailableQs.map(q => q.id))).map(id => uniqueAvailableQs.find(q => q.id === id)); // Remove duplicatas
+    }
+
+
+    if (uniqueAvailableQs.length === 0 && filteredQs.length > 0) {
+        // Se NENHUMA questão única estiver disponível (todas foram vistas recentemente),
+        // mas AINDA HÁ questões filtradas, recicla todas as filtradas para evitar parar o quiz.
+        console.warn("Todas as questões filtradas foram vistas recentemente. Reciclando o conjunto filtrado para este bloco.");
+        uniqueAvailableQs = questionBank.shuffleArray([...filteredQs]); // Recicla todas as filtradas, embaralhadas
+         // Limpa uma porção mais antiga do shownQuestionIds para permitir que essas questões reapareçam mais cedo se necessário no futuro
+        if (shownQuestionIds.length > BLOCK_SIZE * 2) {
+            shownQuestionIds.splice(0, BLOCK_SIZE); 
+        }
+    }
+
+
+    if (uniqueAvailableQs.length <= BLOCK_SIZE) {
+        questionsForBlock = questionBank.shuffleArray([...uniqueAvailableQs]);
+    } else {
+        questionsForBlock = [];
+        let availableForSelection = [...uniqueAvailableQs];
+
+        let wrongRelevant = previousWrongIds
+            .map(id => availableForSelection.find(q => q && q.id === id))
+            .filter(q => q);
+
+        const countForWrong = Math.min(wrongRelevant.length, Math.floor(BLOCK_SIZE * 0.2)); // Max 20% do bloco para erradas
+        questionsForBlock.push(...questionBank.shuffleArray(wrongRelevant).slice(0, countForWrong));
+        availableForSelection = availableForSelection.filter(q => !questionsForBlock.some(nbq => nbq.id === q.id));
+        
+        if (availableForSelection.length > 0 && questionsForBlock.length < BLOCK_SIZE) {
+            const difficultyProportions = { easy: 0.2, moderate: 0.3, hard: 0.3, very_hard: 0.2 };
+            let neededForProportionFill = BLOCK_SIZE - questionsForBlock.length;
+
+            Object.entries(difficultyProportions).forEach(([level, fraction]) => {
+                if (neededForProportionFill <= 0) return;
+                const targetCountForLevel = Math.max(0, Math.round(fraction * (BLOCK_SIZE - countForWrong)));
+                const subsetForLevel = availableForSelection.filter(q => q.level === level);
+                const takeFromSubset = Math.min(subsetForLevel.length, targetCountForLevel, neededForProportionFill);
+                
+                if (takeFromSubset > 0) {
+                    const questionsToAdd = questionBank.shuffleArray(subsetForLevel).slice(0, takeFromSubset);
+                    questionsForBlock.push(...questionsToAdd);
+                    neededForProportionFill -= takeFromSubset;
+                    availableForSelection = availableForSelection.filter(q => !questionsToAdd.some(addedQ => addedQ.id === q.id));
+                }
+            });
+        }
+        
+        if (questionsForBlock.length < BLOCK_SIZE && availableForSelection.length > 0) {
+            questionsForBlock.push(...questionBank.shuffleArray(availableForSelection).slice(0, BLOCK_SIZE - questionsForBlock.length));
+        }
+
+        // Se ainda faltar, preencher aleatoriamente do que sobrou das filtradas (reciclagem forçada)
+        if (questionsForBlock.length < BLOCK_SIZE) {
+            let emergencyPool = filteredQs.filter(q => !questionsForBlock.some(nbq => nbq.id === q.id));
+            if (emergencyPool.length === 0 && filteredQs.length > 0) emergencyPool = filteredQs; // Usa todas se o filtro anterior esvaziou
+
+            questionsForBlock.push(...questionBank.shuffleArray(emergencyPool).slice(0, BLOCK_SIZE - questionsForBlock.length));
+             // Remove duplicatas que podem ter sido introduzidas pelo preenchimento de emergência
+            questionsForBlock = Array.from(new Set(questionsForBlock.map(q => q.id))).map(id => questionsForBlock.find(q => q.id === id || filteredQs.find(fq => fq.id === id) ));
+        }
+        questionsForBlock = questionsForBlock.slice(0, BLOCK_SIZE); // Garante o tamanho do bloco
+    }
+
+    questionsForBlock.forEach(q => {
+        if (q && q.options && typeof questionBank.shuffleOptionsAndUpdateCorrect === 'function') {
+            questionBank.shuffleOptionsAndUpdateCorrect(q);
+        } else if (q) {
+            console.warn("Focused Pro: Objeto da questão ou suas opções são inválidos para embaralhar. ID:", q.id);
+        }
+        if (q && !shownQuestionIds.includes(q.id)) { // Adiciona ao histórico geral apenas se não estiver lá
+            shownQuestionIds.push(q.id);
+        }
+    });
+
+    // Limita o histórico geral de questões mostradas para evitar consumo excessivo de memória
+    if (shownQuestionIds.length > 300) { 
+        shownQuestionIds = shownQuestionIds.slice(-300);
+    }
+    
+    return questionsForBlock;
+}
+// #endregion
+
+// #region --- Renderização da Questão e Opções ---
+function renderQuestion(question) {
+    const quizContainer = document.getElementById('quiz-container');
+    if (!question || !quizContainer) {
+        displayQuizError(translate("error_rendering_question"));
+        console.error("Focused Pro RenderQuestion: Objeto da questão ou quizContainer inválido.", question, quizContainer);
+        return;
+    }
+
+    const { labelText, prevDisabled } = getQuestionMetadata();
+    const difficultyText = getDifficultyText(question.level);
+    const optionsHTML = generateOptionsHTML(question);
+    const questionActualText = getQuestionText(question);
+
+    const levelKey = question.level ? String(question.level).toLowerCase().replace(/\s+/g, '_') : 'unknown';
+    const difficultyBadgeClasses = 
+        levelKey === 'easy' ? 'bg-green-100 text-green-700' :
+        levelKey === 'moderate' ? 'bg-yellow-100 text-yellow-700' :
+        levelKey === 'hard' ? 'bg-red-100 text-red-700' :
+        levelKey === 'very_hard' ? 'bg-purple-100 text-purple-700' : 
+        'bg-gray-100 text-gray-700';
+
+    quizContainer.innerHTML = `
+        <div class="bg-white p-6 rounded-xl shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-semibold text-purple-700">${labelText}</h2>
+                <span class="text-xs font-bold px-2 py-1 rounded-full ${difficultyBadgeClasses}">
+                    ${difficultyText}
+                </span>
+            </div>
+            <p class="text-gray-800 mb-6 text-base">${questionActualText}</p>
+            <form id="question-form" class="space-y-3">${optionsHTML}</form>
+            <div class="flex flex-col sm:flex-row justify-between items-center mt-8 pt-6 border-t border-gray-200">
+                <button type="button" id="mark-btn" onclick="toggleMark(${question.id})" class="mb-3 sm:mb-0">
+                    {/* Conteúdo definido por updateMarkButton */}
+                </button>
+                <div class="flex gap-x-3">
+                    <button type="button" onclick="handlePreviousQuestionClick()" id="prev-btn" 
+                            class="px-6 py-2.5 text-sm font-medium bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            ${prevDisabled ? 'disabled' : ''}>
+                        ⬅️ ${translate("previousButton")}
+                    </button>
+                    <button type="button" onclick="handleNextQuestionClick()" id="next-btn" 
+                            class="px-6 py-2.5 text-sm font-medium bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors focus:ring-4 focus:ring-purple-300">
+                        ${translate("nextButton")} ➡️
+                    </button>
+                </div>
+            </div>
+        </div>`;
+    
+    setupOptionEventListeners(question.id);
+    updateMarkButton(question.id);
+    window.scrollTo(0, 0);
+    console.log(`📦 Focused Pro: Questão ${question.id} renderizada.`);
+}
+
+function getQuestionMetadata() {
+    if (isRevisitingMarkedQuestions) {
+        return {
+            labelText: translate("revisitingMarkedLabel", {
+                num: currentRevisitIndex + 1,
+                total: markedQuestionsToRevisit.length
+            }),
+            prevDisabled: currentRevisitIndex === 0
+        };
+    }
+    return {
+        labelText: translate("question_label_placeholder", {
+            x: currentIndex + 1,
+            y: currentQuestions.length
+        }),
+        prevDisabled: currentIndex === 0
+    };
+}
+
+function getDifficultyText(level) {
+    const levelKey = level ? String(level).toLowerCase().replace(/\s+/g, '_') : 'unknown';
+    const translatedText = translate(`difficulty_${levelKey}`);
+    return (translatedText !== `difficulty_${levelKey}`) ? translatedText : (level || translate('difficulty_unknown'));
+}
+
+function getQuestionText(question) {
+    if (!question || !question.question) return translate("Question_text_not_available");
+    const lang = getCurrentLanguage();
+    return question.question[lang] || question.question['en'] || translate("Question_text_not_available");
+}
+
+function generateOptionsHTML(question) {
+    if (!question || !Array.isArray(question.options)) return '';
+    const lang = getCurrentLanguage();
+    return question.options.map((opt, index) => {
+        const isChecked = userAnswers[question.id] === index;
+        const optionText = (opt && opt.text) ? (opt.text[lang] || opt.text['en'] || translate("option_text_not_available")) : translate("option_text_not_available");
+        return `
+            <div class="flex items-center option-container py-1">
+                <input type="radio" name="question_${question.id}" value="${index}" 
+                        id="q${question.id}_opt${index}" ${isChecked ? 'checked' : ''}
+                        class="peer h-4 w-4 transform scale-125 accent-purple-600 focus:ring-purple-500 focus:ring-offset-0 focus:ring-2">
+                <label for="q${question.id}_opt${index}" 
+                        class="ml-3 block flex-1 text-gray-800 bg-white border border-gray-300 rounded-lg p-4 cursor-pointer 
+                                hover:border-purple-400 hover:bg-purple-50 transition-colors duration-150
+                                peer-checked:border-purple-500 peer-checked:bg-purple-50">
+                    ${optionText}
+                </label>
+            </div>`;
+    }).join('');
+}
+
+function setupOptionEventListeners(questionId) {
+    document.querySelectorAll(`input[type="radio"][name="question_${questionId}"]`).forEach(radio => {
+        radio.addEventListener('change', (event) => {
+            userAnswers[questionId] = parseInt(event.target.value);
+            saveProgress();
+            console.log(`✅ Focused Pro: Opção selecionada para Q ${questionId}:`, event.target.value);
+        });
+    });
+}
+
+function displayQuizError(messageKeyOrText) {
+    const container = document.getElementById('quiz-container');
+    const errorPrefix = translate("error_prefix_text");
+    const message = (translate(messageKeyOrText) !== messageKeyOrText) ? translate(messageKeyOrText) : messageKeyOrText;
+
+    if (container) {
+        container.innerHTML = `
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center mt-4" role="alert">
+                <strong class="font-bold">⚠️ ${errorPrefix}</strong> 
+                <span class="block sm:inline">${message}</span>
+            </div>`;
+    } else {
+        console.error(`${errorPrefix} ${message} (Quiz container não encontrado).`);
+    }
+    console.error(`❌ Focused Pro: ${errorPrefix} ${message}`);
+}
+// #endregion
+
+// #region --- Navegação entre Questões ---
+function handleNextQuestionClick() {
+    const currentQ = getCurrentQuestionObject();
+    if (!currentQ || !validateOptionSelection(currentQ.id)) {
+        if(!currentQ) console.error("Focused Pro handleNextQuestionClick: currentQ é indefinido.");
+        return;
+    }
+
+    if (isRevisitingMarkedQuestions) {
+        handleMarkedQuestionNavigation();
+    } else {
+        handleRegularQuestionNavigation();
+    }
+}
+
+function getCurrentQuestionObject() {
+    return isRevisitingMarkedQuestions 
+        ? markedQuestionsToRevisit[currentRevisitIndex] 
+        : currentQuestions[currentIndex];
+}
+
+function validateOptionSelection(questionId) {
+    if (!document.querySelector(`input[type="radio"][name="question_${questionId}"]:checked`)) {
+        alert(translate("selectOptionPrompt"));
+        return false;
+    }
+    return true;
+}
+
+function handleMarkedQuestionNavigation() {
+    currentRevisitIndex++;
+    if (currentRevisitIndex < markedQuestionsToRevisit.length) {
+        renderQuestion(markedQuestionsToRevisit[currentRevisitIndex]);
+    } else {
+        isRevisitingMarkedQuestions = false;
+        console.log("Focused Pro: Revisão de marcadas concluída. Prosseguindo para revisão do bloco.");
+        showReviewMode();
+    }
+}
+
+function handleRegularQuestionNavigation() {
+    currentIndex++;
+    if (currentIndex < currentQuestions.length) {
+        renderQuestion(currentQuestions[currentIndex]);
+    } else {
+        startMarkedQuestionsReview();
+    }
+}
+
+function startMarkedQuestionsReview() {
+    markedQuestionsToRevisit = currentQuestions.filter(q => q && markedQuestions.has(q.id));
+    
+    if (markedQuestionsToRevisit.length > 0) {
+        isRevisitingMarkedQuestions = true;
+        currentRevisitIndex = 0;
+        console.log("Focused Pro: Bloco finalizado. Iniciando revisão de marcadas:", markedQuestionsToRevisit.map(q => q.id));
+        renderQuestion(markedQuestionsToRevisit[currentRevisitIndex]);
+    } else {
+        console.log("Focused Pro: Bloco finalizado. Nenhuma questão marcada. Prosseguindo para revisão do bloco.");
+        showReviewMode();
+    }
+}
+
+function handlePreviousQuestionClick() {
+    if (isRevisitingMarkedQuestions) {
+        if (currentRevisitIndex > 0) {
+            currentRevisitIndex--;
+            renderQuestion(markedQuestionsToRevisit[currentRevisitIndex]);   
+        }
+    } else {
+        if (currentIndex > 0) {   
+            currentIndex--;   
+            renderQuestion(currentQuestions[currentIndex]);   
+        }
+    }
+}
+// #endregion
+
+// #region --- Modos de Revisão e Relatório Final ---
+function showReviewMode() {
+    const container = document.getElementById('quiz-container');
+    if (!container) {
+        console.error("❌ Focused Pro: quiz-container não encontrado para showReviewMode.");
+        return;
+    }
+
+    container.innerHTML = `<h2 class="text-xl font-bold text-center mb-6">🔁 ${translate("blockReviewTitle")}</h2>`;
+    
+    currentQuestions.forEach((q, i) => {
+        if (q) {
+            container.innerHTML += createReviewItemHTML(q, i);
+        } else {
+            console.warn (`Focused Pro: Pulando questão indefinida no índice ${i} em showReviewMode.`);
+        }
+    });
+    
+    container.innerHTML += `
+        <div class="text-center mt-8">
+            <button id="resume-quiz-btn-pro" 
+                    class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
+                ${translate("returnToQuizButton")}
+            </button>
+        </div>`;
+    
+    const resumeBtn = document.getElementById('resume-quiz-btn-pro');
+    if (resumeBtn) {
+        resumeBtn.addEventListener('click', () => {
+            const wrongIdsFromThisBlock = currentQuestions
+                .filter(cq => cq && userAnswers[cq.id] !== undefined && userAnswers[cq.id] !== cq.correct)
+                .map(cq => cq.id);
+
+            wrongIdsFromThisBlock.forEach(id => {
+                if (!previousWrongIds.includes(id)) {
+                    previousWrongIds.push(id);
+                }
+            });
+            // previousWrongIds = previousWrongIds.slice(-50); // Limite opcional
+
+            resetQuizState(); // Reseta para o próximo bloco
+            prepareNextBlock();
+        });
+    } else {
+        console.error("Focused Pro: Botão 'resume-quiz-btn-pro' não encontrado.");
+    }
+}
+
+function createReviewItemHTML(question, index) {
+    const userAnswer = userAnswers[question.id];
+    const isCorrect = userAnswer === question.correct;
+    const explanation = getExplanationText(question);
+    const questionActualText = getQuestionText(question);
+    const lang = getCurrentLanguage();
+
+    const reviewOptionsHTML = (question.options || []).map((opt, idx) => {
+        const optText = (opt && opt.text) ? (opt.text[lang] || opt.text['en'] || translate("option_text_not_available")) : translate("option_text_not_available");
+        const isRightAnswer = idx === question.correct;
+        const isChosenAnswer = idx === userAnswer;
+
+        let optionClasses = "relative p-3 mb-2 rounded-md border text-sm ";
+        let indicatorHtml = "";
+
+        if (isRightAnswer) {
+            optionClasses += "border-blue-500 bg-blue-50 text-blue-700 ring-2 ring-blue-300 ring-offset-1 font-medium";
+            indicatorHtml = `<span class="absolute top-1 right-1 text-xs font-bold text-blue-600">✔️ ${translate("Correct")}</span>`;
+        } else if (isChosenAnswer && !isRightAnswer) {
+            optionClasses += "border-red-500 bg-red-50 text-red-700 ring-2 ring-red-300 ring-offset-1 font-medium";
+            indicatorHtml = `<span class="absolute top-1 right-1 text-xs font-bold text-red-600">❌ ${translate("YourAnswer")}</span>`;
+        } else {
+            optionClasses += "bg-white border-gray-300 text-gray-700";
+        }
+      
+        return `<div class="${optionClasses}"><p class="pr-16">${String.fromCharCode(65 + idx)}. ${optText}</p> ${indicatorHtml}</div>`;
+    }).join('');
+
+    return `
+        <div class="border rounded-lg p-4 mb-4 ${isCorrect ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'}">
+            <p class="font-semibold mb-2">Q${index + 1}: ${questionActualText}</p>
+            <div class="space-y-2">${reviewOptionsHTML}</div>
+            <p class="text-sm text-gray-600 italic mt-3">🧠 ${explanation}</p>
+        </div>`;
+}
+
+function getExplanationText(question) {
+    if (!question || !Array.isArray(question.options) || typeof question.correct !== 'number') {
+        return translate("explanation_not_available_default");
+    }
+    const lang = getCurrentLanguage();
+    const correctOption = question.options[question.correct];
+    
+    if (correctOption && correctOption.explanation) {
+        return correctOption.explanation[lang] || 
+               correctOption.explanation['en'] || 
+               translate("explanation_not_available_default");
+    }
+    return translate("explanation_not_available_default");
+}
+// #endregion
+
+// #region --- Inicialização do Evento DOMContentLoaded ---
+document.addEventListener('DOMContentLoaded', () => {
+    window.scrollTo(0, 0);
+    console.log("DOM da página focused-pro.html carregado.");
+    
+    setupStaticElementsAndListeners(); // Configura textos estáticos e listeners da barra superior
+    
+    const initQuizWithRetry = () => {
+        if (typeof questionBank !== 'undefined' && 
+            typeof questionBank.getAllQuestions === 'function' &&
+            typeof questionBank.shuffleOptionsAndUpdateCorrect === 'function' &&
+            questionBank.getAllQuestions().length > 0) {
+            
+            console.log("Focused Pro: Banco de questões pronto. Inicializando quiz...");
+            initializeFocusedProQuiz();
+        } else {
+            console.log("Focused Pro: Aguardando questionBank. Tentando novamente em 300ms.");
+            setTimeout(initQuizWithRetry, 300);
+        }
+    };
+    
+    initQuizWithRetry();
+});
+// #endregion

@@ -3,7 +3,7 @@ const bancoNeuroFacil = [
   id: 101,
   code: "neuro01-q101",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["coma", "glasgow coma scale"],
+  topics: ["coma", "glasgow coma scale"],
   level: "easy",
   correct: 0,
   question: {
@@ -66,7 +66,7 @@ const bancoNeuroFacil = [
   id: 102,
   code: "neuro01-q102",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["seizure", "first aid"],
+  topics: ["seizure", "first aid"],
   level: "easy",
   correct: 1,
   question: {
@@ -129,7 +129,7 @@ const bancoNeuroFacil = [
   id: 103,
   code: "neuro01-q103",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["reflexes", "brainstem"],
+  topics: ["reflexes", "brainstem"],
   level: "easy",
   correct: 2,
   question: {
@@ -192,7 +192,7 @@ const bancoNeuroFacil = [
   id: 104,
   code: "neuro01-q104",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["temporal lobe", "seizure", "aura"],
+  topics: ["temporal lobe", "seizure", "aura"],
   level: "easy",
   correct: 3,
   question: {
@@ -255,7 +255,7 @@ const bancoNeuroFacil = [
   id: 105,
   code: "neuro01-q105",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["cranial nerves", "motor exam", "hypoglossal nerve"],
+  topics: ["cranial nerves", "motor exam", "hypoglossal nerve"],
   level: "easy",
   correct: 1,
   question: {
@@ -318,7 +318,7 @@ const bancoNeuroFacil = [
   id: 106,
   code: "neuro01-q106",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["pupils", "brain herniation", "neuro exam"],
+  topics: ["pupils", "brain herniation", "neuro exam"],
   level: "easy",
   correct: 2,
   question: {
@@ -381,7 +381,7 @@ const bancoNeuroFacil = [
   id: 107,
   code: "neuro01-q107",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["delirium", "icu care", "neurobehavior", "prevention"],
+  topics: ["delirium", "icu care", "neurobehavior", "prevention"],
   level: "easy",
   correct: 0,
   question: {
@@ -444,7 +444,7 @@ const bancoNeuroFacil = [
   id: 106,
   code: "neuro01-q106",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["doppler", "vasospasm", "monitoring", "saeh", "transcranial doppler"],
+  topics: ["doppler", "vasospasm", "monitoring", "saeh", "transcranial doppler"],
   level: "easy",
   correct: 3,
   question: {
@@ -507,7 +507,7 @@ const bancoNeuroFacil = [
   id: 107,
   code: "neuro01-q107",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["vasospasm", "subarachnoid hemorrhage", "neurocomplications", "cerebral ischemia"],
+  topics: ["vasospasm", "subarachnoid hemorrhage", "neurocomplications", "cerebral ischemia"],
   level: "easy",
   correct: 1,
   question: {
@@ -570,7 +570,7 @@ const bancoNeuroFacil = [
   id: 108,
   code: "neuro01-q108",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["cpp", "intracranial pressure", "head trauma", "critical care", "cerebral autoregulation"],
+  topics: ["cpp", "intracranial pressure", "head trauma", "critical care", "cerebral autoregulation"],
   level: "easy",
   correct: 1,
   question: {
@@ -633,7 +633,7 @@ const bancoNeuroFacil = [
   id: 109,
   code: "neuro01-q109",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["sedation", "rass", "icu monitoring", "consciousness", "neurointensive care"],
+  topics: ["sedation", "rass", "icu monitoring", "consciousness", "neurointensive care"],
   level: "easy",
   correct: 0,
   question: {
@@ -696,7 +696,7 @@ const bancoNeuroFacil = [
   id: 110,
   code: "neuro01-q110",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["continuous eeg", "seizure detection", "nonconvulsive seizure", "monitoring", "status epilepticus"],
+  topics: ["continuous eeg", "seizure detection", "nonconvulsive seizure", "monitoring", "status epilepticus"],
   level: "easy",
   correct: 2,
   question: {
@@ -759,7 +759,7 @@ const bancoNeuroFacil = [
   id: 111,
   code: "neuro01-q111",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["stroke", "neurological deficit", "emergency", "facial droop", "FAST scale"],
+  topics: ["stroke", "neurological deficit", "emergency", "facial droop", "FAST scale"],
   level: "easy",
   correct: 1,
   question: {
@@ -822,7 +822,7 @@ const bancoNeuroFacil = [
   id: 112,
   code: "neuro01-q112",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["neurosurgery", "postoperative care", "craniotomy", "neurological deterioration", "neurointensive care"],
+  topics: ["neurosurgery", "postoperative care", "craniotomy", "neurological deterioration", "neurointensive care"],
   level: "easy",
   correct: 2,
   question: {
@@ -885,7 +885,7 @@ const bancoNeuroFacil = [
   id: 113,
   code: "neuro01-q113",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["stroke", "blood pressure", "ischemic stroke", "thrombolysis", "acute management"],
+  topics: ["stroke", "blood pressure", "ischemic stroke", "thrombolysis", "acute management"],
   level: "easy",
   correct: 1,
   question: {
@@ -948,7 +948,7 @@ const bancoNeuroFacil = [
   id: 114,
   code: "neuro01-q114",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["venous thromboembolism", "neurosurgery", "prophylaxis", "anticoagulation", "mechanical prophylaxis"],
+  topics: ["venous thromboembolism", "neurosurgery", "prophylaxis", "anticoagulation", "mechanical prophylaxis"],
   level: "easy",
   correct: 0,
   question: {
@@ -1011,7 +1011,7 @@ const bancoNeuroFacil = [
   id: 115,
   code: "neuro01-q115",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["stroke", "intracerebral hemorrhage", "ischemic stroke", "clinical features", "neurological emergency"],
+  topics: ["stroke", "intracerebral hemorrhage", "ischemic stroke", "clinical features", "neurological emergency"],
   level: "easy",
   correct: 3,
   question: {
@@ -1074,7 +1074,7 @@ const bancoNeuroFacil = [
   id: 116,
   code: "neuro01-q116",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["brain death", "neurological exam", "coma", "apnea test", "clinical criteria"],
+  topics: ["brain death", "neurological exam", "coma", "apnea test", "clinical criteria"],
   level: "easy",
   correct: 1,
   question: {
@@ -1137,7 +1137,7 @@ const bancoNeuroFacil = [
   id: 117,
   code: "neuro01-q117",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["status epilepticus", "seizure", "emergency", "prolonged seizure", "neurology"],
+  topics: ["status epilepticus", "seizure", "emergency", "prolonged seizure", "neurology"],
   level: "easy",
   correct: 2,
   question: {
@@ -1200,7 +1200,7 @@ const bancoNeuroFacil = [
   id: 118,
   code: "neuro01-q118",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["cerebral autoregulation", "cerebral perfusion", "neurophysiology", "critical care", "intracranial pressure"],
+  topics: ["cerebral autoregulation", "cerebral perfusion", "neurophysiology", "critical care", "intracranial pressure"],
   level: "easy",
   correct: 0,
   question: {
@@ -1263,7 +1263,7 @@ const bancoNeuroFacil = [
   id: 119,
   code: "neuro01-q119",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["neuroprotection", "traumatic brain injury", "tbi", "critical care", "intracranial hypertension"],
+  topics: ["neuroprotection", "traumatic brain injury", "tbi", "critical care", "intracranial hypertension"],
   level: "easy",
   correct: 1,
   question: {
@@ -1326,7 +1326,7 @@ const bancoNeuroFacil = [
   id: 120,
   code: "neuro01-q120",
   areas: ["neuro+icu", "neuro", "icu", "medicine"],
-  topic: ["pbto2", "brain tissue oxygenation", "monitoring", "cerebral hypoxia", "neurocritical care"],
+  topics: ["pbto2", "brain tissue oxygenation", "monitoring", "cerebral hypoxia", "neurocritical care"],
   level: "easy",
   correct: 2,
   question: {

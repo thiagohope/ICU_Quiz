@@ -3,7 +3,7 @@ const bancoCardioDificilima = [
   id: 401,
   code: "cardio04-q401",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["myocardial infarction", "valvular complications", "cardiogenic shock", "echocardiography", "surgery"],
+  topics: ["myocardial infarction", "valvular complications", "cardiogenic shock", "echocardiography", "surgery"],
   level: "very_hard",
   correct: 1,
   question: {
@@ -78,7 +78,7 @@ const bancoCardioDificilima = [
   id: 402,
   code: "cardio04-q402",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["myocardial infarction", "septal rupture", "cardiogenic shock", "echocardiography", "emergency surgery"],
+  topics: ["myocardial infarction", "septal rupture", "cardiogenic shock", "echocardiography", "emergency surgery"],
   level: "very_hard",
   correct: 2,
   question: {
@@ -153,7 +153,7 @@ const bancoCardioDificilima = [
   id: 403,
   code: "cardio04-q403",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["myocardial infarction", "free wall rupture", "cardiac tamponade", "pericardial effusion", "emergency surgery"],
+  topics: ["myocardial infarction", "free wall rupture", "cardiac tamponade", "pericardial effusion", "emergency surgery"],
   level: "very_hard",
   correct: 0,
   question: {
@@ -228,7 +228,7 @@ const bancoCardioDificilima = [
   id: 404,
   code: "cardio04-q404",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["cardiogenic shock", "ecmo", "myocardial infarction", "advanced support", "multiorgan failure"],
+  topics: ["cardiogenic shock", "ecmo", "myocardial infarction", "advanced support", "multiorgan failure"],
   level: "very_hard",
   correct: 4,
   question: {
@@ -303,7 +303,7 @@ const bancoCardioDificilima = [
   id: 405,
   code: "cardio04-q405",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["heart failure", "acute kidney injury", "renal replacement therapy", "hemodynamics", "multiorgan interaction"],
+  topics: ["heart failure", "acute kidney injury", "renal replacement therapy", "hemodynamics", "multiorgan interaction"],
   level: "very_hard",
   correct: 2,
   question: {
@@ -378,7 +378,7 @@ const bancoCardioDificilima = [
   id: 406,
   code: "cardio04-q406",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["acute pulmonary edema", "hypertensive emergency", "vasodilators", "noninvasive ventilation", "diuretics"],
+  topics: ["acute pulmonary edema", "hypertensive emergency", "vasodilators", "noninvasive ventilation", "diuretics"],
   level: "very_hard",
   correct: 3,
   question: {
@@ -453,7 +453,7 @@ const bancoCardioDificilima = [
   id: 407,
   code: "cardio04-q407",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["pulmonary embolism", "heart failure", "post-myocardial infarction", "prolonged hospitalization", "differential diagnosis"],
+  topics: ["pulmonary embolism", "heart failure", "post-myocardial infarction", "prolonged hospitalization", "differential diagnosis"],
   level: "very_hard",
   correct: 1,
   question: {
@@ -528,7 +528,7 @@ const bancoCardioDificilima = [
   id: 408,
   code: "cardio04-q408",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["septic shock", "echocardiography", "hemodynamic monitoring", "volume responsiveness", "vasoplegia"],
+  topics: ["septic shock", "echocardiography", "hemodynamic monitoring", "volume responsiveness", "vasoplegia"],
   level: "very_hard",
   correct: 1,
   question: {
@@ -603,7 +603,7 @@ const bancoCardioDificilima = [
   id: 409,
   code: "cardio04-q409",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["cardiogenic shock", "echocardiography", "left ventricular dysfunction", "mechanical support", "hemodynamics"],
+  topics: ["cardiogenic shock", "echocardiography", "left ventricular dysfunction", "mechanical support", "hemodynamics"],
   level: "very_hard",
   correct: 0,
   question: {
@@ -678,7 +678,7 @@ const bancoCardioDificilima = [
   id: 410,
   code: "cardio04-q410",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["obstructive shock", "echocardiography", "tamponade", "pulmonary embolism", "right ventricular failure"],
+  topics: ["obstructive shock", "echocardiography", "tamponade", "pulmonary embolism", "right ventricular failure"],
   level: "very_hard",
   correct: 2,
   question: {
@@ -753,7 +753,7 @@ const bancoCardioDificilima = [
   id: 411,
   code: "cardio04-q411",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["hypovolemic shock", "echocardiography", "preload", "volume status", "fluid resuscitation"],
+  topics: ["hypovolemic shock", "echocardiography", "preload", "volume status", "fluid resuscitation"],
   level: "very_hard",
   correct: 3,
   question: {
@@ -828,7 +828,7 @@ const bancoCardioDificilima = [
   id: 412,
   code: "cardio04-q412",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["pacemaker", "heart failure", "atrial fibrillation", "junctional rhythm", "electrophysiology"],
+  topics: ["pacemaker", "heart failure", "atrial fibrillation", "junctional rhythm", "electrophysiology"],
   level: "very_hard",
   correct: 4,
   question: {
@@ -903,7 +903,7 @@ const bancoCardioDificilima = [
   id: 413,
   code: "cardio04-q413",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["intra-aortic balloon pump", "cardiogenic shock", "mechanical support", "myocardial infarction", "perfusion"],
+  topics: ["intra-aortic balloon pump", "cardiogenic shock", "mechanical support", "myocardial infarction", "perfusion"],
   level: "very_hard",
   correct: 1,
   question: {
@@ -978,7 +978,7 @@ const bancoCardioDificilima = [
   id: 414,
   code: "cardio04-q414",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["ecmo", "complications", "critical care", "vascular access", "hemodynamics"],
+  topics: ["ecmo", "complications", "critical care", "vascular access", "hemodynamics"],
   level: "very_hard",
   correct: 2,
   question: {
@@ -1053,7 +1053,7 @@ const bancoCardioDificilima = [
   id: 415,
   code: "cardio04-q415",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["ecmo", "heparin-induced thrombocytopenia", "anticoagulation", "cardiogenic shock", "stroke"],
+  topics: ["ecmo", "heparin-induced thrombocytopenia", "anticoagulation", "cardiogenic shock", "stroke"],
   level: "very_hard",
   correct: 3,
   question: {
@@ -1128,7 +1128,7 @@ const bancoCardioDificilima = [
   id: 416,
   code: "cardio04-q416",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["lvad", "advanced heart failure", "mechanical circulatory support", "bridge to transplant", "complications"],
+  topics: ["lvad", "advanced heart failure", "mechanical circulatory support", "bridge to transplant", "complications"],
   level: "very_hard",
   correct: 2,
   question: {
@@ -1203,7 +1203,7 @@ const bancoCardioDificilima = [
   id: 417,
   code: "cardio04-q417",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["ecmo", "monitoring", "oxygenator", "circuit pressure", "continuous blood pressure"],
+  topics: ["ecmo", "monitoring", "oxygenator", "circuit pressure", "continuous blood pressure"],
   level: "very_hard",
   correct: 2,
   question: {
@@ -1278,7 +1278,7 @@ const bancoCardioDificilima = [
   id: 418,
   code: "cardio04-q418",
   areas: ["cardio+icu", "cardio", "icu", "medicine"],
-  topic: ["aortic dissection", "shock", "neurological complications", "emergency surgery", "diagnostic approach"],
+  topics: ["aortic dissection", "shock", "neurological complications", "emergency surgery", "diagnostic approach"],
   level: "very_hard",
   correct: 4,
   question: {
@@ -1352,8 +1352,8 @@ const bancoCardioDificilima = [
 {
   "id": 419,
   "code": "cardio04-q419",
-  "area": ["cardio+icu", "cardio", "icu", "medicine"],
-  "topic": [
+  "areas": ["cardio+icu", "cardio", "icu", "medicine"],
+  "topics": [
     "postoperative care",
     "cardiac surgery",
     "obstructive shock",
@@ -1430,7 +1430,69 @@ const bancoCardioDificilima = [
     }
   ]
 },
-
+{
+  "id": 420,
+  "code": "cardio04-q420",
+  "areas": ["cardio+icu", "cardio", "icu", "medicine"],
+  "topics": ["myocardial infarction", "ventricular arrhythmias", "mechanical support", "heart failure", "critical care"],
+  "level": "muito_dificil",
+  "correct": 3,
+  "question": {
+    "pt": "Homem de 63 anos, previamente hipertenso e tabagista, foi internado há 4 dias por IAM extenso de parede anterior, tratado com ICP primária. Evolui com fração de ejeção de 25%, congestão pulmonar, hipotensão refratária (PAM 58 mmHg), e episódios de TV sustentada necessitando cardioversão. Está em uso de noradrenalina e ventilação invasiva. Diante da instabilidade clínica e disfunção multissistêmica iminente, qual é a melhor conduta terapêutica?",
+    "en": "A 63-year-old man, with hypertension and smoking history, was admitted 4 days ago for an extensive anterior MI treated with primary PCI. He now presents with LVEF of 25%, pulmonary congestion, refractory hypotension (MAP 58 mmHg), and sustained VT episodes requiring cardioversion. He is on norepinephrine and mechanical ventilation. In the face of clinical instability and impending multiorgan failure, what is the best therapeutic approach?",
+    "es": "Hombre de 63 años, hipertenso y fumador, fue ingresado hace 4 días por un IAM extenso anterior tratado con ICP primaria. Evoluciona con FEVI de 25%, congestión pulmonar, hipotensión refractaria (PAM 58 mmHg), y episodios de TV sostenida que requirieron cardioversión. Está en noradrenalina y ventilación mecánica. Ante la inestabilidad clínica y fallo multiorgánico inminente, ¿cuál es la mejor conducta terapéutica?"
+  },
+  "options": [
+    {
+      "text": {
+        "pt": "Iniciar infusão de amiodarona e aumentar a dose de noradrenalina",
+        "en": "Start amiodarone infusion and increase norepinephrine dose",
+        "es": "Iniciar infusión de amiodarona y aumentar la dosis de noradrenalina"
+      },
+      "explanation": {
+        "pt": "Embora a amiodarona seja apropriada para TV sustentada, o paciente apresenta sinais claros de choque cardiogênico com necessidade de suporte hemodinâmico mais avançado. O aumento isolado da noradrenalina pode exacerbar a pós-carga e agravar a disfunção ventricular.",
+        "en": "Although amiodarone is suitable for sustained VT, the patient has clear signs of cardiogenic shock requiring advanced hemodynamic support. Increasing norepinephrine alone may worsen afterload and ventricular function.",
+        "es": "Aunque la amiodarona es apropiada para TV sostenida, el paciente muestra signos de shock cardiogénico que requieren soporte hemodinámico avanzado. Aumentar solo la noradrenalina puede empeorar la poscarga."
+      }
+    },
+    {
+      "text": {
+        "pt": "Introduzir betabloqueador EV com monitorização contínua",
+        "en": "Start IV beta-blocker with continuous monitoring",
+        "es": "Iniciar betabloqueante IV con monitorización continua"
+      },
+      "explanation": {
+        "pt": "O uso de betabloqueadores intravenosos é contraindicado neste momento devido à hipotensão refratária e risco de piora hemodinâmica imediata. A prioridade deve ser estabilizar o débito cardíaco com suporte mecânico.",
+        "en": "IV beta-blockers are contraindicated at this time due to refractory hypotension and risk of immediate hemodynamic worsening. Priority should be stabilizing cardiac output with mechanical support.",
+        "es": "Los betabloqueantes IV están contraindicados en este momento por la hipotensión refractaria. Es prioritario estabilizar el gasto cardíaco con soporte mecánico."
+      }
+    },
+    {
+      "text": {
+        "pt": "Inserir balão intra-aórtico (IABP) e repetir coronariografia",
+        "en": "Insert intra-aortic balloon pump (IABP) and repeat coronary angiography",
+        "es": "Colocar balón intraaórtico (IABP) y repetir coronariografía"
+      },
+      "explanation": {
+        "pt": "A reavaliação coronariana pode ser considerada se houver suspeita de reoclusão, mas o uso de IABP isoladamente mostrou benefício limitado em pacientes com choque cardiogênico, segundo o estudo IABP-SHOCK II. A prioridade neste caso é suporte mais robusto.",
+        "en": "Coronary reassessment may be considered if reocclusion is suspected, but IABP alone has shown limited benefit in cardiogenic shock patients, per the IABP-SHOCK II trial. More robust support is indicated.",
+        "es": "La reevaluación coronaria puede considerarse, pero el IABP solo ha mostrado beneficio limitado en shock cardiogénico según IABP-SHOCK II. Se requiere un soporte más robusto."
+      }
+    },
+    {
+      "text": {
+        "pt": "Iniciar ECMO-VA associada à sedação profunda e controle rigoroso eletrolítico",
+        "en": "Initiate VA-ECMO along with deep sedation and strict electrolyte control",
+        "es": "Iniciar ECMO-VA junto con sedación profunda y control estricto de electrolitos"
+      },
+      "explanation": {
+        "pt": "O paciente apresenta critérios clássicos para ECMO-VA: disfunção ventricular grave, instabilidade refratária, suporte vasopressor alto e arritmias ventriculares recorrentes. Guidelines da ELSO e registros clínicos sustentam a utilização de ECMO-VA nestes casos, desde que haja reversibilidade potencial e tempo adequado de decisão. A sedação reduz o consumo miocárdico e previne agitação. Controle eletrolítico rigoroso é essencial para evitar recorrência de arritmias.",
+        "en": "The patient meets classical VA-ECMO criteria: severe ventricular dysfunction, refractory instability, high vasopressor support, and recurrent ventricular arrhythmias. ELSO guidelines and clinical registries support ECMO-VA use in these settings, provided potential reversibility and timely initiation. Deep sedation reduces myocardial demand, and strict electrolyte control prevents arrhythmia recurrence.",
+        "es": "El paciente cumple criterios clásicos para ECMO-VA: disfunción ventricular severa, inestabilidad refractaria, soporte vasopresor alto y arritmias ventriculares recurrentes. Guías de ELSO apoyan su uso si hay reversibilidad y decisión temprana. La sedación profunda reduce la demanda miocárdica y el control de electrolitos evita recurrencia de arritmias."
+      }
+    }
+  ]
+},
 ];
 
 questionBank.addBank(bancoCardioDificilima);

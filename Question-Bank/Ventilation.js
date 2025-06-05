@@ -3,7 +3,7 @@ const bancoVentilation = [
     "id": 501,
     "code": "pneumo01-q501",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "easy",
     "correct": 2,
     "question": {
@@ -78,7 +78,7 @@ const bancoVentilation = [
     "id": 502,
     "code": "pneumo01-q502",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "easy",
     "correct": 0,
     "question": {
@@ -133,7 +133,7 @@ const bancoVentilation = [
     "id": 503,
     "code": "pneumo01-q503",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "easy",
     "correct": 3,
     "question": {
@@ -208,7 +208,7 @@ const bancoVentilation = [
     "id": 504,
     "code": "pneumo01-q504",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "easy",
     "correct": 4,
     "question": {
@@ -283,7 +283,7 @@ const bancoVentilation = [
     "id": 505,
     "code": "pneumo01-q505",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "easy",
     "correct": 2,
     "question": {
@@ -358,7 +358,7 @@ const bancoVentilation = [
     "id": 506,
     "code": "pneumo01-q506",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "easy",
     "correct": 1,
     "question": {
@@ -433,7 +433,7 @@ const bancoVentilation = [
     "id": 507,
     "code": "pneumo01-q507",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "easy",
     "correct": 0,
     "question": {
@@ -508,7 +508,7 @@ const bancoVentilation = [
     "id": 508,
     "code": "pneumo01-q508",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "easy",
     "correct": 2,
     "question": {
@@ -583,7 +583,7 @@ const bancoVentilation = [
     "id": 509,
     "code": "pneumo01-q509",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "easy",
     "correct": 4,
     "question": {
@@ -658,7 +658,7 @@ const bancoVentilation = [
     "id": 510,
     "code": "pneumo01-q510",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "easy",
     "correct": 3,
     "question": {
@@ -733,7 +733,7 @@ const bancoVentilation = [
     "id": 511,
     "code": "pneumo01-q511",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "moderate",
     "correct": 4,
     "question": {
@@ -808,7 +808,7 @@ const bancoVentilation = [
     "id": 512,
     "code": "pneumo01-q512",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "moderate",
     "correct": 0,
     "question": {
@@ -883,7 +883,7 @@ const bancoVentilation = [
     "id": 513,
     "code": "pneumo01-q513",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "moderate",
     "correct": 1,
     "question": {
@@ -958,7 +958,7 @@ const bancoVentilation = [
     "id": 514,
     "code": "pneumo01-q514",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "moderate",
     "correct": 3,
     "question": {
@@ -1033,7 +1033,7 @@ const bancoVentilation = [
     "id": 515,
     "code": "pneumo01-q515",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "moderate",
     "correct": 2,
     "question": {
@@ -1108,7 +1108,7 @@ const bancoVentilation = [
     "id": 516,
     "code": "pneumo01-q516",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "moderate",
     "correct": 1,
     "question": {
@@ -1183,7 +1183,7 @@ const bancoVentilation = [
     "id": 517,
     "code": "pneumo01-q517",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "moderate",
     "correct": 0,
     "question": {
@@ -1258,7 +1258,7 @@ const bancoVentilation = [
     "id": 518,
     "code": "pneumo01-q518",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "moderate",
     "correct": 3,
     "question": {
@@ -1333,7 +1333,7 @@ const bancoVentilation = [
     "id": 519,
     "code": "pneumo01-q519",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "moderate",
     "correct": 0,
     "question": {
@@ -1408,7 +1408,7 @@ const bancoVentilation = [
     "id": 520,
     "code": "pneumo01-q520",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "moderate",
     "correct": 4,
     "question": {
@@ -1483,7 +1483,7 @@ const bancoVentilation = [
     "id": 521,
     "code": "pneumo01-q521",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "hard",
     "correct": 2,
     "question": {
@@ -1558,7 +1558,7 @@ const bancoVentilation = [
     "id": 522,
     "code": "pneumo01-q522",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation"],
+    "topics": ["ventilation"],
     "level": "hard",
     "correct": 3,
     "question": {
@@ -1633,7 +1633,7 @@ const bancoVentilation = [
     "id": 523,
     "code": "pneumo01-q523",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "ARDS"],
+    "topics": ["ventilation", "ARDS"],
     "level": "hard",
     "correct": 1,
     "question": {
@@ -1708,7 +1708,7 @@ const bancoVentilation = [
     "id": 524,
     "code": "pneumo01-q524",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "ARDS", "pregnancy"],
+    "topics": ["ventilation", "ARDS", "pregnancy"],
     "level": "hard",
     "correct": 4,
     "question": {
@@ -1783,7 +1783,7 @@ const bancoVentilation = [
     "id": 525,
     "code": "pneumo01-q525",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "post-arrest"],
+    "topics": ["ventilation", "post-arrest"],
     "level": "hard",
     "correct": 4,
     "question": {
@@ -1858,7 +1858,7 @@ const bancoVentilation = [
     "id": 526,
     "code": "pneumo01-q526",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "neuro"],
+    "topics": ["ventilation", "neuro"],
     "level": "hard",
     "correct": 0,
     "question": {
@@ -1933,7 +1933,7 @@ const bancoVentilation = [
     "id": 527,
     "code": "pneumo01-q527",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "ARDS"],
+    "topics": ["ventilation", "ARDS"],
     "level": "hard",
     "correct": 3,
     "question": {
@@ -2008,7 +2008,7 @@ const bancoVentilation = [
     "id": 528,
     "code": "pneumo01-q528",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "ecmo"],
+    "topics": ["ventilation", "ecmo"],
     "level": "hard",
     "correct": 2,
     "question": {
@@ -2083,7 +2083,7 @@ const bancoVentilation = [
     "id": 529,
     "code": "pneumo01-q529",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "inhalation injury", "burns"],
+    "topics": ["ventilation", "inhalation injury", "burns"],
     "level": "hard",
     "correct": 4,
     "question": {
@@ -2158,7 +2158,7 @@ const bancoVentilation = [
     "id": 530,
     "code": "pneumo01-q530",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "abdominal compartment syndrome"],
+    "topics": ["ventilation", "abdominal compartment syndrome"],
     "level": "hard",
     "correct": 1,
     "question": {
@@ -2233,7 +2233,7 @@ const bancoVentilation = [
     "id": 531,
     "code": "pneumo01-q531",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "ARDS", "COPD", "barotrauma"],
+    "topics": ["ventilation", "ARDS", "COPD", "barotrauma"],
     "level": "very_hard",
     "correct": 3,
     "question": {
@@ -2308,7 +2308,7 @@ const bancoVentilation = [
     "id": 532,
     "code": "pneumo01-q532",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "pulmonary embolism", "DAH", "ARDS"],
+    "topics": ["ventilation", "pulmonary embolism", "DAH", "ARDS"],
     "level": "very_hard",
     "correct": 2,
     "question": {
@@ -2383,7 +2383,7 @@ const bancoVentilation = [
     "id": 533,
     "code": "pneumo01-q533",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "ARDS", "hepatic encephalopathy", "acidosis"],
+    "topics": ["ventilation", "ARDS", "hepatic encephalopathy", "acidosis"],
     "level": "very_hard",
     "correct": 4,
     "question": {
@@ -2458,7 +2458,7 @@ const bancoVentilation = [
     "id": 534,
     "code": "pneumo01-q534",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "abdominal compartment syndrome", "ARDS"],
+    "topics": ["ventilation", "abdominal compartment syndrome", "ARDS"],
     "level": "very_hard",
     "correct": 1,
     "question": {
@@ -2533,7 +2533,7 @@ const bancoVentilation = [
     "id": 535,
     "code": "pneumo01-q535",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "obesity", "ARDS", "atelectasis"],
+    "topics": ["ventilation", "obesity", "ARDS", "atelectasis"],
     "level": "very_hard",
     "correct": 3,
     "question": {
@@ -2608,7 +2608,7 @@ const bancoVentilation = [
     "id": 536,
     "code": "pneumo01-q536",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "pulmonary hypertension", "RV dysfunction"],
+    "topics": ["ventilation", "pulmonary hypertension", "RV dysfunction"],
     "level": "very_hard",
     "correct": 2,
     "question": {
@@ -2683,7 +2683,7 @@ const bancoVentilation = [
     "id": 537,
     "code": "pneumo01-q537",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "metabolic acidosis", "DKA", "lactic acidosis"],
+    "topics": ["ventilation", "metabolic acidosis", "DKA", "lactic acidosis"],
     "level": "very_hard",
     "correct": 1,
     "question": {
@@ -2758,7 +2758,7 @@ const bancoVentilation = [
     "id": 538,
     "code": "pneumo01-q538",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "asynchrony", "COPD"],
+    "topics": ["ventilation", "asynchrony", "COPD"],
     "level": "very_hard",
     "correct": 2,
     "question": {
@@ -2833,7 +2833,7 @@ const bancoVentilation = [
     "id": 539,
     "code": "pneumo01-q539",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "asynchrony", "neurocritical care"],
+    "topics": ["ventilation", "asynchrony", "neurocritical care"],
     "level": "very_hard",
     "correct": 4,
     "question": {
@@ -2908,7 +2908,7 @@ const bancoVentilation = [
     "id": 540,
     "code": "pneumo01-q540",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["ventilation", "asynchrony", "ARDS"],
+    "topics": ["ventilation", "asynchrony", "ARDS"],
     "level": "very_hard",
     "correct": 3,
     "question": {
@@ -2984,7 +2984,7 @@ const bancoVentilation = [
     "id": 541,
     "code": "pneumo01-q541",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["niv"],
+    "topics": ["niv"],
     "level": "easy",
     "correct": 2,
     "question": {
@@ -3059,7 +3059,7 @@ const bancoVentilation = [
     "id": 542,
     "code": "ventilation-q542",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["niv"],
+    "topics": ["niv"],
     "level": "easy",
     "correct": 1,
     "question": {
@@ -3134,7 +3134,7 @@ const bancoVentilation = [
     "id": 543,
     "code": "ventilation-q543",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["niv"],
+    "topics": ["niv"],
     "level": "hard",
     "correct": 2,
     "question": {
@@ -3209,7 +3209,7 @@ const bancoVentilation = [
     "id": 544,
     "code": "ventilation-q544",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["niv"],
+    "topics": ["niv"],
     "level": "hard",
     "correct": 3,
     "question": {
@@ -3284,7 +3284,7 @@ const bancoVentilation = [
     "id": 545,
     "code": "ventilation-q545",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["niv"],
+    "topics": ["niv"],
     "level": "very_hard",
     "correct": 1,
     "question": {
@@ -3359,7 +3359,7 @@ const bancoVentilation = [
     "id": 546,
     "code": "ventilation-q546",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["niv"],
+    "topics": ["niv"],
     "level": "very_hard",
     "correct": 1,
     "question": {
@@ -3434,7 +3434,7 @@ const bancoVentilation = [
     "id": 547,
     "code": "ventilation-q547",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["recruitment"],
+    "topics": ["recruitment"],
     "level": "easy",
     "correct": 3,
     "question": {
@@ -3509,7 +3509,7 @@ const bancoVentilation = [
     "id": 548,
     "code": "ventilation-q548",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["recruitment"],
+    "topics": ["recruitment"],
     "level": "moderate",
     "correct": 0,
     "question": {
@@ -3584,7 +3584,7 @@ const bancoVentilation = [
     "id": 549,
     "code": "ventilation-q549",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["recruitment", "ards"],
+    "topics": ["recruitment", "ards"],
     "level": "very_hard",
     "correct": 1,
     "question": {
@@ -3659,7 +3659,7 @@ const bancoVentilation = [
     "id": 550,
     "code": "ventilation-q550",
     "areas": ["pneumo", "pneumo+icu", "icu", "vent", "medicine"],
-    "topic": ["recruitment", "asynchrony", "pneumonia", "niv"],
+    "topics": ["recruitment", "asynchrony", "pneumonia", "niv"],
     "level": "very_hard",
     "correct": 4,
     "question": {

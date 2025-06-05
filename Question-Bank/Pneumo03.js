@@ -3,7 +3,7 @@ const bancoPneumoDificil = [
   "id": 801,
   "code": "pneumo03-q801",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["oxygen_therapy", "covid19", "respiratory_failure", "hfno", "intubation_timing"],
+  "topics": ["oxygen_therapy", "covid19", "respiratory_failure", "hfno", "intubation_timing"],
   "level": "hard",
   "correct": 3,
   "question": {
@@ -78,7 +78,7 @@ const bancoPneumoDificil = [
   "id": 802,
   "code": "pneumo03-q802",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["interstitial_lung_disease", "oxygen_therapy", "fibrosis", "exercise", "hypoxemia"],
+  "topics": ["interstitial_lung_disease", "oxygen_therapy", "fibrosis", "exercise", "hypoxemia"],
   "level": "hard",
   "correct": 0,
   "question": {
@@ -153,7 +153,7 @@ const bancoPneumoDificil = [
   "id": 803,
   "code": "pneumo03-q803",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["bronchoscopy", "diagnostic_tools", "hypoxemia", "icu_procedures"],
+  "topics": ["bronchoscopy", "diagnostic_tools", "hypoxemia", "icu_procedures"],
   "level": "hard",
   "correct": 1,
   "question": {
@@ -228,7 +228,7 @@ const bancoPneumoDificil = [
   "id": 804,
   "code": "pneumo03-q804",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["pocus", "lung_ultrasound", "ards", "pneumonia", "differential_diagnosis"],
+  "topics": ["pocus", "lung_ultrasound", "ards", "pneumonia", "differential_diagnosis"],
   "level": "hard",
   "correct": 3,
   "question": {
@@ -303,7 +303,7 @@ const bancoPneumoDificil = [
   "id": 805,
   "code": "pneumo03-q805",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["diaphragm_ultrasound", "weaning", "mechanical_ventilation", "icu_monitoring"],
+  "topics": ["diaphragm_ultrasound", "weaning", "mechanical_ventilation", "icu_monitoring"],
   "level": "hard",
   "correct": 0,
   "question": {
@@ -378,7 +378,7 @@ const bancoPneumoDificil = [
   "id": 806,
   "code": "pneumo03-q806",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["ards", "steroids", "meduri_protocol", "refractory_hypoxemia"],
+  "topics": ["ards", "steroids", "meduri_protocol", "refractory_hypoxemia"],
   "level": "hard",
   "correct": 1,
   "question": {
@@ -453,7 +453,7 @@ const bancoPneumoDificil = [
   "id": 807,
   "code": "pneumo03-q807",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["ards", "prone_positioning", "peep_titration", "neuromuscular_blockade", "refractory_hypoxemia"],
+  "topics": ["ards", "prone_positioning", "peep_titration", "neuromuscular_blockade", "refractory_hypoxemia"],
   "level": "hard",
   "correct": 3,
   "question": {
@@ -528,7 +528,7 @@ const bancoPneumoDificil = [
   "id": 808,
   "code": "pneumo03-q808",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["tension_pneumothorax", "pocus", "thoracostomy", "emergency_airway", "ultrasound"],
+  "topics": ["tension_pneumothorax", "pocus", "thoracostomy", "emergency_airway", "ultrasound"],
   "level": "hard",
   "correct": 2,
   "question": {
@@ -603,7 +603,7 @@ const bancoPneumoDificil = [
   "id": 809,
   "code": "pneumo03-q809",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["interstitial_lung_disease", "fibrosis", "oxygen_therapy", "hypoxemia", "lung_transplant"],
+  "topics": ["interstitial_lung_disease", "fibrosis", "oxygen_therapy", "hypoxemia", "lung_transplant"],
   "level": "hard",
   "correct": 0,
   "question": {
@@ -678,7 +678,7 @@ const bancoPneumoDificil = [
   "id": 810,
   "code": "pneumo03-q810",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["cystic_fibrosis", "mechanical_ventilation", "air_trapping", "dynamic_hyperinflation", "auto_peep"],
+  "topics": ["cystic_fibrosis", "mechanical_ventilation", "air_trapping", "dynamic_hyperinflation", "auto_peep"],
   "level": "hard",
   "correct": 3,
   "question": {
@@ -753,7 +753,7 @@ const bancoPneumoDificil = [
   "id": 811,
   "code": "pneumo03-q811",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["aspiration_pneumonia", "elderly", "stroke", "antibiotics", "airway_management"],
+  "topics": ["aspiration_pneumonia", "elderly", "stroke", "antibiotics", "airway_management"],
   "level": "hard",
   "correct": 1,
   "question": {
@@ -828,7 +828,7 @@ const bancoPneumoDificil = [
   "id": 812,
   "code": "pneumo03-q812",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["extubation", "neurological_disorders", "weaning", "airway_protection", "dysphagia"],
+  "topics": ["extubation", "neurological_disorders", "weaning", "airway_protection", "dysphagia"],
   "level": "hard",
   "correct": 2,
   "question": {
@@ -903,7 +903,7 @@ const bancoPneumoDificil = [
   "id": 813,
   "code": "pneumo03-q813",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["ecmo", "vv_ecmo", "ards", "hypoxemia", "eolia_trial"],
+  "topics": ["ecmo", "vv_ecmo", "ards", "hypoxemia", "eolia_trial"],
   "level": "hard",
   "correct": 0,
   "question": {
@@ -978,7 +978,7 @@ const bancoPneumoDificil = [
   "id": 814,
   "code": "pneumo03-q814",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["ecmo", "vv_ecmo", "weaning", "lung_recovery", "liberation_ecmo"],
+  "topics": ["ecmo", "vv_ecmo", "weaning", "lung_recovery", "liberation_ecmo"],
   "level": "hard",
   "correct": 1,
   "question": {
@@ -1053,7 +1053,7 @@ const bancoPneumoDificil = [
   "id": 815,
   "code": "pneumo03-q815",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["ecmo", "anticoagulation", "bleeding", "vv_ecmo", "heparin"],
+  "topics": ["ecmo", "anticoagulation", "bleeding", "vv_ecmo", "heparin"],
   "level": "hard",
   "correct": 4,
   "question": {
@@ -1128,7 +1128,7 @@ const bancoPneumoDificil = [
   "id": 816,
   "code": "pneumo03-q816",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["drowning", "aspiration", "pneumonia", "ards", "mechanical_ventilation"],
+  "topics": ["drowning", "aspiration", "pneumonia", "ards", "mechanical_ventilation"],
   "level": "hard",
   "correct": 3,
   "question": {
@@ -1203,7 +1203,7 @@ const bancoPneumoDificil = [
   "id": 817,
   "code": "pneumo03-q817",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["asthma", "severe_asthma", "mechanical_ventilation", "icu_asthma", "refractory"],
+  "topics": ["asthma", "severe_asthma", "mechanical_ventilation", "icu_asthma", "refractory"],
   "level": "hard",
   "correct": 3,
   "question": {
@@ -1278,7 +1278,7 @@ const bancoPneumoDificil = [
   "id": 818,
   "code": "pneumo03-q818",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["ards", "hypercapnia", "ecc02r", "ventilation", "ecmo-alternative"],
+  "topics": ["ards", "hypercapnia", "ecc02r", "ventilation", "ecmo-alternative"],
   "level": "hard",
   "correct": 2,
   "question": {
@@ -1353,7 +1353,7 @@ const bancoPneumoDificil = [
   "id": 819,
   "code": "pneumo03-q819",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["tracheostomy", "bleeding", "fibrosis", "pneumonia", "bronchoscopy"],
+  "topics": ["tracheostomy", "bleeding", "fibrosis", "pneumonia", "bronchoscopy"],
   "level": "hard",
   "correct": 1,
   "question": {
@@ -1428,7 +1428,7 @@ const bancoPneumoDificil = [
   "id": 820,
   "code": "pneumo03-q820",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["tracheostomy", "pocus", "ultrasound", "neck_assessment", "icu_procedures"],
+  "topics": ["tracheostomy", "pocus", "ultrasound", "neck_assessment", "icu_procedures"],
   "level": "hard",
   "correct": 0,
   "question": {

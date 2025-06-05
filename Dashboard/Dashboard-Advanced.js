@@ -7,18 +7,84 @@ document.addEventListener('DOMContentLoaded', () => {
     const staticDashboardTexts = {
         en: {
             "dashboard_logout_text": "Logout",
-            "logout_confirm_message": "Your progress will be saved. Are you sure you want to logout and go to the login page?",
-            // ... outras traduções para esta página ...
+            "logout_confirm_message": "Are you sure you want to logout and go to the login page?",
+            "select_an_area_prompt": "-- Select a Specialty --",
+            "no_areas_available": "No specialties available",
+            "error_loading_areas": "Error loading specialties",
+            "areas_unavailable": "Specialties unavailable",
+            "please_select_area_alert": "Please select a specialty to continue.",
+            "continue_session_button_text": "Continue Previous Session",
+            "configure_your_quiz_title": "Configure Your Quiz",
+            "choose_specialty_label": "Choose Specialty:",
+            "loading_areas_option": "-- Loading Areas... --",
+            "select_area_prompt_dashboard": "Select the area you wish to study.",
+            "start_session_button_text": "Start Session",
+            "confirm_overwrite_progress": "Starting a new session will erase any unsaved Advanced quiz progress. Are you sure you want to continue?",
+            "cardio": "Cardiology",
+            "neuro": "Neurology",
+            "pneumo": "Pulmonology",
+            "pneumo+icu": "Pulmonology-ICU",
+            "icu": "Intensive Care Unit",
+            "cardio+icu": "Cardiology-ICU",
+            "neuro+icu": "Neurology-ICU",
+            "vent": "Mechanical Ventilation",
+            "nephro": "Nephrology",
+            "nephro+icu": "Nephrology-ICU",
+            "rrt": "Renal Replacement Therapy - RRT - Dialysis",
         },
         pt: {
             "dashboard_logout_text": "Sair",
-            "logout_confirm_message": "Seu progresso será salvo. Tem certeza que deseja sair e ir para a página de login?",
-            // ...
+            "logout_confirm_message": "Tem certeza que deseja sair e ir para a página de login?",
+            "select_an_area_prompt": "-- Selecione uma Especialidade --",
+            "no_areas_available": "Nenhuma especialidade disponível",
+            "error_loading_areas": "Erro ao carregar especialidades",
+            "areas_unavailable": "Especialidades indisponíveis",
+            "please_select_area_alert": "Por favor, selecione uma especialidade para continuar.",
+            "continue_session_button_text": "Continuar Sessão Anterior",
+            "configure_your_quiz_title": "Configure Seu Quiz",
+            "choose_specialty_label": "Escolha a Especialidade:",
+            "loading_areas_option": "-- Carregando Áreas... --",
+            "select_area_prompt_dashboard": "Selecione a área que deseja estudar.",
+            "start_session_button_text": "Iniciar Sessão",
+            "confirm_overwrite_progress": "Iniciar uma nova sessão apagará qualquer progresso não salvo do quiz Advanced. Tem certeza que deseja continuar?",
+            "cardio": "Cardiologia",
+            "neuro": "Neurologia",
+            "pneumo": "Pneumologia",
+            "pneumo+icu": "UTI-Pneumologia",
+            "icu": "UTI",
+            "cardio+icu": "UTI-Cardiologia",
+            "neuro+icu": "UTI-Neurologia",
+            "vent": "Ventilação Mecânica",
+            "nephro": "Nefrologia",
+            "nephro+icu": "Nefrologia-UTI",
+            "rrt": "Terapia Renal Substitutiva - TRS - Diálise",
         },
         es: {
             "dashboard_logout_text": "Cerrar Sesión",
-            "logout_confirm_message": "Tu progreso se guardará. ¿Estás seguro de que quieres cerrar sesión e ir a la página de inicio de sesión?",
-            // ...
+            "logout_confirm_message": "¿Estás seguro de que quieres cerrar sesión e ir a la página de inicio de sesión?",
+            "select_an_area_prompt": "-- Seleccione una Especialidad --",
+            "no_areas_available": "No hay especialidades disponibles",
+            "error_loading_areas": "Error al cargar especialidades",
+            "areas_unavailable": "Especialidades no disponibles",
+            "please_select_area_alert": "Por favor, seleccione una especialidad para continuar.",
+            "continue_session_button_text": "Continuar Sesión Anterior",
+            "configure_your_quiz_title": "Configura Tu Cuestionario",
+            "choose_specialty_label": "Elige Especialidad:",
+            "loading_areas_option": "-- Cargando Áreas... --",
+            "select_area_prompt_dashboard": "Selecciona el área que deseas estudiar.",
+            "start_session_button_text": "Iniciar Sesión",
+            "confirm_overwrite_progress": "Iniciar una nueva sesión borrará cualquier progreso no guardado del cuestionario Advanced. ¿Estás seguro de que quieres continuar?",
+            "cardio": "Cardiología",
+            "neuro": "Neurología",
+            "pneumo": "Neumología",
+            "pneumo+icu": "UCI Neumología",
+            "icu": "UCI",
+            "cardio+icu": "UCI Cardiología",
+            "neuro+icu": "UCI Neurología",
+            "vent": "Ventilación Mecánica",
+            "nephro": "Nefrología",
+            "nephro+icu": "Nefrología-ICU",
+            "rrt": "Terapia de Reemplazo Renal - TRR - Diálisis",
         }
     };
     const s_t = staticDashboardTexts[currentLang] || staticDashboardTexts['en'];
@@ -36,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (focusedProButton) {
         focusedProButton.addEventListener('click', () => {
             console.log("Redirecionando para Dashboard-FocusedPro.html");
-            window.location.href = 'Dashboard-FocusedPro.html'; // Ajuste o caminho se necessário
+            window.location.href = 'Dashboard-Focused-Pro.html'; // Ajuste o caminho se necessário
         });
     } else {
         console.error("Dashboard-Advanced: Botão 'start-focused-pro-mode-button' não encontrado.");

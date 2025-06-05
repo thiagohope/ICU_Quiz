@@ -34,7 +34,6 @@ function getTranslations() {
     "logout_confirm_message": { en: "Your progress will be saved. Are you sure you want to logout and go to the login page?", pt: "Seu progresso será salvo. Tem certeza que deseja sair e ir para a página de login?", es: "Tu progreso se guardará. ¿Estás seguro de que quieres cerrar sesión e ir a la página de inicio de sesión?" },
     "legal-notice-text": { en: "© 2025 BrainboxMed. All rights reserved. This content is for educational purposes only and does not replace professional medical advice.", pt: "© 2025 BrainboxMed. Todos os direitos reservados. Este conteúdo é apenas para fins educacionais e não substitui o aconselhamento médico profissional.", es: "© 2025 BrainboxMed. Todos los derechos reservados. Este contenido es solo para fines educativos y no reemplaza el asesoramiento médico profesional." },
     "go_dashboard_text_basic": { en: "Dashboard", pt: "Painel", es: "Panel" },
-
     // Chaves para alertas e mensagens de erro
     "selectOptionPrompt": { en: "Please select an option before proceeding.", pt: "Por favor, selecione uma opção antes de prosseguir.", es: "Por favor, seleccione una opción antes de continuar." },
     "error_processing_question": { en: "An error occurred while processing the current question. Please try reloading or contact support.", pt: "Ocorreu um erro ao processar a questão atual. Tente recarregar ou contate o suporte.", es: "Ocurrió un error al procesar la pregunta actual. Intente recargar o contacte al soporte."},
@@ -43,6 +42,8 @@ function getTranslations() {
     "error_question_bank_not_loaded": { en: "Question bank not loaded or empty.", pt: "Banco de questões não carregado ou vazio.", es: "Banco de preguntas no cargado o vacío."},
     "error_loading_questions": { en: "Error loading questions.", pt: "Erro ao carregar as questões.", es: "Error al cargar las preguntas."},
     "advertisement_placeholder_text": { en: "Advertisement", pt: "Publicidade", es: "Publicidad" },
+    "go_dashboard_text_basic": { en: "Dashboard", pt: "Painel", es: "Panel" },
+    "confirm_exit_to_dashboard": { en: "Your current progress will be saved. Are you sure you want to return to the Dashboard?", pt: "Seu progresso atual será salvo. Tem certeza que deseja retornar ao Painel?", es: "Tu progreso actual se guardará. ¿Estás seguro de que quieres volver al Panel?"},
     // Chaves para níveis de dificuldade (IMPORTANTE: use "very_hard" se seus dados usam "very_hard")
     "difficulty_easy": { en: "Easy", pt: "Fácil", es: "Fácil" },
     "difficulty_moderate": { en: "Moderate", pt: "Moderada", es: "Moderada" }, // A chave no seu arquivo estava "moderado", deve ser "moderate" se o dado for "moderate"
@@ -62,7 +63,7 @@ function getTranslations() {
     "Question": { en: "Question", pt: "Questão", es: "Pregunta" },
     "Correct": { en: "Correct", pt: "Correta", es: "Correcta" }, // Para indicar a resposta correta
     "YourAnswer": { en: "Your Answer", pt: "Sua Resposta", es: "Tu Respuesta" },
-    "Explanation": { en: "Explanation", pt: "Explicação", es: "Explicación" }
+    "Explanation": { en: "Explanation", pt: "Explicação", es: "Explicación" },
   };
 
   // Retorna uma função que busca a tradução
@@ -75,54 +76,60 @@ function getTranslations() {
   };
 }
 
-
-// Defina simSelectedAreas no escopo global ou acessível para prepareNextBlock
 let simSelectedAreas = [];
 
 function initializeQuizBasic() {
     console.log("Initializing Quiz Basic...");
-
-    // 1. Ler o parâmetro 'areas' da URL
     const urlParams = new URLSearchParams(window.location.search);
-    const areasParam = urlParams.get('areas'); // 'areas' é o nome do parâmetro que o Dashboard-Basic.js envia
-
+    const areasParam = urlParams.get('areas');
+    const newSessionParam = urlParams.get('new'); // Ler o novo parâmetro 'new'
+    // Define simSelectedAreas com base no parâmetro 'areas'
     if (areasParam) {
-        // Se um parâmetro 'areas' foi passado na URL
-        // Como o Dashboard-Basic envia apenas uma área, não precisamos de split(',') por agora.
-        // Se no futuro puderem ser múltiplas, você pode adaptar para:
-        // simSelectedAreas = areasParam.split(',').map(area => area.trim().toLowerCase()).filter(area => area);
         const singleArea = areasParam.trim().toLowerCase();
         if (singleArea) {
             simSelectedAreas = [singleArea];
         } else {
             simSelectedAreas = []; // Parâmetro 'areas' estava presente mas vazio
         }
-        console.log("Area parameter found in URL:", singleArea);
+        console.log("Quiz Basic: Area parameter found in URL:", singleArea);
     } else {
-        // Se NENHUM parâmetro 'areas' foi passado na URL, carregar todas as áreas (para testes ou por defeito)
-        simSelectedAreas = [];
-        console.log("No specific area parameter in URL. Quiz Basic will load questions from all areas.");
+        simSelectedAreas = []; // Default se nenhum parâmetro 'areas' for passado
+        console.log("Quiz Basic: No area parameter found initially in URL.");
     }
-    console.log("Quiz Basic - Selected areas for current session:", simSelectedAreas);
+    console.log("Quiz Basic - Initial selected areas based on URL:", simSelectedAreas);
 
-    // 2. Continuar com a lógica existente de carregar progresso ou preparar novo bloco
-    if (!loadProgress()) { // loadProgress() e saveProgress() usam 'focusedProState'. Considere renomear para 'quizBasicState'
-        prepareNextBlock(); // Esta função DEVE agora usar a variável simSelectedAreas
+    // Decide se é uma nova sessão ou se deve tentar continuar
+    if (newSessionParam === 'true' || areasParam) {
+        // É uma nova sessão se 'new=true' OU se 'areas' foi especificado na URL
+        console.log("Quiz Basic: Starting a new session (new=true or areas specified). Clearing previous state.");
+        localStorage.removeItem('quizBasicState'); // Limpa o estado anterior
+        prepareNextBlock(); // Prepara um novo bloco (usará simSelectedAreas se definido)
     } else {
-        console.log("🧠 currentQuestions loaded:", currentQuestions);
-        if (
-            Array.isArray(currentQuestions) &&
-            currentQuestions.length > 0 &&
-            Number.isInteger(currentIndex) &&
-            currentIndex >= 0 &&
-            currentIndex < currentQuestions.length &&
-            typeof currentQuestions[currentIndex] === 'object' &&
-            currentQuestions[currentIndex] !== null
-        ) {
-            renderQuestion(currentQuestions[currentIndex]);
+        // Não é 'new=true' nem 'areas' na URL - Tenta continuar uma sessão existente
+        console.log("Quiz Basic: Attempting to continue a previous session.");
+        if (loadProgress()) { // Tenta carregar o progresso
+            console.log("Quiz Basic: Progress loaded successfully. Rendering current question.");
+            // Verifica se os dados carregados são válidos antes de renderizar
+            if (
+                Array.isArray(currentQuestions) &&
+                currentQuestions.length > 0 &&
+                Number.isInteger(currentIndex) &&
+                currentIndex >= 0 &&
+                currentIndex < currentQuestions.length &&
+                typeof currentQuestions[currentIndex] === 'object' &&
+                currentQuestions[currentIndex] !== null
+            ) {
+                renderQuestion(currentQuestions[currentIndex]);
+            } else {
+                console.warn("Quiz Basic: Progress loaded, but question data is invalid. Starting new block.");
+                localStorage.removeItem('quizBasicState'); // Limpa estado inválido
+                simSelectedAreas = []; // Reseta áreas para um novo quiz genérico
+                prepareNextBlock();
+            }
         } else {
-            console.warn("❌ Invalid data when restoring progress. Clearing and restarting block...");
-            localStorage.removeItem('quizBasicState'); // Considere renomear para 'quizBasicState'
+            // Nenhum progresso para carregar, inicia um novo quiz genérico (sem filtro de área)
+            console.log("Quiz Basic: No progress to load. Starting a new generic session.");
+            simSelectedAreas = []; // Garante que não há filtro de área para um novo quiz genérico
             prepareNextBlock();
         }
     }
@@ -437,54 +444,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const translate = getTranslations(); // Obtém a função de tradução deste ficheiro
 
-    // --- DEFINIR TEXTOS ESTÁTICOS DA PÁGINA ---
-    const goDashboardButtonTextEl = document.getElementById("go_dashboard_text_basic");
-    if (goDashboardButtonTextEl) {
-        // Certifique-se que "go_dashboard_text_basic" está no objeto de traduções do getTranslations()
-        goDashboardButtonTextEl.textContent = translate("go_dashboard_text_basic") || "Dashboard"; 
-    }
-
-    const logoutTextSpan = document.getElementById("dashboard_logout_text"); // ID CORRETO do span
-    if (logoutTextSpan) {
-        // A chave "logout_button_text_content" deve existir no getTranslations()
-        logoutTextSpan.textContent = translate("logout_button_text_content") || "Logout";
-    }
-
-    const legalNoticeEl = document.getElementById("legal-notice-text");
-    if (legalNoticeEl) {
+  // --- TRADUÇÕES DE TEXTOS ESTÁTICOS DA PÁGINA
+  const goDashboardButtonTextEl = document.getElementById("go_dashboard_text_basic");
+  if (goDashboardButtonTextEl) {
+  goDashboardButtonTextEl.textContent = translate("go_dashboard_text_basic") || "Dashboard"; 
+  }
+  const logoutTextSpan = document.getElementById("dashboard_logout_text");
+  if (logoutTextSpan) {
+  logoutTextSpan.textContent = translate("logout_button_text_content") || "Logout";
+  }
+  const legalNoticeEl = document.getElementById("legal-notice-text");
+  if (legalNoticeEl) {
         // A chave "legal-notice-text" deve existir no getTranslations()
         legalNoticeEl.textContent = translate("legal-notice-text");
-    }
-    // --- FIM DA DEFINIÇÃO DE TEXTOS ---
+  }
+  // FIM DA DEFINIÇÃO DA TRADUÇÃO DE TEXTOS ESTÁTICOS ---
 
-  // --- BOTÃO PARA VOLTAR AO DASHBOARD (NOVO) ---
-    const goDashboardButton = document.getElementById('go-basic-dashboard-button');
-    if (goDashboardButton) {
-        goDashboardButton.addEventListener('click', () => {
-            console.log("Quiz Basic: Saving progress and returning to Dashboard-Basic.html");
-            saveProgress(); // Chama a função para salvar o progresso atual
+// --- BOTÃO PARA VOLTAR AO DASHBOARD (NOVO) ---
+const goDashboardButton = document.getElementById('go-basic-dashboard-button');
+if (goDashboardButton) {
+    goDashboardButton.addEventListener('click', () => {
+        const translate = getTranslations(); // Obter a função de tradução
+        // Use a chave de tradução apropriada. Se criou uma nova, use-a aqui.
+        const confirmMessage = translate("confirm_exit_to_dashboard"); 
 
-            // Determina para qual dashboard voltar.
-            // Você pode tornar isso mais dinâmico se precisar no futuro,
-            // mas para o quiz-basic, ele sempre volta para o Dashboard-Basic.
-            let targetDashboard = "../Dashboard/Dashboard-Basic.html"; // Caminho relativo correto
-
-            // Se você adicionou o data-attribute ao body do quiz-basic.html:
-            // const originDashboard = document.body.getAttribute('data-current-dashboard');
-            // if (originDashboard) {
-            //     targetDashboard = `../${originDashboard}`;
-            // }
-
+        if (confirm(confirmMessage)) { // Mostrar o pop-up de confirmação
+            console.log("Quiz Basic: User confirmed exit. Saving progress and returning to Dashboard-Basic.html");
+            saveProgress(); // Salva o progresso atual
+            localStorage.setItem('cameFromBasicQuiz', 'true'); // Sinaliza para o dashboard
+            let targetDashboard = "../Dashboard/Dashboard-Basic.html";
             window.location.href = targetDashboard;
-        });
-    } else {
-        console.warn("Botão 'go-basic-dashboard-button' não encontrado no quiz-basic.html.");
-    }
-    // --- FIM DO BOTÃO DASHBOARD ---
-
-        // --- LÓGICA DE LOGOUT ---
-    const logoutButton = document.getElementById('dashboard-logout-button'); // ID do BOTÃO
-    if (logoutButton) {
+        } else {
+            console.log("Quiz Basic: User cancelled exit to Dashboard.");
+            // Nenhuma ação é necessária se o usuário cancelar
+        }
+    });
+} else {
+    console.warn("Botão 'go-basic-dashboard-button' não encontrado no quiz-basic.html.");
+}
+// --- FIM DO BOTÃO DASHBOARD ---
+// --- BOTÃO DE LOGOUT
+const logoutButton = document.getElementById('dashboard-logout-button'); // ID do BOTÃO
+  if (logoutButton) {
         logoutButton.addEventListener('click', () => {
             const confirmMessage = translate("logout_confirm_message"); // Chave deve existir no getTranslations()
             if (confirm(confirmMessage)) {
@@ -502,11 +503,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log("Logout cancelado pelo usuário.");
             }
         });
-    } else {
-        console.error("Quiz-Basic: Botão 'dashboard-logout-button' não encontrado.");
-    }
-
-  // --- INICIALIZAÇÃO DO QUIZ ---
+  }
+  else {console.error("Quiz-Basic: Botão 'dashboard-logout-button' não encontrado.");}
+  // FIM DO BOTÃO DE LOGOUT ---
+  // --- INICIALIZAÇÃO DO QUIZ
   // (Sua lógica existente com waitForQuestionBankAndStart chamando initializeQuizBasic)
   function waitForQuestionBankAndStart() {
     console.log("Função waitForQuestionBankAndStart: Verificando se o questionBank está pronto...");
@@ -534,7 +534,7 @@ document.addEventListener('DOMContentLoaded', () => {
  
   waitForQuestionBankAndStart();
 });
-
+// FIM DA INICIALIZAÇÃO DO QUIZ ---
 function showReviewMode() {
   const translate = getTranslations();
   const container = document.getElementById('quiz-container');

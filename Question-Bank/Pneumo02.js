@@ -3,7 +3,7 @@ const bancoPneumoModerate = [
   "id": 701,
   "code": "pneumo02-q701",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["mechanical_ventilation", "peep", "ards"],
+  "topics": ["mechanical_ventilation", "peep", "ards"],
   "level": "moderate",
   "correct": 2,
   "question": {
@@ -78,7 +78,7 @@ const bancoPneumoModerate = [
   "id": 702,
   "code": "pneumo02-q702",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["oxygen_therapy", "hypoxemia", "high_flow"],
+  "topics": ["oxygen_therapy", "hypoxemia", "high_flow"],
   "level": "moderate",
   "correct": 1,
   "question": {
@@ -153,7 +153,7 @@ const bancoPneumoModerate = [
   "id": 703,
   "code": "pneumo02-q703",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["thoracentesis", "pleural_effusion", "empyema"],
+  "topics": ["thoracentesis", "pleural_effusion", "empyema"],
   "level": "moderate",
   "correct": 0,
   "question": {
@@ -228,7 +228,7 @@ const bancoPneumoModerate = [
   "id": 704,
   "code": "pneumo02-q704",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["bronchoscopy", "diagnostic_tools", "airway_management"],
+  "topics": ["bronchoscopy", "diagnostic_tools", "airway_management"],
   "level": "moderate",
   "correct": 2,
   "question": {
@@ -303,7 +303,7 @@ const bancoPneumoModerate = [
   "id": 705,
   "code": "pneumo02-q705",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["pocus", "lung_ultrasound", "pneumothorax"],
+  "topics": ["pocus", "lung_ultrasound", "pneumothorax"],
   "level": "moderate",
   "correct": 1,
   "question": {
@@ -378,7 +378,7 @@ const bancoPneumoModerate = [
   "id": 706,
   "code": "pneumo02-q706",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["pocus", "lung_ultrasound", "pleural_effusion"],
+  "topics": ["pocus", "lung_ultrasound", "pleural_effusion"],
   "level": "moderate",
   "correct": 0,
   "question": {
@@ -453,7 +453,7 @@ const bancoPneumoModerate = [
   "id": 707,
   "code": "pneumo02-q707",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["thoracic_ct", "ards", "atelectasis", "pneumonia"],
+  "topics": ["thoracic_ct", "ards", "atelectasis", "pneumonia"],
   "level": "moderate",
   "correct": 3,
   "question": {
@@ -528,7 +528,7 @@ const bancoPneumoModerate = [
   "id": 708,
   "code": "pneumo02-q708",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["severe_asthma", "mechanical_ventilation", "acid_base", "clinical_case"],
+  "topics": ["severe_asthma", "mechanical_ventilation", "acid_base", "clinical_case"],
   "level": "moderate",
   "correct": 1,
   "question": {
@@ -603,7 +603,7 @@ const bancoPneumoModerate = [
   "id": 709,
   "code": "pneumo02-q709",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["copd_exacerbation", "acid_base", "ventilatory_support", "clinical_case"],
+  "topics": ["copd_exacerbation", "acid_base", "ventilatory_support", "clinical_case"],
   "level": "moderate",
   "correct": 2,
   "question": {
@@ -678,7 +678,7 @@ const bancoPneumoModerate = [
   "id": 710,
   "code": "pneumo02-q710",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["ecmo_vv", "refractory_hypoxemia", "mechanical_ventilation", "clinical_case"],
+  "topics": ["ecmo_vv", "refractory_hypoxemia", "mechanical_ventilation", "clinical_case"],
   "level": "moderate",
   "correct": 3,
   "question": {
@@ -753,7 +753,7 @@ const bancoPneumoModerate = [
   "id": 711,
   "code": "pneumo02-q711",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["ecmo_vv", "complications", "bleeding", "infection", "clinical_case"],
+  "topics": ["ecmo_vv", "complications", "bleeding", "infection", "clinical_case"],
   "level": "moderate",
   "correct": 0,
   "question": {
@@ -828,7 +828,7 @@ const bancoPneumoModerate = [
   "id": 712,
   "code": "pneumo02-q712",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["ards", "mechanical_ventilation", "peep", "protective_ventilation", "clinical_case"],
+  "topics": ["ards", "mechanical_ventilation", "peep", "protective_ventilation", "clinical_case"],
   "level": "moderate",
   "correct": 1,
   "question": {
@@ -903,7 +903,7 @@ const bancoPneumoModerate = [
   "id": 713,
   "code": "pneumo02-q713",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["ards", "prone_positioning", "driving_pressure", "recruitment_maneuvers", "mechanical_ventilation"],
+  "topics": ["ards", "prone_positioning", "driving_pressure", "recruitment_maneuvers", "mechanical_ventilation"],
   "level": "moderate",
   "correct": 2,
   "question": {
@@ -978,7 +978,7 @@ const bancoPneumoModerate = [
   "id": 714,
   "code": "pneumo02-q714",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["ventilator_associated_pneumonia", "empirical_antibiotic", "infection", "antimicrobial_stewardship"],
+  "topics": ["ventilator_associated_pneumonia", "empirical_antibiotic", "infection", "antimicrobial_stewardship"],
   "level": "moderate",
   "correct": 3,
   "question": {
@@ -1053,7 +1053,7 @@ const bancoPneumoModerate = [
   "id": 715,
   "code": "pneumo02-q715",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["ards", "corticosteroids", "dexamethasone", "inflammation", "mechanical_ventilation"],
+  "topics": ["ards", "corticosteroids", "dexamethasone", "inflammation", "mechanical_ventilation"],
   "level": "moderate",
   "correct": 1,
   "question": {
@@ -1128,7 +1128,7 @@ const bancoPneumoModerate = [
   "id": 716,
   "code": "pneumo02-q716",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["necrotizing_pneumonia", "lung_abscess", "ventilator_associated_pneumonia", "antibiotic_therapy", "severe_infection"],
+  "topics": ["necrotizing_pneumonia", "lung_abscess", "ventilator_associated_pneumonia", "antibiotic_therapy", "severe_infection"],
   "level": "moderate",
   "correct": 2,
   "question": {
@@ -1203,7 +1203,7 @@ const bancoPneumoModerate = [
   "id": 717,
   "code": "pneumo02-q717",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["hemoptysis", "airway_management", "bronchoscopy", "lung_bleeding", "emergency"],
+  "topics": ["hemoptysis", "airway_management", "bronchoscopy", "lung_bleeding", "emergency"],
   "level": "moderate",
   "correct": 0,
   "question": {
@@ -1278,7 +1278,7 @@ const bancoPneumoModerate = [
   "id": 718,
   "code": "pneumo02-q718",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["tracheostomy", "airway", "bleeding", "stenosis", "post_icuprocedure"],
+  "topics": ["tracheostomy", "airway", "bleeding", "stenosis", "post_icuprocedure"],
   "level": "moderate",
   "correct": 3,
   "question": {
@@ -1353,7 +1353,7 @@ const bancoPneumoModerate = [
   "id": 719,
   "code": "pneumo02-q719",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["severe_asthma", "refractory_asthma", "mechanical_ventilation", "sedation", "ventilator_strategy"],
+  "topics": ["severe_asthma", "refractory_asthma", "mechanical_ventilation", "sedation", "ventilator_strategy"],
   "level": "moderate",
   "correct": 4,
   "question": {
@@ -1428,7 +1428,7 @@ const bancoPneumoModerate = [
   "id": 720,
   "code": "pneumo02-q720",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["difficult_airway", "intubation", "emergency_airway", "icu_management"],
+  "topics": ["difficult_airway", "intubation", "emergency_airway", "icu_management"],
   "level": "moderate",
   "correct": 2,
   "question": {

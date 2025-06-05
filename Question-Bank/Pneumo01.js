@@ -4,7 +4,7 @@ const bancoPneumoFacil = [
     id: 601,
     code: "PneumoFacil-q601",
     area: ["pneumo"],
-    topic: ["oxygen_therapy"],
+    topics: ["oxygen_therapy"],
     level: "easy",
     correct: 1,
     question: {
@@ -79,7 +79,7 @@ const bancoPneumoFacil = [
     id: 602,
     code: "pneumo01-q602",
     area: ["pneumo"],
-    topic: ["thoracentesis"],
+    topics: ["thoracentesis"],
     level: "easy",
     correct: 0,
     question: {
@@ -154,7 +154,7 @@ const bancoPneumoFacil = [
   "id": 603,
   "code": "pneumo01-q603",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["bronchoscopy"],
+  "topics": ["bronchoscopy"],
   "level": "easy",
   "correct": 2,
   "question": {
@@ -229,7 +229,7 @@ const bancoPneumoFacil = [
   "id": 604,
   "code": "pneumo01-q604",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["respiratory_physiology"],
+  "topics": ["respiratory_physiology"],
   "level": "easy",
   "correct": 3,
   "question": {
@@ -304,7 +304,7 @@ const bancoPneumoFacil = [
   "id": 605,
   "code": "pneumo01-q605",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["respiratory_physiology"],
+  "topics": ["respiratory_physiology"],
   "level": "easy",
   "correct": 1,
   "question": {
@@ -379,7 +379,7 @@ const bancoPneumoFacil = [
   "id": 606,
   "code": "pneumo01-q606",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["bronchoscopy"],
+  "topics": ["bronchoscopy"],
   "level": "easy",
   "correct": 0,
   "question": {
@@ -454,7 +454,7 @@ const bancoPneumoFacil = [
   "id": 607,
   "code": "pneumo01-q607",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["lung_ultrasound"],
+  "topics": ["lung_ultrasound"],
   "level": "easy",
   "correct": 0,
   "question": {
@@ -529,7 +529,7 @@ const bancoPneumoFacil = [
   "id": 608,
   "code": "pneumo01-q608",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["lung_ultrasound"],
+  "topics": ["lung_ultrasound"],
   "level": "easy",
   "correct": 3,
   "question": {
@@ -604,7 +604,7 @@ const bancoPneumoFacil = [
   "id": 609,
   "code": "pneumo01-q609",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["asthma"],
+  "topics": ["asthma"],
   "level": "easy",
   "correct": 4,
   "question": {
@@ -679,7 +679,7 @@ const bancoPneumoFacil = [
   "id": 610,
   "code": "pneumo01-q610",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["copd"],
+  "topics": ["copd"],
   "level": "easy",
   "correct": 2,
   "question": {
@@ -754,7 +754,7 @@ const bancoPneumoFacil = [
   "id": 611,
   "code": "pneumo01-q611",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["ards"],
+  "topics": ["ards"],
   "level": "easy",
   "correct": 1,
   "question": {
@@ -829,7 +829,7 @@ const bancoPneumoFacil = [
   "id": 612,
   "code": "pneumo01-q612",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["ards"],
+  "topics": ["ards"],
   "level": "easy",
   "correct": 0,
   "question": {
@@ -904,7 +904,7 @@ const bancoPneumoFacil = [
   "id": 613,
   "code": "pneumo01-q613",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["ards"],
+  "topics": ["ards"],
   "level": "easy",
   "correct": 2,
   "question": {
@@ -979,7 +979,7 @@ const bancoPneumoFacil = [
   "id": 614,
   "code": "pneumo01-q614",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["ards"],
+  "topics": ["ards"],
   "level": "easy",
   "correct": 3,
   "question": {
@@ -1054,7 +1054,7 @@ const bancoPneumoFacil = [
   "id": 615,
   "code": "pneumo01-q615",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["near_drowning"],
+  "topics": ["near_drowning"],
   "level": "easy",
   "correct": 0,
   "question": {
@@ -1129,7 +1129,7 @@ const bancoPneumoFacil = [
   "id": 616,
   "code": "pneumo01-q616",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["acute_respiratory_failure"],
+  "topics": ["acute_respiratory_failure"],
   "level": "easy",
   "correct": 3,
   "question": {
@@ -1204,7 +1204,7 @@ const bancoPneumoFacil = [
   "id": 617,
   "code": "pneumo01-q617",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["ecmo_vv"],
+  "topics": ["ecmo_vv"],
   "level": "easy",
   "correct": 4,
   "question": {
@@ -1279,7 +1279,7 @@ const bancoPneumoFacil = [
   "id": 619,
   "code": "pneumo01-q619",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["pneumonia"],
+  "topics": ["pneumonia"],
   "level": "easy",
   "correct": 1,
   "question": {
@@ -1354,7 +1354,7 @@ const bancoPneumoFacil = [
   "id": 620,
   "code": "pneumo01-q620",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["airway_management", "tracheostomy"],
+  "topics": ["airway_management", "tracheostomy"],
   "level": "easy",
   "correct": 3,
   "question": {
@@ -1429,7 +1429,7 @@ const bancoPneumoFacil = [
   "id": 621,
   "code": "pneumo01-q621",
   "areas": ["pneumo+icu", "pneumo", "icu", "medicine"],
-  "topic": ["airway_management", "tracheostomy"],
+  "topics": ["airway_management", "tracheostomy"],
   "level": "easy",
   "correct": 1,
   "question": {
