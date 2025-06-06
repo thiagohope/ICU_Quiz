@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="tabTitle">BrainBoxMed - Coming Soon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, .font-title {
+            font-family: 'Poppins', sans-serif;
+        }
+        .hero-bg {
+            background-image: url(./assets/img/Doctors_on_a_table.png);
+            background-size: cover;
+            background-position: center;
+        }
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        .contact-email-link {
+            color: #F39C12;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .contact-email-link:hover {
+            color: #d27c0c; 
+        }
+        .text-brand-purple {
+            color: #5E3E94;
+            text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7);
+        }
+        .text-brand-orange {
+            color: #F39C12;
+            text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="min-h-screen hero-bg">
+        <div class="min-h-screen flex flex-col items-center justify-center overlay text-white p-6 relative">
+
+            <header class="absolute top-0 left-0 p-6 flex items-center">
+                <img src="./assets/img/logo-brainboxmed-cube.png" alt="BrainBoxMed Cube Logo" class="h-12 w-12 mr-3">
+                <img src="./assets/img/logo-brainboxmed-name.png" alt="BrainBoxMed Name Logo" class="h-10">
+            </header>
+
+            <div class="absolute top-0 right-0 p-6">
+                <button onclick="changeLanguage('en')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2 text-sm">EN</button>
+                <button onclick="changeLanguage('pt')" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2 text-sm">PT</button>
+                <button onclick="changeLanguage('es')" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-sm">ES</button>
+            </div>
+
+            <main class="text-center z-10">
+                <h1 class="text-5xl md:text-6xl font-bold mb-4" data-translate="mainMessage">Wait! It is about to come!</h1>
+                
+                <p class="text-6xl md:text-7xl font-bold mb-8 font-title">
+                    <span class="text-brand-purple" data-translate="brandNamePart1">BRAINBOX</span><span class="text-brand-orange" data-translate="brandNamePart2">MED</span>
+                </p>
+            </main>
+
+            <div class="absolute bottom-20 left-1/2 -translate-x-1/2 w-full max-w-md px-4">
+                <div class="bg-black bg-opacity-20 backdrop-blur-sm rounded-lg p-4 text-center">
+                     <p class="text-sm mb-1" data-translate="contactIntro">For more information, contact us:</p>
+                     <a href="mailto:hello@brainboxmed.com" class="text-base font-semibold contact-email-link" data-translate="contactEmail">hello@brainboxmed.com</a>
+                </div>
+            </div>
+
+            <footer class="absolute bottom-0 p-6 text-center w-full text-sm">
+                <p data-translate="footerText">&copy; 2025 BrainBoxMed. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+<script>
+        const translations = {
+            en: {
+                tabTitle: "BrainBoxMed - Coming Soon",
+                mainMessage: "Wait! It is about to come!",
+                brandNamePart1: "BRAINBOX",
+                brandNamePart2: "MED",
+                contactIntro: "For more information, contact us:",
+                contactEmail: "hello@brainboxmed.com",
+                footerText: "&copy; 2025 BrainBoxMed. All rights reserved."
+            },
+            pt: {
+                tabTitle: "BrainBoxMed - Em Breve",
+                mainMessage: "Aguarde! Está para chegar!",
+                brandNamePart1: "BRAINBOX",
+                brandNamePart2: "MED",
+                contactIntro: "Para mais informações, entre em contato:",
+                contactEmail: "hello@brainboxmed.com",
+                footerText: "&copy; 2025 BrainBoxMed. Todos os direitos reservados."
+            },
+            es: {
+                tabTitle: "BrainBoxMed - Próximamente",
+                mainMessage: "¡Espera! ¡Está por llegar!",
+                brandNamePart1: "BRAINBOX",
+                brandNamePart2: "MED",
+                contactIntro: "Para más información, contáctenos en:",
+                contactEmail: "hola@brainboxmed.es",
+                footerText: "&copy; 2025 BrainBoxMed. Todos los derechos reservados."
+            }
+        };
+
+        function changeLanguage(lang) {
+            if (translations[lang]) {
+                document.documentElement.lang = lang;
+                document.querySelectorAll('[data-translate]').forEach(el => {
+                    const key = el.getAttribute('data-translate');
+                    if (translations[lang][key]) {
+                        if (el.tagName === 'TITLE') {
+                             document.title = translations[lang][key];
+                        } else {
+                             el.innerHTML = translations[lang][key];
+                        }
+                    }
+                });
+            }
+        }
+
+        // NOVA FUNÇÃO INTELIGENTE
+        function getInitialLanguage() {
+            const hostname = window.location.hostname; // Pega o endereço, ex: "www.brainboxmed.es"
+
+            // 1. Prioridade: Verificar o domínio
+            if (hostname.endsWith('.es')) {
+                return 'es'; // Se terminar com .es, define o idioma como Espanhol
+            }
+            if (hostname.endsWith('.pt') || hostname.endsWith('.com.br')) {
+                return 'pt'; // Se terminar com .pt ou .com.br, define como Português
+            }
+            // Adicione outras regras de domínio aqui, como .in para 'en'
+            if (hostname.endsWith('.in')) {
+                return 'en';
+            }
+
+
+            // 2. Segunda opção: Verificar o idioma do navegador (para domínios genéricos como .com)
+            const browserLang = navigator.language.split('-')[0]; // Pega 'pt' de 'pt-BR'
+            if (translations[browserLang]) {
+                return browserLang; // Retorna o idioma do navegador se ele existir nas suas traduções
+            }
+
+            // 3. Última opção: Idioma padrão
+            return 'en'; // Se nada corresponder, o padrão é Inglês
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const initialLang = getInitialLanguage();
+            changeLanguage(initialLang);
+        });
+    </script>
+</body>
+</html>

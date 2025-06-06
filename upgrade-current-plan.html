@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title-text">BrainboxMed - Upgrade Your Plan</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+    }
+    .plan-card-upgrade {
+      background-color: #f7f4fb;
+      border: 1px solid #d5cde2;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .plan-card-upgrade:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+    .plan-card-upgrade.selected {
+      border: 2px solid #6D28D9; /* Purple-700 for selected */
+      box-shadow: 0 8px 24px rgba(109, 40, 217, 0.2);
+    }
+    .plan-card-upgrade.selected::after {
+      content: '✅';
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 1.5rem;
+    }
+    .current-plan-box {
+        background-color: #e0f2f7;
+        border: 1px solid #b2ebf2;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .current-plan-box h3 {
+        color: #00838f;
+        margin-bottom: 0.5rem;
+    }
+    .current-plan-box p {
+        color: #4a4a4a;
+        font-size: 1rem;
+    }
+    .upgrade-cost {
+        font-weight: bold;
+        font-size: 1.25rem;
+        color: #10B981; /* Green for cost */
+        margin-top: 1rem;
+    }
+    .upgrade-info {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-top: 1rem;
+        line-height: 1.5;
+    }
+  </style>
+</head>
+<body class="min-h-screen py-10 px-4">
+<header class="w-full py-3 px-4 sm:px-6 bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-screen-xl mx-auto flex justify-between items-center h-12 sm:h-14">
+    <div id="header-actions-landing" style="position: absolute; top: 1rem; right: 1rem; z-index: 1000; display: flex; align-items: center; gap: 0.5rem;">
+      <button id="login-button-header"
+        class="bg-purple-600 text-white hover:bg-purple-700 text-xs font-semibold py-1 px-3 rounded-md shadow-sm transition-colors whitespace-nowrap">
+        <span id="login_button_text"></span> 🔑
+      </button>
+      <a href="plans.html" id="plans-button-header"
+        class="border border-purple-600 text-purple-700 hover:bg-purple-600 hover:text-white text-xs font-semibold py-1 px-3 rounded-md shadow-sm transition-colors whitespace-nowrap"
+        style="text-decoration: none;">
+        <span id="plans_button_text"></span> ✨
+      </a>
+    </div>
+  </div>
+  <div id="language-selector-header" style="position: absolute; top: 1rem; left: 1rem; z-index: 1000; display: flex; align-items: center; gap: 0.5rem;">
+    <button onclick="changeLanguage('en')" title="English" style="background: none; border: none; cursor: pointer; padding:0; line-height: 0;">
+      <img src="assets/img/flag-en.png" alt="English" style="height: 32px; width: auto; display: block;"> 
+    </button>
+    <button onclick="changeLanguage('es')" title="Español" style="background: none; border: none; cursor: pointer; padding:0; line-height: 0;">
+      <img src="assets/img/flag-es.png" alt="Español" style="height: 32px; width: auto; display: block;"> 
+    </button>
+    <button onclick="changeLanguage('pt')" title="Português" style="background: none; border: none; cursor: pointer; padding:0; line-height: 0;">
+      <img src="assets/img/flag-pt.png" alt="Português" style="height: 32px; width: auto; display: block;"> 
+    </button>
+  </div>
+</header>
+
+<section class="py-16">
+  <div class="max-w-screen-xl mx-auto px-4">
+    <div class="text-center mb-10">
+      <div style="width: 100%; background-color: #f3f0eb; display: flex; justify-content: center; align-items: center; padding: 48px 0;">
+        <img src="assets/img/logo-brainboxmed-cube.png" alt="BrainboxMed Icon" style="height: 120px; width: auto; margin-right: 32px;" />
+        <img src="assets/img/logo-brainboxmed-name.png" alt="BrainboxMed Text Logo" style="height: 120px; width: auto;" />
+      </div>
+
+      <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: #333; text-align: center; margin: 1.5rem auto 2rem auto;">
+        Train your brain. Master medicine.
+      </p>
+    </div>
+
+    <h1 id="upgrade-page-title" class="text-3xl font-bold text-center mb-4" style="color: #6D28D9; font-family: 'Poppins', sans-serif;"></h1>
+    <p id="upgrade-page-desc" class="text-center text-base mb-10" style="color: #4a4a4a;"></p>
+
+    <div class="current-plan-box">
+        <h3 id="current-plan-title"></h3>
+        <p id="current-plan-name-display"></p>
+        <p id="current-plan-price-display"></p>
+        <p id="current-plan-benefits-display" class="text-sm mt-2"></p>
+    </div>
+
+    <h2 id="choose-upgrade-plan-title" class="text-2xl font-bold text-center mb-6" style="color: #5E3E94; font-family: 'Poppins', sans-serif;"></h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 text-center items-stretch w-full">
+        <div id="plan-basic-card" class="plan-card-upgrade rounded-xl p-6" data-plan="basic">
+            <h3 id="plan-basic-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
+            <p id="plan-basic-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$5.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+                <li id="basic-li1"></li>
+                <li id="basic-li2"></li>
+                <li id="basic-li3"></li>
+                <li id="basic-li4"></li>
+            </ul>
+            <div id="basic-upgrade-cost" class="upgrade-cost"></div>
+        </div>
+            
+        <div id="plan-adfree-card" class="plan-card-upgrade rounded-xl p-6" data-plan="adfree">
+            <h3 id="plan-adfree-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
+            <p id="plan-adfree-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$9.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+                <li id="adfree-li1"></li>
+                <li id="adfree-li2"></li>
+                <li id="adfree-li3"></li>
+            </ul>
+            <div id="adfree-upgrade-cost" class="upgrade-cost"></div>
+        </div>
+
+        <div id="plan-focused-card" class="plan-card-upgrade rounded-xl p-6" data-plan="focused">
+            <div id="plan-focused-badge" style="margin-top: -32px; margin-bottom: 12px; background-color: #5E3E94; color: white; font-size: 0.75rem; font-weight: bold; padding: 4px 12px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); letter-spacing: 0.5px; text-align: center; text-transform: uppercase; max-width: 180px; line-height: 1.2; margin-left: auto; margin-right: auto;">
+              🔥 Most Popular
+            </div>
+            <h3 id="plan-focused-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
+            <p id="plan-focused-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$15.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+                <li id="focused-li1"></li>
+                <li id="focused-li2"></li>
+                <li id="focused-li3"></li>
+            </ul>
+            <div id="focused-upgrade-cost" class="upgrade-cost"></div>
+        </div>
+
+        <div id="plan-focusedpro-card" class="plan-card-upgrade rounded-xl p-6" data-plan="focusedpro">
+            <div id="focusedpro-badge" style="margin-top: -32px; margin-bottom: 12px; background-color: #f59e0b; color: #1f2937; font-size: 0.75rem; font-weight: bold; padding: 4px 12px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); letter-spacing: 0.5px; text-align: center; text-transform: uppercase; max-width: 180px; line-height: 1.2; margin-left: auto; margin-right: auto;"></div>
+            <h3 id="plan-focusedpro-title" class="text-xl font-bold text-center mb-2" style="color: #b45309; font-family: 'Poppins', sans-serif;"></h3>
+            <p id="plan-focusedpro-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: #b45309;">$18.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+                <li id="focusedpro-li1"></li>
+                <li id="focusedpro-li2"></li>
+                <li id="focusedpro-li3"></li>
+                <li id="focusedpro-li5"></li>
+                <li id="focusedpro-li4"></li>
+            </ul>
+            <div id="focusedpro-upgrade-cost" class="upgrade-cost"></div>
+        </div>
+
+        <div id="plan-sim-card" class="plan-card-upgrade rounded-xl p-6" data-plan="sim">
+            <h3 id="plan-sim-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-highlight); font-family: 'Poppins', sans-serif;"></h3>
+            <p id="plan-sim-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-highlight);">$17.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+                <li id="sim-li1"></li>
+                <li id="sim-li2"></li>
+                <li id="sim-li3"></li>
+            </ul>
+            <div id="sim-upgrade-cost" class="upgrade-cost"></div>
+        </div>
+
+        <div id="plan-advanced-card" class="plan-card-upgrade rounded-xl p-6" data-plan="advanced">
+            <div id="plan-advanced-badge" style="margin-top: -32px; margin-bottom: 12px; background-color: #00838f; color: white; font-size: 0.75rem; font-weight: bold; padding: 4px 12px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); letter-spacing: 0.5px; text-align: center; text-transform: uppercase; max-width: 180px; line-height: 1.2; margin-left: auto; margin-right: auto;">
+                ✨ New! Advanced
+            </div>
+            <h3 id="plan-advanced-title" class="text-xl font-bold text-center mb-2" style="color: #006064; font-family: 'Poppins', sans-serif;"></h3>
+            <p id="plan-advanced-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: #006064;">$23.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+                <li id="advanced-li1"></li>
+                <li id="advanced-li2"></li>
+                <li id="advanced-li3"></li>
+                <li id="advanced-li4"></li>
+                <li id="advanced-li5"></li>
+                <li id="advanced-li6"></li>
+            </ul>
+            <div id="advanced-upgrade-cost" class="upgrade-cost"></div>
+        </div>
+    </div>
+
+    <div class="text-center mt-10">
+        <p id="upgrade-call-to-action" class="text-lg text-gray-700 mb-4"></p>
+        <button id="initiate-upgrade-btn"
+            class="inline-block bg-purple-600 text-white px-8 py-4 rounded-full text-lg font-bold transition opacity-50 cursor-not-allowed"
+            style="font-family: 'Poppins', sans-serif;"
+            disabled>
+            Initiate Upgrade
+        </button>
+        <input type="hidden" id="selected-upgrade-plan-input" name="selected_upgrade_plan_input" value="">
+        <p id="upgrade-error-message" class="text-red-500 text-sm mt-2 text-center hidden"></p>
+        <p id="upgrade-info-text" class="upgrade-info"></p>
+    </div>
+
+    <div class="w-full my-10 flex justify-center">
+      <div class="w-full sm:w-3/4 lg:w-2/3 px-4">
+        <div class="bg-yellow-50 border border-yellow-300 rounded-xl shadow p-4 text-center">
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9746627179270389"
+               crossorigin="anonymous"></script>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-9746627179270389"
+               data-ad-slot="2606982429"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-20 bg-white rounded-xl shadow-lg p-8 border border-gray-200 max-w-4xl mx-auto text-center">
+      <h3 class="text-2xl font-bold mb-2" id="institutional-title" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
+      <p class="text-sm text-gray-600 mb-6" id="institutional-desc"></p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-300">
+          <p id="inst-10" class="text-sm font-semibold text-gray-700"></p>
+          <p class="text-lg text-gray-900 font-bold mt-2">$79.99/mo</p>
+          <p class="text-sm text-gray-600">or $799.99/yr</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-300">
+          <p id="inst-50" class="text-sm font-semibold text-gray-700"></p>
+          <p class="text-lg text-gray-900 font-bold mt-2">$299.99/mo</p>
+          <p class="text-sm text-gray-600">or $2,999.99/yr</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-300">
+          <p id="inst-100" class="text-sm font-semibold text-gray-700"></p>
+          <p class="text-lg text-gray-900 font-bold mt-2">$499.99/mo</p>
+          <p class="text-sm text-gray-600">or $4,999.99/yr</p>
+        </div>
+        <div class="bg-purple-100 p-4 rounded-lg border-2 border-purple-500 text-center">
+          <p id="inst-100plus" class="text-sm font-semibold text-purple-700"></p>
+          <p id="inst-contact" class="text-md mt-2 text-purple-900 font-bold italic"></p>
+        </div>
+      </div>
+      <div class="text-center mt-6">
+        <a id="institutional-btn" href="mailto:contact@brainboxmed.com"
+          class="inline-block bg-purple-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-purple-700 transition"
+          style="font-family: 'Poppins', sans-serif;">
+          📩 Request Institutional Access
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="text-center text-xs text-gray-500 mt-12 py-6 border-t border-gray-200">
+  <p id="footer1">&copy; 2024 BrainboxMed. All rights reserved.</p>
+  <p id="footer2"></p>
+  <p>
+    <a href="privacy.html" id="footer3" class="text-purple-600 hover:underline"></a> |
+    <a href="terms.html" id="footer4" class="text-purple-600 hover:underline"></a>
+  </p>
+</footer>
+
+<script>
+// Detectar idioma do hostname se não estiver no localStorage
+function detectLanguageFromHostname() {
+  const hostname = window.location.hostname;
+  if (hostname.endsWith('.es')) {
+    return 'es';
+  } else if (hostname.endsWith('.com.br')) {
+    return 'pt';
+  } else {
+    return 'en'; // Padrão para .com, .in, ou outros
+  }
+}
+
+let lang = localStorage.getItem('selectedLanguage');
+if (!lang) {
+  lang = detectLanguageFromHostname();
+  localStorage.setItem('selectedLanguage', lang);
+}
+
+const translations = {
+  en: {
+    'page-title-text': 'Upgrade Your BrainboxMed Plan', // Specific title for upgrade page
+    'login_button_text': 'Login',
+    'plans_button_text': 'Plans & Pricing', // Link to the new plans page
+    'upgrade-page-title': 'Upgrade Your BrainboxMed Plan', // Main title of the page
+    'upgrade-page-desc': 'You are currently on the <span id="current-plan-name-placeholder" class="font-bold text-purple-700"></span> plan. Select a higher tier below to unlock more features!',
+    'current-plan-title': 'Your Current Plan:',
+    'choose-upgrade-plan-title': 'Choose Your Upgrade:',
+    'upgrade-call-to-action': 'Ready to enhance your learning experience?',
+    'initiate-upgrade-btn': 'Initiate Upgrade',
+    'upgrade-info-text': 'The upgrade cost shown is the additional monthly amount. Your billing cycle will be adjusted proportionally.',
+    'no-upgrade-plan-selected-error': 'Please select a plan to upgrade to.',
+
+    'institutional-title': '🏥 Institutional Plans',
+    'institutional-desc': 'For universities, hospitals & residency programs',
+    'plan-basic-title': 'Basic (With Ads)', 
+    'plan-basic-desc': 'Ideal for trying out',
+    'plan-adfree-title': 'Ad-Free',
+    'plan-adfree-desc': 'Smooth experience',
+    'plan-focused-title': 'Focused Study',
+    'plan-focused-desc': 'Choose what to study',
+    'plan-focusedpro-title': 'Focused Study Pro',
+    'plan-focusedpro-desc': 'Focus deeper with music and analytics',
+    'plan-sim-title': 'Simulated Exam',
+    'plan-sim-desc': 'Closest to the real thing',
+    'site-slogan': 'Train your brain. Master medicine.',
+    'plan-focused-badge': '🔥 Most Popular',
+    'focusedpro-badge': '🎧 Includes Study Music', 
+    "try-free-quiz-text": "🎁 Try a Free Quiz Before Choosing a Plan", // Will keep this for consistency, though might not be used here
+    "basic-li1": "✅ Simulated test formats (USMLE, etc)",
+    "basic-li2": "✅ All specialties included",
+    "basic-li3": "✅ Updated weekly by doctors",
+    "basic-li4": "⚠️ With ads",
+    "adfree-li1": "✅ Everything in Basic",
+    "adfree-li2": "🚫 No ads",
+    "adfree-li3": "⚡ Faster access",
+    "focused-li1": "✅ Everything in Ad-Free",
+    "focused-li2": "🎯 Choose specialty & topic",
+    "focused-li3": "🧠 Adaptive recommendations",
+    "focusedpro-li1": "🎯 Choose specialty & topic",
+    "focusedpro-li2": "📊 Performance analytics",
+    "focusedpro-li3": "🎵 Curated study music",
+    "focusedpro-li5": "🎧 Will not be available during simulation sessions",
+    "focusedpro-li4": "🚫 No ads",
+    "sim-li1": "🧪 Full-length timed simulations",
+    "sim-li2": "📈 Performance analytics",
+    "sim-li3": "🧬 Real exam experience",
+    "institutional-title": "🏥 Institutional Plans",
+    "institutional-desc": "For universities, hospitals & residency programs",
+    "inst-10": "👥 Up to 10 users",
+    "inst-50": "👥 Up to 50 users",
+    "inst-100": "👥 Up to 100 users",
+    "inst-100plus": "🏥 More than 100 users",
+    "inst-contact": "Contact us",
+    "price-10": "$79.99/mo",
+    "price-10-year": "or $799.99/yr",
+    "price-50": "$299.99/mo",
+    "price-50-year": "or $2,999.99/yr",
+    "price-100": "$499.99/mo",
+    "price-100-year": "or $4,999.99/yr",
+    "institutional-btn": "📩 Request Institutional Access",
+    'plan-advanced-title': 'Advanced Plan',
+    'plan-advanced-desc': 'Everything in Focused Pro PLUS full-length mock exams for realistic simulation.',
+    'advanced-li1': '✅ Everything in Focused Pro',
+    'advanced-li2': '✅ Full-length mock exams',
+    'advanced-li3': '🧬 Realistic simulation experience',
+    'advanced-li4': '📊 Advanced performance analytics',
+    'advanced-li5': '🎵 Curated study music',
+    'advanced-li6': '🚫 No ads',
+    'upgrade-cost-prefix': 'Upgrade for ',
+    'per-month-suffix': '/mo',
+    'same-plan-text': 'You are already on this plan.',
+    'downgrade-text': 'This is a downgrade.',
+    'upgrade-to-selected-plan': 'Upgrade to {planName}', // Placeholder for specific upgrade text
+  },
+  pt: {
+    'page-title-text': 'Atualizar Seu Plano BrainboxMed',
+    'login_button_text': 'Login',
+    'plans_button_text': 'Planos e Preços',
+    'upgrade-page-title': 'Atualize Seu Plano BrainboxMed',
+    'upgrade-page-desc': 'Você está atualmente no plano <span id="current-plan-name-placeholder" class="font-bold text-purple-700"></span>. Selecione um nível superior abaixo para desbloquear mais recursos!',
+    'current-plan-title': 'Seu Plano Atual:',
+    'choose-upgrade-plan-title': 'Escolha Seu Upgrade:',
+    'upgrade-call-to-action': 'Pronto para aprimorar sua experiência de aprendizado?',
+    'initiate-upgrade-btn': 'Iniciar Upgrade',
+    'upgrade-info-text': 'O custo de upgrade mostrado é o valor mensal adicional. Seu ciclo de faturamento será ajustado proporcionalmente.',
+    'no-upgrade-plan-selected-error': 'Por favor, selecione um plano para atualizar.',
+
+    'institutional-title': '🏥 Planos Institucionais',
+    'institutional-desc': 'Para universidades, hospitais e programas de residência',
+    'plan-basic-title': 'Básico (com anúncios)', 
+    'plan-basic-desc': 'Ideal para experimentar',
+    'plan-adfree-title': 'Sem Anúncios',
+    'plan-adfree-desc': 'Experiência mais fluida',
+    'plan-focused-title': 'Estudo Focado',
+    'plan-focused-desc': 'Escolha o que estudar',
+    'plan-focusedpro-title': 'Estudo Focado Pro',
+    'plan-focusedpro-desc': 'Foque mais profundamente com música e análises',
+    'plan-sim-title': 'Simulado Completo',
+    'plan-sim-desc': 'Mais próximo da prova real',
+    'site-slogan': 'Treine seu cérebro. Domine a medicina.',
+    'plan-focused-badge': '🔥 Mais popular',
+    'focusedpro-badge': '🎧 Inclui Música para Estudo', 
+    "try-free-quiz-text": "🎁 Experimente um Quiz Grátis Antes de Escolher um Plano",
+    "basic-li1": "✅ Formatos simulados de prova (USMLE, etc)",
+    "basic-li2": "✅ Todas as especialidades incluídas",
+    "basic-li3": "✅ Atualizado semanalmente por médicos",
+    "basic-li4": "⚠️ Com anúncios",
+    "adfree-li1": "✅ Tudo do plano Básico",
+    "adfree-li2": "🚫 Sem anúncios",
+    "adfree-li3": "⚡ Acesso mais rápido",
+    "focused-li1": "✅ Tudo do plano Sem Anúncios",
+    "focused-li2": "🎯 Escolha especialidade e tema",
+    "focused-li3": "🧠 Recomendações adaptativas",
+    "focusedpro-li1": "🎯 Escolha especialidade e tema",
+    "focusedpro-li2": "📊 Análises de desempenho",
+    "focusedpro-li3": "🎵 Música para estudo curada",
+    "focusedpro-li5": "🎧 Não estará disponível durante sessões de simulação",
+    "focusedpro-li4": "🚫 Sem anúncios",
+    "sim-li1": "🧪 Simulados completos com tempo",
+    "sim-li2": "📈 Análises de desempenho",
+    "sim-li3": "🧬 Experiência de prova real",
+    "institutional-title": "🏥 Planos Institucionais",
+    "institutional-desc": "Para universidades, hospitais e programas de residência",
+    "inst-10": "👥 Até 10 usuários",
+    "inst-50": "👥 Até 50 usuários",
+    "inst-100": "👥 Até 100 usuários",
+    "inst-100plus": "🏥 Mais de 100 usuários",
+    "inst-contact": "Entre em contato",
+    "institutional-btn": "📩 Solicitar Acesso Institucional",
+    'plan-advanced-title': 'Plano Avançado',
+    'plan-advanced-desc': 'Inclui tudo no Estudo Focado Pro MAIS simulados completos para uma simulação realista.',
+    'advanced-li1': '✅ Tudo no Estudo Focado Pro',
+    'advanced-li2': '✅ Simulados completos',
+    'advanced-li3': '🧬 Experiência de simulação realista',
+    'advanced-li4': '📊 Análises de desempenho avançadas',
+    'advanced-li5': '🎵 Música para estudo curada',
+    'advanced-li6': '🚫 Sem anúncios',
+    'upgrade-cost-prefix': 'Upgrade por ',
+    'per-month-suffix': '/mês',
+    'same-plan-text': 'Você já está neste plano.',
+    'downgrade-text': 'Isto é um downgrade.',
+    'upgrade-to-selected-plan': 'Atualizar para {planName}',
+  },
+  es: {
+    'page-title-text': 'Actualiza Tu Plan BrainboxMed',
+    'login_button_text': 'Iniciar Sesión',
+    'plans_button_text': 'Planes y Precios',
+    'upgrade-page-title': 'Actualiza Tu Plan BrainboxMed',
+    'upgrade-page-desc': 'Actualmente tienes el plan <span id="current-plan-name-placeholder" class="font-bold text-purple-700"></span>. ¡Selecciona un nivel superior a continuación para desbloquear más funciones!',
+    'current-plan-title': 'Tu Plan Actual:',
+    'choose-upgrade-plan-title': 'Elige Tu Actualización:',
+    'upgrade-call-to-action': '¿Listo para mejorar tu experiencia de aprendizaje?',
+    'initiate-upgrade-btn': 'Iniciar Actualización',
+    'upgrade-info-text': 'El costo de actualización mostrado es el monto mensual adicional. Tu ciclo de facturación se ajustará proporcionalmente.',
+    'no-upgrade-plan-selected-error': 'Por favor, selecciona un plan para actualizar.',
+
+    'institutional-title': '🏥 Planes Institucionales',
+    'institutional-desc': 'Para universidades, hospitales y programas de residencia',
+    'plan-basic-title': 'Básico (con anuncios)', 
+    'plan-basic-desc': 'Ideal para probar',
+    'plan-adfree-title': 'Sin Anuncios',
+    'plan-adfree-desc': 'Experiencia fluida',
+    'plan-focused-title': 'Estudio Personalizado',
+    'plan-focused-desc': 'Elige qué estudiar',
+    'plan-focusedpro-title': 'Estudio Personalizado Pro',
+    'plan-focusedpro-desc': 'Concéntrate más profundamente con música y análisis',
+    'plan-sim-title': 'Simulacro de Examen',
+    'plan-sim-desc': 'Más cercano al examen real',
+    'site-slogan': 'Entrena tu cerebro. Domina la medicina.',
+    'plan-focused-badge': '🔥 Más popular',
+    'focusedpro-badge': '🎧 Incluye Música de Estudio', 
+    "try-free-quiz-text": "🎁 Prueba un Quiz Gratis Antes de Elegir un Plan",
+    "basic-li1": "✅ Formatos simulados de examen (USMLE, etc)",
+    "basic-li2": "✅ Todas las especialidades incluidas",
+    "basic-li3": "✅ Actualizado semanalmente por médicos",
+    "basic-li4": "⚠️ Con anuncios",
+    "adfree-li1": "✅ Todo lo del plan Básico",
+    "adfree-li2": "🚫 Sin anuncios",
+    "adfree-li3": "⚡ Acceso más rápido",
+    "focused-li1": "✅ Todo lo del plan Sin Anuncios",
+    "focused-li2": "🎯 Elige especialidad y tema",
+    "focused-li3": "🧠 Recomendaciones adaptativas",
+    "focusedpro-li1": "🎯 Elige especialidad y tema",
+    "focusedpro-li2": "📊 Análisis de rendimiento",
+    "focusedpro-li3": "🎵 Música de estudio curada",
+    "focusedpro-li5": "🎧 No estará disponible durante sesiones de simulación",
+    "focusedpro-li4": "🚫 Sin anuncios",
+    "sim-li1": "🧪 Simulacros completos cronometrados",
+    "sim-li2": "📈 Análisis de rendimiento",
+    "sim-li3": "🧬 Experiencia real de examen",
+    "institutional-title": "🏥 Planes Institucionales",
+    "institutional-desc": "Para universidades, hospitales y programas de residencia",
+    "inst-10": "👥 Hasta 10 usuarios",
+    "inst-50": "👥 Hasta 50 usuarios",
+    "inst-100": "👥 Hasta 100 usuarios",
+    "inst-100plus": "🏥 Más de 100 usuarios",
+    "inst-contact": "Contáctanos",
+    "institutional-btn": "📩 Solicitar Acceso Institucional",
+    'plan-advanced-title': 'Plan Avanzado',
+    'plan-advanced-desc': 'Incluye todo en Estudio Personalizado Pro MÁS simulacros completos para una simulación realista.',
+    'advanced-li1': '✅ Todo en Estudio Personalizado Pro',
+    'advanced-li2': '✅ Simulacros completos',
+    'advanced-li3': '🧬 Experiencia de simulación realista',
+    'advanced-li4': '📊 Análisis de rendimiento avanzados',
+    'advanced-li5': '🎵 Música de estudio curada',
+    'advanced-li6': '🚫 Sin anuncios',
+    'upgrade-selected-plan-btn': 'Actualizar Plan Seleccionado',
+    'no-plan-selected-error': 'Por favor, selecciona un plan para actualizar.',
+  }
+};
+
+const planDetails = { // Note: these prices should match the ones in your plans.html and signup.html for consistency
+  basic: {
+    name_en: "Basic (With Ads)", name_pt: "Básico (com anúncios)", name_es: "Básico (con anuncios)", price: 5.99,
+    benefits_en: ["Simulated test formats (USMLE, etc)", "All specialties included", "Updated weekly by doctors", "With ads"],
+  },
+  adfree: {
+    name_en: "Ad-Free", name_pt: "Sem Anúncios", name_es: "Sin Anuncios", price: 9.99,
+    benefits_en: ["Everything in Basic", "No ads", "Faster access"],
+  },
+  focused: {
+    name_en: "Focused Study", name_pt: "Estudo Focado", name_es: "Estudio Personalizado", price: 15.99,
+    benefits_en: ["Everything in Ad-Free", "Choose specialty & topic", "Adaptive recommendations"],
+  },
+  focusedpro: {
+    name_en: "Focused Study Pro", name_pt: "Estudo Focado Pro", name_es: "Estudio Personalizado Pro", price: 18.99,
+    benefits_en: ["Choose specialty & topic", "Performance analytics", "Curated study music", "Will not be available during simulation sessions", "No ads"],
+  },
+  sim: {
+    name_en: "Simulated Exam", name_pt: "Simulado Completo", name_es: "Simulacro de Examen", price: 17.99,
+    benefits_en: ["Full-length timed simulations", "Performance analytics", "Real exam experience"],
+  },
+  advanced: {
+    name_en: "Advanced Plan", name_pt: "Plano Avançado", name_es: "Plan Avanzado", price: 23.99,
+    benefits_en: ["Everything in Focused Pro", "Full-length mock exams", "Realistic simulation experience", "Advanced performance analytics", "Curated study music", "No ads"],
+  },
+};
+
+// Placeholder for user's current plan (will come from backend after login)
+// For testing, you can change this value to 'basic', 'adfree', etc.
+const currentPlanId = 'basic'; // <<< SIMULE O PLANO ATUAL DO USUÁRIO AQUI PARA TESTES
+
+function applyTranslations() {
+  const map = translations[lang];
+  document.getElementById('page-title-text').textContent = map['page-title-text'];
+  document.getElementById('upgrade-page-title').textContent = map['upgrade-page-title'];
+  document.getElementById('upgrade-page-desc').innerHTML = map['upgrade-page-desc'].replace('<span id="current-plan-name-placeholder" class="font-bold text-purple-700"></span>', `<span id="current-plan-name-placeholder" class="font-bold text-purple-700">${planDetails[currentPlanId][`name_${lang}`]}</span>`); // Dynamic current plan name
+  
+  document.getElementById('current-plan-title').textContent = map['current-plan-title'];
+  document.getElementById('choose-upgrade-plan-title').textContent = map['choose-upgrade-plan-title'];
+  document.getElementById('upgrade-call-to-action').textContent = map['upgrade-call-to-action'];
+  document.getElementById('initiate-upgrade-btn').textContent = map['initiate-upgrade-btn'];
+  document.getElementById('upgrade-info-text').textContent = map['upgrade-info-text'];
+
+  // Apply translations for header, institutional plans, and footer
+  document.getElementById('login-button-header').querySelector('span').textContent = map['login_button_text'];
+  document.getElementById('plans-button-header').querySelector('span').textContent = map['plans_button_text']; // Changed from signup to plans
+  document.getElementById('institutional-title').textContent = map['institutional-title'];
+  document.getElementById('institutional-desc').textContent = map['institutional-desc'];
+  document.getElementById('inst-10').textContent = map['inst-10'];
+  document.getElementById('inst-50').textContent = map['inst-50'];
+  document.getElementById('inst-100').textContent = map['inst-100'];
+  document.getElementById('inst-100plus').textContent = map['inst-100plus'];
+  document.getElementById('inst-contact').textContent = map['inst-contact'];
+  document.getElementById('institutional-btn').textContent = map['institutional-btn'];
+
+  document.getElementById('footer1').textContent = translations[lang]['footer1'];
+  document.getElementById('footer2').textContent = translations[lang]['footer2'];
+  document.getElementById('footer3').textContent = translations[lang]['footer3'];
+  document.getElementById('footer4').textContent = translations[lang]['footer4'];
+
+
+  // Apply translations for plan cards and their features
+  const planKeys = ['basic', 'adfree', 'focused', 'focusedpro', 'sim', 'advanced'];
+  planKeys.forEach(key => {
+      const planTitleEl = document.getElementById(`plan-${key}-title`);
+      if (planTitleEl) planTitleEl.textContent = map[`plan-${key}-title`];
+
+      const planDescEl = document.getElementById(`plan-${key}-desc`);
+      if (planDescEl) planDescEl.textContent = map[`plan-${key}-desc`];
+
+      const badgeEl = document.getElementById(`${key}-badge`); // For focusedpro-badge, plan-focused-badge, etc.
+      if (badgeEl && map[`${key}-badge`]) {
+          badgeEl.innerHTML = map[`${key}-badge`];
+      }
+
+      const liElements = document.querySelectorAll(`li[id^="${key}-li"]`);
+      liElements.forEach(li => {
+          if (map[li.id]) {
+              li.textContent = map[li.id];
+          }
+      });
+  });
+}
+
+// Function to calculate and display upgrade cost
+function calculateAndDisplayUpgradeCosts() {
+    const currentPlanPrice = planDetails[currentPlanId].price;
+    const allPlanCards = document.querySelectorAll('.plan-card-upgrade');
+    const lang = localStorage.getItem('selectedLanguage') || 'en';
+
+    // Display current plan details
+    document.getElementById('current-plan-name-display').textContent = planDetails[currentPlanId][`name_${lang}`];
+    document.getElementById('current-plan-price-display').textContent = `$${currentPlanPrice.toFixed(2)}${translations[lang]['per-month-suffix']}`;
+    document.getElementById('current-plan-benefits-display').innerHTML = `<strong>${translations[lang]['current-plan-title']}:</strong><br>` + 
+        (planDetails[currentPlanId][`benefits_${lang}`] || []).map(b => `<span>${b}</span>`).join('<br>');
+
+
+    allPlanCards.forEach(card => {
+        const targetPlanId = card.dataset.plan;
+        const targetPlanPrice = planDetails[targetPlanId].price;
+        const upgradeCostEl = document.getElementById(`${targetPlanId}-upgrade-cost`);
+        const selectButton = document.getElementById('initiate-upgrade-btn');
+
+        if (!upgradeCostEl) return; // Skip if no element for upgrade cost
+
+        if (targetPlanId === currentPlanId) {
+            upgradeCostEl.textContent = translations[lang]['same-plan-text'];
+            card.classList.add('opacity-50', 'cursor-not-allowed'); // Visually disable
+            card.removeEventListener('click', handlePlanCardClick); // Remove listener to prevent selection
+        } else if (targetPlanPrice < currentPlanPrice) {
+            upgradeCostEl.textContent = translations[lang]['downgrade-text'];
+            card.classList.add('opacity-50', 'cursor-not-allowed'); // Visually disable for downgrade
+            card.removeEventListener('click', handlePlanCardClick); // Remove listener
+        } else {
+            const costDifference = (targetPlanPrice - currentPlanPrice).toFixed(2);
+            upgradeCostEl.textContent = `${translations[lang]['upgrade-cost-prefix']}$${costDifference}${translations[lang]['per-month-suffix']}`;
+            card.classList.remove('opacity-50', 'cursor-not-allowed'); // Ensure clickable
+            card.addEventListener('click', handlePlanCardClick); // Add listener if not already added
+        }
+    });
+
+    // Event listener for plan selection
+    function handlePlanCardClick() {
+        const selectedPlanId = this.dataset.plan;
+        const selectedPlanName = planDetails[selectedPlanId][`name_${lang}`];
+        document.querySelectorAll('.plan-card-upgrade').forEach(pc => pc.classList.remove('selected'));
+        this.classList.add('selected');
+        document.getElementById('selected-upgrade-plan-input').value = selectedPlanId;
+        
+        selectButton.disabled = false;
+        selectButton.classList.remove('opacity-50', 'cursor-not-allowed');
+        selectButton.textContent = translations[lang]['upgrade-to-selected-plan'].replace('{planName}', selectedPlanName);
+        errorMessageEl.classList.add('hidden');
+    }
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  applyTranslations();
+  calculateAndDisplayUpgradeCosts(); // Calculate costs on load
+
+  const upgradePlanCards = document.querySelectorAll('.plan-card-upgrade'); // Select upgrade cards
+  const initiateUpgradeButton = document.getElementById('initiate-upgrade-btn');
+  const selectedUpgradePlanInput = document.getElementById('selected-upgrade-plan-input');
+  const upgradeErrorMessageEl = document.getElementById('upgrade-error-message');
+
+
+  initiateUpgradeButton.addEventListener('click', () => {
+    if (selectedUpgradePlanInput.value) {
+      const selectedPlan = selectedUpgradePlanInput.value;
+      // In a real scenario, this would send data to backend for upgrade
+      // For now, redirecting to a payment confirmation page or signup.html
+      alert(`Initiating upgrade to ${selectedPlan}... (Backend logic will handle payment and plan change)`);
+      // Redirect to payment page with upgrade info
+      window.location.href = `payment.html?plan=${selectedPlan}&action=upgrade`; // Example: pass action as upgrade
+    } else {
+      upgradeErrorMessageEl.textContent = translations[lang]['no-upgrade-plan-selected-error'];
+      upgradeErrorMessageEl.classList.remove('hidden');
+    }
+  });
+
+  // Ensure scroll to top on load for consistent UX
+  window.scrollTo(0, 0);
+});
+</script>
+</body>
+</html>

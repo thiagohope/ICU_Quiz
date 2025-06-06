@@ -537,3 +537,82 @@ body, p, label, select, input, td, th {
     color: #4b5563; /* text-gray-600 */
     font-weight: 500;
 }
+/*===============
+ Styling for the Study Suggestions Section 
+ ================*/
+.suggestions-card {
+    background-color: #f3e8ff; /* purple-100 */
+    border: 1px solid #c084fc; /* purple-400 */
+    border-left: 5px solid #8b5cf6; /* purple-500 */
+    border-radius: 0.75rem; /* rounded-xl */
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.suggestions-list-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.suggestions-list-item .accuracy-badge {
+    font-size: 0.875rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px; /* rounded-full */
+    color: #ffffff;
+    margin-right: 1rem;
+}
+
+.suggestions-list-item .topic-name {
+    font-weight: 600;
+    color: #374151; /* gray-700 */
+}
+
+/* ===============
+Styling for new interactive bar charts 
+================== */
+.interactive-chart-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s;
+}
+.interactive-chart-bar:hover {
+    background-color: #f3e8ff; /* purple-100 */
+}
+.interactive-chart-bar .bar-label {
+    width: 120px;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.interactive-chart-bar .bar-container {
+    flex-grow: 1;
+    background-color: #e5e7eb; /* gray-200 */
+    border-radius: 0.25rem;
+    height: 20px;
+}
+.interactive-chart-bar .bar-fill {
+    height: 100%;
+    border-radius: 0.25rem;
+}
+.interactive-chart-bar .bar-value {
+    width: 50px;
+    text-align: right;
+    font-size: 0.875rem;
+    font-weight: bold;
+}
+.question-review-item.highlight {
+    border: 2px solid #8b5cf6; /* purple-500 */
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}

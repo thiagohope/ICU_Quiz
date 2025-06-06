@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title-text">BrainboxMed - Plans & Pricing</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+    }
+    /* Styles for plan selection cards (copied from signup.html for consistency) */
+    .plan-select-card {
+      background-color: #f7f4fb;
+      border: 1px solid #d5cde2;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      height: 100%; /* Ensure cards have equal height */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .plan-select-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+    .plan-select-card.selected {
+      border: 2px solid #6D28D9; /* Purple-700 for selected */
+      box-shadow: 0 8px 24px rgba(109, 40, 217, 0.2);
+    }
+    .plan-select-card.selected::after {
+      content: '✅';
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body class="min-h-screen py-10 px-4">
+<header class="w-full py-3 px-4 sm:px-6 bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-screen-xl mx-auto flex justify-between items-center h-12 sm:h-14">
+    <div id="header-actions-landing" style="position: absolute; top: 1rem; right: 1rem; z-index: 1000; display: flex; align-items: center; gap: 0.5rem;">
+      <button id="login-button-header"
+        class="bg-purple-600 text-white hover:bg-purple-700 text-xs font-semibold py-1 px-3 rounded-md shadow-sm transition-colors whitespace-nowrap">
+        <span id="login_button_text"></span> 🔑
+      </button>
+      <a href="signup.html" id="signup-button-header"
+        class="border border-purple-600 text-purple-700 hover:bg-purple-600 hover:text-white text-xs font-semibold py-1 px-3 rounded-md shadow-sm transition-colors whitespace-nowrap"
+        style="text-decoration: none;">
+        <span id="signup_button_text"></span> ✨
+      </a>
+    </div>
+  </div>
+  <div id="language-selector-header" style="position: absolute; top: 1rem; left: 1rem; z-index: 1000; display: flex; align-items: center; gap: 0.5rem;">
+    <button onclick="changeLanguage('en')" title="English" style="background: none; border: none; cursor: pointer; padding:0; line-height: 0;">
+      <img src="assets/img/flag-en.png" alt="English" style="height: 32px; width: auto; display: block;"> 
+    </button>
+    <button onclick="changeLanguage('es')" title="Español" style="background: none; border: none; cursor: pointer; padding:0; line-height: 0;">
+      <img src="assets/img/flag-es.png" alt="Español" style="height: 32px; width: auto; display: block;"> 
+    </button>
+    <button onclick="changeLanguage('pt')" title="Português" style="background: none; border: none; cursor: pointer; padding:0; line-height: 0;">
+      <img src="assets/img/flag-pt.png" alt="Português" style="height: 32px; width: auto; display: block;"> 
+    </button>
+  </div>
+</header>
+
+<section class="py-16">
+  <div class="max-w-screen-xl mx-auto px-4">
+    <div class="text-center mb-10">
+      <div style="width: 100%; background-color: #f3f0eb; display: flex; justify-content: center; align-items: center; padding: 48px 0;">
+        <img src="assets/img/logo-brainboxmed-cube.png" alt="BrainboxMed Icon" style="height: 120px; width: auto; margin-right: 32px;" />
+        <img src="assets/img/logo-brainboxmed-name.png" alt="BrainboxMed Text Logo" style="height: 120px; width: auto;" />
+      </div>
+
+      <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: #333; text-align: center; margin: 1.5rem auto 2rem auto;">
+        Train your brain. Master medicine.
+      </p>
+    </div>
+
+    <h1 id="plans-title" class="text-3xl font-bold text-center mb-4" style="color: #6D28D9; font-family: 'Poppins', sans-serif;"></h1>
+    <p id="plans-desc" class="text-center text-base mb-10" style="color: #4a4a4a;"></p>
+
+    <div class="w-full my-8 flex justify-center">
+      <div class="w-full sm:w-3/4 lg:w-2/3 px-4">
+        <div class="bg-yellow-50 border border-yellow-300 rounded-xl shadow p-4 text-center">
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9746627179270389"
+               crossorigin="anonymous"></script>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-9746627179270389"
+               data-ad-slot="2606982429"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 text-center items-stretch w-full">
+        <div id="plan-basic-card" class="plan-select-card rounded-xl p-6" data-plan="basic">
+            <h3 id="plan-basic-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
+            <p id="plan-basic-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$5.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+                <li id="basic-li1"></li>
+                <li id="basic-li2"></li>
+                <li id="basic-li3"></li>
+                <li id="basic-li4"></li>
+            </ul>
+        </div>
+            
+        <div id="plan-adfree-card" class="plan-select-card rounded-xl p-6" data-plan="adfree">
+            <h3 id="plan-adfree-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
+            <p id="plan-adfree-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$9.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+                <li id="adfree-li1"></li>
+                <li id="adfree-li2"></li>
+                <li id="adfree-li3"></li>
+            </ul>
+        </div>
+
+        <div id="plan-focused-card" class="plan-select-card rounded-xl p-6" data-plan="focused">
+            <div id="plan-focused-badge" style="margin-top: -32px; margin-bottom: 12px; background-color: #5E3E94; color: white; font-size: 0.75rem; font-weight: bold; padding: 4px 12px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); letter-spacing: 0.5px; text-align: center; text-transform: uppercase; max-width: 180px; line-height: 1.2; margin-left: auto; margin-right: auto;">
+              🔥 Most Popular
+            </div>
+            <h3 id="plan-focused-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
+            <p id="plan-focused-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$15.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+                <li id="focused-li1"></li>
+                <li id="focused-li2"></li>
+                <li id="focused-li3"></li>
+            </ul>
+        </div>
+
+        <div id="plan-focusedpro-card" class="plan-select-card rounded-xl p-6" data-plan="focusedpro">
+            <div id="focusedpro-badge" style="margin-top: -32px; margin-bottom: 12px; background-color: #f59e0b; color: #1f2937; font-size: 0.75rem; font-weight: bold; padding: 4px 12px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); letter-spacing: 0.5px; text-align: center; text-transform: uppercase; max-width: 180px; line-height: 1.2; margin-left: auto; margin-right: auto;"></div>
+            <h3 id="plan-focusedpro-title" class="text-xl font-bold text-center mb-2" style="color: #b45309; font-family: 'Poppins', sans-serif;"></h3>
+            <p id="plan-focusedpro-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: #b45309;">$18.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+                <li id="focusedpro-li1"></li>
+                <li id="focusedpro-li2"></li>
+                <li id="focusedpro-li3"></li>
+                <li id="focusedpro-li5"></li>
+                <li id="focusedpro-li4"></li>
+            </ul>
+        </div>
+
+        <div id="plan-sim-card" class="plan-select-card rounded-xl p-6" data-plan="sim">
+            <h3 id="plan-sim-title" class="text-xl font-bold text-center mb-2" style="color: var(--color-highlight); font-family: 'Poppins', sans-serif;"></h3>
+            <p id="plan-sim-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-highlight);">$17.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+                <li id="sim-li1"></li>
+                <li id="sim-li2"></li>
+                <li id="sim-li3"></li>
+            </ul>
+        </div>
+
+        <div id="plan-advanced-card" class="plan-select-card rounded-xl p-6" data-plan="advanced">
+            <div id="plan-advanced-badge" style="margin-top: -32px; margin-bottom: 12px; background-color: #00838f; color: white; font-size: 0.75rem; font-weight: bold; padding: 4px 12px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); letter-spacing: 0.5px; text-align: center; text-transform: uppercase; max-width: 180px; line-height: 1.2; margin-left: auto; margin-right: auto;">
+                ✨ New! Advanced
+            </div>
+            <h3 id="plan-advanced-title" class="text-xl font-bold text-center mb-2" style="color: #006064; font-family: 'Poppins', sans-serif;"></h3>
+            <p id="plan-advanced-desc" class="text-center text-sm text-gray-500 mb-4"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: #006064;">$23.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+                <li id="advanced-li1"></li>
+                <li id="advanced-li2"></li>
+                <li id="advanced-li3"></li>
+                <li id="advanced-li4"></li>
+                <li id="advanced-li5"></li>
+                <li id="advanced-li6"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="text-center mt-10">
+        <button id="select-plan-btn"
+            class="inline-block bg-purple-600 text-white px-8 py-4 rounded-full text-lg font-bold transition opacity-50 cursor-not-allowed"
+            style="font-family: 'Poppins', sans-serif;"
+            disabled>
+            Select Plan
+        </button>
+        <input type="hidden" id="selected-plan-pricing" name="selected_plan_pricing" value="">
+        <p id="pricing-error-message" class="text-red-500 text-sm mt-2 text-center hidden"></p>
+    </div>
+
+
+    <div class="text-center mt-10">
+      <a href="Quiz/demo-quiz.html" class="inline-block bg-purple-600 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-purple-700 transition">
+        <span id="try-free-quiz-text"></span>
+      </a>
+    </div>
+
+    <div class="mt-20 bg-white rounded-xl shadow-lg p-8 border border-gray-200 max-w-4xl mx-auto text-center">
+      <h3 class="text-2xl font-bold mb-2" id="institutional-title" style="color: var(--color-primary); font-family: 'Poppins', sans-serif;"></h3>
+      <p class="text-sm text-gray-600 mb-6" id="institutional-desc"></p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-300">
+          <p id="inst-10" class="text-sm font-semibold text-gray-700"></p>
+          <p class="text-lg text-gray-900 font-bold mt-2">$79.99/mo</p>
+          <p class="text-sm text-gray-600">or $799.99/yr</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-300">
+          <p id="inst-50" class="text-sm font-semibold text-gray-700"></p>
+          <p class="text-lg text-gray-900 font-bold mt-2">$299.99/mo</p>
+          <p class="text-sm text-gray-600">or $2,999.99/yr</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-300">
+          <p id="inst-100" class="text-sm font-semibold text-gray-700"></p>
+          <p class="text-lg text-gray-900 font-bold mt-2">$499.99/mo</p>
+          <p class="text-sm text-gray-600">or $4,999.99/yr</p>
+        </div>
+        <div class="bg-purple-100 p-4 rounded-lg border-2 border-purple-500 text-center">
+          <p id="inst-100plus" class="text-sm font-semibold text-purple-700"></p>
+          <p id="inst-contact" class="text-md mt-2 text-purple-900 font-bold italic"></p>
+        </div>
+      </div>
+      <div class="text-center mt-6">
+        <a id="institutional-btn" href="mailto:contact@brainboxmed.com"
+          class="inline-block bg-purple-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-purple-700 transition"
+          style="font-family: 'Poppins', sans-serif;">
+          📩 Request Institutional Access
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="text-center text-xs text-gray-500 mt-12 py-6 border-t border-gray-200">
+  <p id="footer1">&copy; 2024 BrainboxMed. All rights reserved.</p>
+  <p id="footer2">BrainboxMed™ is a registered educational platform. Unauthorized use is prohibited.</p>
+  <p>
+    <a href="privacy.html" id="footer3" class="text-purple-600 hover:underline">Privacy Policy</a> |
+    <a href="terms.html" id="footer4" class="text-purple-600 hover:underline">Terms of Use</a>
+  </p>
+</footer>
+
+<script>
+// Detectar idioma do hostname se não estiver no localStorage
+function detectLanguageFromHostname() {
+  const hostname = window.location.hostname;
+  if (hostname.endsWith('.es')) {
+    return 'es';
+  } else if (hostname.endsWith('.com.br')) {
+    return 'pt';
+  } else {
+    return 'en'; // Padrão para .com, .in, ou outros
+  }
+}
+
+let lang = localStorage.getItem('selectedLanguage');
+if (!lang) {
+  lang = detectLanguageFromHostname();
+  localStorage.setItem('selectedLanguage', lang);
+}
+
+const translations = {
+  en: {
+    'page-title-text': 'Plans & Pricing | BrainboxMed',
+    'login_button_text': 'Login',
+    'signup_button_text': 'Sign Up',
+    'plans-title': 'Choose Your Perfect Plan', // New title for plans page
+    'plans-desc': 'Find the ideal BrainboxMed plan to boost your medical studies.', // New desc for plans page
+    'institutional-title': '🏥 Institutional Plans',
+    'institutional-desc': 'For universities, hospitals & residency programs',
+    'plan-basic-title': 'Basic (With Ads)', 
+    'plan-basic-desc': 'Ideal for trying out',
+    'plan-adfree-title': 'Ad-Free',
+    'plan-adfree-desc': 'Smooth experience',
+    'plan-focused-title': 'Focused Study',
+    'plan-focused-desc': 'Choose what to study',
+    'plan-focusedpro-title': 'Focused Study Pro',
+    'plan-focusedpro-desc': 'Focus deeper with music and analytics',
+    'plan-sim-title': 'Simulated Exam',
+    'plan-sim-desc': 'Closest to the real thing',
+    'site-slogan': 'Train your brain. Master medicine.',
+    'plan-focused-badge': '🔥 Most Popular',
+    'focusedpro-badge': '🎧 Includes Study Music', 
+    "try-free-quiz-text": "🎁 Try a Free Quiz Before Choosing a Plan",
+    "basic-li1": "✅ Simulated test formats (USMLE, etc)",
+    "basic-li2": "✅ All specialties included",
+    "basic-li3": "✅ Updated weekly by doctors",
+    "basic-li4": "⚠️ With ads",
+    "adfree-li1": "✅ Everything in Basic",
+    "adfree-li2": "🚫 No ads",
+    "adfree-li3": "⚡ Faster access",
+    "focused-li1": "✅ Everything in Ad-Free",
+    "focused-li2": "🎯 Choose specialty & topic",
+    "focused-li3": "🧠 Adaptive recommendations",
+    "focusedpro-li1": "🎯 Choose specialty & topic",
+    "focusedpro-li2": "📊 Performance analytics",
+    "focusedpro-li3": "🎵 Curated study music",
+    "focusedpro-li5": "🎧 Will not be available during simulation sessions",
+    "focusedpro-li4": "🚫 No ads",
+    "sim-li1": "🧪 Full-length timed simulations",
+    "sim-li2": "📈 Performance analytics",
+    "sim-li3": "🧬 Real exam experience",
+    "institutional-title": "🏥 Institutional Plans",
+    "institutional-desc": "For universities, hospitals & residency programs",
+    "inst-10": "👥 Up to 10 users",
+    "inst-50": "👥 Up to 50 users",
+    "inst-100": "👥 Up to 100 users",
+    "inst-100plus": "🏥 More than 100 users",
+    "inst-contact": "Contact us",
+    "price-10": "$79.99/mo",
+    "price-10-year": "or $799.99/yr",
+    "price-50": "$299.99/mo",
+    "price-50-year": "or $2,999.99/yr",
+    "price-100": "$499.99/mo",
+    "price-100-year": "or $4,999.99/yr",
+    "institutional-btn": "📩 Request Institutional Access",
+    // Advanced Plan translations
+    'plan-advanced-title': 'Advanced Plan',
+    'plan-advanced-desc': 'Everything in Focused Pro PLUS full-length mock exams for realistic simulation.',
+    'advanced-li1': '✅ Everything in Focused Pro',
+    'advanced-li2': '✅ Full-length mock exams',
+    'advanced-li3': '🧬 Realistic simulation experience',
+    'advanced-li4': '📊 Advanced performance analytics',
+    'advanced-li5': '🎵 Curated study music',
+    'advanced-li6': '🚫 No ads',
+    'select-plan-btn': 'Select Plan', // Changed button text
+    'no-plan-selected-error': 'Please select a plan to continue.',
+  },
+  pt: {
+    'page-title-text': 'Planos e Preços | BrainboxMed',
+    'login_button_text': 'Login',
+    'signup_button_text': 'Cadastre-se',
+    'plans-title': 'Escolha Seu Plano Perfeito', // New title for plans page
+    'plans-desc': 'Encontre o plano BrainboxMed ideal para impulsionar seus estudos médicos.', // New desc for plans page
+    'institutional-title': '🏥 Planos Institucionais',
+    'institutional-desc': 'Para universidades, hospitais e programas de residência',
+    'plan-basic-title': 'Básico (com anúncios)', 
+    'plan-basic-desc': 'Ideal para experimentar',
+    'plan-adfree-title': 'Sem Anúncios',
+    'plan-adfree-desc': 'Experiência mais fluida',
+    'plan-focused-title': 'Estudo Focado',
+    'plan-focused-desc': 'Escolha o que estudar',
+    'plan-focusedpro-title': 'Estudo Focado Pro',
+    'plan-focusedpro-desc': 'Foque mais profundamente com música e análises',
+    'plan-sim-title': 'Simulado Completo',
+    'plan-sim-desc': 'Mais próximo da prova real',
+    'site-slogan': 'Treine seu cérebro. Domine a medicina.',
+    'plan-focused-badge': '🔥 Mais popular',
+    'focusedpro-badge': '🎧 Inclui Música para Estudo', 
+    "try-free-quiz-text": "🎁 Experimente um Quiz Grátis Antes de Escolher um Plano",
+    "basic-li1": "✅ Formatos simulados de prova (USMLE, etc)",
+    "basic-li2": "✅ Todas as especialidades incluídas",
+    "basic-li3": "✅ Atualizado semanalmente por médicos",
+    "basic-li4": "⚠️ Com anúncios",
+    "adfree-li1": "✅ Tudo do plano Básico",
+    "adfree-li2": "🚫 Sem anúncios",
+    "adfree-li3": "⚡ Acesso mais rápido",
+    "focused-li1": "✅ Tudo do plano Sem Anúncios",
+    "focused-li2": "🎯 Escolha especialidade e tema",
+    "focused-li3": "🧠 Recomendações adaptativas",
+    "focusedpro-li1": "🎯 Escolha especialidade e tema",
+    "focusedpro-li2": "📊 Análises de desempenho",
+    "focusedpro-li3": "🎵 Música para estudo curada",
+    "focusedpro-li5": "🎧 Não estará disponível durante sessões de simulação",
+    "focusedpro-li4": "🚫 Sem anúncios",
+    "sim-li1": "🧪 Simulados completos com tempo",
+    "sim-li2": "📈 Análises de desempenho",
+    "sim-li3": "🧬 Experiência de prova real",
+    "institutional-title": "🏥 Planos Institucionais",
+    "institutional-desc": "Para universidades, hospitais e programas de residência",
+    "inst-10": "👥 Até 10 usuários",
+    "inst-50": "👥 Até 50 usuários",
+    "inst-100": "👥 Até 100 usuários",
+    "inst-100plus": "🏥 Mais de 100 usuários",
+    "inst-contact": "Entre em contato",
+    "price-10": "R$79,99/mês",
+    "price-10-year": "ou R$799,99/ano",
+    "price-50": "R$299,99/mês",
+    "price-50-year": "ou R$2.999,99/ano",
+    "price-100": "R$499,99/mês",
+    "price-100-year": "ou R$4.999,99/ano",
+    "institutional-btn": "📩 Solicitar Acesso Institucional",
+    // Advanced Plan translations
+    'plan-advanced-title': 'Plano Avançado',
+    'plan-advanced-desc': 'Inclui tudo no Estudo Focado Pro MAIS simulados completos para uma simulação realista.',
+    'advanced-li1': '✅ Tudo no Estudo Focado Pro',
+    'advanced-li2': '✅ Simulados completos',
+    'advanced-li3': '🧬 Experiência de simulação realista',
+    'advanced-li4': '📊 Análises de desempenho avançadas',
+    'advanced-li5': '🎵 Música para estudo curada',
+    'advanced-li6': '🚫 Sem anúncios',
+    'select-plan-btn': 'Selecionar Plano', // Changed button text
+    'no-plan-selected-error': 'Por favor, selecione um plano para continuar.',
+  },
+  es: {
+    'page-title-text': 'Planes y Precios | BrainboxMed',
+    'login_button_text': 'Iniciar Sesión',
+    'signup_button_text': 'Registrarse',
+    'plans-title': 'Elige Tu Plan Perfecto', // New title for plans page
+    'plans-desc': 'Encuentra el plan BrainboxMed ideal para impulsar tus estudios médicos.', // New desc for plans page
+    'institutional-title': '🏥 Planes Institucionales',
+    'institutional-desc': 'Para universidades, hospitales y programas de residencia',
+    'plan-basic-title': 'Básico (con anuncios)', 
+    'plan-basic-desc': 'Ideal para probar',
+    'plan-adfree-title': 'Sin Anuncios',
+    'plan-adfree-desc': 'Experiencia fluida',
+    'plan-focused-title': 'Estudio Personalizado',
+    'plan-focused-desc': 'Elige qué estudiar',
+    'plan-focusedpro-title': 'Estudio Personalizado Pro',
+    'plan-focusedpro-desc': 'Concéntrate más profundamente con música y análisis',
+    'plan-sim-title': 'Simulacro de Examen',
+    'plan-sim-desc': 'Más cercano al examen real',
+    'site-slogan': 'Entrena tu cerebro. Domina la medicina.',
+    'plan-focused-badge': '🔥 Más popular',
+    'focusedpro-badge': '🎧 Incluye Música de Estudio', 
+    "try-free-quiz-text": "🎁 Prueba un Quiz Gratis Antes de Elegir un Plan",
+    "basic-li1": "✅ Formatos simulados de examen (USMLE, etc)",
+    "basic-li2": "✅ Todas las especialidades incluidas",
+    "basic-li3": "✅ Actualizado semanalmente por médicos",
+    "basic-li4": "⚠️ Con anuncios",
+    "adfree-li1": "✅ Todo lo del plan Básico",
+    "adfree-li2": "🚫 Sin anuncios",
+    "adfree-li3": "⚡ Acceso más rápido",
+    "focused-li1": "✅ Todo lo del plan Sin Anuncios",
+    "focused-li2": "🎯 Elige especialidad y tema",
+    "focused-li3": "🧠 Recomendaciones adaptativas",
+    "focusedpro-li1": "🎯 Elige especialidad y tema",
+    "focusedpro-li2": "📊 Análisis de rendimiento",
+    "focusedpro-li3": "🎵 Música de estudio curada",
+    "focusedpro-li5": "🎧 No estará disponible durante sesiones de simulación",
+    "focusedpro-li4": "🚫 Sin anuncios",
+    "sim-li1": "🧪 Simulacros completos cronometrados",
+    "sim-li2": "📈 Análisis de rendimiento",
+    "sim-li3": "🧬 Experiencia real de examen",
+    "institutional-title": "🏥 Planes Institucionales",
+    "institutional-desc": "Para universidades, hospitales y programas de residencia",
+    "inst-10": "👥 Hasta 10 usuarios",
+    "inst-50": "👥 Hasta 50 usuarios",
+    "inst-100": "👥 Hasta 100 usuarios",
+    "inst-100plus": "🏥 Más de 100 usuarios",
+    "inst-contact": "Contáctanos",
+    "price-10": "$79.99/mes",
+    "price-10-year": "o $799.99/año",
+    "price-50": "$299.99/mes",
+    "price-50-year": "o $2,999.99/año",
+    "price-100": "$499.99/mes",
+    "price-100-year": "o $4,999.99/año",
+    "institutional-btn": "📩 Solicitar Acceso Institucional",
+    // Advanced Plan translations
+    'plan-advanced-title': 'Plan Avanzado',
+    'plan-advanced-desc': 'Incluye todo en Estudio Personalizado Pro MÁS simulacros completos para una simulación realista.',
+    'advanced-li1': '✅ Todo en Estudio Personalizado Pro',
+    'advanced-li2': '✅ Simulacros completos',
+    'advanced-li3': '🧬 Experiencia de simulación realista',
+    'advanced-li4': '📊 Análisis de rendimiento avanzados',
+    'advanced-li5': '🎵 Música de estudio curada',
+    'advanced-li6': '🚫 Sin anuncios',
+    'select-plan-btn': 'Seleccionar Plan', // Changed button text
+    'no-plan-selected-error': 'Por favor, selecciona un plan para continuar.',
+  }
+};
+
+function applyTranslations() {
+  const lang = localStorage.getItem('selectedLanguage') || 'en';
+  const map = translations[lang];
+  Object.keys(map).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = map[id];
+  });
+
+  // Special handling for elements where innerHTML is needed (e.g., strong tags or badges with HTML)
+  const innerHTML_ids = [
+      "price-basic", "price-adfree", "price-focused", "price-focusedpro", "price-sim", "price-advanced", // Prices with <strong>
+      "plan-focused-badge", "focusedpro-badge", "plan-advanced-badge", // Badges that contain HTML
+  ];
+  innerHTML_ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && map[id]) el.innerHTML = map[id];
+  });
+
+  // Handle specific li elements (e.g., basic-li1, basic-li2, etc.)
+  const liElements = document.querySelectorAll('li[id^="basic-li"], li[id^="adfree-li"], li[id^="focused-li"], li[id^="focusedpro-li"], li[id^="sim-li"], li[id^="advanced-li"]');
+    liElements.forEach(li => {
+        if (map[li.id]) {
+            li.textContent = map[li.id];
+        }
+    });
+
+    // Handle header button texts (Login, Sign Up)
+    document.getElementById('login-button-header').querySelector('span').textContent = map['login_button_text'];
+    document.getElementById('signup-button-header').querySelector('span').textContent = map['signup_button_text'];
+    document.getElementById('institutional-btn').textContent = map['institutional-btn'];
+    document.getElementById('try-free-quiz-text').textContent = map['try-free-quiz-text'];
+    document.getElementById('select-plan-btn').textContent = map['select-plan-btn']; // For the main select button
+}
+
+function changeLanguage(lang) {
+  localStorage.setItem('selectedLanguage', lang);
+  location.reload();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  applyTranslations();
+
+  const planCards = document.querySelectorAll('.plan-select-card');
+  const selectPlanButton = document.getElementById('select-plan-btn');
+  const selectedPlanInput = document.getElementById('selected-plan-pricing');
+  const errorMessageEl = document.getElementById('pricing-error-message');
+
+  planCards.forEach(card => {
+    card.addEventListener('click', () => {
+      planCards.forEach(pc => pc.classList.remove('selected')); // Deselect all
+      card.classList.add('selected'); // Select current
+      selectedPlanInput.value = card.dataset.plan; // Set hidden input value
+      selectPlanButton.disabled = false; // Enable button
+      selectPlanButton.classList.remove('opacity-50', 'cursor-not-allowed'); // Enable visual
+      errorMessageEl.classList.add('hidden'); // Hide error if present
+    });
+  });
+
+  selectPlanButton.addEventListener('click', () => {
+    if (selectedPlanInput.value) {
+      const selectedPlan = selectedPlanInput.value;
+      let redirectUrl = '';
+      switch (selectedPlan) {
+          case 'basic':
+              redirectUrl = 'Signup/signup-basic.html';
+              break;
+          case 'adfree':
+              redirectUrl = 'Signup/signup-adfree.html';
+              break;
+          case 'focused':
+              redirectUrl = 'Signup/signup-focused.html';
+              break;
+          case 'focusedpro':
+              redirectUrl = 'Signup/signup-focusedpro.html';
+              break;
+          case 'sim':
+              redirectUrl = 'Signup/signup-simulation.html'; // Assuming 'sim' goes to signup-simulation.html
+              break;
+          case 'advanced':
+              redirectUrl = 'Signup/signup-focusedpro.html?upgrade=advanced'; // Redirects to focusedpro page as transition, which has advanced option
+              break;
+          default:
+              errorMessageEl.textContent = "Invalid plan selected."; // Add to translations if needed
+              errorMessageEl.classList.remove('hidden');
+              return;
+      }
+      window.location.href = redirectUrl;
+    } else {
+      errorMessageEl.textContent = translations[lang]['no-plan-selected-error'];
+      errorMessageEl.classList.remove('hidden');
+    }
+  });
+
+  // Ensure scroll to top on load for consistent UX
+  window.scrollTo(0, 0);
+});
+</script>
+</body>
+</html>
