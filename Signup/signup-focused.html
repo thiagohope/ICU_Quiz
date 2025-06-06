@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> Subscribe to Focused </title>
+  <title id="page-title-text"></title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet" />
   <style>
@@ -17,6 +17,33 @@
     h1,
     h2 {
       font-family: 'Poppins', sans-serif;
+    }
+
+    /* Estilo para o novo upgrade-box do Advanced */
+    .upgrade-box {
+        background-color: #e0f2f7; /* Light blue background for emphasis */
+        border: 1px solid #b2ebf2;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-top: 1.5rem;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .upgrade-box h2 {
+        color: #00838f; /* Darker blue */
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+    .upgrade-box p {
+        color: #4a4a4a;
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+    .upgrade-box .price-advanced {
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: #006064; /* Even darker blue */
+        margin-bottom: 1rem;
     }
   </style>
 </head>
@@ -31,24 +58,31 @@
       </div>
     </a>
 
-    <h1 id="title-text" class="text-xl font-bold text-purple-700 text-center mb-2">Subscribe to Focused</h1>
-    <p id="price-text" class="text-center text-sm text-gray-600 mb-4">Plan cost: <strong>$15.99/mo</strong></p>
+    <h1 id="title-text" class="text-xl font-bold text-purple-700 text-center mb-2"></h1>
+    <p id="price-text" class="text-center text-sm text-gray-600 mb-4"></p>
 
-    <form class="space-y-4">
-      <input id="name-placeholder" type="text" placeholder="Full Name" class="w-full border rounded-lg px-4 py-2" required />
-      <input id="email-placeholder" type="email" placeholder="Email Address" class="w-full border rounded-lg px-4 py-2" required />
-      <button id="confirm-button" type="submit" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold">
-        Confirm Subscription
+    <form id="transition-form-focused" class="space-y-4">
+      <input id="name-input" type="text" placeholder="Full Name" class="w-full border rounded-lg px-4 py-2" required />
+      <input id="email-input" type="email" placeholder="Email Address" class="w-full border rounded-lg px-4 py-2" required />
+      <button id="continue-button-focused" type="submit" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold">
+        Continue to Sign Up
       </button>
     </form>
 
     <div class="text-center mt-4">
-      <a href="add-sim-focused.html" id="add-sim-link" class="text-sm text-orange-600 hover:underline">
-        ➕ Add Timed Simulations for +$5/month
-      </a>
+      <a href="#" id="upgrade-to-focusedpro-link" class="text-sm text-orange-600 hover:underline"></a>
     </div>
 
-    <div class="mt-4 text-center">
+    <div class="upgrade-box">
+        <h2 id="advanced-plan-title"></h2>
+        <p id="advanced-plan-desc"></p>
+        <p id="advanced-plan-price" class="price-advanced"></p>
+        <button id="continue-button-advanced" type="button" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition font-semibold">
+            Continue to Sign Up for Advanced
+        </button>
+    </div>
+
+    <div class="text-center mt-6">
       <a id="back-to-plans" href="../upgrade.html" class="text-sm text-purple-600 hover:underline">⬅️ Back to Plans</a>
     </div>
   </div>
@@ -56,7 +90,8 @@
   <div class="w-full my-8 flex justify-center">
     <div class="w-full sm:w-3/4 lg:w-2/3 px-4">
       <div class="bg-yellow-50 border border-yellow-300 rounded-xl shadow p-4 text-center">
-        <p class="text-sm text-yellow-800 font-semibold">Publicidade</p> <div class="mt-2">
+        <p class="text-sm text-yellow-800 font-semibold" id="ad-label"></p>
+        <div class="mt-2">
           <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="YYYYYYYYYY" data-ad-format="auto" data-full-width-responsive="true"></ins>
         </div>
         <script>
@@ -67,79 +102,170 @@
   </div>
 
   <footer class="text-center text-xs text-gray-500 mt-12 py-6 border-t border-gray-200">
-    <p id="footer1">© 2024 BrainboxMed. All rights reserved.</p>
-    <p id="footer2">BrainboxMed™ is a registered educational platform. Unauthorized use is prohibited.</p>
+    <p id="footer1"></p>
+    <p id="footer2"></p>
     <p>
-      <a href="../privacy.html" id="footer3" class="text-purple-600 hover:underline">Privacy Policy</a> |
-      <a href="../terms.html" id="footer4" class="text-purple-600 hover:underline">Terms of Use</a>
+      <a href="../privacy.html" id="footer3" class="text-purple-600 hover:underline"></a> |
+      <a href="../terms.html" id="footer4" class="text-purple-600 hover:underline"></a>
     </p>
   </footer>
 
   <script>
-    const lang = localStorage.getItem('selectedLanguage') || 'en';
+    function detectLanguageFromHostname() {
+      const hostname = window.location.hostname;
+      if (hostname.endsWith('.es')) {
+        return 'es';
+      } else if (hostname.endsWith('.com.br')) {
+        return 'pt';
+      } else {
+        return 'en';
+      }
+    }
+
+    let lang = localStorage.getItem('selectedLanguage');
+    if (!lang) {
+      lang = detectLanguageFromHostname();
+      localStorage.setItem('selectedLanguage', lang);
+    }
 
     const translations = {
       en: {
+        pageTitle: "Subscribe to Focused",
         title: "Subscribe to Focused",
         price: "Plan cost: <strong>$15.99/mo</strong>",
         namePlaceholder: "Full Name",
         emailPlaceholder: "Email Address",
-        button: "Confirm Subscription",
-        addSim: "➕ Add Timed Simulations for +$5/month",
+        button: "Continue to Sign Up", // for Focused button
+        upgradeToFocusedPro: "🎵 Upgrade to Focused Pro (with Music) for +$3/month", // NEW TEXT with music emoji
+        advancedPlanTitle: "Upgrade to Advanced Plan",
+        advancedPlanDesc: "Includes everything in Focused Pro PLUS full-length mock exams for realistic simulation.",
+        advancedPlanPrice: "Plan cost: <strong>$23.99/mo</strong>",
+        advancedButton: "Continue to Sign Up for Advanced",
         back: "⬅️ Back to Plans",
-        footer1: "© 2025 BrainboxMed. All rights reserved.",
+        adLabel: "Advertisement",
+        footer1: "© 2024 BrainboxMed. All rights reserved.",
         footer2: "BrainboxMed™ is a registered educational platform. Unauthorized use is prohibited.",
         footer3: "Privacy Policy",
-        footer4: "Terms of Use"
-        // adsLabel: "Advertisement" // Adicionar se quiser traduzir "Publicidade"
+        footer4: "Terms of Use",
       },
       pt: {
-        title: "Assinar Focused",
+        pageTitle: "Assinar Estudo Focado",
+        title: "Assinar Estudo Focado",
         price: "Custo do plano: <strong>R$15,99/mês</strong>",
         namePlaceholder: "Nome completo",
         emailPlaceholder: "Endereço de e-mail",
-        button: "Confirmar Assinatura",
-        addSim: "➕ Adicionar Simulações por +R$5/mês",
+        button: "Continuar Cadastro", // for Focused button
+        upgradeToFocusedPro: "🎵 Upgrade para Estudo Focado Pro (com Música) por +R$3/mês", // NEW TEXT with music emoji
+        advancedPlanTitle: "Upgrade para Plano Avançado",
+        advancedPlanDesc: "Inclui tudo no Estudo Focado Pro MAIS simulados completos para uma simulação realista.",
+        advancedPlanPrice: "Custo do plano: <strong>R$23,99/mês</strong>",
+        advancedButton: "Continuar Cadastro para Avançado",
         back: "⬅️ Voltar aos Planos",
-        footer1: "© 2025 BrainboxMed. Todos os direitos reservados.",
+        adLabel: "Publicidade",
+        footer1: "© 2024 BrainboxMed. Todos os direitos reservados.",
         footer2: "BrainboxMed™ é uma plataforma educacional registrada. Uso não autorizado é proibido.",
         footer3: "Política de Privacidade",
-        footer4: "Termos de Uso"
-        // adsLabel: "Publicidade"
+        footer4: "Termos de Uso",
       },
       es: {
-        title: "Suscribirse a Focused",
+        pageTitle: "Suscribirse a Estudio Personalizado",
+        title: "Suscribirse a Estudio Personalizado",
         price: "Costo del plan: <strong>$15.99/mes</strong>",
         namePlaceholder: "Nombre completo",
         emailPlaceholder: "Dirección de correo",
-        button: "Confirmar Suscripción",
-        addSim: "➕ Agregar Simulaciones por +$5/mes",
+        button: "Continuar Registro", // for Focused button
+        upgradeToFocusedPro: "🎵 Actualizar a Estudio Personalizado Pro (con Música) por +$3/mes", // NEW TEXT with music emoji
+        advancedPlanTitle: "Actualizar a Plan Avanzado",
+        advancedPlanDesc: "Incluye todo en Estudio Personalizado Pro MÁS simulacros completos para una simulación realista.",
+        advancedPlanPrice: "Costo del plan: <strong>$23.99/mes</strong>",
+        advancedButton: "Continuar Registro para Avanzado",
         back: "⬅️ Volver a los Planes",
-        footer1: "© 2025 BrainboxMed. Todos los derechos reservados.",
+        adLabel: "Publicidad",
+        footer1: "© 2024 BrainboxMed. Todos los derechos reservados.",
         footer2: "BrainboxMed™ es una plataforma educativa registrada. Uso no autorizado está prohibido.",
         footer3: "Política de Privacidad",
-        footer4: "Términos de Uso"
-        // adsLabel: "Publicidad"
+        footer4: "Términos de Uso",
       }
     };
 
-    const t = translations[lang] || translations['en'];
+    const t = translations[lang];
 
+    // Aplicar traduções aos elementos do plano Focused
+    document.getElementById("page-title-text").textContent = t.pageTitle;
     document.getElementById("title-text").textContent = t.title;
     document.getElementById("price-text").innerHTML = t.price;
-    document.getElementById("name-placeholder").placeholder = t.namePlaceholder;
-    document.getElementById("email-placeholder").placeholder = t.emailPlaceholder;
-    document.getElementById("confirm-button").textContent = t.button;
-    document.getElementById("add-sim-link").textContent = t.addSim;
+    document.getElementById("name-input").placeholder = t.namePlaceholder;
+    document.getElementById("email-input").placeholder = t.emailPlaceholder;
+    document.getElementById("continue-button-focused").textContent = t.button; // Botão do Focused
+    document.getElementById("upgrade-to-focusedpro-link").textContent = t.upgradeToFocusedPro; // NOVO LINK DE UPGRADE
     document.getElementById("back-to-plans").textContent = t.back;
+    document.getElementById("ad-label").textContent = t.adLabel;
     document.getElementById("footer1").textContent = t.footer1;
     document.getElementById("footer2").textContent = t.footer2;
     document.getElementById("footer3").textContent = t.footer3;
     document.getElementById("footer4").textContent = t.footer4;
-    // const adsLabelEl = document.getElementById("ads-label"); // Descomentar se adicionar ID ao <p> de Publicidade
-    // if (adsLabelEl) adsLabelEl.textContent = t.adsLabel;     // Descomentar se adicionar ID
+
+    // Aplicar traduções aos elementos do plano Advanced
+    document.getElementById("advanced-plan-title").textContent = t.advancedPlanTitle;
+    document.getElementById("advanced-plan-desc").textContent = t.advancedPlanDesc;
+    document.getElementById("advanced-plan-price").innerHTML = t.advancedPlanPrice;
+    document.getElementById("continue-button-advanced").textContent = t.advancedButton;
+
+    // Lógica para enviar dados para a página de cadastro completo para o plano Focused
+    document.getElementById('transition-form-focused').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const fullName = document.getElementById('name-input').value;
+      const email = document.getElementById('email-input').value;
+      const plan = 'focused'; // PLANO ESPECÍFICO PARA ESTE FORMULÁRIO (Focused)
+
+      const encodedFullName = encodeURIComponent(fullName);
+      const encodedEmail = encodeURIComponent(email);
+
+      window.location.href = `signup.html?plan=${plan}&name=${encodedFullName}&email=${encodedEmail}`;
+    });
+
+    // Lógica para o novo link de upgrade para Focused Pro
+    document.getElementById('upgrade-to-focusedpro-link').addEventListener('click', function(event) {
+      event.preventDefault(); // Impede o link padrão
+
+      const fullName = document.getElementById('name-input').value;
+      const email = document.getElementById('email-input').value;
+      const plan = 'focusedpro'; // O plano de destino é 'focusedpro'
+
+      const encodedFullName = encodeURIComponent(fullName);
+      const encodedEmail = encodeURIComponent(email);
+
+      // Redirecionar para a página de transição do Focused Pro
+      window.location.href = `signup-focusedpro.html?name=${encodedFullName}&email=${encodedEmail}`;
+    });
+
+
+    // Lógica para enviar dados para a página de cadastro completo para o plano Advanced
+    document.getElementById('continue-button-advanced').addEventListener('click', function(event) {
+      event.preventDefault();
+
+      const fullName = document.getElementById('name-input').value;
+      const email = document.getElementById('email-input').value;
+      const plan = 'advanced'; // PLANO ESPECÍFICO PARA O BOTÃO ADVANCED
+
+      const encodedFullName = encodeURIComponent(fullName);
+      const encodedEmail = encodeURIComponent(email);
+
+      window.location.href = `signup.html?plan=${plan}&name=${encodedFullName}&email=${encodedEmail}`;
+    });
+
+    // Pre-fill name and email from localStorage if available
+    const storedFullName = localStorage.getItem('signupFullName');
+    const storedEmail = localStorage.getItem('signupEmail');
+    if (storedFullName) {
+        document.getElementById('name-input').value = storedFullName;
+    }
+    if (storedEmail) {
+        document.getElementById('email-input').value = storedEmail;
+    }
+  window.scrollTo(0, 0);
   </script>
 
 </body>
-</html>
 </html>

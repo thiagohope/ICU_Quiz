@@ -2,26 +2,1297 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sign Up - BrainboxMed</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
-  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-  <script defer src="/firebase-init.js"></script>
-  <script defer src="signup.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title-text">Sign Up | BrainBoxMed</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+    }
+    .plan-card {
+      background-color: #f7f4fb;
+      border: 1px solid #d5cde2;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    .plan-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+    .plan-card.selected {
+      border: 2px solid #6D28D9;
+      box-shadow: 0 8px 24px rgba(109, 40, 217, 0.2);
+    }
+    .plan-card.selected::after {
+      content: '✅';
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 1.5rem;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+    .close-button {
+      color: #aaa;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close-button:hover,
+    .close-button:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .hidden {
+        display: none;
+    }
+
+    /* Fixed plan summary box - Default for larger screens */
+    .plan-summary-box {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 999;
+      background-color: #f7f4fb;
+      border: 1px solid #d5cde2;
+      border-radius: 8px;
+      padding: 1rem;
+      max-width: 280px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease-in-out; /* Smooth transition for height/width */
+    }
+
+    .plan-summary-box h4 {
+        font-family: 'Poppins', sans-serif;
+        font-weight: bold;
+        color: #5E3E94;
+    }
+    .plan-summary-box ul {
+        list-style-type: none;
+        padding-left: 0;
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        color: #4a4a4a;
+    }
+    .plan-summary-box ul li {
+        margin-bottom: 0.25rem;
+    }
+    .plan-summary-box .price {
+        font-weight: bold;
+        font-size: 1.25rem;
+        color: #6D28D9;
+        margin-top: 0.75rem;
+        text-align: right;
+    }
+
+    /* === Responsive adjustments for .plan-summary-box === */
+    @media (max-width: 767px) { /* Adjust breakpoint as needed, e.g., for 'md' in Tailwind */
+        .plan-summary-box {
+            position: relative; /* Make it flow with content */
+            top: auto;
+            left: auto;
+            margin: 1rem auto; /* Center it */
+            max-width: 90%; /* Adjust max-width for smaller screens */
+            width: 100%; /* Take full available width */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            cursor: pointer; /* Indicate it's clickable */
+            overflow: hidden; /* Hide overflow when collapsed */
+        }
+        .plan-summary-box.collapsed {
+            max-height: 50px; /* Collapsed height */
+            padding-bottom: 0.5rem; /* Adjust padding for collapsed state */
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .plan-summary-box.expanded {
+            max-height: 500px; /* Arbitrarily large height for expansion */
+            padding-bottom: 1rem;
+            border-bottom-left-radius: 8px; /* Restore radius when expanded */
+            border-bottom-right-radius: 8px; /* Restore radius when expanded */
+        }
+        /* Style for the toggle handle */
+        .summary-toggle-handle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #d5cde2;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #5E3E94;
+            cursor: pointer;
+        }
+        .summary-toggle-handle .toggle-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        .plan-summary-box.expanded .summary-toggle-handle .toggle-icon {
+            transform: rotate(90deg); /* Rotate for expanded state */
+        }
+        /* Hide content when collapsed */
+        .plan-summary-box.collapsed .summary-content {
+            display: none; /* Explicitly hide content div when collapsed */
+        }
+    }
+  </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-  <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
-    <h2 class="text-2xl font-bold mb-6 text-center text-purple-700">📝 Create Your Account</h2>
+
+<body class="min-h-screen py-10 px-4">
+
+  <div id="plan-summary-box" class="plan-summary-box hidden">
+    <div id="summary-toggle-handle" class="summary-toggle-handle">
+        <h4 id="summary-title"></h4>
+        <span id="summary-plan-name-compact" class="font-semibold text-purple-700 ml-2"></span> <span class="toggle-icon">+</span>
+    </div>
+    <div id="summary-content" class="summary-content">
+        <h4 id="summary-plan-name-full" class="hidden"></h4> <ul id="summary-plan-benefits"></ul>
+        <div id="summary-plan-price" class="price"></div>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-md">
+
+    <a href="landing.html" aria-label="Back to Homepage">
+      <div class="text-center mb-6">
+        <img src="../assets/img/logo-brainboxmed-cube.png" alt="BrainboxMed Icon" class="mx-auto h-16 mb-2">
+        <img src="../assets/img/logo-brainboxmed-name.png" alt="BrainboxMed Text" class="mx-auto h-10">
+        <p class="text-sm text-gray-500 mt-1">Train your brain. Master medicine.</p>
+        <p class="text-sm text-purple-600 mt-2 hover:underline" id="back-to-homepage-text"></p>
+      </div>
+    </a>
+
+    <h2 class="text-xl font-bold text-purple-700 text-center mb-6" id="signup-title"></h2>
     <form id="signup-form" class="space-y-4">
-      <input type="email" id="email" placeholder="Email" class="w-full px-4 py-2 border rounded-lg" required />
-      <input type="password" id="password" placeholder="Password" class="w-full px-4 py-2 border rounded-lg" required />
-      <button type="submit" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition">Sign Up</button>
+      <input type="text" id="full-name" name="full_name" class="w-full border rounded-lg px-4 py-2" required />
+      <input type="email" id="email" name="email" class="w-full border rounded-lg px-4 py-2" required />
+      <input type="password" id="password" name="password" class="w-full border rounded-lg px-4 py-2" required />
+      <input type="password" id="confirm-password" name="confirm_password" class="w-full border rounded-lg px-4 py-2" required />
+
+      <div>
+        <label for="dob" class="block text-sm font-medium text-gray-700 mb-1" id="dob-label"></label>
+        <input type="date" id="dob" name="date_of_birth" class="w-full border rounded-lg px-4 py-2" required />
+        <p id="age-display" class="text-sm text-gray-500 mt-1"></p>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1" id="gender-label"></label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" name="gender" value="male" class="form-radio text-purple-600" id="gender-radio-male" required>
+            <span class="ml-2" id="gender-male"></span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="gender" value="female" class="form-radio text-purple-600" id="gender-radio-female">
+            <span class="ml-2" id="gender-female"></span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="gender" value="other" class="form-radio text-purple-600" id="gender-radio-other">
+            <span class="ml-2" id="gender-other"></span>
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <label for="user-type" class="block text-sm font-medium text-gray-700 mb-1" id="user-type-label"></label>
+        <select id="user-type" name="user_type" class="w-full border rounded-lg px-4 py-2" required>
+          <option value="" id="select-option"></option>
+          <option value="student" id="option-student"></option>
+          <option value="professional" id="option-professional"></option>
+          <option value="other_status" id="option-other-status"></option>
+        </select>
+      </div>
+
+      <div id="student-fields" class="hidden space-y-4">
+        <label for="study-year" class="block text-sm font-medium text-gray-700 mb-1" id="study-year-label"></label>
+        <input type="text" id="study-year" name="study_year" class="w-full border rounded-lg px-4 py-2" />
+      </div>
+
+      <div id="professional-fields" class="hidden space-y-4">
+        <div>
+          <label for="experience-years" class="block text-sm font-medium text-gray-700 mb-1" id="experience-years-label"></label>
+          <select id="experience-years" name="experience_years" class="w-full border rounded-lg px-4 py-2">
+            <option value="" id="select-option-exp"></option>
+            <option value="1-5" id="exp-1-5"></option>
+            <option value="6-10" id="exp-6-10"></option>
+            <option value=">10" id="exp-10-plus"></option>
+          </select>
+        </div>
+        <div>
+          <label for="university-name" class="block text-sm font-medium text-gray-700 mb-1" id="university-name-label"></label>
+          <input type="text" id="university-name" name="university_name" class="w-full border rounded-lg px-4 py-2" />
+        </div>
+        <div>
+          <label for="university-country" class="block text-sm font-medium text-gray-700 mb-1" id="university-country-label"></label>
+          <input type="text" id="university-country" name="university_country" class="w-full border rounded-lg px-4 py-2" />
+        </div>
+        <div>
+          <label for="graduation-year" class="block text-sm font-medium text-gray-700 mb-1" id="graduation-year-label"></label>
+          <input type="number" id="graduation-year" name="graduation_year" min="1900" max="2099" class="w-full border rounded-lg px-4 py-2" />
+        </div>
+      </div>
+
+      <div id="other-status-field" class="hidden space-y-4">
+          <label for="other-status-description" class="block text-sm font-medium text-gray-700 mb-1" id="other-status-description-label"></label>
+          <textarea id="other-status-description" name="other_status_description" rows="3" class="w-full border rounded-lg px-4 py-2"></textarea>
+      </div>
+
+      <div>
+        <label for="current-country" class="block text-sm font-medium text-gray-700 mb-1" id="current-country-label"></label>
+        <select id="current-country" name="current_country" class="w-full border rounded-lg px-4 py-2" required>
+          <option value="" id="select-country-option"></option>
+          </select>
+      </div>
+
+      <div>
+        <label for="signup-purpose" class="block text-sm font-medium text-gray-700 mb-1" id="signup-purpose-label"></label>
+        <select id="signup-purpose" name="signup_purpose" class="w-full border rounded-lg px-4 py-2" required>
+          <option value="" id="select-purpose-option"></option>
+          <option value="certification-exams" id="purpose-cert-exams"></option>
+          <option value="residency-review" id="purpose-residency-review"></option>
+          <option value="cpe" id="purpose-cpe"></option>
+          <option value="med-school-study" id="purpose-med-school-study"></option>
+          <option value="explore" id="purpose-explore"></option>
+          <option value="other-purpose" id="purpose-other"></option>
+        </select>
+        <textarea id="other-purpose-description" name="other_purpose_description" rows="3" class="hidden w-full border rounded-lg px-4 py-2 mt-2"></textarea>
+        <p class="text-xs text-gray-500 mt-1" id="purpose-hint"></p>
+      </div>
+
+      <p id="error-message" class="text-red-500 text-sm mt-4 text-center hidden"></p>
+
+      <div id="plan-selection-section">
+        <h3 class="text-center text-xl font-bold mt-10 mb-6" id="choose-plan-title"></h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 text-center items-stretch w-full">
+          <div id="plan-basic-card" class="plan-card rounded-xl p-6 flex flex-col justify-between h-full" data-plan="basic">
+            <h3 class="text-xl font-bold text-center mb-2" id="plan-basic-title"></h3>
+            <p class="text-center text-sm text-gray-500 mb-4" id="plan-basic-desc"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$5.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+              <li id="basic-li1"></li>
+              <li id="basic-li2"></li>
+              <li id="basic-li3"></li>
+              <li id="basic-li4"></li>
+            </ul>
+            <button type="button" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold select-plan-btn" data-plan="basic" id="plan-basic-btn"></button>
+          </div>
+            
+          <div id="plan-adfree-card" class="plan-card rounded-xl p-6 flex flex-col justify-between h-full" data-plan="adfree">
+            <h3 class="text-xl font-bold text-center mb-2" id="plan-adfree-title"></h3>
+            <p class="text-center text-sm text-gray-500 mb-4" id="plan-adfree-desc"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$9.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+              <li id="adfree-li1"></li>
+              <li id="adfree-li2"></li>
+              <li id="adfree-li3"></li>
+            </ul>
+            <button type="button" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold select-plan-btn" data-plan="adfree" id="plan-adfree-btn"></button>
+          </div>
+
+          <div id="plan-focused-card" class="plan-card rounded-xl p-6 flex flex-col justify-between h-full" data-plan="focused">
+            <div id="plan-focused-badge" style="margin-top: -32px; margin-bottom: 12px; background-color: #5E3E94; color: white; font-size: 0.75rem; font-weight: bold; padding: 4px 12px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); letter-spacing: 0.5px; text-align: center; text-transform: uppercase; max-width: 180px; line-height: 1.2; margin-left: auto; margin-right: auto;">
+              🔥 Most Popular
+            </div>
+            <h3 class="text-xl font-bold text-center mb-2" id="plan-focused-title"></h3>
+            <p class="text-center text-sm text-gray-500 mb-4" id="plan-focused-desc"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-primary);">$15.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+              <li id="focused-li1"></li>
+              <li id="focused-li2"></li>
+              <li id="focused-li3"></li>
+            </ul>
+            <button type="button" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold select-plan-btn" data-plan="focused" id="plan-focused-btn"></button>
+          </div>
+
+          <div id="plan-focusedpro-card" class="plan-card rounded-xl p-6 flex flex-col justify-between h-full" data-plan="focusedpro">
+            <div id="focusedpro-badge" style="margin-top: -32px; margin-bottom: 12px; background-color: #f59e0b; color: #1f2937; font-size: 0.75rem; font-weight: bold; padding: 4px 12px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); letter-spacing: 0.5px; text-align: center; text-transform: uppercase; max-width: 180px; line-height: 1.2; margin-left: auto; margin-right: auto;"></div>
+            <h3 class="text-xl font-bold text-center mb-2" id="plan-focusedpro-title" style="color: #b45309; font-family: 'Poppins', sans-serif;"></h3>
+            <p class="text-center text-sm text-gray-500 mb-4" id="plan-focusedpro-desc"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: #b45309;">$18.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+              <li id="focusedpro-li1"></li>
+              <li id="focusedpro-li2"></li>
+              <li id="focusedpro-li3"></li>
+              <li id="focusedpro-li5"></li>
+              <li id="focusedpro-li4"></li>
+            </ul>
+            <button type="button" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold select-plan-btn" data-plan="focusedpro" id="plan-focusedpro-btn"></button>
+          </div>
+
+          <div id="plan-sim-card" class="plan-card rounded-xl p-6 flex flex-col justify-between h-full" data-plan="sim">
+            <h3 class="text-xl font-bold text-center mb-2" id="plan-sim-title"></h3>
+            <p class="text-center text-sm text-gray-500 mb-4" id="plan-sim-desc"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: var(--color-highlight);">$17.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+              <li id="sim-li1"></li>
+              <li id="sim-li2"></li>
+              <li id="sim-li3"></li>
+            </ul>
+            <button type="button" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold select-plan-btn" data-plan="sim" id="plan-sim-btn"></button>
+          </div>
+
+          <div id="plan-advanced-card" class="plan-card rounded-xl p-6 flex flex-col justify-between h-full" data-plan="advanced">
+            <div id="advanced-badge" style="margin-top: -32px; margin-bottom: 12px; background-color: #00838f; color: white; font-size: 0.75rem; font-weight: bold; padding: 4px 12px; border-radius: 999px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); letter-spacing: 0.5px; text-align: center; text-transform: uppercase; max-width: 180px; line-height: 1.2; margin-left: auto; margin-right: auto;">
+              ✨ New! Advanced
+            </div>
+            <h3 class="text-xl font-bold text-center mb-2" id="plan-advanced-title" style="color: #006064; font-family: 'Poppins', sans-serif;"></h3>
+            <p class="text-center text-sm text-gray-500 mb-4" id="plan-advanced-desc"></p>
+            <p class="text-center text-3xl font-bold mb-4" style="color: #006064;">$23.99<span class="text-base font-normal">/mo</span></p>
+            <ul class="text-sm text-gray-700 mb-4 list-none text-center leading-snug space-y-1">
+              <li id="advanced-li1"></li>
+              <li id="advanced-li2"></li>
+              <li id="advanced-li3"></li>
+              <li id="advanced-li4"></li>
+              <li id="advanced-li5"></li>
+              <li id="advanced-li6"></li>
+            </ul>
+            <button type="button" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition font-semibold select-plan-btn" data-plan="advanced" id="plan-advanced-btn"></button>
+          </div>
+        </div>
+      </div>
+      <input type="hidden" id="selected-plan" name="selected_plan" value="" required>
+      <p id="plan-error-message" class="text-red-500 text-sm mt-2 text-center hidden"></p>
+
+      <button type="submit" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold mt-6" id="submit-signup-btn"></button>
     </form>
-    <p id="error-message" class="text-red-500 text-sm mt-4 text-center hidden"></p>
+
     <p class="text-center text-sm text-gray-600 mt-4">
-      Already have an account? <a href="/login.html" class="text-purple-600 font-semibold hover:underline">Login</a>
+      <span id="already-have-account-text"></span> <a href="login.html" class="text-purple-600 font-semibold hover:underline" id="login-link-text"></a>
     </p>
   </div>
+
+  <div class="w-full my-8 flex justify-center">
+    <div class="w-full sm:w-3/4 lg:w-2/3 px-4">
+      <div class="bg-yellow-50 border border-yellow-300 rounded-xl shadow p-4 text-center">
+        <p class="text-sm text-yellow-800 font-semibold" id="ad-label"></p>
+        <div class="mt-2">
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+               data-ad-slot="YYYYYYYYYY"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+        </div>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center text-xs text-gray-500 mt-12 py-6 border-t border-gray-200">
+    <p id="footer1"></p>
+    <p id="footer2"></p>
+    <p>
+      <a href="privacy.html" class="text-purple-600 hover:underline" id="privacy-policy-link"></a> |
+      <a href="terms.html" class="text-purple-600 hover:underline" id="terms-of-use-link"></a>
+    </p>
+  </footer>
+
+  <div id="confirmation-modal" class="modal fixed inset-0 flex items-center justify-center">
+    <div class="modal-content">
+      <span class="close-button" id="close-modal-btn">&times;</span>
+      <h3 class="text-2xl font-bold text-purple-700 mb-4" id="modal-title"></h3>
+      <p class="text-gray-700 mb-2" id="modal-selected-plan-text"></p>
+      <p class="text-gray-600 mb-6" id="modal-plan-price-text"></p>
+      <button type="button" class="bg-purple-600 text-white py-2 px-6 rounded-lg hover:bg-purple-700 transition font-semibold" id="proceed-to-payment-btn"></button>
+      <button type="button" class="mt-4 bg-gray-300 text-gray-800 py-2 px-6 rounded-lg hover:bg-gray-400 transition font-semibold" id="cancel-payment-btn"></button>
+    </div>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        'page-title-text': 'Sign Up | BrainBoxMed',
+        'back-to-homepage-text': '⬅️ Back to Homepage',
+        'signup-title': 'Create Your Account',
+        'full-name': 'Full Name',
+        'email': 'Email',
+        'password': 'Password',
+        'confirm-password': 'Confirm Password',
+        'dob-label': 'Date of Birth:',
+        'age-display-prefix': 'Age:',
+        'age-display-suffix-singular': 'year',
+        'age-display-suffix-plural': 'years',
+        'invalid-dob': 'Invalid date of birth.',
+        'gender-label': 'Gender:',
+        'gender-male': 'Male',
+        'gender-female': 'Female',
+        'gender-other': 'Other',
+        'user-type-label': 'You are a:',
+        'select-option': 'Select...',
+        'option-student': 'Student',
+        'option-professional': 'Healthcare Professional',
+        'option-other-status': 'Other',
+        'study-year-label': 'Year of Study:',
+        'study-year-placeholder': 'e.g., 3rd year Medical Student',
+        'experience-years-label': 'Years of Experience:',
+        'select-option-exp': 'Select...',
+        'exp-1-5': '1 to 5 years',
+        'exp-6-10': '6 to 10 years',
+        'exp-10-plus': 'More than 10 years',
+        'university-name-label': 'University Name (Graduation):',
+        'university-name-placeholder': 'Full university name',
+        'university-country-label': 'University Country:',
+        'university-country-placeholder': 'e.g., USA',
+        'graduation-year-label': 'Graduation Year:',
+        'graduation-year-placeholder': 'e.g., 2020',
+        'other-status-description-label': 'Describe your Status:',
+        'other-status-description-placeholder': 'Please describe your status (e.g., researcher, curious, etc.)',
+        'current-country-label': 'Country where you reside/work/study:',
+        'select-country-option': 'Select a country...',
+        'signup-purpose-label': 'What is your main purpose for signing up?',
+        'select-purpose-option': 'Select...',
+        'purpose-cert-exams': 'Prepare for certification exams (USMLE, etc.)',
+        'purpose-residency-review': 'Review for medical residency',
+        'purpose-cpe': 'Continuous Professional Development (CPE)',
+        'purpose-med-school-study': 'Medical school study',
+        'purpose-explore': 'Just exploring the platform',
+        'purpose-other': 'Other (please describe)',
+        'other-purpose-description-placeholder': 'Please describe your specific purpose.',
+        'purpose-hint': '(We will be adding more test types over time, please mention what you are looking for)',
+        'choose-plan-title': 'Choose Your Study Plan',
+        'plan-basic-title': 'Basic (With Ads)', 
+        'plan-basic-desc': 'Ideal for trying out', 
+        'plan-basic-btn': 'Select Plan', 
+        'plan-adfree-title': 'Ad-Free',
+        'plan-adfree-desc': 'Smooth experience',
+        'plan-adfree-btn': 'Select Plan',
+        'plan-focused-title': 'Focused Study',
+        'plan-focused-desc': 'Choose what to study',
+        'plan-focused-btn': 'Select Plan',
+        'focusedpro-badge': '🎧 Includes Study Music',
+        'plan-focusedpro-title': 'Focused Study Pro',
+        'plan-focusedpro-desc': 'Focus deeper with music and analytics',
+        'plan-focusedpro-btn': 'Select Plan',
+        'plan-sim-title': 'Simulated Exam',
+        'plan-sim-desc': 'Closest to the real thing',
+        'plan-sim-btn': 'Select Plan',
+        'submit-signup-btn': 'Sign Up',
+        'already-have-account-text': 'Already have an account?',
+        'login-link-text': 'Login',
+        'ad-label': 'Advertisement',
+        'footer1': '&copy; 2024 BrainboxMed. All rights reserved.',
+        'footer2': 'BrainboxMed™ is a registered educational platform. Unauthorized use is prohibited.',
+        'privacy-policy-link': 'Privacy Policy',
+        'terms-of-use-link': 'Terms of Use',
+        'modal-title': 'Confirm Your Plan',
+        'modal-selected-plan-text': 'You have selected the <span id="modal-plan-name" class="font-semibold text-purple-700"></span> plan.',
+        'modal-plan-price-text': 'Price: <span id="modal-plan-price" class="font-bold text-lg"></span>',
+        'proceed-to-payment-btn': 'Proceed to Payment',
+        'cancel-payment-btn': 'Cancel',
+        'plan-error-message': 'Please select a plan to continue.',
+        'passwords-mismatch': 'Passwords do not match.',
+        "basic-li1": "✅ Simulated test formats (USMLE, etc)",
+        "basic-li2": "✅ All specialties included",
+        "basic-li3": "✅ Updated weekly by doctors",
+        "basic-li4": "⚠️ With ads",
+        "adfree-li1": "✅ Everything in Starter",
+        "adfree-li2": "🚫 No ads",
+        "adfree-li3": "⚡ Faster access",
+        "focused-li1": "✅ Everything in Ad-Free",
+        "focused-li2": "🎯 Choose specialty & topic",
+        "focused-li3": "🧠 Adaptive recommendations",
+        "focusedpro-li1": "🎯 Choose specialty & topic",
+        "focusedpro-li2": "📊 Performance analytics",
+        "focusedpro-li3": "🎵 Curated study music",
+        "focusedpro-li5": "🎧 Will not be available during simulation sessions",
+        "focusedpro-li4": "🚫 No ads",
+        "sim-li1": "🧪 Full-length timed simulations",
+        "sim-li2": "📈 Performance analytics",
+        "sim-li3": "🧬 Real exam experience",
+        // Plan summary box
+        'summary-title': 'Your Plan',
+        'summary-benefits-prefix': 'Benefits:',
+        'summary-price-prefix': 'Monthly Price:',
+        // Advanced Plan in signup.html
+        'plan-advanced-title': 'Advanced Plan',
+        'plan-advanced-desc': 'Everything in Focused Pro PLUS full-length mock exams for realistic simulation.',
+        'advanced-li1': '✅ Everything in Focused Pro',
+        'advanced-li2': '✅ Full-length mock exams',
+        'advanced-li3': '🧬 Realistic simulation experience',
+        'advanced-li4': '📊 Advanced performance analytics',
+        'advanced-li5': '🎵 Curated study music',
+        'advanced-li6': '🚫 No ads', 
+      },
+      pt: {
+        'page-title-text': 'Cadastro | BrainBoxMed',
+        'back-to-homepage-text': '⬅️ Voltar à Página Inicial',
+        'signup-title': 'Crie Sua Conta',
+        'full-name': 'Nome Completo',
+        'email': 'Email',
+        'password': 'Senha',
+        'confirm-password': 'Confirme a Senha',
+        'dob-label': 'Data de Nascimento:',
+        'age-display-prefix': 'Idade:',
+        'age-display-suffix-singular': 'ano',
+        'age-display-suffix-plural': 'anos',
+        'invalid-dob': 'Data de nascimento inválida.',
+        'gender-label': 'Gênero:',
+        'gender-male': 'Masculino',
+        'gender-female': 'Feminino',
+        'gender-other': 'Outros',
+        'user-type-label': 'Você é:',
+        'select-option': 'Selecione...',
+        'option-student': 'Estudante',
+        'option-professional': 'Profissional da Saúde',
+        'option-other-status': 'Outros',
+        'study-year-label': 'Ano de Estudo:',
+        'study-year-placeholder': 'Ex: 3º ano de Medicina',
+        'experience-years-label': 'Anos de Experiência:',
+        'select-option-exp': 'Selecione...',
+        'exp-1-5': '1 a 5 anos',
+        'exp-6-10': '6 a 10 anos',
+        'exp-10-plus': 'Mais de 10 anos',
+        'university-name-label': 'Nome da Universidade (Graduação):',
+        'university-name-placeholder': 'Nome completo da universidade',
+        'university-country-label': 'País da Universidade:',
+        'university-country-placeholder': 'Ex: Brasil',
+        'graduation-year-label': 'Ano de Graduação:',
+        'graduation-year-placeholder': 'Ex: 2020',
+        'other-status-description-label': 'Descreva seu Status:',
+        'other-status-description-placeholder': 'Por favor, descreva seu status (ex: pesquisador, curioso, etc.)',
+        'current-country-label': 'País em que você reside/trabalha/estuda:',
+        'select-country-option': 'Selecione um país...',
+        'signup-purpose-label': 'Qual a sua principal finalidade de se cadastrar?',
+        'select-purpose-option': 'Selecione...',
+        'purpose-cert-exams': 'Preparar para exames de certificação (USMLE, etc.)',
+        'purpose-residency-review': 'Revisar para a residência médica',
+        'purpose-cpe': 'Desenvolvimento Profissional Contínuo (DPC)',
+        'purpose-med-school-study': 'Estudo para a faculdade de medicina',
+        'purpose-explore': 'Apenas explorar a plataforma',
+        'purpose-other': 'Outro (descrever)',
+        'other-purpose-description-placeholder': 'Por favor, descreva sua finalidade específica.',
+        'purpose-hint': '(Estaremos adicionando mais tipos de testes com o tempo, mencione qual você busca)',
+        'choose-plan-title': 'Escolha Seu Plano de Estudo',
+        'plan-basic-title': 'Inicial (com anúncios)',
+        'plan-basic-desc': 'Ideal para experimentar',
+        'plan-basic-btn': 'Selecionar Plano',
+        'plan-adfree-title': 'Sem Anúncios',
+        'plan-adfree-desc': 'Experiência mais fluida',
+        'plan-adfree-btn': 'Selecionar Plano',
+        'plan-focused-title': 'Estudo Focado',
+        'plan-focused-desc': 'Escolha o que estudar',
+        'plan-focused-btn': 'Selecionar Plano',
+        'focusedpro-badge': '🎧 Inclui Música para Estudo',
+        'plan-focusedpro-title': 'Estudo Focado Pro',
+        'plan-focusedpro-desc': 'Foque mais profundamente com música e análises',
+        'plan-focusedpro-btn': 'Selecionar Plano',
+        'plan-sim-title': 'Simulado Completo',
+        'plan-sim-desc': 'Mais próximo da prova real',
+        'plan-sim-btn': 'Simular Agora',
+        'submit-signup-btn': 'Cadastrar',
+        'already-have-account-text': 'Já possui uma conta?',
+        'login-link-text': 'Fazer Login',
+        'ad-label': 'Publicidade',
+        'footer1': '&copy; 2024 BrainboxMed. Todos os direitos reservados.',
+        'footer2': 'BrainboxMed™ é uma plataforma educacional registrada. Uso não autorizado é proibido.',
+        'privacy-policy-link': 'Política de Privacidade',
+        'terms-of-use-link': 'Termos de Uso',
+        'modal-title': 'Confirme Seu Plano',
+        'modal-selected-plan-text': 'Você selecionou o plano <span id="modal-plan-name" class="font-semibold text-purple-700"></span>.',
+        'modal-plan-price-text': 'Preço: <span id="modal-plan-price" class="font-bold text-lg"></span>',
+        'proceed-to-payment-btn': 'Prosseguir para o Pagamento',
+        'cancel-payment-btn': 'Cancelar',
+        'plan-error-message': 'Por favor, selecione um plano para continuar.',
+        'passwords-mismatch': 'As senhas não coincidem.',
+        "basic-li1": "✅ Formatos simulados de prova (USMLE, etc)",
+        "basic-li2": "✅ Todas as especialidades incluídas",
+        "basic-li3": "✅ Atualizado semanalmente por médicos",
+        "basic-li4": "⚠️ Com anúncios",
+        "adfree-li1": "✅ Tudo do plano Inicial",
+        "adfree-li2": "🚫 Sem anúncios",
+        "adfree-li3": "⚡ Acesso mais rápido",
+        "focused-li1": "✅ Tudo do plano Sem Anúncios",
+        "focused-li2": "🎯 Escolha especialidade e tema",
+        "focused-li3": "🧠 Recomendações adaptativas",
+        "focusedpro-li1": "🎯 Escolha especialidade e tema",
+        "focusedpro-li2": "📊 Análises de desempenho",
+        "focusedpro-li3": "🎵 Música para estudo curada",
+        "focusedpro-li5": "🎧 Não estará disponível durante sessões de simulação",
+        "focusedpro-li4": "🚫 Sem anúncios",
+        "sim-li1": "🧪 Simulados completos com tempo",
+        "sim-li2": "📈 Análises de desempenho",
+        "sim-li3": "🧬 Experiência de prova real",
+        // Plan summary box
+        'summary-title': 'Seu Plano',
+        'summary-benefits-prefix': 'Benefícios:',
+        'summary-price-prefix': 'Preço Mensal:',
+        // Advanced Plan in signup.html
+        'plan-advanced-title': 'Plano Avançado',
+        'plan-advanced-desc': 'Inclui tudo no Estudo Focado Pro MAIS simulados completos para uma simulação realista.',
+        'advanced-li1': '✅ Tudo no Estudo Focado Pro',
+        'advanced-li2': '✅ Simulados completos',
+        'advanced-li3': '🧬 Experiência de simulação realista',
+        'advanced-li4': '📊 Análises de desempenho avançadas',
+        'advanced-li5': '🎵 Música para estudo curada',
+        'advanced-li6': '🚫 Sem anúncios',
+      },
+      es: {
+        'page-title-text': 'Registrarse | BrainBoxMed',
+        'back-to-homepage-text': '⬅️ Volver a la Página Principal',
+        'signup-title': 'Crea Tu Cuenta',
+        'full-name': 'Nombre Completo',
+        'email': 'Correo Electrónico',
+        'password': 'Contraseña',
+        'confirm-password': 'Confirmar Contraseña',
+        'dob-label': 'Fecha de Nacimiento:',
+        'age-display-prefix': 'Edad:',
+        'invalid-dob': 'Fecha de nacimiento inválida.',
+        'gender-label': 'Género:',
+        'gender-male': 'Masculino',
+        'gender-female': 'Feminino',
+        'gender-other': 'Otro',
+        'user-type-label': 'Usted es:',
+        'select-option': 'Seleccione...',
+        'option-student': 'Estudiante',
+        'option-professional': 'Profesional de la Salud',
+        'option-other-status': 'Otro',
+        'study-year-label': 'Año de Estudio:',
+        'study-year-placeholder': 'Ej: 3er año de Estudiante de Medicina',
+        'experience-years-label': 'Años de Experiencia:',
+        'select-option-exp': 'Seleccione...',
+        'exp-1-5': '1 a 5 años',
+        'exp-6-10': '6 a 10 años',
+        'exp-10-plus': 'Más de 10 años',
+        'university-name-label': 'Nombre de la Universidad (Graduación):',
+        'university-name-placeholder': 'Nombre completo de la universidad',
+        'university-country-label': 'País de la Universidad:',
+        'university-country-placeholder': 'Ej: España',
+        'graduation-year-label': 'Año de Graduación:',
+        'graduation-year-placeholder': 'Ej: 2020',
+        'other-status-description-label': 'Describe tu Estado:',
+        'other-status-description-placeholder': 'Por favor, describe tu estado (ej: investigador, curioso, etc.)',
+        'current-country-label': 'País donde reside/trabaja/estudia:',
+        'select-country-option': 'Seleccione un país...',
+        'signup-purpose-label': '¿Cuál es su principal propósito al registrarse?',
+        'select-purpose-option': 'Seleccione...',
+        'purpose-cert-exams': 'Prepararse para exámenes de certificación (USMLE, etc.)',
+        'purpose-residency-review': 'Repaso para la residencia médica',
+        'purpose-cpe': 'Desarrollo Profesional Continuo (DPC)',
+        'purpose-med-school-study': 'Estudio para la facultad de medicina',
+        'purpose-explore': 'Solo explorando la plataforma',
+        'purpose-other': 'Otro (por favor, describa)',
+        'other-purpose-description-placeholder': 'Por favor, describe tu propósito específico.',
+        'purpose-hint': '(Estaremos añadiendo más tipos de exámenes con el tiempo, por favor menciona el que buscas)',
+        'choose-plan-title': 'Elige Tu Plan de Estudio',
+        'plan-basic-title': 'Inicial (con anuncios)',
+        'plan-basic-desc': 'Ideal para probar',
+        'plan-basic-btn': 'Seleccionar Plan',
+        'plan-adfree-title': 'Sin Anuncios',
+        'plan-adfree-desc': 'Experiencia fluida',
+        'plan-adfree-btn': 'Seleccionar Plan',
+        'plan-focused-title': 'Estudio Personalizado',
+        'plan-focused-desc': 'Elige qué estudiar',
+        'plan-focused-btn': 'Seleccionar Plan',
+        'focusedpro-badge': '🎧 Incluye Música de Estudio',
+        'plan-focusedpro-title': 'Estudio Personalizado Pro',
+        'plan-focusedpro-desc': 'Concéntrate más profundamente con música y análisis',
+        'plan-focusedpro-btn': 'Seleccionar Plan',
+        'plan-sim-title': 'Simulacro de Examen',
+        'plan-sim-desc': 'Más cercano al examen real',
+        'plan-sim-btn': 'Seleccionar Plan',
+        'submit-signup-btn': 'Registrarse',
+        'already-have-account-text': '¿Ya tienes una cuenta?',
+        'login-link-text': 'Iniciar Sesión',
+        'ad-label': 'Publicidad',
+        'footer1': '&copy; 2024 BrainboxMed. Todos los derechos reservados.',
+        'footer2': 'BrainboxMed™ es una plataforma educativa registrada. Queda prohibido su uso no autorizado.',
+        'privacy-policy-link': 'Política de Privacidad',
+        'terms-of-use-link': 'Términos de Uso',
+        'modal-title': 'Confirma Tu Plan',
+        'modal-selected-plan-text': 'Has seleccionado el plan <span id="modal-plan-name" class="font-semibold text-purple-700"></span>.',
+        'modal-plan-price-text': 'Precio: <span id="modal-plan-price" class="font-bold text-lg"></span>',
+        'proceed-to-payment-btn': 'Continuar al Pago',
+        'cancel-payment-btn': 'Cancelar',
+        'plan-error-message': 'Por favor, selecciona un plan para continuar.',
+        'passwords-mismatch': 'Las contraseñas no coinciden.',
+        "basic-li1": "✅ Formatos simulados de examen (USMLE, etc)",
+        "basic-li2": "✅ Todas las especialidades incluidas",
+        "basic-li3": "✅ Actualizado semanalmente por médicos",
+        "basic-li4": "⚠️ Con anuncios",
+        "adfree-li1": "✅ Todo lo del plan Inicial",
+        "adfree-li2": "🚫 Sin anuncios",
+        "adfree-li3": "⚡ Acceso más rápido",
+        "focused-li1": "✅ Todo lo del plan Sin Anuncios",
+        "focused-li2": "🎯 Elige especialidad y tema",
+        "focused-li3": "🧠 Recomendaciones adaptativas",
+        "focusedpro-li1": "🎯 Elige especialidad y tema",
+        "focusedpro-li2": "📊 Análisis de rendimiento",
+        "focusedpro-li3": "🎵 Música de estudio curada",
+        "focusedpro-li5": "🎧 No estará disponible durante sesiones de simulación",
+        "focusedpro-li4": "🚫 Sin anuncios",
+        "sim-li1": "🧪 Simulacros completos cronometrados",
+        "sim-li2": "📈 Análisis de rendimiento",
+        "sim-li3": "🧬 Experiencia real de examen",
+        // Plan summary box
+        'summary-title': 'Tu Plan',
+        'summary-benefits-prefix': 'Beneficios:',
+        'summary-price-prefix': 'Precio Mensual:',
+        // Advanced Plan in signup.html
+        'plan-advanced-title': 'Plan Avanzado',
+        'plan-advanced-desc': 'Incluye todo en Estudio Personalizado Pro MÁS simulacros completos para una simulación realista.',
+        'advanced-li1': '✅ Todo en Estudio Personalizado Pro',
+        'advanced-li2': '✅ Simulacros completos',
+        'advanced-li3': '🧬 Experiencia de simulación realista',
+        'advanced-li4': '📊 Análisis de rendimiento avanzados',
+        'advanced-li5': '🎵 Música de estudio curada',
+        'advanced-li6': '🚫 Sin anuncios',
+      }
+    };
+
+    const planDetails = {
+      basic: {
+        name_en: "Basic (With Ads)", name_pt: "Básico (com anúncios)", name_es: "Básico (con anuncios)", price: "$5.99/mo",
+        benefits_en: [
+          "✅ Simulated test formats (USMLE, etc)",
+          "✅ All specialties included",
+          "✅ Updated weekly by doctors",
+          "⚠️ With ads"
+        ],
+        benefits_pt: [
+          "✅ Formatos simulados de prova (USMLE, etc)",
+          "✅ Todas as especialidades incluídas",
+          "✅ Atualizado semanalmente por médicos",
+          "⚠️ Com anúncios"
+        ],
+        benefits_es: [
+          "✅ Formatos simulados de examen (USMLE, etc)",
+          "✅ Todas las especialidades incluidas",
+          "✅ Actualizado semanalmente por médicos",
+          "⚠️ Con anuncios"
+        ]
+      },
+      adfree: {
+        name_en: "Ad-Free", name_pt: "Sem Anúncios", name_es: "Sin Anuncios", price: "$9.99/mo",
+        benefits_en: [
+          "✅ Everything in Starter",
+          "🚫 No ads",
+          "⚡ Faster access"
+        ],
+        benefits_pt: [
+          "✅ Tudo do plano Inicial",
+          "🚫 Sem anúncios",
+          "⚡ Acesso mais rápido"
+        ],
+        benefits_es: [
+          "✅ Todo lo del plan Inicial",
+          "🚫 Sin anuncios",
+          "⚡ Acceso más rápido"
+        ]
+      },
+      focused: {
+        name_en: "Focused Study", name_pt: "Estudo Focado", name_es: "Estudio Personalizado", price: "$15.99/mo",
+        benefits_en: [
+          "✅ Everything in Ad-Free",
+          "🎯 Choose specialty & topic",
+          "🧠 Adaptive recommendations"
+        ],
+        benefits_pt: [
+          "✅ Tudo do plano Sem Anúncios",
+          "🎯 Escolha especialidade e tema",
+          "🧠 Recomendações adaptativas"
+        ],
+        benefits_es: [
+          "✅ Todo lo del plan Sin Anuncios",
+          "🎯 Elige especialidad y tema",
+          "🧠 Recomendaciones adaptativas"
+        ]
+      },
+      focusedpro: {
+        name_en: "Focused Study Pro", name_pt: "Estudo Focado Pro", name_es: "Estudio Personalizado Pro", price: "$18.99/mo",
+        benefits_en: [
+          "🎯 Choose specialty & topic",
+          "📊 Performance analytics",
+          "🎵 Curated study music",
+          "🎧 Will not be available during simulation sessions",
+          "🚫 No ads"
+        ],
+        benefits_pt: [
+          "🎯 Escolha especialidade e tema",
+          "📊 Análises de desempenho",
+          "🎵 Música para estudo curada",
+          "🎧 Não estará disponível durante sessões de simulação",
+          "🚫 Sem anúncios"
+        ],
+        benefits_es: [
+          "🎯 Elige especialidad y tema",
+          "📊 Análisis de rendimiento",
+          "🎵 Música de estudio curada",
+          "🎧 No estará disponible durante sesiones de simulación",
+          "🚫 Sin anuncios"
+        ]
+      },
+      sim: {
+        name_en: "Simulated Exam", name_pt: "Simulado Completo", name_es: "Simulacro de Examen", price: "$17.99/mo",
+        benefits_en: [
+          "🧪 Full-length timed simulations",
+          "📈 Performance analytics",
+          "🧬 Real exam experience"
+        ],
+        benefits_pt: [
+          "🧪 Simulados completos com tempo",
+          "📈 Análises de desempenho",
+          "🧬 Experiência de prova real"
+        ],
+        benefits_es: [
+          "🧪 Simulacros completos cronometrados",
+          "📈 Análisis de rendimiento",
+          "🧬 Experiencia real de examen"
+        ]
+      },
+      advanced: {
+        name_en: "Advanced Plan",
+        name_pt: "Plano Avançado",
+        name_es: "Plan Avanzado",
+        price: "$23.99/mo", 
+        benefits_en: [
+          "✅ Everything in Focused Pro",
+          "✅ Full-length mock exams",
+          "🧬 Realistic simulation experience",
+          "📊 Advanced performance analytics",
+          "🎵 Curated study music",
+          "🚫 No ads"
+        ],
+        benefits_pt: [
+          "✅ Tudo no Estudo Focado Pro",
+          "✅ Simulados completos",
+          "🧬 Experiência de simulação realista",
+          "📊 Análises de desempenho avançadas",
+          "🎵 Música para estudo curada",
+          "🚫 Sem anúncios"
+        ],
+        benefits_es: [
+          "✅ Todo en Estudio Personalizado Pro",
+          "✅ Simulacros completos",
+          "🧬 Experiencia de simulación realista",
+          "📊 Análisis de rendimiento avanzados",
+          "🎵 Música de estudio curada",
+          "🚫 Sin anuncios"
+        ]
+      },
+    };
+
+    const countries = [
+        "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan",
+        "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi",
+        "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo (Brazzaville)", "Congo (Kinshasa)", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czechia",
+        "Denmark", "Djibouti", "Dominica", "Dominican Republic",
+        "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia",
+        "Fiji", "Finland", "France",
+        "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana",
+        "Haiti", "Honduras", "Hungary",
+        "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Ivory Coast",
+        "Jamaica", "Japan", "Jordan",
+        "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan",
+        "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg",
+        "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar",
+        "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway",
+        "Oman",
+        "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal",
+        "Qatar",
+        "Romania", "Russia", "Rwanda",
+        "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria",
+        "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu",
+        "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan",
+        "Vanuatu", "Vatican City", "Venezuela", "Vietnam",
+        "Yemen",
+        "Zambia", "Zimbabwe"
+    ];
+
+    function applyTranslations() {
+      const lang = localStorage.getItem('selectedLanguage') || 'en';
+      const map = translations[lang];
+
+      document.getElementById('page-title-text').textContent = map['page-title-text'];
+
+      Object.keys(map).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            if (map[`${id}-placeholder`]) {
+                el.placeholder = map[`${id}-placeholder`];
+            } else if (map[id]) {
+                el.placeholder = map[id];
+            }
+          } else {
+            el.innerHTML = map[id];
+          }
+        }
+      });
+    }
+
+    function detectLanguageFromHostname() {
+      const hostname = window.location.hostname;
+      if (hostname.endsWith('.es')) {
+        return 'es';
+      } else if (hostname.endsWith('.com.br')) {
+        return 'pt';
+      } else {
+        return 'en';
+      }
+    }
+
+    function populatePlanSummary(planId) {
+        const lang = localStorage.getItem('selectedLanguage') || 'en';
+        const plan = planDetails[planId];
+        const summaryBox = document.getElementById('plan-summary-box');
+        const summaryTitle = document.getElementById('summary-title'); 
+        const summaryPlanName = document.getElementById('summary-plan-name'); // For expanded state, potentially
+        const summaryPlanNameCompact = document.getElementById('summary-plan-name-compact'); // For collapsed state
+        const summaryPlanBenefits = document.getElementById('summary-plan-benefits');
+        const summaryPlanPrice = document.getElementById('summary-plan-price');
+        const summaryContent = document.getElementById('summary-content');
+        const toggleIcon = summaryBox.querySelector('.toggle-icon');
+
+
+        if (plan) {
+            summaryTitle.textContent = translations[lang]['summary-title']; 
+            summaryPlanNameCompact.textContent = plan[`name_${lang}`]; // Always set compact name
+            
+            // Only fill full details if it's not hidden (e.g., on large screens or expanded)
+            summaryPlanBenefits.innerHTML = '';
+            plan[`benefits_${lang}`].forEach(benefit => {
+                const li = document.createElement('li');
+                li.textContent = benefit;
+                summaryPlanBenefits.appendChild(li);
+            });
+            summaryPlanPrice.textContent = `${translations[lang]['summary-price-prefix']} ${plan.price}`;
+            
+            summaryBox.classList.remove('hidden');
+
+            // Apply initial state based on screen size
+            if (window.matchMedia('(max-width: 767px)').matches) {
+                summaryBox.classList.add('collapsed');
+                summaryBox.classList.remove('expanded');
+                if (toggleIcon) toggleIcon.textContent = '+';
+                // Hide full content when collapsed
+                summaryContent.style.display = 'none'; // Ensure it's hidden on init for small screens
+            } else {
+                summaryBox.classList.remove('collapsed');
+                summaryBox.classList.add('expanded');
+                if (toggleIcon) toggleIcon.textContent = '−'; // Minus sign
+                // Show full content when expanded
+                summaryContent.style.display = 'block'; // Ensure it's visible on init for large screens
+            }
+
+        } else {
+            summaryBox.classList.add('hidden');
+        }
+    }
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let currentLang = localStorage.getItem('selectedLanguage');
+      if (!currentLang) {
+        currentLang = detectLanguageFromHostname();
+        localStorage.setItem('selectedLanguage', currentLang);
+      }
+      
+      applyTranslations();
+
+      const dobInput = document.getElementById('dob');
+      const ageDisplay = document.getElementById('age-display');
+      const userTypeSelect = document.getElementById('user-type');
+      const studentFields = document.getElementById('student-fields');
+      const professionalFields = document.getElementById('professional-fields');
+      const otherStatusField = document.getElementById('other-status-field');
+      const signupPurposeSelect = document.getElementById('signup-purpose');
+      const otherPurposeDescription = document.getElementById('other-purpose-description');
+      const currentCountrySelect = document.getElementById('current-country');
+      const planSelectionSection = document.getElementById('plan-selection-section'); 
+      const selectedPlanInput = document.getElementById('selected-plan'); 
+
+
+      countries.forEach(country => {
+        const option = document.createElement('option');
+        option.value = country;
+        option.textContent = country;
+        currentCountrySelect.appendChild(option);
+      });
+
+      dobInput.addEventListener('change', () => {
+        const dob = new Date(dobInput.value);
+        const today = new Date();
+        let age = today.getFullYear() - dob.getFullYear();
+        const m = today.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+          age--;
+        }
+        if (age >= 0) {
+          ageDisplay.textContent = `${translations[localStorage.getItem('selectedLanguage') || 'en']['age-display-prefix']} ${age} ${age === 1 ? translations[localStorage.getItem('selectedLanguage') || 'en']['age-display-suffix-singular'] || 'year' : translations[localStorage.getItem('selectedLanguage') || 'en']['age-display-suffix-plural'] || 'years'}`;
+        } else {
+          ageDisplay.textContent = translations[localStorage.getItem('selectedLanguage') || 'en']['invalid-dob'];
+        }
+      });
+
+      userTypeSelect.addEventListener('change', () => {
+        studentFields.classList.add('hidden');
+        professionalFields.classList.add('hidden');
+        otherStatusField.classList.add('hidden');
+
+        document.getElementById('study-year').removeAttribute('required');
+        document.getElementById('experience-years').removeAttribute('required');
+        document.getElementById('university-name').removeAttribute('required');
+        document.getElementById('university-country').removeAttribute('required');
+        document.getElementById('graduation-year').removeAttribute('required');
+        document.getElementById('other-status-description').removeAttribute('required');
+
+
+        if (userTypeSelect.value === 'student') {
+          studentFields.classList.remove('hidden');
+          document.getElementById('study-year').setAttribute('required', 'true');
+        } else if (userTypeSelect.value === 'professional') {
+          professionalFields.classList.remove('hidden');
+          document.getElementById('experience-years').setAttribute('required', 'true');
+          document.getElementById('university-name').setAttribute('required', 'true');
+          document.getElementById('university-country').setAttribute('required', 'true');
+          document.getElementById('graduation-year').setAttribute('required', 'true');
+        } else if (userTypeSelect.value === 'other_status') {
+            otherStatusField.classList.remove('hidden');
+            document.getElementById('other-status-description').setAttribute('required', 'true');
+        }
+      });
+
+      signupPurposeSelect.addEventListener('change', () => {
+        if (signupPurposeSelect.value === 'other-purpose') {
+          otherPurposeDescription.classList.remove('hidden');
+          otherPurposeDescription.setAttribute('required', 'true');
+        } else {
+          otherPurposeDescription.classList.add('hidden');
+          otherPurposeDescription.removeAttribute('required');
+        }
+      });
+
+      const planCards = document.querySelectorAll('.plan-card');
+      const selectPlanButtons = document.querySelectorAll('.select-plan-btn');
+      const planErrorMessage = document.getElementById('plan-error-message');
+
+      planCards.forEach(card => {
+        card.addEventListener('click', () => {
+          planCards.forEach(pc => pc.classList.remove('selected'));
+          card.classList.add('selected');
+          selectedPlanInput.value = card.dataset.plan;
+          planErrorMessage.classList.add('hidden'); 
+          populatePlanSummary(card.dataset.plan);
+        });
+      });
+
+      selectPlanButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.stopPropagation(); 
+          const card = e.target.closest('.plan-card');
+          planCards.forEach(pc => pc.classList.remove('selected'));
+          card.classList.add('selected');
+          selectedPlanInput.value = card.dataset.plan;
+          planErrorMessage.classList.add('hidden');
+          populatePlanSummary(card.dataset.plan);
+        });
+      });
+
+
+      const signupForm = document.getElementById('signup-form');
+      const passwordInput = document.getElementById('password');
+      const confirmPasswordInput = document.getElementById('confirm-password');
+      const errorMessage = document.getElementById('error-message');
+
+      const confirmationModal = document.getElementById('confirmation-modal');
+      const closeModalBtn = document.getElementById('close-modal-btn');
+      const proceedToPaymentBtn = document.getElementById('proceed-to-payment-btn');
+      const cancelPaymentBtn = document.getElementById('cancel-payment-btn');
+      const modalPlanName = document.getElementById('modal-plan-name');
+      const modalPlanPrice = document.getElementById('modal-plan-price');
+
+
+      signupForm.addEventListener('submit', (e) => {
+        e.preventDefault(); 
+
+        errorMessage.classList.add('hidden');
+        planErrorMessage.classList.add('hidden');
+
+        if (passwordInput.value !== confirmPasswordInput.value) {
+          errorMessage.textContent = translations[currentLang]['passwords-mismatch'];
+          errorMessage.classList.remove('hidden');
+          return;
+        }
+
+        if (selectedPlanInput.value === '') {
+          planErrorMessage.textContent = translations[currentLang]['plan-error-message'];
+          planErrorMessage.classList.remove('hidden');
+          return;
+        }
+
+        const selectedPlanData = planDetails[selectedPlanInput.value];
+        modalPlanName.textContent = selectedPlanData[`name_${currentLang}`];
+        modalPlanPrice.textContent = selectedPlanData.price;
+        confirmationModal.style.display = 'flex'; 
+
+      });
+
+      closeModalBtn.addEventListener('click', () => {
+        confirmationModal.style.display = 'none';
+      });
+
+      cancelPaymentBtn.addEventListener('click', () => {
+        confirmationModal.style.display = 'none';
+      });
+
+      proceedToPaymentBtn.addEventListener('click', () => {
+        const formData = new FormData(signupForm);
+        const userData = {};
+        formData.forEach((value, key) => {
+            userData[key] = value;
+        });
+        userData.selected_plan = selectedPlanInput.value; 
+
+        console.log('Sending user data to backend:', userData);
+
+        alert('Dados enviados para o backend. Redirecionando para a página de pagamento...');
+        window.location.href = 'payment.html?plan=' + selectedPlanInput.value; 
+      });
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const preselectedPlan = urlParams.get('plan');
+      const prefilledName = urlParams.get('name'); 
+      const prefilledEmail = urlParams.get('email'); 
+
+      if (preselectedPlan) {
+        selectedPlanInput.value = preselectedPlan; 
+        populatePlanSummary(preselectedPlan); 
+        planSelectionSection.classList.add('hidden'); 
+        
+        const targetCard = document.querySelector(`.plan-card[data-plan="${preselectedPlan}"]`);
+        if (targetCard) {
+            targetCard.classList.add('selected');
+        }
+
+      }
+
+      const fullNameInput = document.getElementById('full-name');
+      const emailInput = document.getElementById('email');
+
+      if (prefilledName) {
+          fullNameInput.value = prefilledName;
+          localStorage.setItem('signupFullName', prefilledName); 
+      } else {
+          const storedFullName = localStorage.getItem('signupFullName');
+          if (storedFullName) {
+              fullNameInput.value = storedFullName;
+          }
+      }
+
+      if (prefilledEmail) {
+          emailInput.value = prefilledEmail;
+          localStorage.setItem('signupEmail', prefilledEmail); 
+      } else {
+          const storedEmail = localStorage.getItem('signupEmail');
+          if (storedEmail) {
+              emailInput.value = storedEmail;
+          }
+      }
+
+      fullNameInput.addEventListener('input', (e) => {
+          localStorage.setItem('signupFullName', e.target.value);
+      });
+      emailInput.addEventListener('input', (e) => {
+          localStorage.setItem('signupEmail', e.target.value);
+      });
+
+      // === Logic for collapsible plan summary on small screens ===
+      const summaryBox = document.getElementById('plan-summary-box');
+      const summaryToggleHandle = document.getElementById('summary-toggle-handle');
+      const toggleIcon = summaryToggleHandle ? summaryToggleHandle.querySelector('.toggle-icon') : null;
+      const summaryContent = document.getElementById('summary-content'); // Get reference to content div
+
+      if (summaryBox && summaryToggleHandle && summaryContent) {
+          summaryToggleHandle.addEventListener('click', () => {
+              // Only toggle if on a small screen breakpoint
+              if (window.matchMedia('(max-width: 767px)').matches) {
+                  summaryBox.classList.toggle('collapsed');
+                  summaryBox.classList.toggle('expanded');
+                  if (toggleIcon) {
+                      toggleIcon.textContent = summaryBox.classList.contains('expanded') ? '−' : '+';
+                  }
+                  // Toggle display property for content div for immediate show/hide
+                  summaryContent.style.display = summaryBox.classList.contains('expanded') ? 'block' : 'none';
+              }
+          });
+
+          // Also adjust on window resize in case user changes orientation or resizes browser
+          window.addEventListener('resize', () => {
+              if (window.matchMedia('(max-width: 767px)').matches) {
+                  // Ensure it's collapsible if on small screen
+                  if (!summaryBox.classList.contains('collapsed') && !summaryBox.classList.contains('expanded')) {
+                       summaryBox.classList.add('collapsed');
+                       if (toggleIcon) toggleIcon.textContent = '+';
+                  }
+                  // On resize to small, if it was expanded, make sure content is hidden initially
+                  if (summaryBox.classList.contains('collapsed')) {
+                      summaryContent.style.display = 'none';
+                  }
+              } else {
+                  // Ensure it's expanded if on large screen
+                  summaryBox.classList.remove('collapsed');
+                  summaryBox.classList.remove('hidden'); // Ensure it's visible on large screens
+                  summaryBox.classList.add('expanded'); // Use expanded class for styling
+                  if (toggleIcon) toggleIcon.textContent = '−';
+                  summaryContent.style.display = 'block'; // Always show content on large screens
+              }
+          });
+
+          // Set initial state on load
+          if (window.matchMedia('(max-width: 767px)').matches) {
+              summaryBox.classList.add('collapsed');
+              summaryContent.style.display = 'none';
+              if (toggleIcon) toggleIcon.textContent = '+';
+          } else {
+              summaryBox.classList.remove('collapsed');
+              summaryBox.classList.add('expanded');
+              summaryContent.style.display = 'block';
+              if (toggleIcon) toggleIcon.textContent = '−';
+          }
+      }
+    });
+  window.scrollTo(0, 0);
+  </script>
 </body>
 </html>

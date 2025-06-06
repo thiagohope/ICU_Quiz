@@ -3,54 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Subscribe to Focused Study Pro</title>
+  <title id="page-title-text"></title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    h1, h2 {
+      font-family: 'Poppins', sans-serif;
+    }
+    .upgrade-box {
+        background-color: #e0f2f7; /* Light blue background for emphasis */
+        border: 1px solid #b2ebf2;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-top: 1.5rem;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .upgrade-box h2 {
+        color: #00838f; /* Darker blue */
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+    .upgrade-box p {
+        color: #4a4a4a;
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+    .upgrade-box .price-advanced {
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: #006064; /* Even darker blue */
+        margin-bottom: 1rem;
+    }
+  </style>
 </head>
-<body class="bg-gray-50 font-sans">
-  <div class="min-h-screen flex flex-col items-center justify-center px-4">
-    <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-md">
-      <a href="../landing.html" aria-label="Back to Homepage">
-        <div class="text-center mb-6">
-            <img src="../assets/img/logo-brainboxmed-cube.png" alt="BrainboxMed Icon" class="mx-auto h-16 mb-2">
-            <img src="../assets/img/logo-brainboxmed-name.png" alt="BrainboxMed Text" class="mx-auto h-10">
-            <p class="text-sm text-gray-500 mt-1">Train your brain. Master medicine.</p>
-        </div>
-      </a>
-      <h1 id="title-text" class="text-xl font-bold text-purple-700 text-center mb-2">
-        Subscribe to Focused Study Pro
-      </h1>
-      <p id="price-text" class="text-center text-sm text-gray-600 mb-4">
-        Plan cost: <strong>$18.99/mo</strong>
-      </p>
+<body class="min-h-screen py-10 px-4">
+  <div class="max-w-md mx-auto bg-white p-6 rounded-xl shadow-md">
+    <a href="../landing.html" aria-label="Back to Homepage">
+      <div class="text-center mb-6">
+        <img src="../assets/img/logo-brainboxmed-cube.png" alt="BrainboxMed Icon" class="mx-auto h-16 mb-2">
+        <img src="../assets/img/logo-brainboxmed-name.png" alt="BrainboxMed Text" class="mx-auto h-10">
+        <p class="text-sm text-gray-500 mt-1">Train your brain. Master medicine.</p>
+      </div>
+    </a>
+    <h1 id="title-text" class="text-xl font-bold text-purple-700 text-center mb-2"></h1>
+    <p id="price-text" class="text-center text-sm text-gray-600 mb-4"></p>
 
-      <form class="space-y-4">
-        <input id="name-placeholder" type="text" placeholder="Full Name" class="w-full border rounded-lg px-4 py-2" required />
-        <input id="email-placeholder" type="email" placeholder="Email Address" class="w-full border rounded-lg px-4 py-2" required />
-        <button id="confirm-button" type="submit" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold">
-          Confirm Subscription
+    <form id="transition-form-focusedpro" class="space-y-4">
+      <input id="name-input" type="text" placeholder="Full Name" class="w-full border rounded-lg px-4 py-2" required />
+      <input id="email-input" type="email" placeholder="Email Address" class="w-full border rounded-lg px-4 py-2" required />
+      <button id="continue-button-focusedpro" type="submit" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold">
+        Continue to Sign Up
+      </button>
+    </form>
+
+    <div class="upgrade-box">
+        <h2 id="advanced-plan-title"></h2>
+        <p id="advanced-plan-desc"></p>
+        <p id="advanced-plan-price" class="price-advanced"></p>
+        <button id="continue-button-advanced" type="button" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition font-semibold">
+            Continue to Sign Up for Advanced
         </button>
-      </form>
-
-      <!-- Link to add simulations -->
-      <div class="text-center mt-4">
-        <a href="add-sim-focusedpro.html" id="add-sim-link" class="text-sm text-orange-600 hover:underline">
-            ➕ Add Timed Simulations for +$5/month
-        </a>
-      </div>
-
-      <!-- Back link -->
-      <div class="text-center mt-6">
-        <a id="back-to-plans" href="../upgrade.html" class="text-sm text-purple-600 hover:underline">
-          ⬅️ Back to Plans
-        </a>
-      </div>
     </div>
 
-    <!-- AdSense Banner -->
-    <div class="w-full my-8 flex justify-center">
+    <div class="text-center mt-6">
+      <a id="back-to-plans" href="../upgrade.html" class="text-sm text-purple-600 hover:underline">⬅️ Back to Plans</a>
+    </div>
+  </div>
+
+  <div class="w-full my-8 flex justify-center">
     <div class="w-full sm:w-3/4 lg:w-2/3 px-4">
         <div class="bg-yellow-50 border border-yellow-300 rounded-xl shadow p-4 text-center">
-        <p class="text-sm text-yellow-800 font-semibold">Publicidade</p>
+        <p class="text-sm text-yellow-800 font-semibold" id="ad-label"></p>
         <div class="mt-2">
             <ins class="adsbygoogle"
             style="display:block"
@@ -64,79 +93,159 @@
         </script>
         </div>
     </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="text-center text-xs text-gray-500 mt-6">
-      <p id="footer1">© 2024 BrainboxMed. All rights reserved.</p>
-      <p id="footer2">BrainboxMed™ is a registered educational platform. Unauthorized use is prohibited.</p>
-      <p>
-        <a href="../privacy.html" id="footer3" class="text-purple-600 hover:underline">Privacy Policy</a> |
-        <a href="../terms.html" id="footer4" class="text-purple-600 hover:underline">Terms of Use</a>
-      </p>
-    </footer>
   </div>
 
-  <!-- Translation script placeholder -->
-  <script src="../upgrade.js"></script>
+  <footer class="text-center text-xs text-gray-500 mt-6">
+    <p id="footer1"></p>
+    <p id="footer2"></p>
+    <p>
+      <a href="../privacy.html" id="footer3" class="text-purple-600 hover:underline"></a> |
+      <a href="../terms.html" id="footer4" class="text-purple-600 hover:underline"></a>
+    </p>
+  </footer>
+
   <script>
-  const lang = localStorage.getItem('selectedLanguage') || 'en';
-
-  const translations = {
-    en: {
-      title: "Subscribe to Focused Study Pro",
-      price: "Plan cost: $18.99/mo",
-      namePlaceholder: "Full Name",
-      emailPlaceholder: "Email Address",
-      button: "Confirm Subscription",
-      addSim: "➕ Add Timed Simulations for +$5/month",
-      back: "⬅️ Back to Plans",
-      footer1: "© 2024 BrainboxMed. All rights reserved.",
-      footer2: "BrainboxMed™ is a registered educational platform. Unauthorized use is prohibited.",
-      footer3: "Privacy Policy",
-      footer4: "Terms of Use"
-    },
-    pt: {
-      title: "Assinar Focused Study Pro",
-      price: "Custo do plano: R$18,99/mês",
-      namePlaceholder: "Nome completo",
-      emailPlaceholder: "Endereço de e-mail",
-      button: "Confirmar Assinatura",
-      addSim: "➕ Adicionar Simulações por +R$5/mês",
-      back: "⬅️ Voltar aos Planos",
-      footer1: "© 2024 BrainboxMed. Todos os direitos reservados.",
-      footer2: "BrainboxMed™ é uma plataforma educacional registrada. Uso não autorizado é proibido.",
-      footer3: "Política de Privacidade",
-      footer4: "Termos de Uso"
-    },
-    es: {
-      title: "Suscribirse a Focused Study Pro",
-      price: "Costo del plan: $18.99/mes",
-      namePlaceholder: "Nombre completo",
-      emailPlaceholder: "Dirección de correo",
-      button: "Confirmar Suscripción",
-      addSim: "➕ Agregar Simulaciones por +$5/mes",
-      back: "⬅️ Volver a los Planes",
-      footer1: "© 2024 BrainboxMed. Todos los derechos reservados.",
-      footer2: "BrainboxMed™ es una plataforma educativa registrada. Uso no autorizado está prohibido.",
-      footer3: "Política de Privacidad",
-      footer4: "Términos de Uso"
+    // Detectar idioma do hostname se não estiver no localStorage
+    function detectLanguageFromHostname() {
+      const hostname = window.location.hostname;
+      if (hostname.endsWith('.es')) {
+        return 'es';
+      } else if (hostname.endsWith('.com.br')) {
+        return 'pt';
+      } else {
+        return 'en'; // Padrão para .com, .in, ou outros
+      }
     }
-  };
 
-  const t = translations[lang];
-  document.getElementById("title-text").textContent = t.title;
-  document.getElementById("price-text").innerHTML = t.price;
-  document.getElementById("name-placeholder").placeholder = t.namePlaceholder;
-  document.getElementById("email-placeholder").placeholder = t.emailPlaceholder;
-  document.getElementById("confirm-button").textContent = t.button;
-  document.getElementById("add-sim-link").textContent = t.addSim;
-  document.getElementById("back-to-plans").textContent = t.back;
-  document.getElementById("footer1").textContent = t.footer1;
-  document.getElementById("footer2").textContent = t.footer2;
-  document.getElementById("footer3").textContent = t.footer3;
-  document.getElementById("footer4").textContent = t.footer4;
-</script>
+    let lang = localStorage.getItem('selectedLanguage');
+    if (!lang) {
+      lang = detectLanguageFromHostname();
+      localStorage.setItem('selectedLanguage', lang);
+    }
+
+    // Definições de tradução para esta página de transição
+    const translations = {
+      en: {
+        pageTitle: "Subscribe to Focused Pro Study",
+        title: "Subscribe to Focused Pro Study",
+        price: "Plan cost: <strong>$18.99/mo</strong>",
+        namePlaceholder: "Full Name",
+        emailPlaceholder: "Email Address",
+        button: "Continue to Sign Up", // for Focused Pro button
+        // addSim: "➕ Add Timed Simulations for +$5/month", // REMOVIDO DAQUI
+        advancedPlanTitle: "Upgrade to Advanced Plan",
+        advancedPlanDesc: "Includes everything in Focused Pro PLUS full-length mock exams for realistic simulation.",
+        advancedPlanPrice: "Plan cost: <strong>$23.99/mo</strong>",
+        advancedButton: "Continue to Sign Up for Advanced",
+        back: "⬅️ Back to Plans",
+        adLabel: "Advertisement",
+        footer1: "© 2024 BrainboxMed. All rights reserved.",
+        footer2: "BrainboxMed™ is a registered educational platform. Unauthorized use is prohibited.",
+        footer3: "Privacy Policy",
+        footer4: "Terms of Use",
+      },
+      pt: {
+        pageTitle: "Assinar Estudo Focado Pro",
+        title: "Assinar Estudo Focado Pro",
+        price: "Custo do plano: <strong>R$18,99/mês</strong>",
+        namePlaceholder: "Nome completo",
+        emailPlaceholder: "Endereço de e-mail",
+        button: "Continuar Cadastro", // for Focused Pro button
+        // addSim: "➕ Adicionar Simulações por +R$5/mês", // REMOVIDO DAQUI
+        advancedPlanTitle: "Upgrade para Plano Avançado",
+        advancedPlanDesc: "Inclui tudo no Estudo Focado Pro MAIS simulados completos para uma simulação realista.",
+        advancedPlanPrice: "Custo do plano: <strong>R$23,99/mês</strong>",
+        advancedButton: "Continuar Cadastro para Avançado",
+        back: "⬅️ Voltar aos Planos",
+        adLabel: "Publicidade",
+        footer1: "© 2024 BrainboxMed. Todos os direitos reservados.",
+        footer2: "BrainboxMed™ é uma plataforma educacional registrada. Uso não autorizado é proibido.",
+        footer3: "Política de Privacidade",
+        footer4: "Termos de Uso",
+      },
+      es: {
+        pageTitle: "Suscribirse a Estudio Personalizado Pro",
+        title: "Suscribirse a Estudio Personalizado Pro",
+        price: "Costo del plan: <strong>$18.99/mes</strong>",
+        namePlaceholder: "Nombre completo",
+        emailPlaceholder: "Dirección de correo",
+        button: "Continuar Registro", // for Focused Pro button
+        // addSim: "➕ Agregar Simulaciones por +$5/mes", // REMOVIDO DAQUI
+        advancedPlanTitle: "Actualizar a Plan Avanzado",
+        advancedPlanDesc: "Incluye todo en Estudio Personalizado Pro MÁS simulacros completos para una simulación realista.",
+        advancedPlanPrice: "Costo del plan: <strong>$23.99/mes</strong>",
+        advancedButton: "Continuar Registro para Avanzado",
+        back: "⬅️ Volver a los Planes",
+        adLabel: "Publicidad",
+        footer1: "© 2024 BrainboxMed. Todos los derechos reservados.",
+        footer2: "BrainboxMed™ es una plataforma educativa registrada. Uso no autorizado está prohibido.",
+        footer3: "Política de Privacidad",
+        footer4: "Términos de Uso",
+      }
+    };
+
+    const t = translations[lang];
+
+    // Aplicar traduções aos elementos do Focused Pro
+    document.getElementById("page-title-text").textContent = t.pageTitle;
+    document.getElementById("title-text").textContent = t.title;
+    document.getElementById("price-text").innerHTML = t.price; 
+    document.getElementById("name-input").placeholder = t.namePlaceholder; 
+    document.getElementById("email-input").placeholder = t.emailPlaceholder; 
+    document.getElementById("continue-button-focusedpro").textContent = t.button; // Específico para o botão do Focused Pro
+    // document.getElementById("add-sim-link").textContent = t.addSim; // LINHA REMOVIDA
+    document.getElementById("back-to-plans").textContent = t.back;
+    document.getElementById("ad-label").textContent = t.adLabel;
+    document.getElementById("footer1").textContent = t.footer1;
+    document.getElementById("footer2").textContent = t.footer2;
+    document.getElementById("footer3").textContent = t.footer3;
+    document.getElementById("footer4").textContent = t.footer4;
+
+    // Aplicar traduções aos elementos do plano Advanced
+    document.getElementById("advanced-plan-title").textContent = t.advancedPlanTitle;
+    document.getElementById("advanced-plan-desc").textContent = t.advancedPlanDesc;
+    document.getElementById("advanced-plan-price").innerHTML = t.advancedPlanPrice; // innerHTML para manter o <strong>
+    document.getElementById("continue-button-advanced").textContent = t.advancedButton;
+
+    // Lógica para enviar dados para a página de cadastro completo para o plano Focused Pro
+    document.getElementById('transition-form-focusedpro').addEventListener('submit', function(event) {
+      event.preventDefault(); 
+
+      const fullName = document.getElementById('name-input').value;
+      const email = document.getElementById('email-input').value;
+      const plan = 'focusedpro'; // PLANO ESPECÍFICO PARA ESTE FORMULÁRIO
+
+      const encodedFullName = encodeURIComponent(fullName);
+      const encodedEmail = encodeURIComponent(email);
+
+      window.location.href = `signup.html?plan=${plan}&name=${encodedFullName}&email=${encodedEmail}`;
+    });
+
+    // Lógica para enviar dados para a página de cadastro completo para o plano Advanced
+    document.getElementById('continue-button-advanced').addEventListener('click', function(event) {
+      event.preventDefault(); 
+
+      const fullName = document.getElementById('name-input').value;
+      const email = document.getElementById('email-input').value;
+      const plan = 'advanced'; // PLANO ESPECÍFICO PARA O BOTÃO ADVANCED
+
+      const encodedFullName = encodeURIComponent(fullName);
+      const encodedEmail = encodeURIComponent(email);
+
+      window.location.href = `signup.html?plan=${plan}&name=${encodedFullName}&email=${encodedEmail}`;
+    });
+
+    // Pre-fill name and email from localStorage if available
+    const storedFullName = localStorage.getItem('signupFullName');
+    const storedEmail = localStorage.getItem('signupEmail');
+    if (storedFullName) {
+        document.getElementById('name-input').value = storedFullName;
+    }
+    if (storedEmail) {
+        document.getElementById('email-input').value = storedEmail;
+    }
+    window.scrollTo(0, 0); // Comando para rolar para o topo da página
+  </script>
 
 </body>
 </html>

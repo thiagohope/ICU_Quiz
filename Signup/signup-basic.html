@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Subscribe to Basic </title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+  <title id="page-title-text"></title> <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&display=swap" rel="stylesheet"/>
   <style>
     body {
@@ -26,25 +25,26 @@
         <p class="text-sm text-gray-500 mt-1">Train your brain. Master medicine.</p>
       </div>
     </a>
-    <h1 id="title-text" class="text-xl font-bold text-purple-700 text-center mb-2">Subscribe to Basic</h1>
-    <p id="price-text" class="text-center text-sm text-gray-600 mb-4">Plan cost: <strong>$5.99/mo</strong></p>
-    <form class="space-y-4">
-      <input id="name-placeholder" type="text" placeholder="Full Name" class="w-full border rounded-lg px-4 py-2" required />
-      <input id="email-placeholder" type="email" placeholder="Email Address" class="w-full border rounded-lg px-4 py-2" required />
-      <button id="confirm-button" type="submit" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold">
-        Confirm Subscription
+    <h1 id="title-text" class="text-xl font-bold text-purple-700 text-center mb-2"></h1>
+    <p id="price-text" class="text-center text-sm text-gray-600 mb-4"></p>
+    
+    <form id="transition-form" class="space-y-4">
+      <input id="name-input" type="text" placeholder="Full Name" class="w-full border rounded-lg px-4 py-2" required />
+      <input id="email-input" type="email" placeholder="Email Address" class="w-full border rounded-lg px-4 py-2" required />
+      <button id="continue-button" type="submit" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-semibold">
+        Continue to Sign Up
       </button>
     </form>
-    <div class="mt-4 text-center">
+
+    <p id="upgrade-message" class="hidden"></p> <div class="mt-4 text-center">
       <a id="back-to-plans" href="../upgrade.html" class="text-sm text-purple-600 hover:underline">⬅️ Back to Plans</a>
     </div>
   </div>
-
-<!-- AdSense Banner -->
+  
 <div class="w-full my-8 flex justify-center">
   <div class="w-full sm:w-3/4 lg:w-2/3 px-4">
     <div class="bg-yellow-50 border border-yellow-300 rounded-xl shadow p-4 text-center">
-      <p class="text-sm text-yellow-800 font-semibold">Publicidade</p>
+      <p class="text-sm text-yellow-800 font-semibold" id="ad-label"></p>
       <div class="mt-2">
         <ins class="adsbygoogle"
           style="display:block"
@@ -60,79 +60,122 @@
   </div>
 </div>
 
-
 <footer class="text-center text-xs text-gray-500 mt-12 py-6 border-t border-gray-200">
-  <p id="footer1">© 2025 BrainboxMed. All rights reserved.</p>
-  <p id="footer2">BrainboxMed™ is a registered educational platform. Unauthorized use is prohibited.</p>
+  <p id="footer1"></p>
+  <p id="footer2"></p>
   <p>
-    <a href="../privacy.html" id="footer3" class="text-purple-600 hover:underline">Privacy Policy</a> |
-    <a href="../terms.html" id="footer4" class="text-purple-600 hover:underline">Terms of Use</a>
+    <a href="../privacy.html" id="footer3" class="text-purple-600 hover:underline"></a> |
+    <a href="../terms.html" id="footer4" class="text-purple-600 hover:underline"></a>
   </p>
 </footer>
 
-
 <script>
-  const lang = localStorage.getItem('selectedLanguage') || 'en';
+  // Detectar idioma do hostname se não estiver no localStorage
+  function detectLanguageFromHostname() {
+    const hostname = window.location.hostname;
+    if (hostname.endsWith('.es')) {
+      return 'es';
+    } else if (hostname.endsWith('.com.br')) {
+      return 'pt';
+    } else {
+      return 'en'; // Padrão para .com, .in, ou outros
+    }
+  }
+
+  let lang = localStorage.getItem('selectedLanguage');
+  if (!lang) {
+    lang = detectLanguageFromHostname();
+    localStorage.setItem('selectedLanguage', lang);
+  }
+
+  // Definições de tradução para esta página de transição
   const translations = {
     en: {
+      pageTitle: "Subscribe to Basic",
       title: "Subscribe to Basic",
       price: "Plan cost: <strong>$5.99/mo</strong>",
       namePlaceholder: "Full Name",
       emailPlaceholder: "Email Address",
-      button: "Confirm Subscription",
+      button: "Continue to Sign Up",
       back: "⬅️ Back to Plans",
-      footer1: "© 2025 BrainboxMed. All rights reserved.",
+      adLabel: "Advertisement",
+      footer1: "© 2024 BrainboxMed. All rights reserved.",
       footer2: "BrainboxMed™ is a registered educational platform. Unauthorized use is prohibited.",
       footer3: "Privacy Policy",
-      footer4: "Terms of Use"
+      footer4: "Terms of Use",
     },
     pt: {
+      pageTitle: "Assinar Básico",
       title: "Assinar Básico",
       price: "Custo do plano: <strong>R$5,99/mês</strong>",
       namePlaceholder: "Nome completo",
       emailPlaceholder: "Endereço de e-mail",
-      button: "Confirmar Assinatura",
+      button: "Continuar Cadastro",
       back: "⬅️ Voltar aos Planos",
-      footer1: "© 2025 BrainboxMed. Todos os direitos reservados.",
+      adLabel: "Publicidade",
+      footer1: "© 2024 BrainboxMed. Todos os direitos reservados.",
       footer2: "BrainboxMed™ é uma plataforma educacional registrada. Uso não autorizado é proibido.",
       footer3: "Política de Privacidade",
-      footer4: "Termos de Uso"
+      footer4: "Termos de Uso",
     },
     es: {
+      pageTitle: "Suscribirse a Básico",
       title: "Suscribirse a Básico",
       price: "Costo del plan: <strong>$5.99/mes</strong>",
       namePlaceholder: "Nombre completo",
       emailPlaceholder: "Dirección de correo",
-      button: "Confirmar Suscripción",
+      button: "Continuar Registro",
       back: "⬅️ Volver a los Planes",
-      footer1: "© 2025 BrainboxMed. Todos los derechos reservados.",
+      adLabel: "Publicidad",
+      footer1: "© 2024 BrainboxMed. Todos los derechos reservados.",
       footer2: "BrainboxMed™ es una plataforma educativa registrada. Uso no autorizado está prohibido.",
       footer3: "Política de Privacidad",
-      footer4: "Términos de Uso"
+      footer4: "Términos de Uso",
     }
   };
-  const t = translations[lang] || translations['en'];
-  // Aplicar traduções
-  const titleEl = document.getElementById("title-text");
-  if (titleEl) titleEl.textContent = t.title;
-  const priceEl = document.getElementById("price-text");
-  if (priceEl) priceEl.innerHTML = t.price; // innerHTML para manter o <strong>
-  const namePlaceholderEl = document.getElementById("name-placeholder");
-  if (namePlaceholderEl) namePlaceholderEl.placeholder = t.namePlaceholder;
-  const emailPlaceholderEl = document.getElementById("email-placeholder");
-  if (emailPlaceholderEl) emailPlaceholderEl.placeholder = t.emailPlaceholder;
-  const confirmButtonEl = document.getElementById("confirm-button");
-  if (confirmButtonEl) confirmButtonEl.textContent = t.button;
-  const backToPlansEl = document.getElementById("back-to-plans");
-  if (backToPlansEl) backToPlansEl.textContent = t.back;
-  const footer1El = document.getElementById("footer1");
-  if (footer1El) footer1El.textContent = t.footer1;
-  const footer2El = document.getElementById("footer2");
-  if (footer2El) footer2El.textContent = t.footer2;
-  const footer3El = document.getElementById("footer3");
-  if (footer3El) footer3El.textContent = t.footer3;
-  const footer4El = document.getElementById("footer4");
-  if (footer4El) footer4El.textContent = t.footer4;
+
+  const t = translations[lang];
+
+  // Aplicar traduções aos elementos
+  document.getElementById("page-title-text").textContent = t.pageTitle;
+  document.getElementById("title-text").textContent = t.title;
+  document.getElementById("price-text").innerHTML = t.price; // innerHTML para manter o <strong>
+  document.getElementById("name-input").placeholder = t.namePlaceholder; // Alterado de name-placeholder para name-input
+  document.getElementById("email-input").placeholder = t.emailPlaceholder; // Alterado de email-placeholder para email-input
+  document.getElementById("continue-button").textContent = t.button; // Alterado de confirm-button para continue-button
+  document.getElementById("back-to-plans").textContent = t.back;
+  document.getElementById("ad-label").textContent = t.adLabel;
+  document.getElementById("footer1").textContent = t.footer1;
+  document.getElementById("footer2").textContent = t.footer2;
+  document.getElementById("footer3").textContent = t.footer3;
+  document.getElementById("footer4").textContent = t.footer4;
+
+  // Lógica para enviar dados para a página de cadastro completo
+  document.getElementById('transition-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Impede o envio padrão do formulário
+
+    const fullName = document.getElementById('name-input').value;
+    const email = document.getElementById('email-input').value;
+    const plan = 'basic'; // Este é o plano específico para esta página de transição
+
+    // Codificar os valores para usar na URL
+    const encodedFullName = encodeURIComponent(fullName);
+    const encodedEmail = encodeURIComponent(email);
+
+    // Redirecionar para a página de cadastro completo com os dados
+    window.location.href = `signup.html?plan=${plan}&name=${encodedFullName}&email=${encodedEmail}`;
+  });
+
+  // Pre-fill name and email from localStorage if available (from previous visit to signup.html)
+  const storedFullName = localStorage.getItem('signupFullName');
+  const storedEmail = localStorage.getItem('signupEmail');
+  if (storedFullName) {
+      document.getElementById('name-input').value = storedFullName;
+  }
+  if (storedEmail) {
+      document.getElementById('email-input').value = storedEmail;
+  }
+window.scrollTo(0, 0);
 </script>
 
 </body>
