@@ -42,6 +42,10 @@ const questionBank = {
     return this.externalBanks ? [].concat(...this.externalBanks) : [];
   },
 
+      getQuestionById: function(id) {
+        return this.getAllQuestions().find(q => q.id === id);
+    },
+
   // Smart quiz generator
   generateQuiz: function (mode, numberOfQuestions, areaFilters = []) {
     if (!numberOfQuestions) numberOfQuestions = mode === 'exam' ? 50 : 10; [4]

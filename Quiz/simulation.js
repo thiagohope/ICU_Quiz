@@ -566,8 +566,22 @@ function finalizeSimulation(timedOut = false) {
 
     console.log("Mock Exam Performance:", performanceData);
     try {
-        localStorage.setItem('lastMockExamResult', JSON.stringify(performanceData));
-    } catch (e) {
+      // 1. Salva o resultado mais recente para acesso rápido (mantém o comportamento atual)
+      localStorage.setItem('lastMockExamResult', JSON.stringify(performanceData));
+      // 2. Pega o histórico existente do localStorage. Se não existir, cria uma lista vazia.
+      const history = JSON.parse(localStorage.getItem('mockExamHistory')) || [];
+      // 3. Adiciona o novo resultado ao final do histórico.
+      history.push(performanceData);
+      // 4. Se o histórico tiver mais de 10 itens, remove o mais antigo (o primeiro da lista).
+      if (history.length > 10) {
+          history.shift(); // .shift() remove o primeiro elemento
+      }
+      // 5. Salva a lista de histórico atualizada de volta no localStorage.
+      localStorage.setItem('mockExamHistory', JSON.stringify(history));
+
+        console.log(`Salvo no histórico. O histórico agora contém ${history.length} resultados.`);
+      
+      } catch (e) {
         console.error("Error saving lastMockExamResult to localStorage:", e);
     }
 

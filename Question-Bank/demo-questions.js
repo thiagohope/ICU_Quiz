@@ -1038,7 +1038,7 @@
 {
   id: 26,
   code: "demo-q26",
-  area: ["icu", "renal", "electrolytes"],
+  area: ["icu", "renal"],
   topic: ["hypernatremia", "diabetes insipidus"],
   level: "very_hard",
   correct: 2,

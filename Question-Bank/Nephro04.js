@@ -227,7 +227,7 @@ const bancoNephroDificilima = [
 {
   id: 704,
   code: "nephro04-q704",
-  areas: ["nephro", "nephro+icu", "icu", "medicine", "ventilation"],
+  areas: ["nephro", "nephro+icu", "icu", "medicine", ],
   topics: ["acid-base", "meningitis", "ventilatory strategy", "metabolic acidosis", "respiratory alkalosis"],
   level: "very_hard",
   correct: 2,
@@ -377,7 +377,7 @@ const bancoNephroDificilima = [
 {
   id: 706,
   code: "nephro04-q706",
-  areas: ["nephro", "nephro+icu", "icu", "medicine", "electrolytes"],
+  areas: ["nephro", "nephro+icu", "icu", "medicine"],
   topics: ["metabolic alkalosis", "hypokalemia", "chloride depletion", "mechanical ventilation", "diuretics"],
   level: "very_hard",
   correct: 3,
@@ -524,7 +524,231 @@ const bancoNephroDificilima = [
     }
   ]
 },
-
+{
+  id: 708,
+  code: "nephro04-q708",
+  areas: ["nephro", "nephro+icu", "icu", "medicine", "rrt"],
+  topics: ["fluid overload", "AKI", "COPD", "RRT indications", "hemodynamic support"],
+  level: "very_hard",
+  correct: 2,
+  question: {
+    pt: "Homem de 76 anos com DPOC grave está intubado por exacerbação aguda com pneumonia associada. Após 3 dias, evolui com oligúria persistente, creatinina crescente e necessidade de doses progressivas de noradrenalina. Apresenta distensão abdominal, congestão pulmonar e balanço hídrico positivo de 4,5 litros. Qual conduta abaixo é a MENOS indicada?",
+    en: "A 76-year-old man with severe COPD is intubated due to acute exacerbation and associated pneumonia. After 3 days, he develops persistent oliguria, rising creatinine, and increasing norepinephrine requirements. He presents with abdominal distension, pulmonary congestion, and a positive fluid balance of 4.5 liters. Which of the following is the LEAST indicated approach?",
+    es: "Hombre de 76 años con EPOC grave está intubado por exacerbación aguda y neumonía asociada. Tras 3 días, desarrolla oliguria persistente, creatinina en ascenso y necesidad creciente de noradrenalina. Presenta distensión abdominal, congestión pulmonar y balance hídrico positivo de 4,5 litros. ¿Cuál de las siguientes conductas es la MENOS indicada?"
+  },
+  options: [
+    {
+      text: {
+        pt: "Iniciar terapia renal substitutiva para manejo da sobrecarga hídrica refratária.",
+        en: "Initiate renal replacement therapy to manage refractory fluid overload.",
+        es: "Iniciar terapia de reemplazo renal para manejar sobrecarga hídrica refractaria."
+      },
+      explanation: {
+        pt: "A TRS é indicada em casos de sobrecarga hídrica que comprometem a oxigenação e a estabilidade hemodinâmica, mesmo na ausência de ureia elevada. (Bouchard J et al., Kidney Int 2009)",
+        en: "RRT is indicated in fluid overload compromising oxygenation and hemodynamics, even without elevated urea. (Bouchard J et al., Kidney Int 2009)",
+        es: "La TRS está indicada en sobrecarga hídrica que compromete la oxigenación y hemodinamia, incluso sin urea elevada. (Bouchard J et al., Kidney Int 2009)"
+      }
+    },
+    {
+      text: {
+        pt: "Manter diuréticos em alta dose por mais 48h antes de considerar diálise.",
+        en: "Continue high-dose diuretics for another 48h before considering dialysis.",
+        es: "Mantener diuréticos en dosis altas por 48h más antes de considerar diálisis."
+      },
+      explanation: {
+        pt: "Insistir em diuréticos frente a falência tubular e sobrecarga progressiva adia desnecessariamente uma terapia salvadora. TRS precoce está associada a melhor prognóstico. (Prowle JR et al., Crit Care 2012)",
+        en: "Persisting with diuretics in established tubular failure and worsening overload unnecessarily delays a potentially life-saving therapy. Early RRT is associated with better outcomes. (Prowle JR et al., Crit Care 2012)",
+        es: "Insistir en diuréticos con falla tubular y sobrecarga progresiva retrasa innecesariamente una terapia potencialmente salvadora. La TRS precoz mejora el pronóstico. (Prowle JR et al., Crit Care 2012)"
+      }
+    },
+    {
+      text: {
+        pt: "Avaliar parâmetros respiratórios e hemodinâmicos antes de iniciar ultrafiltração.",
+        en: "Assess respiratory and hemodynamic parameters before starting ultrafiltration.",
+        es: "Evaluar parámetros respiratorios y hemodinámicos antes de iniciar ultrafiltración."
+      },
+      explanation: {
+        pt: "É essencial avaliar tolerância à ultrafiltração com base na perfusão e no status respiratório para evitar piora clínica durante a TRS. (KDIGO 2012)",
+        en: "It's crucial to assess ultrafiltration tolerance based on perfusion and respiratory status to avoid clinical deterioration during RRT. (KDIGO 2012)",
+        es: "Es esencial evaluar la tolerancia a la ultrafiltración según perfusión y estado respiratorio para evitar deterioro clínico durante la TRS. (KDIGO 2012)"
+      }
+    },
+    {
+      text: {
+        pt: "Avaliar possibilidade de TRS precoce mesmo na ausência de sintomas urêmicos.",
+        en: "Evaluate possibility of early RRT even without overt uremic symptoms.",
+        es: "Evaluar posibilidad de TRS precoz incluso sin síntomas urémicos evidentes."
+      },
+      explanation: {
+        pt: "A sobrecarga hídrica é uma das principais indicações funcionais de início precoce de TRS, mesmo sem sinais urêmicos clássicos. (KDIGO 2012)",
+        en: "Fluid overload is one of the main functional indications for early RRT initiation, even without classic uremic signs. (KDIGO 2012)",
+        es: "La sobrecarga hídrica es una indicación funcional clave para TRS precoz, incluso sin signos urémicos clásicos. (KDIGO 2012)"
+      }
+    },
+    {
+      text: {
+        pt: "Considerar início de TRS intermitente ou contínua conforme perfil hemodinâmico.",
+        en: "Consider initiating intermittent or continuous RRT depending on hemodynamic profile.",
+        es: "Considerar inicio de TRS intermitente o continua según perfil hemodinámico."
+      },
+      explanation: {
+        pt: "Pacientes instáveis podem se beneficiar de TRS contínua; pacientes estáveis podem tolerar hemodiálise intermitente. A decisão deve ser individualizada. (Palevsky PM, NEJM 2008)",
+        en: "Hemodynamically unstable patients may benefit from continuous RRT; stable ones can tolerate intermittent dialysis. Decision must be individualized. (Palevsky PM, NEJM 2008)",
+        es: "Pacientes inestables se benefician de TRS continua; los estables toleran diálisis intermitente. La decisión debe ser individualizada. (Palevsky PM, NEJM 2008)"
+      }
+    }
+  ]
+},
+{
+  id: 709,
+  code: "nephro04-q709",
+  areas: ["nephro", "nephro+icu", "icu", "medicine"],
+  topics: ["renal transplant", "immunosuppression", "sepsis", "AKI", "critical care"],
+  level: "very_hard",
+  correct: 1,
+  question: {
+    pt: "Paciente de 64 anos, transplantado renal há 3 anos, é internado na UTI por sepse grave de origem pulmonar, com necessidade de vasopressores e insuficiência respiratória. Faz uso crônico de tacrolimo, micofenolato e prednisona. Evolui com LRA estágio 2 (KDIGO). Qual das condutas abaixo é a MENOS apropriada neste cenário?",
+    en: "A 64-year-old kidney transplant recipient (3 years post-transplant) is admitted to the ICU with severe sepsis of pulmonary origin, requiring vasopressors and ventilatory support. He is on chronic tacrolimus, mycophenolate, and prednisone. He develops KDIGO stage 2 AKI. Which of the following is the LEAST appropriate management approach?",
+    es: "Paciente de 64 años, trasplantado renal hace 3 años, es ingresado en UCI por sepsis grave de origen pulmonar, con requerimiento de vasopresores e insuficiencia respiratoria. Usa tacrolimus, micofenolato y prednisona. Desarrolla LRA estadio 2 (KDIGO). ¿Cuál de las siguientes conductas es la MENOS apropiada?"
+  },
+  options: [
+    {
+      text: {
+        pt: "Suspender micofenolato e manter prednisona em dose de manutenção.",
+        en: "Discontinue mycophenolate and maintain prednisone at maintenance dose.",
+        es: "Suspender micofenolato y mantener prednisona en dosis de mantenimiento."
+      },
+      explanation: {
+        pt: "Imunossupressores antiproliferativos devem ser interrompidos na sepse grave; corticosteroides são usualmente mantidos. (KDIGO 2020)",
+        en: "Antiproliferative agents should be discontinued during severe sepsis; corticosteroids are usually maintained. (KDIGO 2020)",
+        es: "Los inmunosupresores antiproliferativos deben suspenderse en sepsis grave; los corticoides suelen mantenerse. (KDIGO 2020)"
+      }
+    },
+    {
+      text: {
+        pt: "Ajustar dose do tacrolimo conforme função renal e níveis séricos.",
+        en: "Adjust tacrolimus dose according to renal function and serum levels.",
+        es: "Ajustar la dosis de tacrolimus según función renal y niveles séricos."
+      },
+      explanation: {
+        pt: "Tacrolimo pode ser mantido com monitorização rigorosa. A dosagem deve ser ajustada conforme função renal e toxicidade potencial. (Silva HT, CJASN 2020)",
+        en: "Tacrolimus may be continued with close monitoring. Dose adjustment should reflect renal function and toxicity. (Silva HT, CJASN 2020)",
+        es: "Tacrolimus puede mantenerse con vigilancia estricta. Ajuste de dosis según función renal y toxicidad. (Silva HT, CJASN 2020)"
+      }
+    },
+    {
+      text: {
+        pt: "Suspender temporariamente tacrolimo e micofenolato, mantendo apenas corticoterapia.",
+        en: "Temporarily discontinue tacrolimus and mycophenolate, maintaining corticosteroids only.",
+        es: "Suspender temporalmente tacrolimus y micofenolato, manteniendo solo corticosteroides."
+      },
+      explanation: {
+        pt: "Redução agressiva da imunossupressão é aceitável em sepse grave, com reintrodução gradual após estabilização. (KDIGO 2020)",
+        en: "Aggressive reduction of immunosuppression is acceptable during severe sepsis, with gradual reintroduction post-stabilization. (KDIGO 2020)",
+        es: "Reducción agresiva de inmunosupresión es aceptable en sepsis grave, con reintroducción gradual tras estabilización. (KDIGO 2020)"
+      }
+    },
+    {
+      text: {
+        pt: "Iniciar antibioticoterapia de amplo espectro e suporte de órgãos-alvo.",
+        en: "Initiate broad-spectrum antibiotics and target organ support.",
+        es: "Iniciar antibióticos de amplio espectro y soporte de órganos diana."
+      },
+      explanation: {
+        pt: "O tratamento da infecção e suporte de órgãos é prioridade absoluta em pacientes imunossuprimidos com sepse. (Surviving Sepsis Campaign 2021)",
+        en: "Treating the infection and supporting failing organs is the primary goal in immunosuppressed septic patients. (Surviving Sepsis Campaign 2021)",
+        es: "Tratar la infección y apoyar los órganos en falla es prioridad en pacientes sépticos inmunosuprimidos. (Surviving Sepsis Campaign 2021)"
+      }
+    },
+    {
+      text: {
+        pt: "Aumentar a dose do micofenolato para evitar rejeição aguda.",
+        en: "Increase the dose of mycophenolate to avoid acute rejection.",
+        es: "Aumentar la dosis de micofenolato para evitar rechazo agudo."
+      },
+      explanation: {
+        pt: "Manter ou intensificar imunossupressão durante sepse grave aumenta o risco de morte. Micofenolato deve ser reduzido ou suspenso. (Rebollal-Leal F, Transpl Infect Dis 2022)",
+        en: "Maintaining or increasing immunosuppression during severe sepsis increases mortality risk. Mycophenolate should be reduced or stopped. (Rebollal-Leal F, Transpl Infect Dis 2022)",
+        es: "Mantener o aumentar inmunosupresión durante sepsis grave eleva riesgo de muerte. Micofenolato debe reducirse o suspenderse. (Rebollal-Leal F, Transpl Infect Dis 2022)"
+      }
+    }
+  ]
+},
+{
+  id: 710,
+  code: "nephro04-q710",
+  areas: ["nephro", "nephro+icu", "icu", "medicine"],
+  topics: ["electrolytes", "hypocalcemia", "hypomagnesemia", "critical care", "calcium replacement"],
+  level: "very_hard",
+  correct: 1,
+  question: {
+    pt: "Paciente de 68 anos com sepse abdominal grave apresenta hipocalcemia sintomática (QT prolongado, parestesias), mesmo após múltiplas reposições de gluconato de cálcio IV. Gasometria: pH 7,31, HCO₃⁻ 18 mEq/L, lactato 3,5 mmol/L. Albumina: 1,8 g/dL. Magnésio sérico: 1,1 mg/dL (VN: 1,7–2,2). Qual das condutas abaixo é a MENOS adequada?",
+    en: "A 68-year-old patient with severe abdominal sepsis presents with symptomatic hypocalcemia (prolonged QT, paresthesias), despite multiple IV calcium gluconate infusions. ABG shows pH 7.31, HCO₃⁻ 18 mEq/L, lactate 3.5 mmol/L. Albumin: 1.8 g/dL. Serum magnesium: 1.1 mg/dL (normal: 1.7–2.2). Which of the following is the LEAST appropriate approach?",
+    es: "Paciente de 68 años con sepsis abdominal grave presenta hipocalcemia sintomática (QT prolongado, parestesias), a pesar de múltiples reposiciones de gluconato de calcio IV. GSA: pH 7,31, HCO₃⁻ 18 mEq/L, lactato 3,5 mmol/L. Albúmina: 1,8 g/dL. Magnesio sérico: 1,1 mg/dL (VN: 1,7–2,2). ¿Cuál de las siguientes conductas es la MENOS adecuada?"
+  },
+  options: [
+    {
+      text: {
+        pt: "Iniciar reposição de magnésio intravenoso em conjunto com cálcio.",
+        en: "Start intravenous magnesium replacement alongside calcium.",
+        es: "Iniciar reposición intravenosa de magnesio junto con calcio."
+      },
+      explanation: {
+        pt: "A hipomagnesemia reduz a liberação de PTH e a sensibilidade do osso ao PTH, tornando a hipocalcemia refratária à reposição até que o magnésio seja corrigido. (Ayus JC et al., Am J Med 2013)",
+        en: "Hypomagnesemia suppresses PTH secretion and reduces bone responsiveness, making hypocalcemia refractory until magnesium is corrected. (Ayus JC et al., Am J Med 2013)",
+        es: "La hipomagnesemia suprime la secreción de PTH y reduce la respuesta ósea, haciendo que la hipocalcemia sea refractaria hasta corregir el magnesio. (Ayus JC et al., Am J Med 2013)"
+      }
+    },
+    {
+      text: {
+        pt: "Insistir em reposições repetidas de cálcio sem corrigir o magnésio.",
+        en: "Continue repeated calcium infusions without correcting magnesium.",
+        es: "Insistir en reposiciones repetidas de calcio sin corregir magnesio."
+      },
+      explanation: {
+        pt: "Sem correção da hipomagnesemia, o cálcio administrado é ineficaz. Essa abordagem prolonga o distúrbio e aumenta o risco de arritmias. (KDIGO Electrolyte Disorders Guideline)",
+        en: "Without correcting hypomagnesemia, calcium infusions remain ineffective. This approach prolongs the disorder and raises arrhythmia risk. (KDIGO Electrolyte Disorders Guideline)",
+        es: "Sin corregir la hipomagnesemia, las infusiones de calcio son ineficaces. Esto prolonga el trastorno y aumenta el riesgo de arritmias. (KDIGO Electrolyte Disorders Guideline)"
+      }
+    },
+    {
+      text: {
+        pt: "Corrigir o cálcio iônico com base na albumina e avaliar necessidade de reposição contínua.",
+        en: "Correct ionized calcium based on albumin and assess need for continuous replacement.",
+        es: "Corregir el calcio iónico según la albúmina y evaluar la necesidad de reposición continua."
+      },
+      explanation: {
+        pt: "A albumina muito baixa impacta o cálcio total, devendo-se priorizar cálcio iônico. Reposição contínua pode ser necessária em perdas sustentadas. (UpToDate 2024)",
+        en: "Severely low albumin affects total calcium; ionized calcium should guide therapy. Continuous replacement may be required in ongoing losses. (UpToDate 2024)",
+        es: "Albúmina muy baja altera el calcio total; el calcio iónico debe guiar la terapia. Puede requerirse reposición continua. (UpToDate 2024)"
+      }
+    },
+    {
+      text: {
+        pt: "Rever exposição prévia a citrato e transfusões maciças como causa de hipocalcemia.",
+        en: "Review prior exposure to citrate and massive transfusions as cause of hypocalcemia.",
+        es: "Revisar exposición previa a citrato y transfusiones masivas como causa de hipocalcemia."
+      },
+      explanation: {
+        pt: "Citrato presente em transfusões complexa cálcio e pode induzir hipocalcemia. Avaliar se esse é um fator contribuinte é essencial. (Cheungpasitporn W et al., Crit Care 2020)",
+        en: "Citrate in transfusions chelates calcium and may cause hypocalcemia. Evaluating its role is essential. (Cheungpasitporn W et al., Crit Care 2020)",
+        es: "El citrato en transfusiones quelata calcio y puede inducir hipocalcemia. Evaluar este factor es esencial. (Cheungpasitporn W et al., Crit Care 2020)"
+      }
+    },
+    {
+      text: {
+        pt: "Considerar ajuste da reposição de cálcio conforme pH e status ácido-base.",
+        en: "Consider adjusting calcium replacement according to pH and acid-base status.",
+        es: "Considerar ajuste de reposición de calcio según pH y estado ácido-base."
+      },
+      explanation: {
+        pt: "A acidose altera a ligação do cálcio à albumina e interfere nos níveis circulantes. O pH deve ser monitorado e considerado na interpretação do cálcio total. (UpToDate 2024)",
+        en: "Acidosis alters calcium binding to albumin and affects circulating levels. pH should be monitored in calcium interpretation. (UpToDate 2024)",
+        es: "La acidosis altera la unión del calcio a la albúmina y afecta los niveles circulantes. El pH debe considerarse al interpretar el calcio. (UpToDate 2024)"
+      }
+    }
+  ]
+},
 ];
 
 questionBank.addBank(bancoNephroDificilima);  
